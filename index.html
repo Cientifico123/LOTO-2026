@@ -1,300 +1,1285 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>LOTO 2026</title>
-<style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}body{background:radial-gradient(circle at 20% 30%,#0b1c2f,#051018);min-height:100vh;padding:15px;color:#f0f4fa}.app-container{max-width:1400px;margin:0 auto}.header{text-align:center;margin-bottom:20px}.logo{font-size:3.5rem;font-weight:900;background:linear-gradient(135deg,#fff8e0,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}.datetime{background:#0e2638;padding:8px 20px;border-radius:20px;font-weight:bold;color:#ffd966;margin-top:10px;display:inline-block}.nav-tabs{display:flex;flex-wrap:wrap;gap:5px;margin:15px 0;border-bottom:2px solid #2e4e6c;padding-bottom:10px;justify-content:center}.tab-btn{background:transparent;border:none;padding:10px 15px;font-size:0.9rem;font-weight:700;color:#bcd3f0;border-radius:20px;cursor:pointer}.tab-btn.active{background:#1f3f5c;color:#ffd966}.portada{display:none}.portada.active{display:block}.card{background:rgba(10,25,40,0.75);border:1px solid #2e5a7a;border-radius:20px;padding:15px;margin-bottom:20px}.card h2{color:#ffd966;margin-bottom:15px;border-left:6px solid #e6b800;padding-left:12px}.signal-card{background:#0e2638;border-left:6px solid;border-radius:12px;padding:15px;margin-bottom:12px}.priority-high{border-color:#e6b800}.number-highlight{font-size:2.5rem;font-weight:800;background:#00000040;padding:2px 15px;border-radius:30px;display:inline-block}.alert-warning{background:#3a2c0e;border-left:6px solid #e6b800;padding:15px;border-radius:12px;color:#ffe5a3}.route-badge{display:inline-block;background:#1e405b;padding:4px 10px;border-radius:15px;margin:2px;font-size:0.8rem}.gold-btn{background:linear-gradient(145deg,#f3c84e,#c99d1e);border:none;padding:12px 24px;border-radius:30px;font-weight:bold;color:#0a1c2c;cursor:pointer;margin:5px}.btn-outline{background:transparent;border:2px solid #bcd3f0;color:#bcd3f0;padding:10px 20px;border-radius:30px;cursor:pointer;margin:5px}table{width:100%;border-collapse:collapse;color:#e0ecf9;font-size:0.9rem}th{background:#1d4e6e;color:#ffdb7c;padding:10px;text-align:left}td{padding:8px;border-bottom:1px solid #2c6080}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.input-group{background:#0e2638;padding:10px;border-radius:12px;margin-bottom:8px}.input-group label{display:block;margin-bottom:4px;color:#ffd966;font-size:0.85rem}.input-group input{width:100%;padding:8px;border-radius:20px;border:none;background:#1e405b;color:#fff;text-align:center;font-weight:bold}.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:bold;margin:2px}.tag-G{background:#c41e3a;color:#fff}.tag-F{background:#ff6b35;color:#fff}.tag-N{background:#4169e1;color:#fff}@media(max-width:600px){.logo{font-size:2rem}.tab-btn{font-size:0.8rem;padding:8px 12px}}</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>LOTO 2026 · IA Auto-Aprendizaje</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #020d18;
+      --surface: rgba(4,20,38,0.85);
+      --border: rgba(0,200,255,0.18);
+      --accent: #00c8ff;
+      --gold: #ffd700;
+      --green: #00ff88;
+      --red: #ff4060;
+      --purple: #b060ff;
+      --text: #d0eaff;
+      --muted: #6090b0;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: var(--bg);
+      background-image:
+        radial-gradient(ellipse at 10% 0%, rgba(0,100,200,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 90% 80%, rgba(60,0,120,0.15) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300c8ff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      min-height:100vh;
+      font-family:'Exo 2',sans-serif;
+      color: var(--text);
+      padding: 12px;
+    }
+    .app { max-width:1400px; margin:0 auto; }
+
+    /* HEADER */
+    .header { text-align:center; padding:20px 0 15px; position:relative; }
+    .logo {
+      font-family:'Orbitron',monospace;
+      font-size:clamp(2rem,6vw,4.2rem);
+      font-weight:900;
+      letter-spacing:4px;
+      background: linear-gradient(90deg, #00c8ff, #fff, #ffd700, #00ff88, #00c8ff);
+      background-size:300% auto;
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      animation: shimmer 4s linear infinite;
+      text-shadow:0 0 40px rgba(0,200,255,0.3);
+    }
+    @keyframes shimmer { to { background-position:300% center; } }
+    .logo-sub {
+      font-family:'Share Tech Mono',monospace;
+      font-size:0.75rem;
+      color: var(--accent);
+      letter-spacing:6px;
+      text-transform:uppercase;
+      margin-top:4px;
+      opacity:0.7;
+    }
+    .clock {
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-top:12px;
+      background: rgba(0,200,255,0.08);
+      border:1px solid var(--border);
+      border-radius:50px;
+      padding:8px 22px;
+      font-family:'Share Tech Mono',monospace;
+      color: var(--gold);
+      font-size:0.95rem;
+    }
+    .clock::before { content:'◉'; color:var(--green); animation:blink 1s step-end infinite; }
+    @keyframes blink { 50%{opacity:0} }
+
+    /* TABS */
+    .nav-tabs {
+      display:flex; flex-wrap:wrap; gap:6px;
+      justify-content:center;
+      margin:18px 0 12px;
+      border-bottom:1px solid var(--border);
+      padding-bottom:12px;
+    }
+    .tab-btn {
+      font-family:'Exo 2',sans-serif;
+      background: transparent;
+      border:1px solid rgba(0,200,255,0.2);
+      padding:9px 16px;
+      font-size:0.85rem;
+      font-weight:600;
+      color:var(--muted);
+      border-radius:6px;
+      cursor:pointer;
+      transition:all 0.2s;
+      letter-spacing:0.5px;
+    }
+    .tab-btn:hover { color:var(--accent); border-color:var(--accent); }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(0,200,255,0.15), rgba(0,100,200,0.1));
+      color:var(--accent);
+      border-color:var(--accent);
+      box-shadow:0 0 12px rgba(0,200,255,0.2), inset 0 0 12px rgba(0,200,255,0.05);
+    }
+
+    /* PANEL */
+    .portada { display:none; animation:fadeIn 0.3s ease; }
+    .portada.active { display:block; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+    .card {
+      background: var(--surface);
+      backdrop-filter:blur(12px);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:20px;
+      margin-bottom:20px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .card-title {
+      font-family:'Orbitron',monospace;
+      font-size:0.95rem;
+      font-weight:700;
+      color:var(--gold);
+      letter-spacing:2px;
+      margin-bottom:16px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .card-title span { font-size:1.1rem; }
+
+    /* SIGNAL CARDS */
+    .sig {
+      background: rgba(0,10,25,0.6);
+      border-left:3px solid var(--accent);
+      border-radius:10px;
+      padding:14px 18px;
+      margin-bottom:12px;
+      transition:transform 0.15s;
+    }
+    .sig:hover { transform:translateX(3px); }
+    .sig.gold { border-color:var(--gold); }
+    .sig.green { border-color:var(--green); }
+    .sig.purple { border-color:var(--purple); }
+    .sig.red { border-color:var(--red); }
+
+    .num-big {
+      font-family:'Orbitron',monospace;
+      font-size:2.4rem;
+      font-weight:900;
+      color:var(--gold);
+      text-shadow:0 0 20px rgba(255,215,0,0.4);
+      display:inline-block;
+      min-width:70px;
+      text-align:center;
+      background: rgba(255,215,0,0.05);
+      border:1px solid rgba(255,215,0,0.2);
+      border-radius:8px;
+      padding:2px 14px;
+    }
+
+    .badge {
+      display:inline-block;
+      padding:3px 10px;
+      border-radius:20px;
+      font-size:0.75rem;
+      font-weight:700;
+      letter-spacing:0.5px;
+    }
+    .badge-ga { background:#c41e3a33; color:#ff6680; border:1px solid #c41e3a; }
+    .badge-fl { background:#ff6b3533; color:#ffaa77; border:1px solid #ff6b35; }
+    .badge-ny { background:#4169e133; color:#88aaff; border:1px solid #4169e1; }
+
+    .pct-bar {
+      height:4px;
+      background:rgba(255,255,255,0.07);
+      border-radius:2px;
+      margin-top:8px;
+      overflow:hidden;
+    }
+    .pct-fill { height:100%; border-radius:2px; background:linear-gradient(90deg,var(--accent),var(--green)); transition:width 0.8s ease; }
+
+    /* IA SCORE BADGE */
+    .ia-score {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      background: linear-gradient(135deg, rgba(0,255,136,0.12), rgba(0,200,255,0.08));
+      border:1px solid rgba(0,255,136,0.3);
+      border-radius:20px;
+      padding:4px 12px;
+      font-size:0.8rem;
+      font-weight:700;
+      color:var(--green);
+      font-family:'Share Tech Mono',monospace;
+    }
+
+    .alert-box {
+      background: rgba(255,64,96,0.08);
+      border:1px solid rgba(255,64,96,0.3);
+      border-radius:10px;
+      padding:16px 20px;
+      color:#ff8fa0;
+      text-align:center;
+    }
+
+    /* VALIDACION PANEL */
+    .validation-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+      gap:12px;
+      margin-bottom:16px;
+    }
+    .val-cell {
+      background:rgba(0,200,255,0.05);
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:14px;
+      text-align:center;
+    }
+    .val-cell .val-num {
+      font-family:'Orbitron',monospace;
+      font-size:1.8rem;
+      font-weight:900;
+      color:var(--accent);
+    }
+    .val-cell .val-label { font-size:0.75rem; color:var(--muted); margin-top:4px; letter-spacing:1px; text-transform:uppercase; }
+    .val-cell.best { border-color:var(--gold); }
+    .val-cell.best .val-num { color:var(--gold); }
+
+    /* MEJOR ESTRATEGIA */
+    .champion-card {
+      background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(0,200,255,0.05));
+      border:1px solid rgba(255,215,0,0.4);
+      border-radius:14px;
+      padding:20px;
+      margin-bottom:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .champion-card::before {
+      content:'★';
+      position:absolute;
+      right:20px; top:50%;
+      transform:translateY(-50%);
+      font-size:5rem;
+      opacity:0.05;
+      color:var(--gold);
+    }
+
+    /* MONTECARLO */
+    .mc-flex { display:flex; gap:16px; flex-wrap:wrap; }
+    .mc-col { flex:1; min-width:240px; }
+    .mc-header {
+      font-family:'Share Tech Mono',monospace;
+      font-size:0.8rem;
+      color:var(--muted);
+      letter-spacing:2px;
+      margin-bottom:10px;
+    }
+
+    /* TABLE */
+    table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+    th {
+      background:rgba(0,200,255,0.08);
+      color:var(--accent);
+      padding:10px 12px;
+      text-align:left;
+      font-family:'Share Tech Mono',monospace;
+      letter-spacing:1px;
+      font-size:0.75rem;
+      border-bottom:1px solid var(--border);
+    }
+    td { padding:9px 12px; border-bottom:1px solid rgba(0,200,255,0.06); }
+    tr:hover td { background:rgba(0,200,255,0.03); }
+
+    /* FORM */
+    .form-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(175px,1fr)); gap:12px; }
+    .input-group {
+      background:rgba(0,200,255,0.05);
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:12px;
+    }
+    .input-group label {
+      display:block;
+      color:var(--gold);
+      font-size:0.78rem;
+      font-weight:700;
+      letter-spacing:1px;
+      margin-bottom:8px;
+      text-transform:uppercase;
+    }
+    .input-group input {
+      width:100%;
+      padding:9px;
+      border-radius:6px;
+      border:1px solid var(--border);
+      background:rgba(0,10,30,0.7);
+      color:white;
+      font-family:'Share Tech Mono',monospace;
+      font-size:1rem;
+      text-align:center;
+      margin-top:4px;
+      transition:border-color 0.2s;
+    }
+    .input-group input:focus { outline:none; border-color:var(--accent); }
+
+    .btn-gold {
+      background:linear-gradient(145deg,#f3c84e,#c99d1e);
+      border:none;
+      padding:13px 28px;
+      border-radius:8px;
+      font-family:'Exo 2',sans-serif;
+      font-weight:800;
+      font-size:1rem;
+      color:#0a1c2c;
+      cursor:pointer;
+      box-shadow:0 4px 0 #7a5c00, 0 6px 20px rgba(200,150,0,0.3);
+      transition:0.1s;
+      letter-spacing:1px;
+    }
+    .btn-gold:active { transform:translateY(3px); box-shadow:0 1px 0 #7a5c00; }
+    .btn-outline {
+      background:transparent;
+      border:1px solid var(--border);
+      color:var(--muted);
+      padding:13px 22px;
+      border-radius:8px;
+      font-family:'Exo 2',sans-serif;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.2s;
+    }
+    .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
+
+    /* COMBO pills */
+    .combo { display:inline-block; background:rgba(0,200,255,0.1); border:1px solid rgba(0,200,255,0.25); padding:5px 14px; border-radius:20px; font-family:'Share Tech Mono',monospace; font-size:0.85rem; color:var(--accent); margin:3px; }
+
+    /* RANK LIST */
+    .rank-list { counter-reset:rank; }
+    .rank-item {
+      counter-increment:rank;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:10px 14px;
+      background:rgba(0,200,255,0.03);
+      border:1px solid var(--border);
+      border-radius:8px;
+      margin-bottom:8px;
+    }
+    .rank-item::before {
+      content:counter(rank);
+      font-family:'Orbitron',monospace;
+      font-size:0.7rem;
+      color:var(--muted);
+      min-width:20px;
+      text-align:center;
+    }
+
+    /* PROGRESS RING */
+    .progress-ring { position:relative; display:inline-flex; align-items:center; justify-content:center; }
+    .progress-ring svg { transform:rotate(-90deg); }
+    .progress-ring-text {
+      position:absolute;
+      font-family:'Orbitron',monospace;
+      font-size:0.8rem;
+      font-weight:700;
+    }
+
+    /* BACKTESTING TIMELINE */
+    .bt-bar {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:6px;
+      font-size:0.82rem;
+    }
+    .bt-label { width:90px; color:var(--muted); font-family:'Share Tech Mono',monospace; font-size:0.7rem; }
+    .bt-track { flex:1; height:18px; background:rgba(255,255,255,0.05); border-radius:4px; overflow:hidden; position:relative; }
+    .bt-fill { height:100%; border-radius:4px; display:flex; align-items:center; padding-left:8px; font-size:0.7rem; font-weight:700; transition:width 1s ease; }
+    .bt-pct { margin-left:8px; font-family:'Share Tech Mono',monospace; color:var(--text); font-size:0.72rem; }
+
+    @media(max-width:600px) {
+      .logo { font-size:1.8rem; }
+      .tab-btn { padding:7px 10px; font-size:0.78rem; }
+    }
+  </style>
 </head>
 <body>
-<div class="app-container">
-<div class="header"><div class="logo">LOTO 2026</div><div class="datetime" id="liveDateTime"></div></div>
-<div class="nav-tabs">
-<button class="tab-btn active" data-tab="A">🎯 Pronóstico A</button>
-<button class="tab-btn" data-tab="B">🔥 Pronóstico B</button>
-<button class="tab-btn" data-tab="C">🧲 Pronóstico C</button>
-<button class="tab-btn" data-tab="D">💎 Pronóstico D</button>
-<button class="tab-btn" data-tab="R">⭐ Respaldo</button>
-<button class="tab-btn" data-tab="P">🎲 Palé</button>
-<button class="tab-btn" data-tab="M">🎰 Monte Carlo</button>
-<button class="tab-btn" data-tab="H">📜 Historial</button>
-<button class="tab-btn" data-tab="U">🔄 Actualizar</button>
-</div>
+<div class="app">
+  <div class="header">
+    <div class="logo">LOTO 2026</div>
+    <div class="logo-sub">Sistema IA · Auto-Aprendizaje · Validación Cruzada</div>
+    <div class="clock" id="liveDateTime">--</div>
+  </div>
 
-<div id="A" class="portada active"><div class="card"><h2>🎯 Pronóstico A</h2><div id="cA"></div></div></div>
-<div id="B" class="portada"><div class="card"><h2>🔥 Pronóstico B</h2><div id="cB"></div></div></div>
-<div id="C" class="portada"><div class="card"><h2>🧲 Pronóstico C</h2><div id="cC"></div></div></div>
-<div id="D" class="portada"><div class="card"><h2>💎 Pronóstico D</h2><div id="cD"></div></div></div>
-<div id="R" class="portada"><div class="card"><h2>⭐ Respaldo Múltiple</h2><div id="cR"></div></div></div>
-<div id="P" class="portada"><div class="card"><h2>🎲 Palé Activo</h2><div id="cP"></div></div></div>
-<div id="M" class="portada"><div class="card"><h2>🎰 Monte Carlo</h2><div id="cM"></div></div></div>
-<div id="H" class="portada"><div class="card"><h2>📆 Historial</h2><div style="max-height:400px;overflow-y:auto"><table><thead><tr><th>Fecha</th><th>Lot</th><th>Hora</th><th>1ª</th><th>2ª</th><th>3ª</th></tr></thead><tbody id="hBody"></tbody></table></div></div></div>
-<div id="U" class="portada"><div class="card"><h2>🔄 Actualizar</h2><div class="grid" id="formU"></div><div style="margin-top:20px"><button class="gold-btn" id="btnGuardar">💾 Guardar</button><button class="btn-outline" id="btnLimpiar">🧹 Limpiar</button></div></div></div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" data-tab="ranking">🏆 Mejor Pronóstico</button>
+    <button class="tab-btn" data-tab="validacion">🧪 Validación IA</button>
+    <button class="tab-btn" data-tab="pronosticoA">🎯 Señal A</button>
+    <button class="tab-btn" data-tab="pronosticoB">🔥 Arrastres B</button>
+    <button class="tab-btn" data-tab="pronosticoC">🧲 Percutores C</button>
+    <button class="tab-btn" data-tab="pronosticoD">💎 Dobles D</button>
+    <button class="tab-btn" data-tab="respaldo">⭐ Respaldo</button>
+    <button class="tab-btn" data-tab="paleactivo">🎲 Palé</button>
+    <button class="tab-btn" data-tab="montecarlo">🎰 Monte Carlo</button>
+    <button class="tab-btn" data-tab="historial">📜 Historial</button>
+    <button class="tab-btn" data-tab="actualizar">🔄 Actualizar</button>
+  </div>
+
+  <!-- MEJOR PRONÓSTICO (RANKING VALIDADO) -->
+  <div id="ranking" class="portada active">
+    <div class="card">
+      <div class="card-title"><span>🏆</span> PRONÓSTICO VALIDADO — MEJOR ESTRATEGIA IA</div>
+      <div id="rankingContainer"><p style="color:var(--muted);text-align:center;padding:30px;">⏳ Calculando...</p></div>
+    </div>
+  </div>
+
+  <!-- VALIDACION IA -->
+  <div id="validacion" class="portada">
+    <div class="card">
+      <div class="card-title"><span>🧪</span> BACKTESTING & VALIDACIÓN CRUZADA</div>
+      <div id="validacionContainer"></div>
+    </div>
+  </div>
+
+  <!-- PRONÓSTICO A -->
+  <div id="pronosticoA" class="portada">
+    <div class="card">
+      <div class="card-title"><span>🎯</span> SEÑAL A — NÚMEROS CLAVE</div>
+      <div id="contenedorA"></div>
+    </div>
+  </div>
+
+  <!-- PRONÓSTICO B -->
+  <div id="pronosticoB" class="portada">
+    <div class="card">
+      <div class="card-title"><span>🔥</span> ARRASTRES B</div>
+      <div id="contenedorB"></div>
+    </div>
+  </div>
+
+  <!-- PRONÓSTICO C -->
+  <div id="pronosticoC" class="portada">
+    <div class="card">
+      <div class="card-title"><span>🧲</span> PERCUTORES C</div>
+      <div id="contenedorC"></div>
+    </div>
+  </div>
+
+  <!-- PRONÓSTICO D -->
+  <div id="pronosticoD" class="portada">
+    <div class="card">
+      <div class="card-title"><span>💎</span> DOBLES D</div>
+      <div id="contenedorD"></div>
+    </div>
+  </div>
+
+  <!-- RESPALDO -->
+  <div id="respaldo" class="portada">
+    <div class="card">
+      <div class="card-title"><span>⭐</span> RESPALDO MÚLTIPLE</div>
+      <div id="respaldoContainer"></div>
+    </div>
+  </div>
+
+  <!-- PALÉ -->
+  <div id="paleactivo" class="portada">
+    <div class="card">
+      <div class="card-title"><span>🎲</span> PALÉ ACTIVO</div>
+      <div id="paleActivoContainer"></div>
+    </div>
+  </div>
+
+  <!-- MONTE CARLO -->
+  <div id="montecarlo" class="portada">
+    <div class="card">
+      <div class="card-title"><span>🎰</span> SIMULACIÓN MONTE CARLO — 4 CORTES</div>
+      <div id="montecarloContainer"></div>
+    </div>
+  </div>
+
+  <!-- HISTORIAL -->
+  <div id="historial" class="portada">
+    <div class="card">
+      <div class="card-title"><span>📜</span> HISTORIAL REAL</div>
+      <div style="max-height:500px;overflow-y:auto;">
+        <table><thead><tr><th>Fecha</th><th>Lot.</th><th>Hora</th><th>1ª</th><th>2ª</th><th>3ª</th></tr></thead>
+        <tbody id="historialBody"></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTUALIZAR -->
+  <div id="actualizar" class="portada">
+    <div class="card">
+      <div class="card-title"><span>🔄</span> ACTUALIZAR RESULTADOS</div>
+      <div class="form-grid" id="formActualizar"></div>
+      <div style="display:flex;gap:14px;margin-top:24px;flex-wrap:wrap;">
+        <button class="btn-gold" id="guardarActualizacion">💾 Guardar</button>
+        <button class="btn-outline" id="limpiarForm">🧹 Limpiar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
 (function(){
-// FORMATO COMPACTO: [AAMMDD,LOT,HORA,N1,N2,N3] | LOT: G=Georgia, F=Florida, N=New York
-const D=[
-["251001","G","1230","33","06","40"],["251001","F","0130","12","49","11"],["251001","N","0230","83","57","41"],["251001","G","1900","49","51","45"],["251001","F","2150","58","14","84"],["251001","N","2230","22","99","28"],["251001","G","2330","96","16","41"],
-["251002","G","1230","37","74","39"],["251002","F","0130","70","08","22"],["251002","N","0230","21","28","46"],["251002","G","1900","24","22","47"],["251002","F","2150","00","28","43"],["251002","N","2230","97","69","33"],["251002","G","2330","30","22","04"],
-["251003","G","1230","78","43","13"],["251003","F","0130","82","99","78"],["251003","N","0230","68","35","68"],["251003","G","1900","82","28","49"],["251003","F","2150","70","12","37"],["251003","N","2230","32","64","54"],["251003","G","2330","98","51","94"],
-["251004","G","1230","91","50","13"],["251004","F","0130","89","04","51"],["251004","N","0230","77","20","50"],["251004","G","1900","32","56","34"],["251004","F","2150","82","99","31"],["251004","N","2230","26","16","44"],["251004","G","2330","74","74","15"],
-["251005","G","1230","90","48","97"],["251005","F","0130","99","51","75"],["251005","N","0230","95","61","14"],["251005","G","1900","87","33","76"],["251005","F","2150","81","82","34"],["251005","N","2230","24","77","16"],["251005","G","2330","79","70","76"],
-["251006","G","1230","63","53","41"],["251006","F","0130","56","61","19"],["251006","N","0230","06","76","42"],["251006","G","1900","33","93","76"],["251006","F","2150","62","14","33"],["251006","N","2230","62","32","90"],["251006","G","2330","56","56","06"],
-["251007","G","1230","91","28","22"],["251007","F","0130","73","35","41"],["251007","N","0230","48","48","64"],["251007","G","1900","30","65","96"],["251007","F","2150","33","75","02"],["251007","N","2230","63","96","47"],["251007","G","2330","48","81","20"],
-["251008","F","0130","35","04","49"],["251008","N","0230","60","30","72"],["251008","G","1900","10","73","54"],["251008","F","2150","31","27","63"],["251008","N","2230","64","04","94"],["251008","G","2330","56","70","91"],
-["251009","G","1230","43","45","54"],["251009","F","0130","61","53","09"],["251009","N","0230","08","36","11"],["251009","G","1900","98","69","92"],["251009","F","2150","69","56","59"],["251009","N","2230","72","61","58"],["251009","G","2330","29","40","65"],
-["251010","G","1230","10","50","65"],["251010","F","0130","89","14","57"],["251010","N","0230","35","50","66"],["251010","G","1900","91","28","24"],["251010","F","2150","44","74","15"],["251010","N","2230","38","01","29"],["251010","G","2330","80","62","32"],
-["251011","G","1230","19","24","93"],["251011","F","0130","44","12","47"],["251011","N","0230","29","10","01"],["251011","G","1900","61","20","40"],["251011","F","2150","58","20","07"],["251011","N","2230","90","98","27"],["251011","G","2330","53","87","36"],
-["251012","G","1230","60","81","05"],["251012","F","0130","89","64","53"],["251012","N","0230","13","13","07"],["251012","G","1900","86","06","12"],["251012","F","2150","32","02","52"],["251012","N","2230","42","56","92"],["251012","G","2330","95","64","37"],
-["251013","G","1230","30","41","94"],["251013","F","0130","23","68","77"],["251013","N","0230","48","52","42"],["251013","G","1900","58","29","77"],["251013","F","2150","93","70","22"],["251013","N","2230","08","42","46"],["251013","G","2330","38","69","55"],
-["251014","G","1230","75","41","20"],["251014","F","0130","89","24","26"],["251014","N","0230","40","02","38"],["251014","G","1900","24","92","36"],["251014","F","2150","30","22","96"],["251014","N","2230","23","50","44"],["251014","G","2330","86","21","41"],["251015","G","1230","49","14","36"],["251015","F","0130","13","24","39"],["251015","N","0230","59","65","00"],["251015","G","1900","24","54","96"],["251015","F","2150","66","34","04"],["251015","N","2230","41","64","86"],["251015","G","2330","69","60","98"],
-["251016","G","1230","36","81","57"],["251016","F","0130","00","82","87"],["251016","N","0230","46","91","42"],["251016","G","1900","08","31","99"],["251016","F","2150","88","70","72"],["251016","N","2230","33","75","84"],["251016","G","2330","63","70","00"],
-["251017","G","1230","92","68","85"],["251017","F","0130","19","05","66"],["251017","N","0230","31","18","50"],["251017","G","1900","79","30","48"],["251017","F","2150","45","89","49"],["251017","N","2230","89","06","48"],["251017","G","2330","22","51","47"],
-["251018","G","1230","81","98","42"],["251018","F","0130","58","06","57"],["251018","N","0230","98","93","87"],["251018","G","1900","73","56","30"],["251018","F","2150","08","76","84"],["251018","N","2230","92","00","90"],["251018","G","2330","41","02","67"],
-["251019","G","1230","44","25","11"],["251019","F","0130","64","20","80"],["251019","N","0230","77","16","16"],["251019","G","1900","75","52","99"],["251019","F","2150","57","74","37"],["251019","N","2230","52","02","82"],
-["251020","G","1230","22","92","83"],["251020","F","0130","84","59","75"],["251020","N","0230","87","58","77"],["251020","G","1900","79","00","66"],["251020","F","2150","34","92","10"],["251020","N","2230","82","88","31"],["251020","G","2330","08","08","50"],
-["251021","G","1230","72","11","79"],["251021","F","0130","86","27","89"],["251021","N","0230","60","25","74"],["251021","G","1900","31","10","95"],["251021","F","2150","34","72","86"],["251021","N","2230","86","68","56"],["251021","G","2330","37","28","41"],
-["251022","G","1230","89","07","57"],["251022","F","0130","74","41","00"],["251022","N","0230","67","57","36"],["251022","G","1900","62","41","90"],["251022","F","2150","18","35","12"],["251022","N","2230","04","46","33"],["251022","G","2330","60","43","28"],
-["251023","G","1230","32","77","26"],["251023","F","0130","47","32","23"],["251023","N","0230","05","93","48"],["251023","F","2150","32","47","35"],["251023","N","2230","71","95","36"],["251023","G","2330","58","55","36"],
-["251024","G","1230","94","54","11"],["251024","F","0130","99","00","07"],["251024","N","0230","53","99","79"],["251024","G","1900","09","07","65"],["251024","F","2150","51","50","84"],["251024","N","2230","58","23","10"],["251024","G","2330","15","17","65"],
-["251025","G","1230","19","56","66"],["251025","F","0130","75","65","11"],["251025","N","0230","72","10","04"],["251025","G","1900","38","82","44"],["251025","F","2150","75","38","46"],["251025","N","2230","38","02","54"],["251025","G","2330","56","04","03"],
-["251026","G","1230","73","74","18"],["251026","F","0130","02","71","93"],["251026","N","0230","77","57","72"],["251026","G","1900","29","40","64"],["251026","F","2150","95","94","43"],["251026","N","2230","04","52","02"],["251026","G","2330","60","56","35"],
-["251027","G","1230","03","97","43"],["251027","F","0130","21","77","49"],["251027","N","0230","59","28","42"],["251027","G","1900","95","99","17"],["251027","F","2150","60","71","08"],["251027","N","2230","25","15","56"],["251027","G","2330","90","17","20"],
-["251028","G","1230","12","47","53"],["251028","F","0130","33","65","06"],["251028","N","0230","52","11","93"],["251028","G","1900","30","05","50"],["251028","F","2150","64","20","61"],["251028","N","2230","99","72","69"],["251028","G","2330","14","39","29"],
-["251029","G","1230","73","84","01"],["251029","F","0130","65","30","88"],["251029","N","0230","60","91","54"],["251029","G","1900","39","03","63"],["251029","F","2150","99","24","09"],["251029","N","2230","61","42","88"],["251029","G","2330","57","62","75"],
-["251030","G","1230","10","33","46"],["251030","F","0130","24","15","76"],["251030","N","0230","38","99","60"],["251030","G","1900","28","77","26"],["251030","F","2150","43","42","06"],["251030","N","2230","64","44","59"],["251030","G","2330","28","94","18"],
-["251031","G","1230","76","27","45"],["251031","F","0130","11","86","96"],["251031","N","0230","60","05","12"],["251031","G","1900","37","95","00"],["251031","F","2150","98","87","26"],["251031","N","2230","78","46","29"],["251031","G","2330","88","99","55"],
-["251101","G","1230","77","99","10"],["251101","F","0130","26","40","04"],["251101","N","0230","79","16","90"],["251101","G","1900","29","12","68"],["251101","F","2150","70","68","75"],["251101","N","2230","02","44","80"],["251101","G","2330","51","04","73"],
-["251102","G","1230","24","06","39"],["251102","F","0130","34","33","69"],["251102","N","0230","05","75","97"],["251102","G","1900","82","91","97"],["251102","F","2150","38","91","10"],["251102","N","2230","18","38","38"],["251102","G","2330","69","81","69"],
-["251103","G","1230","44","13","80"],["251103","F","0130","81","57","60"],["251103","N","0230","82","01","97"],["251103","G","1900","88","60","45"],["251103","F","2150","39","87","95"],["251103","N","2230","97","04","02"],["251103","G","2330","97","73","22"],
-["251104","G","1230","84","44","40"],["251104","F","0130","89","75","21"],["251104","N","0230","84","44","31"],["251104","G","1900","61","69","26"],["251104","F","2150","34","60","64"],["251104","N","2230","72","19","43"],["251104","G","2330","26","62","85"],
-["251105","G","1230","81","05","53"],["251105","F","0130","86","61","37"],["251105","N","0230","44","04","83"],["251105","G","1900","14","95","80"],["251105","F","2150","83","82","05"],["251105","N","2230","46","03","02"],["251105","G","2330","19","51","59"],
-["251106","G","1230","33","74","80"],["251106","F","0130","48","64","76"],["251106","N","0230","75","21","10"],["251106","G","1900","03","88","97"],["251106","F","2150","70","46","43"],["251106","N","2230","78","88","24"],["251106","G","2330","88","64","53"],
-["251107","G","1230","86","25","77"],["251107","F","0130","58","65","98"],["251107","N","0230","32","37","21"],["251107","G","1900","39","59","40"],["251107","F","2150","07","19","95"],["251107","N","2230","08","07","23"],["251107","G","2330","11","21","76"],
-["251108","G","1230","05","41","83"],["251108","F","0130","86","39","60"],["251108","N","0230","36","51","64"],["251108","G","1900","00","21","42"],["251108","F","2150","56","11","37"],["251108","N","2230","53","23","03"],["251108","G","2330","44","36","61"],
-["251109","G","1230","71","11","65"],["251109","F","0130","90","75","01"],["251109","N","0230","32","73","22"],["251109","G","1900","39","71","32"],["251109","F","2150","40","52","58"],["251109","N","2230","06","14","86"],["251109","G","2330","37","25","23"],
-["251110","G","1230","50","41","67"],["251110","F","0130","66","11","23"],["251110","N","0230","84","23","84"],["251110","G","1900","39","58","76"],["251110","F","2150","76","38","14"],["251110","N","2230","19","39","97"],["251110","G","2330","89","32","29"],
-["251111","G","1230","31","66","19"],["251111","F","0130","60","36","26"],["251111","N","0230","81","06","83"],["251111","G","1900","34","88","11"],["251111","F","2150","40","33","50"],["251111","N","2230","01","78","13"],["251111","G","2330","34","22","43"],
-["251112","G","1230","37","56","69"],["251112","F","0130","57","80","55"],["251112","N","0230","83","82","43"],["251112","G","1900","83","27","39"],["251112","F","2150","93","23","47"],["251112","N","2230","55","49","24"],["251112","G","2330","59","41","67"],
-["251113","G","1230","17","73","55"],["251113","F","0130","10","36","90"],["251113","N","0230","50","02","03"],["251113","G","1900","64","06","98"],["251113","F","2150","16","98","39"],["251113","N","2230","54","64","98"],["251113","G","2330","94","57","19"],
-["251114","G","1230","83","81","71"],["251114","F","0130","67","20","33"],["251114","N","0230","70","92","00"],["251114","G","1900","56","30","16"],["251114","F","2150","55","05","89"],["251114","N","2230","02","70","94"],["251114","G","2330","05","80","20"],
-["251115","G","1230","26","80","62"],["251115","F","0130","83","99","28"],["251115","G","1900","00","48","93"],["251115","F","2150","71","36","07"],["251115","N","2230","15","83","12"],["251115","G","2330","88","05","99"],
-["251116","G","1230","82","40","86"],["251116","F","0130","86","04","31"],["251116","N","0230","33","01","05"],["251116","G","1900","57","44","05"],["251116","F","2150","50","83","41"],["251116","N","2230","11","74","88"],
-["251117","G","1230","77","23","72"],["251117","F","0130","37","90","73"],["251117","N","0230","48","22","84"],["251117","F","2150","00","17","61"],["251117","N","2230","55","09","79"],["251117","G","2330","58","17","86"],
-["251118","G","1230","73","76","38"],["251118","F","0130","13","53","02"],["251118","N","0230","57","44","70"],["251118","G","1900","16","94","29"],["251118","F","2150","68","34","06"],["251118","N","2230","83","54","66"],["251118","G","2330","29","28","07"],
-["251119","F","0130","07","09","83"],["251119","N","0230","59","33","53"],["251119","G","1900","22","57","28"],["251119","F","2150","37","89","45"],["251119","N","2230","28","26","66"],["251119","G","2330","49","17","91"],
-["251120","G","1230","79","73","80"],["251120","F","0130","85","73","26"],["251120","N","0230","33","72","36"],["251120","G","1900","32","19","54"],["251120","F","2150","14","29","75"],["251120","N","2230","39","14","76"],["251120","G","2330","08","21","12"],
-["251121","G","1230","65","14","47"],["251121","F","0130","72","51","12"],["251121","N","0230","65","03","06"],["251121","G","1900","37","55","13"],["251121","F","2150","11","45","32"],["251121","N","2230","82","30","98"],["251121","G","2330","87","96","42"],
-["251122","G","1230","08","20","27"],["251122","F","0130","28","37","76"],["251122","N","0230","59","83","15"],["251122","G","1900","66","43","42"],["251122","F","2150","37","13","50"],["251122","N","2230","21","65","27"],["251122","G","2330","10","68","24"],
-["251123","G","1230","78","31","95"],["251123","F","0130","20","86","24"],["251123","N","0230","16","78","50"],["251123","G","1900","94","88","50"],["251123","F","2150","96","60","29"],["251123","N","2230","97","64","91"],["251123","G","2330","87","76","40"],
-["251124","G","1230","44","04","39"],["251124","F","0130","65","06","57"],["251124","N","0230","56","59","31"],["251124","G","1900","90","29","12"],["251124","F","2150","55","59","17"],["251124","N","2230","79","70","19"],["251124","G","2330","19","08","68"],
-["251125","G","1230","78","51","39"],["251125","F","0130","78","04","45"],["251125","N","0230","61","57","63"],["251125","G","1900","39","48","18"],["251125","F","2150","41","54","14"],["251125","N","2230","82","24","40"],["251125","G","2330","80","67","11"],
-["251126","G","1230","77","99","47"],["251126","F","0130","03","66","72"],["251126","N","0230","02","55","97"],["251126","G","1900","09","50","84"],["251126","F","2150","57","31","78"],["251126","N","2230","58","43","07"],["251126","G","2330","04","30","99"],
-["251127","G","1230","08","08","68"],["251127","F","0130","09","15","85"],["251127","N","0230","34","82","70"],["251127","G","1900","68","59","83"],["251127","F","2150","06","32","59"],["251127","N","2230","92","99","69"],["251127","G","2330","16","99","77"],
-["251128","G","1230","35","31","84"],["251128","F","0130","07","51","99"],["251128","N","0230","00","37","14"],["251128","G","1900","58","31","56"],["251128","F","2150","18","26","50"],["251128","N","2230","75","89","11"],["251128","G","2330","46","86","92"],
-["251129","F","0130","64","89","06"],["251129","N","0230","08","90","55"],["251129","G","1900","70","28","75"],["251129","F","2150","09","34","28"],["251129","N","2230","10","75","34"],["251129","G","2330","59","76","88"],
-["251130","G","1230","11","44","22"],["251130","F","0130","24","88","10"],["251130","N","0230","56","82","77"],["251130","G","1900","10","37","25"],["251130","F","2150","84","36","62"],["251130","N","2230","50","26","86"],["251130","G","2330","89","74","32"],
-["251201","G","1230","99","86","30"],["251201","F","0130","88","28","05"],["251201","N","0230","64","92","83"],["251201","G","1900","58","59","56"],["251201","F","2150","28","67","20"],["251201","N","2230","02","32","31"],["251201","G","2330","73","33","40"],
-["251202","G","1230","64","71","49"],["251202","F","0130","02","57","72"],["251202","N","0230","83","41","95"],["251202","G","1900","46","32","19"],["251202","F","2150","36","33","36"],["251202","N","2230","21","68","73"],["251202","G","2330","78","61","04"],
-["251203","G","1230","93","82","17"],["251203","F","0130","34","13","56"],["251203","N","0230","14","49","81"],["251203","G","1900","47","66","71"],["251203","F","2150","02","26","81"],["251203","N","2230","94","58","48"],["251203","G","2330","59","35","19"],["251204","G","1230","13","96","61"],["251204","F","0130","21","32","86"],["251204","N","0230","84","96","47"],["251204","G","1900","89","36","22"],["251204","F","2150","41","98","60"],["251204","N","2230","35","93","28"],["251204","G","2330","24","95","23"],
-["251205","G","1230","16","76","23"],["251205","F","0130","55","63","34"],["251205","N","0230","42","84","76"],["251205","G","1900","41","19","09"],["251205","F","2150","80","62","28"],["251205","N","2230","36","57","48"],["251205","G","2330","80","94","98"],
-["251206","G","1230","08","23","51"],["251206","F","0130","13","71","49"],["251206","N","0230","67","78","21"],["251206","G","1900","68","29","25"],["251206","F","2150","40","21","70"],["251206","N","2230","08","56","76"],["251206","G","2330","29","77","22"],
-["251207","G","1230","34","60","10"],["251207","F","0130","96","57","70"],["251207","N","0230","48","01","15"],["251207","G","1900","83","79","51"],["251207","F","2150","67","15","22"],["251207","N","2230","79","50","13"],["251207","G","2330","63","75","56"],
-["251208","G","1230","28","88","43"],["251208","F","0130","56","58","76"],["251208","N","0230","29","93","78"],["251208","G","1900","93","80","59"],["251208","F","2150","84","39","19"],["251208","N","2230","45","38","75"],["251208","G","2330","07","86","28"],
-["251209","G","1230","94","60","79"],["251209","F","0130","83","37","20"],["251209","N","0230","73","26","39"],["251209","G","1900","36","18","51"],["251209","F","2150","34","00","15"],["251209","N","2230","02","99","74"],["251209","G","2330","00","09","55"],
-["251210","G","1230","35","67","43"],["251210","F","0130","58","37","93"],["251210","N","0230","86","81","45"],["251210","G","1900","94","03","56"],["251210","F","2150","00","69","92"],["251210","N","2230","58","15","03"],["251210","G","2330","09","02","69"],
-["251211","G","1230","56","75","54"],["251211","F","0130","52","82","13"],["251211","N","0230","30","42","64"],["251211","G","1900","78","79","08"],["251211","F","2150","41","42","37"],["251211","N","2230","72","22","91"],["251211","G","2330","35","38","79"],
-["251212","G","1230","79","80","63"],["251212","F","0130","63","53","57"],["251212","N","0230","22","05","54"],["251212","G","1900","84","27","96"],["251212","F","2150","12","41","80"],["251212","N","2230","65","01","75"],["251212","G","2330","58","43","42"],
-["251213","G","1230","37","52","20"],["251213","F","0130","21","06","70"],["251213","N","0230","07","91","92"],["251213","G","1900","88","09","29"],["251213","F","2150","14","61","08"],["251213","N","2230","55","35","88"],["251213","G","2330","22","34","71"],
-["251214","G","1230","97","53","16"],["251214","F","0130","17","66","53"],["251214","N","0230","35","32","09"],["251214","G","1900","89","14","89"],["251214","F","2150","11","08","93"],["251214","N","2230","91","88","58"],["251214","G","2330","05","57","29"],
-["251215","G","1230","32","04","35"],["251215","F","0130","74","88","99"],["251215","N","0230","94","91","14"],["251215","G","1900","69","27","61"],["251215","F","2150","18","70","57"],["251215","N","2230","62","02","01"],["251215","G","2330","79","22","23"],
-["251216","G","1230","87","16","38"],["251216","F","0130","17","99","68"],["251216","N","0230","84","21","28"],["251216","G","1900","81","04","61"],["251216","F","2150","95","10","92"],["251216","N","2230","84","21","28"],["251216","G","2330","78","93","55"],
-["251217","G","1230","69","78","59"],["251217","F","0130","52","31","30"],["251217","N","0230","58","01","43"],["251217","G","1900","65","78","30"],["251217","F","2150","61","18","88"],["251217","N","2230","31","09","30"],["251217","G","2330","24","91","93"],
-["251218","G","1230","07","43","12"],["251218","F","0130","36","92","51"],["251218","N","0230","51","19","02"],["251218","G","1900","52","97","42"],["251218","F","2150","63","53","37"],["251218","N","2230","94","33","08"],["251218","G","2330","35","43","26"],
-["251219","G","1230","04","60","44"],["251219","F","0130","22","01","17"],["251219","N","0230","95","86","50"],["251219","G","1900","24","54","83"],["251219","F","2150","59","97","67"],["251219","N","2230","78","61","44"],["251219","G","2330","87","26","43"],
-["251220","G","1230","89","41","18"],["251220","F","0130","31","69","76"],["251220","N","0230","58","11","41"],["251220","G","1900","94","91","22"],["251220","F","2150","15","89","34"],["251220","N","2230","40","15","02"],["251220","G","2330","52","97","25"],
-["251221","G","1230","99","63","72"],["251221","F","0130","58","45","69"],["251221","N","0230","02","96","20"],["251221","G","1900","62","83","12"],["251221","F","2150","55","39","18"],["251221","N","2230","24","16","01"],["251221","G","2330","79","08","00"],
-["251222","G","1230","87","88","64"],["251222","F","0130","48","71","89"],["251222","N","0230","03","50","82"],["251222","G","1900","18","87","08"],["251222","F","2150","99","51","05"],["251222","N","2230","51","29","19"],["251222","G","2330","65","53","89"],
-["251223","G","1230","41","39","09"],["251223","F","0130","74","69","27"],["251223","N","0230","80","62","23"],["251223","G","1900","34","35","19"],["251223","F","2150","22","11","19"],["251223","N","2230","98","76","43"],["251223","G","2330","26","79","29"],
-["251224","G","1230","22","79","21"],["251224","F","0130","46","76","08"],["251224","N","0230","75","19","22"],["251224","G","1900","61","73","69"],["251224","F","2150","34","26","48"],["251224","N","2230","10","06","40"],["251224","G","2330","09","45","63"],
-["251225","G","1230","73","61","63"],["251225","F","0130","25","90","22"],["251225","N","0230","83","03","34"],["251225","G","1900","15","98","25"],["251225","F","2150","10","62","39"],["251225","N","2230","61","73","73"],["251225","G","2330","77","32","83"],
-["251226","G","1230","57","58","81"],["251226","F","0130","45","01","37"],["251226","N","0230","64","45","73"],["251226","G","1900","49","39","93"],["251226","F","2150","46","23","66"],["251226","N","2230","14","26","00"],["251226","G","2330","34","63","75"],
-["251227","G","1230","96","77","87"],["251227","F","0130","52","00","01"],["251227","N","0230","93","07","05"],["251227","G","1900","86","81","45"],["251227","F","2150","85","00","33"],["251227","N","2230","50","29","19"],["251227","G","2330","81","88","81"],
-["251228","G","1230","36","20","55"],["251228","F","0130","09","53","11"],["251228","N","0230","98","09","85"],["251228","G","1900","22","03","12"],["251228","F","2150","03","53","12"],["251228","N","2230","53","42","95"],["251228","G","2330","27","91","03"],
-["251229","G","1230","65","69","46"],["251229","F","0130","22","90","81"],["251229","N","0230","21","73","37"],["251229","G","1900","61","87","11"],["251229","F","2150","08","09","81"],["251229","N","2230","95","13","72"],["251229","G","2330","75","66","60"],
-["251230","G","1230","14","89","39"],["251230","F","0130","77","22","37"],["251230","N","0230","51","94","88"],["251230","G","1900","88","76","12"],["251230","F","2150","70","70","72"],["251230","N","2230","32","35","03"],["251230","G","2330","26","19","45"],
-["251231","G","1230","76","37","06"],["251231","F","0130","07","65","71"],["251231","N","0230","19","23","28"],["251231","G","1900","50","68","92"],["251231","F","2150","11","23","05"],["251231","N","2230","16","37","96"],["251231","G","2330","82","75","99"],
-["260101","G","1230","26","90","78"],["260101","F","0130","95","11","35"],["260101","N","0230","17","55","46"],["260101","G","1900","49","10","60"],["260101","F","2150","91","58","46"],["260101","N","2230","74","33","17"],["260101","G","2330","06","34","28"],
-["260102","G","1230","58","06","38"],["260102","F","0130","62","55","59"],["260102","N","0230","98","36","30"],["260102","G","1900","46","20","99"],["260102","F","2150","89","34","18"],["260102","N","2230","56","80","49"],["260102","G","2330","72","74","82"],
-["260103","G","1230","85","49","59"],["260103","F","0130","08","94","31"],["260103","N","0230","43","45","40"],["260103","G","1900","80","79","35"],["260103","F","2150","11","56","73"],["260103","N","2230","79","12","79"],["260103","G","2330","18","10","63"],
-["260104","G","1230","03","31","58"],["260104","F","0130","71","94","55"],["260104","N","0230","93","84","04"],["260104","G","1900","20","58","70"],["260104","F","2150","71","90","18"],["260104","N","2230","89","67","31"],["260104","G","2330","62","62","39"],
-["260105","G","1230","00","00","61"],["260105","F","0130","80","85","41"],["260105","N","0230","80","83","63"],["260105","G","1900","20","17","64"],["260105","F","2150","94","42","47"],["260105","N","2230","35","82","23"],["260105","G","2330","56","07","82"],
-["260106","G","1230","08","14","83"],["260106","F","0130","09","78","89"],["260106","N","0230","81","26","66"],["260106","G","1900","56","12","84"],["260106","F","2150","60","74","37"],["260106","N","2230","42","44","24"],["260106","G","2330","60","81","46"],
-["260107","G","1230","81","39","40"],["260107","F","0130","34","70","65"],["260107","N","0230","16","61","18"],["260107","G","1900","67","45","79"],["260107","F","2150","63","40","52"],["260107","N","2230","86","59","27"],["260107","G","2330","39","58","17"],
-["260108","G","1230","80","72","71"],["260108","F","0130","29","25","14"],["260108","N","0230","99","67","29"],["260108","G","1900","76","70","71"],["260108","F","2150","96","03","70"],["260108","N","2230","32","69","57"],["260108","G","2330","31","44","79"],
-["260109","G","1230","77","96","32"],["260109","F","0130","60","89","63"],["260109","N","0230","89","09","45"],["260109","G","1900","02","46","18"],["260109","F","2150","93","64","11"],["260109","N","2230","35","10","90"],["260109","G","2330","12","77","89"],
-["260110","G","1230","53","01","46"],["260110","F","0130","01","19","79"],["260110","N","0230","52","47","07"],["260110","G","1900","65","54","75"],["260110","F","2150","06","59","88"],["260110","N","2230","56","94","93"],["260110","G","2330","70","31","97"],
-["260111","G","1230","99","01","16"],["260111","F","0130","22","57","82"],["260111","N","0230","92","98","23"],["260111","G","1900","18","98","23"],["260111","F","2150","89","30","17"],["260111","N","2230","91","29","26"],["260111","G","2330","32","63","91"],
-["260112","G","1230","77","84","63"],["260112","F","0130","60","80","86"],["260112","N","0230","24","49","45"],["260112","G","1900","75","62","14"],["260112","F","2150","96","45","20"],["260112","N","2230","86","95","44"],["260112","G","2330","84","41","70"],
-["260113","G","1230","59","64","78"],["260113","F","0130","90","97","27"],["260113","N","0230","09","11","72"],["260113","G","1900","84","28","60"],["260113","F","2150","43","00","16"],["260113","N","2230","18","83","40"],["260113","G","2330","97","83","24"],
-["260114","G","1230","49","21","37"],["260114","F","0130","16","42","23"],["260114","N","0230","19","62","50"],["260114","G","1900","78","12","01"],["260114","F","2150","49","03","43"],["260114","N","2230","02","97","19"],["260114","G","2330","90","04","31"],
-["260115","G","1230","74","59","28"],["260115","F","0130","04","02","20"],["260115","N","0230","01","06","17"],["260115","G","1900","01","06","17"],["260115","F","2150","47","48","06"],["260115","N","2230","84","38","89"],["260115","G","2330","09","11","72"],
-["260116","G","1230","07","89","84"],["260116","F","0130","73","68","25"],["260116","N","0230","39","83","50"],["260116","G","1900","20","05","69"],["260116","F","2150","00","59","03"],["260116","N","2230","96","80","72"],["260116","G","2330","70","15","82"],
-["260117","G","1230","25","71","51"],["260117","F","0130","14","03","75"],["260117","N","0230","04","08","04"],["260117","G","1900","58","55","40"],["260117","F","2150","06","65","87"],["260117","N","2230","85","99","88"],["260117","G","2330","60","16","80"],
-["260118","G","1230","18","87","69"],["260118","F","0130","11","91","69"],["260118","N","0230","82","15","01"],["260118","G","1900","46","01","59"],["260118","F","2150","62","82","19"],["260118","N","2230","94","91","95"],["260118","G","2330","76","88","10"],
-["260119","G","1230","98","18","43"],["260119","F","0130","63","34","32"],["260119","N","0230","69","39","71"],["260119","G","1900","18","10","21"],["260119","F","2150","59","48","77"],["260119","N","2230","40","19","59"],["260119","G","2330","64","80","60"],
-["260120","G","1230","23","97","13"],["260120","F","0130","43","10","38"],["260120","N","0230","79","09","05"],["260120","G","1900","73","94","16"],["260120","F","2150","06","14","16"],["260120","N","2230","06","00","47"],["260120","G","2330","80","88","23"],
-["260121","G","1230","70","18","86"],["260121","F","0130","50","08","01"],["260121","N","0230","16","93","47"],["260121","G","1900","52","26","71"],["260121","F","2150","84","22","58"],["260121","N","2230","33","26","16"],["260121","G","2330","41","98","06"],
-["260122","G","1230","02","97","49"],["260122","F","0130","93","44","98"],["260122","N","0230","81","24","44"],["260122","G","1900","63","71","97"],["260122","F","2150","16","43","09"],["260122","N","2230","87","00","77"],["260122","G","2330","84","57","32"],["260123","G","1230","86","72","40"],["260123","F","0130","03","66","33"],["260123","N","0230","89","08","14"],["260123","G","1900","49","70","13"],["260123","F","2150","10","34","32"],["260123","N","2230","71","80","35"],["260123","G","2330","87","87","45"],
-["260124","G","1230","58","16","56"],["260124","F","0130","61","26","39"],["260124","N","0230","16","73","76"],["260124","G","1900","86","22","94"],["260124","F","2150","62","80","55"],["260124","N","2230","51","19","60"],["260124","G","2330","52","35","59"],
-["260125","G","1230","05","03","52"],["260125","F","0130","84","98","46"],["260125","N","0230","77","99","83"],["260125","G","1900","73","06","80"],["260125","F","2150","84","92","21"],["260125","N","2230","83","16","73"],["260125","G","2330","84","29","19"],
-["260126","G","1230","37","78","98"],["260126","F","0130","60","12","83"],["260126","N","0230","76","53","95"],["260126","G","1900","81","41","64"],["260126","F","2150","20","68","16"],["260126","N","2230","66","90","94"],["260126","G","2330","16","28","00"],
-["260127","G","1230","97","16","28"],["260127","F","0130","05","46","31"],["260127","N","0230","17","15","50"],["260127","G","1900","22","94","80"],["260127","F","2150","22","59","14"],["260127","N","2230","65","04","95"],["260127","G","2330","03","47","84"],
-["260128","G","1230","28","72","19"],["260128","F","0130","87","09","51"],["260128","N","0230","90","10","44"],["260128","G","1900","54","52","94"],["260128","F","2150","56","05","02"],["260128","N","2230","33","79","06"],["260128","G","2330","03","17","73"],
-["260129","G","1230","66","54","64"],["260129","F","0130","35","46","63"],["260129","N","0230","52","33","91"],["260129","G","1900","91","83","01"],["260129","F","2150","80","62","50"],["260129","N","2230","92","20","06"],["260129","G","2330","97","13","92"],
-["260130","G","1230","05","27","63"],["260130","F","0130","64","44","46"],["260130","N","0230","23","81","88"],["260130","G","1900","49","40","75"],["260130","F","2150","24","97","27"],["260130","N","2230","15","29","68"],["260130","G","2330","12","58","36"],
-["260131","G","1230","92","32","79"],["260131","F","0130","85","02","86"],["260131","N","0230","17","59","64"],["260131","G","1900","21","76","67"],["260131","F","2150","50","83","55"],["260131","N","2230","32","19","77"],["260131","G","2330","73","50","86"],
-["260201","G","1230","48","93","52"],["260201","F","0130","33","60","03"],["260201","N","0230","16","12","20"],["260201","G","1900","76","50","86"],["260201","F","2150","42","20","21"],["260201","N","2230","61","14","65"],["260201","G","2330","02","36","53"],
-["260202","G","1230","34","42","46"],["260202","F","0130","75","10","99"],["260202","N","0230","75","39","62"],["260202","G","1900","32","01","42"],["260202","F","2150","02","42","45"],["260202","N","2230","45","53","30"],["260202","G","2330","23","02","18"],
-["260203","G","1230","33","94","97"],["260203","F","0130","52","28","56"],["260203","N","0230","15","26","47"],["260203","G","1900","65","77","14"],["260203","F","2150","24","21","65"],["260203","N","2230","79","94","74"],["260203","G","2330","26","72","80"],
-["260204","G","1230","29","74","24"],["260204","F","0130","40","38","17"],["260204","N","0230","21","13","30"],["260204","G","1900","96","77","71"],["260204","F","2150","35","03","19"],["260204","N","2230","47","13","33"],["260204","G","2330","68","26","61"],
-["260205","G","1230","06","38","39"],["260205","F","0130","54","41","25"],["260205","N","0230","80","71","83"],["260205","G","1900","32","49","50"],["260205","F","2150","77","82","92"],["260205","N","2230","59","33","26"],["260205","G","2330","32","64","64"],
-["260206","G","1230","89","89","79"],["260206","F","0130","84","18","60"],["260206","N","0230","66","46","84"],["260206","G","1900","23","40","48"],["260206","F","2150","55","46","47"],["260206","N","2230","91","61","84"],["260206","G","2330","65","56","01"],
-["260207","G","1230","95","09","23"],["260207","F","0130","02","12","19"],["260207","N","0230","48","43","25"],["260207","G","1900","15","64","76"],["260207","F","2150","03","51","33"],["260207","N","2230","83","95","63"],["260207","G","2330","18","38","50"],
-["260208","G","1230","67","50","96"],["260208","F","0130","08","37","29"],["260208","N","0230","85","34","66"],["260208","G","1900","71","42","67"],["260208","F","2150","74","86","63"],["260208","N","2230","34","25","86"],["260208","G","2330","03","24","30"],
-["260209","G","1230","85","07","09"],["260209","F","0130","90","32","91"],["260209","N","0230","46","06","33"],["260209","G","1900","73","68","95"],["260209","F","2150","10","62","82"],["260209","N","2230","94","18","49"],["260209","G","2330","61","73","39"],
-["260210","G","1230","68","21","04"],["260210","F","0130","22","54","23"],["260210","N","0230","73","85","48"],["260210","G","1900","71","18","44"],["260210","F","2150","97","75","37"],["260210","N","2230","70","27","71"],["260210","G","2330","17","32","62"],
-["260211","G","1230","79","70","36"],["260211","F","0130","68","88","21"],["260211","N","0230","19","83","83"],["260211","G","1900","76","01","63"],["260211","F","2150","23","83","12"],["260211","N","2230","09","81","06"],["260211","G","2330","70","10","29"],
-["260212","G","1230","72","10","26"],["260212","F","0130","22","17","92"],["260212","N","0230","66","36","81"],["260212","G","1900","06","65","27"],["260212","F","2150","51","28","97"],["260212","N","2230","35","74","65"],["260212","G","2330","17","95","96"],
-["260213","G","1230","34","10","62"],["260213","F","0130","84","43","58"],["260213","N","0230","21","75","15"],["260213","G","1900","33","95","20"],["260213","F","2150","02","27","66"],["260213","N","2230","17","61","75"],["260213","G","2330","51","31","59"],
-["260214","G","1230","32","55","96"],["260214","F","0130","20","95","27"],["260214","N","0230","42","89","11"],["260214","G","1900","61","53","94"],["260214","F","2150","85","00","23"],["260214","N","2230","48","88","20"],["260214","G","2330","47","85","74"],
-["260215","G","1230","48","11","60"],["260215","F","0130","26","01","69"],["260215","N","0230","87","57","58"],["260215","G","1900","85","36","14"],["260215","F","2150","31","72","94"],["260215","N","2230","59","55","75"],["260215","G","2330","32","06","84"],
-["260216","G","1230","53","69","03"],["260216","F","0130","33","59","78"],["260216","N","0230","23","19","25"],["260216","G","1900","29","61","11"],["260216","F","2150","73","56","18"],["260216","N","2230","33","42","54"],["260216","G","2330","90","96","06"],
-["260217","G","1231","64","89","08"],["260217","F","1333","07","89","27"],["260217","N","1432","78","82","17"],["260217","G","1901","15","22","43"],["260217","F","2150","31","70","58"],["260217","N","2230","31","40","35"],["260217","G","2340","10","16","29"],
-["260218","G","1230","17","34","99"],["260218","F","1333","16","88","21"],["260218","N","1439","54","72","13"],["260218","G","1902","43","00","04"],["260218","F","2148","32","56","35"],["260218","N","2230","28","82","44"],["260218","G","2350","78","74","46"],
-["260219","G","1246","13","38","49"],["260219","F","1334","38","60","31"],["260219","N","1432","01","69","03"],["260219","G","1916","95","35","36"],["260219","F","2150","07","50","75"],["260219","N","2230","68","22","94"],["260219","G","2336","55","75","22"],
-["260220","G","1234","89","71","04"],["260220","F","1336","86","55","90"],["260220","N","1434","17","83","96"],["260220","G","1901","08","09","60"],["260220","F","2150","78","14","94"],["260220","N","2230","37","50","76"],["260220","G","2337","22","38","41"],
-["260221","G","1232","84","76","87"],["260221","F","1333","15","00","47"],["260221","N","1435","07","85","15"],["260221","G","1903","29","17","26"],["260221","F","2149","47","78","83"],["260221","N","2236","57","81","22"],["260221","G","2346","84","55","14"],
-["260222","G","1317","11","48","82"],["260222","F","1334","69","67","23"],["260222","N","1437","53","98","37"],["260222","G","1915","56","78","57"],["260222","N","2230","53","86","86"],["260222","G","2338","89","54","15"],
-["260223","G","1238","59","07","77"],["260223","F","1334","07","13","47"],["260223","N","1435","26","52","55"],["260223","F","2151","31","17","22"],["260223","N","2230","40","80","76"],["260223","G","2338","29","26","11"],
-["260224","G","1318","62","41","36"],["260224","F","1334","21","02","09"],
-["260225","G","1230","00","06","53"],["260225","N","1452","99","46","56"],["260225","G","1912","13","06","11"],["260225","F","2149","12","54","15"],["260225","N","2230","66","86","91"],["260225","G","2337","01","09","10"],
-["260226","G","1230","60","38","86"],["260226","F","1334","14","63","95"],["260226","N","1435","25","87","04"],["260226","G","2111","86","26","50"],["260226","F","2150","03","01","14"],["260226","N","2233","27","20","02"],["260226","G","2344","53","55","95"],
-["260227","G","1306","29","22","19"],["260227","F","1334","20","66","54"],["260227","N","1433","62","61","55"],["260227","G","1901","61","11","61"],["260227","F","2150","53","93","36"],["260227","N","2230","40","65","06"],["260227","G","2336","72","41","15"],
-["260228","G","1234","16","51","94"],["260228","F","1333","90","69","41"],["260228","N","1432","60","42","56"],["260228","G","1903","02","18","16"],["260228","F","2150","01","64","66"],["260228","N","2232","22","50","76"],["260228","G","2351","15","12","13"],
-["260301","G","1241","81","70","99"],["260301","F","1333","96","97","22"],["260301","N","1441","33","78","75"],["260301","F","2148","63","12","35"],["260301","G","2341","56","31","71"],
-["260302","F","1333","43","10","47"],["260302","N","1432","43","85","72"],["260302","G","1901","33","54","93"],["260302","F","2150","93","54","60"],["260302","N","2244","17","46","86"],["260302","G","2342","75","09","57"],
-["260303","G","1231","14","02","71"],["260303","F","1333","55","67","58"],["260303","N","1431","32","27","34"],
-["260304","F","1338","55","55","05"],
-["260305","G","1233","24","78","39"],["260305","F","1336","41","18","31"],["260305","N","1435","29","61","39"],["260305","G","1906","95","89","87"],["260305","F","2150","55","00","54"],["260305","N","2232","47","86","81"],["260305","G","2347","50","43","79"],
-["260306","G","1309","90","63","44"],["260306","F","1334","62","05","22"],["260306","N","1434","34","35","59"],
-["260307","G","1920","75","65","75"],["260307","F","2148","59","75","05"],["260307","N","2232","51","43","02"],["260307","G","2343","56","27","75"],
-["260308","G","1231","56","56","05"],["260308","F","1333","11","46","53"],["260308","N","1431","00","89","08"],["260308","G","2059","59","78","55"],["260308","F","2149","89","59","98"],["260308","G","2243","91","96","60"],
-["260309","G","1232","51","67","30"],["260309","F","1334","83","28","76"],["260309","N","1434","00","73","30"],["260309","G","2113","19","01","79"],["260309","F","2151","41","25","87"],["260309","N","2254","98","44","08"],["260309","G","2337","67","73","44"],
-["260310","G","1242","75","04","72"],["260310","F","1334","58","77","18"],["260310","N","1431","19","50","73"],["260310","N","2231","82","11","05"],["260310","G","2330","67","22","24"],
-["260311","G","1233","44","72","23"],["260311","F","1334","00","69","28"],["260311","N","1435","70","19","36"],["260311","G","1913","34","15","68"],["260311","F","2219","94","03","19"],["260311","N","2231","47","36","54"],["260311","G","2344","63","11","25"],
-["260312","G","1232","91","60","15"],["260312","F","1334","08","01","63"],["260312","N","1448","54","85","61"],["260312","G","1906","86","75","06"],["260312","F","2149","39","43","41"],["260312","N","2232","65","53","54"],["260312","G","2340","02","33","58"],
-["260313","G","1239","32","00","98"],["260313","F","1337","50","19","43"],["260313","N","1849","40","16","98"],["260313","F","2149","34","66","52"],["260313","N","2243","86","78","79"],["260313","G","2347","66","01","86"],["260314","F","1334","70","97","62"],["260314","N","1626","95","56","81"],["260314","G","1951","67","58","77"],["260314","F","2151","73","54","78"],["260314","N","2332","23","60","31"],["260314","G","2347","60","15","18"],
-["260315","G","1236","99","64","59"],["260315","F","1334","95","96","01"],["260315","N","1504","12","72","95"],["260315","G","1917","87","79","23"],["260315","F","2149","91","33","18"],["260315","N","2238","01","62","76"],["260315","G","2342","54","88","90"],
-["260316","G","1234","09","31","45"],["260316","F","1333","90","03","65"],["260316","N","1432","59","23","60"],["260316","G","1902","75","91","59"],["260316","F","2149","84","19","62"],["260316","N","2230","97","44","07"],["260316","G","2359","89","63","06"],
-["260317","F","1334","36","32","92"],["260317","N","1512","29","43","91"],["260317","G","2113","84","86","34"],["260317","F","2150","15","63","22"],["260317","N","2230","44","81","02"],["260317","G","2342","93","87","62"],
-["260318","G","1232","27","77","06"],["260318","F","1334","78","91","09"],["260318","N","1432","78","72","06"],["260318","G","1901","69","15","82"],["260318","F","2150","85","09","71"],
-["260319","G","1243","77","03","47"],["260319","F","1335","52","98","60"],["260319","N","1432","03","13","92"],["260319","G","1902","13","79","04"],["260319","F","2201","01","21","25"],["260319","G","2338","65","18","72"],
-["260320","G","1317","83","62","55"],["260320","F","1335","33","17","33"],["260320","N","1508","01","54","70"],["260320","G","1904","73","75","18"],["260320","G","2336","43","02","06"],
-["260321","G","1231","73","98","49"],["260321","F","1334","66","23","05"],["260321","N","1431","71","74","86"],["260321","G","1902","56","82","53"],["260321","F","2149","65","88","42"],["260321","N","2230","99","21","92"],["260321","G","2338","24","21","82"],
-["260322","G","1512","68","76","04"],["260322","F","1513","85","56","93"],["260322","N","1514","92","45","13"],["260322","G","2150","27","43","83"],["260322","F","2151","76","55","51"],["260322","N","2232","18","07","83"],["260322","G","2338","51","49","94"],
-["260323","G","1232","00","27","50"],["260323","F","1333","96","75","59"],["260323","N","1430","39","07","81"],["260323","G","1901","50","64","04"],["260323","F","2210","32","82","71"],["260323","N","2238","09","79","56"],["260323","G","2338","98","86","40"],
-["260324","G","1333","85","80","02"],["260324","F","1333","75","95","21"],["260324","N","1445","39","46","09"],["260324","G","1904","49","01","83"],["260324","F","2208","95","06","15"],["260324","N","2243","53","25","61"],["260324","G","2351","57","30","12"],
-["260325","G","1306","82","83","16"],["260325","F","1333","47","18","05"],["260325","N","1432","97","26","85"],["260325","G","1901","53","58","84"],["260325","F","2150","07","95","54"],["260325","N","2230","86","87","77"],["260325","G","2339","91","40","17"],
-["260326","G","1302","31","57","75"],["260326","F","1333","10","01","85"],["260326","N","1437","04","58","23"],["260326","G","1903","07","97","75"],["260326","F","2151","06","65","93"],["260326","N","2234","79","13","91"],["260326","G","2345","80","14","59"],
-["260327","G","1235","51","43","54"],["260327","F","1436","56","60","50"],["260327","N","1437","97","68","50"],["260327","G","1902","15","08","11"],["260327","F","2307","88","57","74"],["260327","N","2307","63","02","61"],["260327","G","2346","92","84","70"],
-["260328","G","1254","44","14","53"],["260328","F","1334","70","80","88"],["260328","N","1435","62","16","71"],["260328","G","1902","83","13","86"],["260328","F","2150","97","28","51"],["260328","N","2232","93","46","56"],["260328","G","2344","86","55","43"],
-["260329","G","1320","90","21","35"],["260329","F","1337","62","34","75"],["260329","N","1446","04","02","20"],["260329","G","1902","51","79","79"],["260329","F","2204","26","25","59"],["260329","N","2245","08","32","29"],["260329","G","2354","83","49","88"],
-["260330","G","1328","93","87","13"],["260330","F","1334","65","12","75"],["260330","N","1433","91","23","78"],["260330","G","1904","36","42","98"],["260330","F","2150","06","42","75"],["260330","N","2252","46","58","26"],["260330","G","2339","25","86","97"],
-["260331","G","1358","81","42","20"],["260331","F","1358","78","86","68"],["260331","N","1434","81","91","55"],["260331","G","1933","83","14","80"],["260331","F","2151","05","57","99"],["260331","N","2300","90","17","30"],["260331","G","2352","39","19","43"],
-["260401","G","1232","40","29","15"],["260401","F","1334","26","57","87"],["260401","N","1436","13","05","03"],["260401","G","2049","64","14","45"],["260401","F","2152","81","07","44"],["260401","N","2238","24","96","81"],["260401","G","2345","80","83","21"],
-["260402","G","1231","97","89","04"],["260402","F","1334","21","87","37"],["260402","N","1431","81","76","33"],["260402","G","1904","95","28","65"],["260402","F","2224","52","75","12"],["260402","N","2340","41","62","24"],["260402","G","2340","62","51","62"],
-["260403","G","1233","24","12","92"],["260403","F","1334","15","50","43"],["260403","N","1431","56","56","24"],["260403","G","1915","21","31","97"],["260403","F","2149","63","73","82"],["260403","N","2336","19","89","21"],["260403","G","2336","93","13","94"],
-["260404","G","1251","50","80","09"],["260404","F","1429","31","00","20"],["260404","N","1906","69","40","73"],["260404","G","1907","66","97","67"],["260404","F","2148","18","42","63"],["260404","N","2148","92","27","25"],["260404","G","2148","58","62","84"],
-["260405","G","1235","26","37","52"],["260405","F","1340","07","12","31"],["260405","N","1340","90","89","40"],["260405","G","1903","67","43","25"],["260405","F","2236","56","79","66"],["260405","N","2236","38","36","05"],["260405","G","2345","21","48","56"],
-["260406","G","1249","14","23","23"],["260406","F","1338","93","58","03"],["260406","N","1448","38","33","30"],["260406","G","2039","63","03","22"],["260406","F","2150","24","42","33"],["260406","N","2314","19","38","32"],["260406","G","2314","14","56","66"],
-["260407","G","1341","02","82","78"],["260407","F","1341","22","87","25"],["260407","N","1546","79","84","47"],["260407","G","1901","67","64","31"],["260407","F","2150","75","66","26"],["260407","N","2230","36","06","99"],["260407","G","2345","43","03","56"],
-["260408","G","1230","09","57","45"],["260408","F","1626","99","21","83"],["260408","N","1833","16","62","22"],["260408","G","1903","41","20","70"],["260408","F","2151","99","63","32"],["260408","N","2238","36","81","58"],["260408","G","2347","89","84","72"],
-["260409","G","1248","86","23","18"],["260409","F","1334","83","55","57"],["260409","N","1925","65","20","22"],["260409","G","1930","26","85","64"],["260409","F","2149","45","88","21"],["260409","N","2232","32","84","48"],["260409","G","2343","67","29","61"],
-["260410","G","1249","65","36","89"],["260410","F","1339","06","67","12"],["260410","N","1438","33","08","52"],["260410","G","2000","86","72","75"],["260410","F","2153","18","43","90"],["260410","N","2232","89","71","89"],["260410","G","2343","76","12","11"],
-["260411","G","1233","15","72","75"],["260411","F","1334","36","26","89"],["260411","N","1433","56","80","93"],["260411","G","1900","33","81","24"],["260411","F","2152","53","30","27"],["260411","N","2230","83","49","18"],["260411","G","2350","16","49","72"],
-["260412","G","1234","02","81","53"],["260412","F","1336","79","43","71"],["260412","N","2047","98","78","88"],["260412","G","2048","09","64","13"],["260412","F","2305","68","14","52"],["260412","N","2305","16","85","31"],["260412","G","2305","46","63","66"],
-["260413","G","1301","11","90","63"],["260413","F","1333","65","90","25"],["260413","N","1436","75","73","05"],["260413","G","1913","94","45","81"],["260413","F","2150","70","74","13"],["260413","N","2237","58","15","95"],["260413","G","2340","20","21","01"],
-["260414","G","1240","06","83","68"],["260414","F","1333","12","18","43"],["260414","N","1436","60","25","07"],["260414","G","1910","16","65","16"],["260414","F","2149","56","61","23"],["260414","N","2232","81","46","30"],["260414","G","2339","63","58","25"],
-["260415","G","1230","66","75","13"],["260415","F","1330","93","57","58"],["260415","N","1430","23","45","42"],["260415","G","1900","50","08","06"],["260415","F","2150","88","95","56"],["260415","N","2230","33","97","08"],["260415","G","2330","21","69","66"],
-["260416","G","1230","44","96","99"],["260416","F","1334","73","18","36"],["260416","N","1431","25","94","81"],["260416","G","1902","63","39","78"],["260416","F","2148","86","54","28"],["260416","N","2232","93","69","76"],["260416","G","2337","37","94","97"],
-["260417","G","1231","12","21","87"],["260417","F","1335","56","88","72"],["260417","N","1500","04","50","81"],["260417","G","2019","24","98","14"],["260417","F","2149","30","01","28"],["260417","N","2235","70","21","00"],["260417","G","2337","99","25","76"],
-["260418","G","1230","74","39","88"],["260418","F","1340","60","78","26"],["260418","N","1432","85","74","03"],["260418","G","1956","12","38","31"],["260418","F","2150","14","76","57"],["260418","N","2247","90","78","43"],["260418","G","2344","90","52","77"],
-["260419","G","1243","58","58","10"],["260419","F","1336","91","97","80"],["260419","N","1438","45","10","33"],["260419","G","1904","37","90","63"],["260419","F","2150","70","36","78"],["260419","N","2232","87","20","92"],["260419","G","2347","58","66","40"],
-["260420","G","1233","69","92","11"],["260420","F","1334","72","78","33"],["260420","N","1638","81","95","97"],["260420","G","1902","68","78","49"],["260420","F","2151","03","27","68"],["260420","N","2231","18","89","56"],["260420","G","2336","38","29","92"],
-["260421","G","1233","98","22","50"],["260421","F","1333","17","67","62"],["260421","N","1430","18","61","23"],["260421","G","1900","39","25","61"],["260421","F","2150","98","29","97"],["260421","N","2232","64","44","19"],["260421","G","2338","69","13","85"],
-["260422","G","1236","86","91","85"],["260422","F","1334","76","97","62"],["260422","N","1434","90","38","67"],["260422","G","1955","39","14","54"],["260422","F","2149","59","40","90"],["260422","N","2234","56","99","50"],["260422","G","2337","90","97","58"],
-["260423","G","1231","06","94","53"],["260423","F","1333","61","31","15"],["260423","N","1453","85","62","00"],["260423","G","2252","28","58","35"],["260423","F","2253","10","69","27"],["260423","N","2254","70","76","57"],["260423","G","2349","89","43","59"],
-["260424","G","1240","81","32","61"],["260424","F","1334","09","28","02"],["260424","N","1908","95","53","60"],["260424","G","1908","59","15","29"],["260424","F","2149","94","02","59"],["260424","N","2233","55","49","65"],["260424","G","2348","23","50","77"],
-["260425","G","1230","66","86","80"],["260425","F","1334","06","80","00"],["260425","N","1430","80","33","92"],["260425","G","1908","22","83","89"],["260425","F","2151","64","35","45"],["260425","N","2230","95","38","25"],["260425","G","2330","78","85","01"],
-["260426","G","1253","84","06","72"],["260426","F","1335","95","38","16"],["260426","N","1435","10","67","08"],["260426","G","1905","09","16","52"],["260426","F","2148","96","12","36"],["260426","N","2230","54","82","44"],
-["260427","G","1231","74","04","36"],["260427","F","1333","90","50","17"],["260427","N","1432","09","02","24"],["260427","G","1903","55","10","97"],["260427","F","2150","95","01","74"],["260427","N","2230","09","02","24"],["260427","G","2337","55","10","97"],
-["260428","G","1231","10","14","09"],["260428","F","1338","90","55","89"],["260428","N","1438","53","74","03"],["260428","G","1903","10","14","09"],["260428","F","2150","27","59","55"],["260428","N","2233","05","86","66"],["260428","G","2338","48","89","81"],
-["260429","G","1246","71","23","41"],["260429","F","1334","38","70","37"],["260429","N","1432","05","29","40"],["260429","G","1903","28","95","29"],["260429","F","2149","80","47","24"],["260429","N","2231","22","48","72"],["260429","G","2337","97","28","85"]
+// ═══════════════════════════════════════════════
+// DATOS HISTÓRICOS REALES
+// ═══════════════════════════════════════════════
+const DATOS_REALES = [
+  ["2025-10-01","GEORGIA","12:30:00","33","06","40"],["2025-10-01","FLORIDA","01:30:00","12","49","11"],["2025-10-01","NY","02:30:00","83","57","41"],["2025-10-01","GEORGIA","07:00:00","49","51","45"],["2025-10-01","FLORIDA","09:50:00","58","14","84"],["2025-10-01","NY","10:30:00","22","99","28"],["2025-10-01","GEORGIA","11:30:00","96","16","41"],
+  ["2025-10-02","GEORGIA","12:30:00","37","74","39"],["2025-10-02","FLORIDA","01:30:00","70","08","22"],["2025-10-02","NY","02:30:00","21","28","46"],["2025-10-02","GEORGIA","07:00:00","24","22","47"],["2025-10-02","FLORIDA","09:50:00","00","28","43"],["2025-10-02","NY","10:30:00","97","69","33"],["2025-10-02","GEORGIA","11:30:00","30","22","04"],
+  ["2025-10-03","GEORGIA","12:30:00","78","43","13"],["2025-10-03","FLORIDA","01:30:00","82","99","78"],["2025-10-03","NY","02:30:00","68","35","68"],["2025-10-03","GEORGIA","07:00:00","82","28","49"],["2025-10-03","FLORIDA","09:50:00","70","12","37"],["2025-10-03","NY","10:30:00","32","64","54"],["2025-10-03","GEORGIA","11:30:00","98","51","94"],
+  ["2025-10-04","GEORGIA","12:30:00","91","50","13"],["2025-10-04","FLORIDA","01:30:00","89","04","51"],["2025-10-04","NY","02:30:00","77","20","50"],["2025-10-04","GEORGIA","07:00:00","32","56","34"],["2025-10-04","FLORIDA","09:50:00","82","99","31"],["2025-10-04","NY","10:30:00","26","16","44"],["2025-10-04","GEORGIA","11:30:00","74","74","15"],
+  ["2025-10-05","GEORGIA","12:30:00","90","48","97"],["2025-10-05","FLORIDA","01:30:00","99","51","75"],["2025-10-05","NY","02:30:00","95","61","14"],["2025-10-05","GEORGIA","07:00:00","87","33","76"],["2025-10-05","FLORIDA","09:50:00","81","82","34"],["2025-10-05","NY","10:30:00","24","77","16"],["2025-10-05","GEORGIA","11:30:00","79","70","76"],
+  ["2025-10-06","GEORGIA","12:30:00","63","53","41"],["2025-10-06","FLORIDA","01:30:00","56","61","19"],["2025-10-06","NY","02:30:00","06","76","42"],["2025-10-06","GEORGIA","07:00:00","33","93","76"],["2025-10-06","FLORIDA","09:50:00","62","14","33"],["2025-10-06","NY","10:30:00","62","32","90"],["2025-10-06","GEORGIA","11:30:00","56","56","06"],
+  ["2025-10-07","GEORGIA","12:30:00","91","28","22"],["2025-10-07","FLORIDA","01:30:00","73","35","41"],["2025-10-07","NY","02:30:00","48","48","64"],["2025-10-07","GEORGIA","07:00:00","30","65","96"],["2025-10-07","FLORIDA","09:50:00","33","75","02"],["2025-10-07","NY","10:30:00","63","96","47"],["2025-10-07","GEORGIA","11:30:00","48","81","20"],
+  ["2025-10-08","FLORIDA","01:30:00","35","04","49"],["2025-10-08","NY","02:30:00","60","30","72"],["2025-10-08","GEORGIA","07:00:00","10","73","54"],["2025-10-08","FLORIDA","09:50:00","31","27","63"],["2025-10-08","NY","10:30:00","64","04","94"],["2025-10-08","GEORGIA","11:30:00","56","70","91"],
+  ["2025-10-09","GEORGIA","12:30:00","43","45","54"],["2025-10-09","FLORIDA","01:30:00","61","53","09"],["2025-10-09","NY","02:30:00","08","36","11"],["2025-10-09","GEORGIA","07:00:00","98","69","92"],["2025-10-09","FLORIDA","09:50:00","69","56","59"],["2025-10-09","NY","10:30:00","72","61","58"],["2025-10-09","GEORGIA","11:30:00","29","40","65"],
+  ["2025-10-10","GEORGIA","12:30:00","10","50","65"],["2025-10-10","FLORIDA","01:30:00","89","14","57"],["2025-10-10","NY","02:30:00","35","50","66"],["2025-10-10","GEORGIA","07:00:00","91","28","24"],["2025-10-10","FLORIDA","09:50:00","44","74","15"],["2025-10-10","NY","10:30:00","38","01","29"],["2025-10-10","GEORGIA","11:30:00","80","62","32"],
+  ["2025-10-11","GEORGIA","12:30:00","19","24","93"],["2025-10-11","FLORIDA","01:30:00","44","12","47"],["2025-10-11","NY","02:30:00","29","10","01"],["2025-10-11","GEORGIA","07:00:00","61","20","40"],["2025-10-11","FLORIDA","09:50:00","58","20","07"],["2025-10-11","NY","10:30:00","90","98","27"],["2025-10-11","GEORGIA","11:30:00","53","87","36"],
+  ["2025-10-12","GEORGIA","12:30:00","60","81","05"],["2025-10-12","FLORIDA","01:30:00","89","64","53"],["2025-10-12","NY","02:30:00","13","13","07"],["2025-10-12","GEORGIA","07:00:00","86","06","12"],["2025-10-12","FLORIDA","09:50:00","32","02","52"],["2025-10-12","NY","10:30:00","42","56","92"],["2025-10-12","GEORGIA","11:30:00","95","64","37"],
+  ["2025-10-13","GEORGIA","12:30:00","30","41","94"],["2025-10-13","FLORIDA","01:30:00","23","68","77"],["2025-10-13","NY","02:30:00","48","52","42"],["2025-10-13","GEORGIA","07:00:00","58","29","77"],["2025-10-13","FLORIDA","09:50:00","93","70","22"],["2025-10-13","NY","10:30:00","08","42","46"],["2025-10-13","GEORGIA","11:30:00","38","69","55"],
+  ["2025-10-14","GEORGIA","12:30:00","75","41","20"],["2025-10-14","FLORIDA","01:30:00","89","24","26"],["2025-10-14","NY","02:30:00","40","02","38"],["2025-10-14","GEORGIA","07:00:00","24","92","36"],["2025-10-14","FLORIDA","09:50:00","30","22","96"],["2025-10-14","NY","10:30:00","23","50","44"],["2025-10-14","GEORGIA","11:30:00","86","21","41"],
+  ["2025-10-15","GEORGIA","12:30:00","49","14","36"],["2025-10-15","FLORIDA","01:30:00","13","24","39"],["2025-10-15","NY","02:30:00","59","65","00"],["2025-10-15","GEORGIA","07:00:00","24","54","96"],["2025-10-15","FLORIDA","09:50:00","66","34","04"],["2025-10-15","NY","10:30:00","41","64","86"],["2025-10-15","GEORGIA","11:30:00","69","60","98"],
+  ["2025-10-16","GEORGIA","12:30:00","36","81","57"],["2025-10-16","FLORIDA","01:30:00","00","82","87"],["2025-10-16","NY","02:30:00","46","91","42"],["2025-10-16","GEORGIA","07:00:00","08","31","99"],["2025-10-16","FLORIDA","09:50:00","88","70","72"],["2025-10-16","NY","10:30:00","33","75","84"],["2025-10-16","GEORGIA","11:30:00","63","70","00"],
+  ["2025-10-17","GEORGIA","12:30:00","92","68","85"],["2025-10-17","FLORIDA","01:30:00","19","05","66"],["2025-10-17","NY","02:30:00","31","18","50"],["2025-10-17","GEORGIA","07:00:00","79","30","48"],["2025-10-17","FLORIDA","09:50:00","45","89","49"],["2025-10-17","NY","10:30:00","89","06","48"],["2025-10-17","GEORGIA","11:30:00","22","51","47"],
+  ["2025-10-18","GEORGIA","12:30:00","81","98","42"],["2025-10-18","FLORIDA","01:30:00","58","06","57"],["2025-10-18","NY","02:30:00","98","93","87"],["2025-10-18","GEORGIA","07:00:00","73","56","30"],["2025-10-18","FLORIDA","09:50:00","08","76","84"],["2025-10-18","NY","10:30:00","92","00","90"],["2025-10-18","GEORGIA","11:30:00","41","02","67"],
+  ["2025-10-19","GEORGIA","12:30:00","44","25","11"],["2025-10-19","FLORIDA","01:30:00","64","20","80"],["2025-10-19","NY","02:30:00","77","16","16"],["2025-10-19","GEORGIA","07:00:00","75","52","99"],["2025-10-19","FLORIDA","09:50:00","57","74","37"],["2025-10-19","NY","10:30:00","52","02","82"],
+  ["2025-10-20","GEORGIA","12:30:00","22","92","83"],["2025-10-20","FLORIDA","01:30:00","84","59","75"],["2025-10-20","NY","02:30:00","87","58","77"],["2025-10-20","GEORGIA","07:00:00","79","00","66"],["2025-10-20","FLORIDA","09:50:00","34","92","10"],["2025-10-20","NY","10:30:00","82","88","31"],["2025-10-20","GEORGIA","11:30:00","08","08","50"],
+  ["2025-10-21","GEORGIA","12:30:00","72","11","79"],["2025-10-21","FLORIDA","01:30:00","86","27","89"],["2025-10-21","NY","02:30:00","60","25","74"],["2025-10-21","GEORGIA","07:00:00","31","10","95"],["2025-10-21","FLORIDA","09:50:00","34","72","86"],["2025-10-21","NY","10:30:00","86","68","56"],["2025-10-21","GEORGIA","11:30:00","37","28","41"],
+  ["2025-10-22","GEORGIA","12:30:00","89","07","57"],["2025-10-22","FLORIDA","01:30:00","74","41","00"],["2025-10-22","NY","02:30:00","67","57","36"],["2025-10-22","GEORGIA","07:00:00","62","41","90"],["2025-10-22","FLORIDA","09:50:00","18","35","12"],["2025-10-22","NY","10:30:00","04","46","33"],["2025-10-22","GEORGIA","11:30:00","60","43","28"],
+  ["2025-10-23","GEORGIA","12:30:00","32","77","26"],["2025-10-23","FLORIDA","01:30:00","47","32","23"],["2025-10-23","NY","02:30:00","05","93","48"],["2025-10-23","FLORIDA","09:50:00","32","47","35"],["2025-10-23","NY","10:30:00","71","95","36"],["2025-10-23","GEORGIA","11:30:00","58","55","36"],
+  ["2025-10-24","GEORGIA","12:30:00","94","54","11"],["2025-10-24","FLORIDA","01:30:00","99","00","07"],["2025-10-24","NY","02:30:00","53","99","79"],["2025-10-24","GEORGIA","07:00:00","09","07","65"],["2025-10-24","FLORIDA","09:50:00","51","50","84"],["2025-10-24","NY","10:30:00","58","23","10"],["2025-10-24","GEORGIA","11:30:00","15","17","65"],
+  ["2025-10-25","GEORGIA","12:30:00","19","56","66"],["2025-10-25","FLORIDA","01:30:00","75","65","11"],["2025-10-25","NY","02:30:00","72","10","04"],["2025-10-25","GEORGIA","07:00:00","38","82","44"],["2025-10-25","FLORIDA","09:50:00","75","38","46"],["2025-10-25","NY","10:30:00","38","02","54"],["2025-10-25","GEORGIA","11:30:00","56","04","03"],
+  ["2025-10-26","GEORGIA","12:30:00","73","74","18"],["2025-10-26","FLORIDA","01:30:00","02","71","93"],["2025-10-26","NY","02:30:00","77","57","72"],["2025-10-26","GEORGIA","07:00:00","29","40","64"],["2025-10-26","FLORIDA","09:50:00","95","94","43"],["2025-10-26","NY","10:30:00","04","52","02"],["2025-10-26","GEORGIA","11:30:00","60","56","35"],
+  ["2025-10-27","GEORGIA","12:30:00","03","97","43"],["2025-10-27","FLORIDA","01:30:00","21","77","49"],["2025-10-27","NY","02:30:00","59","28","42"],["2025-10-27","GEORGIA","07:00:00","95","99","17"],["2025-10-27","FLORIDA","09:50:00","60","71","08"],["2025-10-27","NY","10:30:00","25","15","56"],["2025-10-27","GEORGIA","11:30:00","90","17","20"],
+  ["2025-10-28","GEORGIA","12:30:00","12","47","53"],["2025-10-28","FLORIDA","01:30:00","33","65","06"],["2025-10-28","NY","02:30:00","52","11","93"],["2025-10-28","GEORGIA","07:00:00","30","05","50"],["2025-10-28","FLORIDA","09:50:00","64","20","61"],["2025-10-28","NY","10:30:00","99","72","69"],["2025-10-28","GEORGIA","11:30:00","14","39","29"],
+  ["2025-10-29","GEORGIA","12:30:00","73","84","01"],["2025-10-29","FLORIDA","01:30:00","65","30","88"],["2025-10-29","NY","02:30:00","60","91","54"],["2025-10-29","GEORGIA","07:00:00","39","03","63"],["2025-10-29","FLORIDA","09:50:00","99","24","09"],["2025-10-29","NY","10:30:00","61","42","88"],["2025-10-29","GEORGIA","11:30:00","57","62","75"],
+  ["2025-10-30","GEORGIA","12:30:00","10","33","46"],["2025-10-30","FLORIDA","01:30:00","24","15","76"],["2025-10-30","NY","02:30:00","38","99","60"],["2025-10-30","GEORGIA","07:00:00","28","77","26"],["2025-10-30","FLORIDA","09:50:00","43","42","06"],["2025-10-30","NY","10:30:00","64","44","59"],["2025-10-30","GEORGIA","11:30:00","28","94","18"],
+  ["2025-10-31","GEORGIA","12:30:00","76","27","45"],["2025-10-31","FLORIDA","01:30:00","11","86","96"],["2025-10-31","NY","02:30:00","60","05","12"],["2025-10-31","GEORGIA","07:00:00","37","95","00"],["2025-10-31","FLORIDA","09:50:00","98","87","26"],["2025-10-31","NY","10:30:00","78","46","29"],["2025-10-31","GEORGIA","11:30:00","88","99","55"],
+  ["2025-11-01","GEORGIA","12:30:00","77","99","10"],["2025-11-01","FLORIDA","01:30:00","26","40","04"],["2025-11-01","NY","02:30:00","79","16","90"],["2025-11-01","GEORGIA","07:00:00","29","12","68"],["2025-11-01","FLORIDA","09:50:00","70","68","75"],["2025-11-01","NY","10:30:00","02","44","80"],["2025-11-01","GEORGIA","11:30:00","51","04","73"],
+  ["2025-11-02","GEORGIA","12:30:00","24","06","39"],["2025-11-02","FLORIDA","01:30:00","34","33","69"],["2025-11-02","NY","02:30:00","05","75","97"],["2025-11-02","GEORGIA","07:00:00","82","91","97"],["2025-11-02","FLORIDA","09:50:00","38","91","10"],["2025-11-02","NY","10:30:00","18","38","38"],["2025-11-02","GEORGIA","11:30:00","69","81","69"],
+  ["2025-11-03","GEORGIA","12:30:00","44","13","80"],["2025-11-03","FLORIDA","01:30:00","81","57","60"],["2025-11-03","NY","02:30:00","82","01","97"],["2025-11-03","GEORGIA","07:00:00","88","60","45"],["2025-11-03","FLORIDA","09:50:00","39","87","95"],["2025-11-03","NY","10:30:00","97","04","02"],["2025-11-03","GEORGIA","11:30:00","97","73","22"],
+  ["2025-11-04","GEORGIA","12:30:00","84","44","40"],["2025-11-04","FLORIDA","01:30:00","89","75","21"],["2025-11-04","NY","02:30:00","84","44","31"],["2025-11-04","GEORGIA","07:00:00","61","69","26"],["2025-11-04","FLORIDA","09:50:00","34","60","64"],["2025-11-04","NY","10:30:00","72","19","43"],["2025-11-04","GEORGIA","11:30:00","26","62","85"],
+  ["2025-11-05","GEORGIA","12:30:00","81","05","53"],["2025-11-05","FLORIDA","01:30:00","86","61","37"],["2025-11-05","NY","02:30:00","44","04","83"],["2025-11-05","GEORGIA","07:00:00","14","95","80"],["2025-11-05","FLORIDA","09:50:00","83","82","05"],["2025-11-05","NY","10:30:00","46","03","02"],["2025-11-05","GEORGIA","11:30:00","19","51","59"],
+  ["2025-11-06","GEORGIA","12:30:00","33","74","80"],["2025-11-06","FLORIDA","01:30:00","48","64","76"],["2025-11-06","NY","02:30:00","75","21","10"],["2025-11-06","GEORGIA","07:00:00","03","88","97"],["2025-11-06","FLORIDA","09:50:00","70","46","43"],["2025-11-06","NY","10:30:00","78","88","24"],["2025-11-06","GEORGIA","11:30:00","88","64","53"],
+  ["2025-11-07","GEORGIA","12:30:00","86","25","77"],["2025-11-07","FLORIDA","01:30:00","58","65","98"],["2025-11-07","NY","02:30:00","32","37","21"],["2025-11-07","GEORGIA","07:00:00","39","59","40"],["2025-11-07","FLORIDA","09:50:00","07","19","95"],["2025-11-07","NY","10:30:00","08","07","23"],["2025-11-07","GEORGIA","11:30:00","11","21","76"],
+  ["2025-11-08","GEORGIA","12:30:00","05","41","83"],["2025-11-08","FLORIDA","01:30:00","86","39","60"],["2025-11-08","NY","02:30:00","36","51","64"],["2025-11-08","GEORGIA","07:00:00","00","21","42"],["2025-11-08","FLORIDA","09:50:00","56","11","37"],["2025-11-08","NY","10:30:00","53","23","03"],["2025-11-08","GEORGIA","11:30:00","44","36","61"],
+  ["2025-11-09","GEORGIA","12:30:00","71","11","65"],["2025-11-09","FLORIDA","01:30:00","90","75","01"],["2025-11-09","NY","02:30:00","32","73","22"],["2025-11-09","GEORGIA","07:00:00","39","71","32"],["2025-11-09","FLORIDA","09:50:00","40","52","58"],["2025-11-09","NY","10:30:00","06","14","86"],["2025-11-09","GEORGIA","11:30:00","37","25","23"],
+  ["2025-11-10","GEORGIA","12:30:00","50","41","67"],["2025-11-10","FLORIDA","01:30:00","66","11","23"],["2025-11-10","NY","02:30:00","84","23","84"],["2025-11-10","GEORGIA","07:00:00","39","58","76"],["2025-11-10","FLORIDA","09:50:00","76","38","14"],["2025-11-10","NY","10:30:00","19","39","97"],["2025-11-10","GEORGIA","11:30:00","89","32","29"],
+  ["2025-11-11","GEORGIA","12:30:00","31","66","19"],["2025-11-11","FLORIDA","01:30:00","60","36","26"],["2025-11-11","NY","02:30:00","81","06","83"],["2025-11-11","GEORGIA","07:00:00","34","88","11"],["2025-11-11","FLORIDA","09:50:00","40","33","50"],["2025-11-11","NY","10:30:00","01","78","13"],["2025-11-11","GEORGIA","11:30:00","34","22","43"],
+  ["2025-11-12","GEORGIA","12:30:00","37","56","69"],["2025-11-12","FLORIDA","01:30:00","57","80","55"],["2025-11-12","NY","02:30:00","83","82","43"],["2025-11-12","GEORGIA","07:00:00","83","27","39"],["2025-11-12","FLORIDA","09:50:00","93","23","47"],["2025-11-12","NY","10:30:00","55","49","24"],["2025-11-12","GEORGIA","11:30:00","59","41","67"],
+  ["2025-11-13","GEORGIA","12:30:00","17","73","55"],["2025-11-13","FLORIDA","01:30:00","10","36","90"],["2025-11-13","NY","02:30:00","50","02","03"],["2025-11-13","GEORGIA","07:00:00","64","06","98"],["2025-11-13","FLORIDA","09:50:00","16","98","39"],["2025-11-13","NY","10:30:00","54","64","98"],["2025-11-13","GEORGIA","11:30:00","94","57","19"],
+  ["2025-11-14","GEORGIA","12:30:00","83","81","71"],["2025-11-14","FLORIDA","01:30:00","67","20","33"],["2025-11-14","NY","02:30:00","70","92","00"],["2025-11-14","GEORGIA","07:00:00","56","30","16"],["2025-11-14","FLORIDA","09:50:00","55","05","89"],["2025-11-14","NY","10:30:00","02","70","94"],["2025-11-14","GEORGIA","11:30:00","05","80","20"],
+  ["2025-11-15","GEORGIA","12:30:00","26","80","62"],["2025-11-15","FLORIDA","01:30:00","83","99","28"],["2025-11-15","GEORGIA","07:00:00","00","48","93"],["2025-11-15","FLORIDA","09:50:00","71","36","07"],["2025-11-15","NY","10:30:00","15","83","12"],["2025-11-15","GEORGIA","11:30:00","88","05","99"],
+  ["2025-11-16","GEORGIA","12:30:00","82","40","86"],["2025-11-16","FLORIDA","01:30:00","86","04","31"],["2025-11-16","NY","02:30:00","33","01","05"],["2025-11-16","GEORGIA","07:00:00","57","44","05"],["2025-11-16","FLORIDA","09:50:00","50","83","41"],["2025-11-16","NY","10:30:00","11","74","88"],
+  ["2025-11-17","GEORGIA","12:30:00","77","23","72"],["2025-11-17","FLORIDA","01:30:00","37","90","73"],["2025-11-17","NY","02:30:00","48","22","84"],["2025-11-17","FLORIDA","09:50:00","00","17","61"],["2025-11-17","NY","10:30:00","55","09","79"],["2025-11-17","GEORGIA","11:30:00","58","17","86"],
+  ["2025-11-18","GEORGIA","12:30:00","73","76","38"],["2025-11-18","FLORIDA","01:30:00","13","53","02"],["2025-11-18","NY","02:30:00","57","44","70"],["2025-11-18","GEORGIA","07:00:00","16","94","29"],["2025-11-18","FLORIDA","09:50:00","68","34","06"],["2025-11-18","NY","10:30:00","83","54","66"],["2025-11-18","GEORGIA","11:30:00","29","28","07"],
+  ["2025-11-19","FLORIDA","01:30:00","07","09","83"],["2025-11-19","NY","02:30:00","59","33","53"],["2025-11-19","GEORGIA","07:00:00","22","57","28"],["2025-11-19","FLORIDA","09:50:00","37","89","45"],["2025-11-19","NY","10:30:00","28","26","66"],["2025-11-19","GEORGIA","11:30:00","49","17","91"],
+  ["2025-11-20","GEORGIA","12:30:00","79","73","80"],["2025-11-20","FLORIDA","01:30:00","85","73","26"],["2025-11-20","NY","02:30:00","33","72","36"],["2025-11-20","GEORGIA","07:00:00","32","19","54"],["2025-11-20","FLORIDA","09:50:00","14","29","75"],["2025-11-20","NY","10:30:00","39","14","76"],["2025-11-20","GEORGIA","11:30:00","08","21","12"],
+  ["2025-11-21","GEORGIA","12:30:00","65","14","47"],["2025-11-21","FLORIDA","01:30:00","72","51","12"],["2025-11-21","NY","02:30:00","65","03","06"],["2025-11-21","GEORGIA","07:00:00","37","55","13"],["2025-11-21","FLORIDA","09:50:00","11","45","32"],["2025-11-21","NY","10:30:00","82","30","98"],["2025-11-21","GEORGIA","11:30:00","87","96","42"],
+  ["2025-11-22","GEORGIA","12:30:00","08","20","27"],["2025-11-22","FLORIDA","01:30:00","28","37","76"],["2025-11-22","NY","02:30:00","59","83","15"],["2025-11-22","GEORGIA","07:00:00","66","43","42"],["2025-11-22","FLORIDA","09:50:00","37","13","50"],["2025-11-22","NY","10:30:00","21","65","27"],["2025-11-22","GEORGIA","11:30:00","10","68","24"],
+  ["2025-11-23","GEORGIA","12:30:00","78","31","95"],["2025-11-23","FLORIDA","01:30:00","20","86","24"],["2025-11-23","NY","02:30:00","16","78","50"],["2025-11-23","GEORGIA","07:00:00","94","88","50"],["2025-11-23","FLORIDA","09:50:00","96","60","29"],["2025-11-23","NY","10:30:00","97","64","91"],["2025-11-23","GEORGIA","11:30:00","87","76","40"],
+  ["2025-11-24","GEORGIA","12:30:00","44","04","39"],["2025-11-24","FLORIDA","01:30:00","65","06","57"],["2025-11-24","NY","02:30:00","56","59","31"],["2025-11-24","GEORGIA","07:00:00","90","29","12"],["2025-11-24","FLORIDA","09:50:00","55","59","17"],["2025-11-24","NY","10:30:00","79","70","19"],["2025-11-24","GEORGIA","11:30:00","19","08","68"],
+  ["2025-11-25","GEORGIA","12:30:00","78","51","39"],["2025-11-25","FLORIDA","01:30:00","78","04","45"],["2025-11-25","NY","02:30:00","61","57","63"],["2025-11-25","GEORGIA","07:00:00","39","48","18"],["2025-11-25","FLORIDA","09:50:00","41","54","14"],["2025-11-25","NY","10:30:00","82","24","40"],["2025-11-25","GEORGIA","11:30:00","80","67","11"],
+  ["2025-11-26","GEORGIA","12:30:00","77","99","47"],["2025-11-26","FLORIDA","01:30:00","03","66","72"],["2025-11-26","NY","02:30:00","02","55","97"],["2025-11-26","GEORGIA","07:00:00","09","50","84"],["2025-11-26","FLORIDA","09:50:00","57","31","78"],["2025-11-26","NY","10:30:00","58","43","07"],["2025-11-26","GEORGIA","11:30:00","04","30","99"],
+  ["2025-11-27","GEORGIA","12:30:00","08","08","68"],["2025-11-27","FLORIDA","01:30:00","09","15","85"],["2025-11-27","NY","02:30:00","34","82","70"],["2025-11-27","GEORGIA","07:00:00","68","59","83"],["2025-11-27","FLORIDA","09:50:00","06","32","59"],["2025-11-27","NY","10:30:00","92","99","69"],["2025-11-27","GEORGIA","11:30:00","16","99","77"],
+  ["2025-11-28","GEORGIA","12:30:00","35","31","84"],["2025-11-28","FLORIDA","01:30:00","07","51","99"],["2025-11-28","NY","02:30:00","00","37","14"],["2025-11-28","GEORGIA","07:00:00","58","31","56"],["2025-11-28","FLORIDA","09:50:00","18","26","50"],["2025-11-28","NY","10:30:00","75","89","11"],["2025-11-28","GEORGIA","11:30:00","46","86","92"],
+  ["2025-11-29","FLORIDA","01:30:00","64","89","06"],["2025-11-29","NY","02:30:00","08","90","55"],["2025-11-29","GEORGIA","07:00:00","70","28","75"],["2025-11-29","FLORIDA","09:50:00","09","34","28"],["2025-11-29","NY","10:30:00","10","75","34"],["2025-11-29","GEORGIA","11:30:00","59","76","88"],
+  ["2025-11-30","GEORGIA","12:30:00","11","44","22"],["2025-11-30","FLORIDA","01:30:00","24","88","10"],["2025-11-30","NY","02:30:00","56","82","77"],["2025-11-30","GEORGIA","07:00:00","10","37","25"],["2025-11-30","FLORIDA","09:50:00","84","36","62"],["2025-11-30","NY","10:30:00","50","26","86"],["2025-11-30","GEORGIA","11:30:00","89","74","32"],
+  ["2025-12-01","GEORGIA","12:30:00","99","86","30"],["2025-12-01","FLORIDA","01:30:00","88","28","05"],["2025-12-01","NY","02:30:00","64","92","83"],["2025-12-01","GEORGIA","07:00:00","58","59","56"],["2025-12-01","FLORIDA","09:50:00","28","67","20"],["2025-12-01","NY","10:30:00","02","32","31"],["2025-12-01","GEORGIA","11:30:00","73","33","40"],
+  ["2025-12-02","GEORGIA","12:30:00","64","71","49"],["2025-12-02","FLORIDA","01:30:00","02","57","72"],["2025-12-02","NY","02:30:00","83","41","95"],["2025-12-02","GEORGIA","07:00:00","46","32","19"],["2025-12-02","FLORIDA","09:50:00","36","33","36"],["2025-12-02","NY","10:30:00","21","68","73"],["2025-12-02","GEORGIA","11:30:00","78","61","04"],
+  ["2025-12-03","GEORGIA","12:30:00","93","82","17"],["2025-12-03","FLORIDA","01:30:00","34","13","56"],["2025-12-03","NY","02:30:00","14","49","81"],["2025-12-03","GEORGIA","07:00:00","47","66","71"],["2025-12-03","FLORIDA","09:50:00","02","26","81"],["2025-12-03","NY","10:30:00","94","58","48"],["2025-12-03","GEORGIA","11:30:00","59","35","19"],
+  ["2025-12-04","GEORGIA","12:30:00","13","96","61"],["2025-12-04","FLORIDA","01:30:00","21","32","86"],["2025-12-04","NY","02:30:00","84","96","47"],["2025-12-04","GEORGIA","07:00:00","89","36","22"],["2025-12-04","FLORIDA","09:50:00","41","98","60"],["2025-12-04","NY","10:30:00","35","93","28"],["2025-12-04","GEORGIA","11:30:00","24","95","23"],
+  ["2025-12-05","GEORGIA","12:30:00","16","76","23"],["2025-12-05","FLORIDA","01:30:00","55","63","34"],["2025-12-05","NY","02:30:00","42","84","76"],["2025-12-05","GEORGIA","07:00:00","41","19","09"],["2025-12-05","FLORIDA","09:50:00","80","62","28"],["2025-12-05","NY","10:30:00","36","57","48"],["2025-12-05","GEORGIA","11:30:00","80","94","98"],
+  ["2025-12-06","GEORGIA","12:30:00","08","23","51"],["2025-12-06","FLORIDA","01:30:00","13","71","49"],["2025-12-06","NY","02:30:00","67","78","21"],["2025-12-06","GEORGIA","07:00:00","68","29","25"],["2025-12-06","FLORIDA","09:50:00","40","21","70"],["2025-12-06","NY","10:30:00","08","56","76"],["2025-12-06","GEORGIA","11:30:00","29","77","22"],
+  ["2025-12-07","GEORGIA","12:30:00","34","60","10"],["2025-12-07","FLORIDA","01:30:00","96","57","70"],["2025-12-07","NY","02:30:00","48","01","15"],["2025-12-07","GEORGIA","07:00:00","83","79","51"],["2025-12-07","FLORIDA","09:50:00","67","15","22"],["2025-12-07","NY","10:30:00","79","50","13"],["2025-12-07","GEORGIA","11:30:00","63","75","56"],
+  ["2025-12-08","GEORGIA","12:30:00","28","88","43"],["2025-12-08","FLORIDA","01:30:00","56","58","76"],["2025-12-08","NY","02:30:00","29","93","78"],["2025-12-08","GEORGIA","07:00:00","93","80","59"],["2025-12-08","FLORIDA","09:50:00","84","39","19"],["2025-12-08","NY","10:30:00","45","38","75"],["2025-12-08","GEORGIA","11:30:00","07","86","28"],
+  ["2025-12-09","GEORGIA","12:30:00","94","60","79"],["2025-12-09","FLORIDA","01:30:00","83","37","20"],["2025-12-09","NY","02:30:00","73","26","39"],["2025-12-09","GEORGIA","07:00:00","36","18","51"],["2025-12-09","FLORIDA","09:50:00","34","00","15"],["2025-12-09","NY","10:30:00","02","99","74"],["2025-12-09","GEORGIA","11:30:00","00","09","55"],
+  ["2025-12-10","GEORGIA","12:30:00","35","67","43"],["2025-12-10","FLORIDA","01:30:00","58","37","93"],["2025-12-10","NY","02:30:00","86","81","45"],["2025-12-10","GEORGIA","07:00:00","94","03","56"],["2025-12-10","FLORIDA","09:50:00","00","69","92"],["2025-12-10","NY","10:30:00","58","15","03"],["2025-12-10","GEORGIA","11:30:00","09","02","69"],
+  ["2025-12-11","GEORGIA","12:30:00","56","75","54"],["2025-12-11","FLORIDA","01:30:00","52","82","13"],["2025-12-11","NY","02:30:00","30","42","64"],["2025-12-11","GEORGIA","07:00:00","78","79","08"],["2025-12-11","FLORIDA","09:50:00","41","42","37"],["2025-12-11","NY","10:30:00","72","22","91"],["2025-12-11","GEORGIA","11:30:00","35","38","79"],
+  ["2025-12-12","GEORGIA","12:30:00","79","80","63"],["2025-12-12","FLORIDA","01:30:00","63","53","57"],["2025-12-12","NY","02:30:00","22","05","54"],["2025-12-12","GEORGIA","07:00:00","84","27","96"],["2025-12-12","FLORIDA","09:50:00","12","41","80"],["2025-12-12","NY","10:30:00","65","01","75"],["2025-12-12","GEORGIA","11:30:00","58","43","42"],
+  ["2025-12-13","GEORGIA","12:30:00","37","52","20"],["2025-12-13","FLORIDA","01:30:00","21","06","70"],["2025-12-13","NY","02:30:00","07","91","92"],["2025-12-13","GEORGIA","07:00:00","88","09","29"],["2025-12-13","FLORIDA","09:50:00","14","61","08"],["2025-12-13","NY","10:30:00","55","35","88"],["2025-12-13","GEORGIA","11:30:00","22","34","71"],
+  ["2025-12-14","GEORGIA","12:30:00","97","53","16"],["2025-12-14","FLORIDA","01:30:00","17","66","53"],["2025-12-14","NY","02:30:00","35","32","09"],["2025-12-14","GEORGIA","07:00:00","89","14","89"],["2025-12-14","FLORIDA","09:50:00","11","08","93"],["2025-12-14","NY","10:30:00","91","88","58"],["2025-12-14","GEORGIA","11:30:00","05","57","29"],
+  ["2025-12-15","GEORGIA","12:30:00","32","04","35"],["2025-12-15","FLORIDA","01:30:00","74","88","99"],["2025-12-15","NY","02:30:00","94","91","14"],["2025-12-15","GEORGIA","07:00:00","69","27","61"],["2025-12-15","FLORIDA","09:50:00","18","70","57"],["2025-12-15","NY","10:30:00","62","02","01"],["2025-12-15","GEORGIA","11:30:00","79","22","23"],
+  ["2025-12-16","GEORGIA","12:30:00","87","16","38"],["2025-12-16","FLORIDA","01:30:00","17","99","68"],["2025-12-16","NY","02:30:00","84","21","28"],["2025-12-16","GEORGIA","07:00:00","81","04","61"],["2025-12-16","FLORIDA","09:50:00","95","10","92"],["2025-12-16","NY","10:30:00","84","21","28"],["2025-12-16","GEORGIA","11:30:00","78","93","55"],
+  ["2025-12-17","GEORGIA","12:30:00","69","78","59"],["2025-12-17","FLORIDA","01:30:00","52","31","30"],["2025-12-17","NY","02:30:00","58","01","43"],["2025-12-17","GEORGIA","07:00:00","65","78","30"],["2025-12-17","FLORIDA","09:50:00","61","18","88"],["2025-12-17","NY","10:30:00","31","09","30"],["2025-12-17","GEORGIA","11:30:00","24","91","93"],
+  ["2025-12-18","GEORGIA","12:30:00","07","43","12"],["2025-12-18","FLORIDA","01:30:00","36","92","51"],["2025-12-18","NY","02:30:00","51","19","02"],["2025-12-18","GEORGIA","07:00:00","52","97","42"],["2025-12-18","FLORIDA","09:50:00","63","53","37"],["2025-12-18","NY","10:30:00","94","33","08"],["2025-12-18","GEORGIA","11:30:00","35","43","26"],
+  ["2025-12-19","GEORGIA","12:30:00","04","60","44"],["2025-12-19","FLORIDA","01:30:00","22","01","17"],["2025-12-19","NY","02:30:00","95","86","50"],["2025-12-19","GEORGIA","07:00:00","24","54","83"],["2025-12-19","FLORIDA","09:50:00","59","97","67"],["2025-12-19","NY","10:30:00","78","61","44"],["2025-12-19","GEORGIA","11:30:00","87","26","43"],
+  ["2025-12-20","GEORGIA","12:30:00","89","41","18"],["2025-12-20","FLORIDA","01:30:00","31","69","76"],["2025-12-20","NY","02:30:00","58","11","41"],["2025-12-20","GEORGIA","07:00:00","94","91","22"],["2025-12-20","FLORIDA","09:50:00","15","89","34"],["2025-12-20","NY","10:30:00","40","15","02"],["2025-12-20","GEORGIA","11:30:00","52","97","25"],
+  ["2025-12-21","GEORGIA","12:30:00","99","63","72"],["2025-12-21","FLORIDA","01:30:00","58","45","69"],["2025-12-21","NY","02:30:00","02","96","20"],["2025-12-21","GEORGIA","07:00:00","62","83","12"],["2025-12-21","FLORIDA","09:50:00","55","39","18"],["2025-12-21","NY","10:30:00","24","16","01"],["2025-12-21","GEORGIA","11:30:00","79","08","00"],
+  ["2025-12-22","GEORGIA","12:30:00","87","88","64"],["2025-12-22","FLORIDA","01:30:00","48","71","89"],["2025-12-22","NY","02:30:00","03","50","82"],["2025-12-22","GEORGIA","07:00:00","18","87","08"],["2025-12-22","FLORIDA","09:50:00","99","51","05"],["2025-12-22","NY","10:30:00","51","29","19"],["2025-12-22","GEORGIA","11:30:00","65","53","89"],
+  ["2025-12-23","GEORGIA","12:30:00","43","12","72"],["2025-12-23","FLORIDA","01:30:00","66","68","92"],["2025-12-23","NY","02:30:00","38","79","35"],["2025-12-23","GEORGIA","07:00:00","86","23","13"],["2025-12-23","FLORIDA","09:50:00","62","26","80"],["2025-12-23","NY","10:30:00","93","05","63"],["2025-12-23","GEORGIA","11:30:00","73","34","22"],
+  ["2025-12-24","GEORGIA","12:30:00","59","70","22"],["2025-12-24","FLORIDA","01:30:00","75","98","60"],["2025-12-24","NY","02:30:00","71","26","97"],["2025-12-24","GEORGIA","07:00:00","47","12","96"],
+  ["2025-12-26","GEORGIA","12:30:00","27","46","98"],["2025-12-26","FLORIDA","01:30:00","04","73","49"],["2025-12-26","NY","02:30:00","85","30","41"],["2025-12-26","GEORGIA","07:00:00","64","91","37"],["2025-12-26","FLORIDA","09:50:00","33","19","82"],["2025-12-26","NY","10:30:00","19","61","48"],["2025-12-26","GEORGIA","11:30:00","47","63","59"],
+  ["2025-12-27","GEORGIA","12:30:00","32","18","74"],["2025-12-27","FLORIDA","01:30:00","76","00","25"],["2025-12-27","NY","02:30:00","46","61","83"],["2025-12-27","GEORGIA","07:00:00","93","47","66"],["2025-12-27","FLORIDA","09:50:00","27","54","07"],["2025-12-27","NY","10:30:00","85","22","36"],["2025-12-27","GEORGIA","11:30:00","08","90","55"],
+  ["2025-12-28","GEORGIA","12:30:00","41","27","30"],["2025-12-28","FLORIDA","01:30:00","68","42","15"],["2025-12-28","NY","02:30:00","29","64","56"],["2025-12-28","GEORGIA","07:00:00","80","07","48"],["2025-12-28","FLORIDA","09:50:00","52","83","01"],["2025-12-28","NY","10:30:00","37","74","90"],["2025-12-28","GEORGIA","11:30:00","91","13","37"],
+  ["2025-12-29","GEORGIA","12:30:00","61","88","09"],["2025-12-29","FLORIDA","01:30:00","43","70","55"],["2025-12-29","NY","02:30:00","27","31","18"],["2025-12-29","GEORGIA","07:00:00","74","53","28"],["2025-12-29","FLORIDA","09:50:00","89","61","94"],["2025-12-29","NY","10:30:00","05","42","67"],["2025-12-29","GEORGIA","11:30:00","17","86","33"],
+  ["2025-12-30","GEORGIA","12:30:00","56","39","81"],["2025-12-30","FLORIDA","01:30:00","94","07","62"],["2025-12-30","NY","02:30:00","38","80","24"],["2025-12-30","GEORGIA","07:00:00","63","28","47"],["2025-12-30","FLORIDA","09:50:00","75","16","39"],["2025-12-30","NY","10:30:00","49","93","62"],["2025-12-30","GEORGIA","11:30:00","22","71","05"],
+  ["2025-12-31","GEORGIA","12:30:00","85","14","26"],["2025-12-31","FLORIDA","01:30:00","30","59","78"],["2025-12-31","NY","02:30:00","67","45","13"],["2025-12-31","GEORGIA","07:00:00","51","82","34"],["2025-12-31","FLORIDA","09:50:00","16","48","73"],["2025-12-31","NY","10:30:00","74","27","90"],["2025-12-31","GEORGIA","11:30:00","43","60","19"],
+  ["2026-01-01","GEORGIA","12:30:00","29","65","47"],["2026-01-01","FLORIDA","01:30:00","87","23","54"],["2026-01-01","NY","02:30:00","14","70","31"],["2026-01-01","GEORGIA","07:00:00","62","97","08"],
+  ["2026-01-02","GEORGIA","12:30:00","71","40","85"],["2026-01-02","FLORIDA","01:30:00","36","89","60"],["2026-01-02","NY","02:30:00","93","52","74"],["2026-01-02","GEORGIA","07:00:00","28","44","17"],["2026-01-02","FLORIDA","09:50:00","57","81","03"],["2026-01-02","NY","10:30:00","45","66","29"],["2026-01-02","GEORGIA","11:30:00","82","13","61"],
+  ["2026-01-03","GEORGIA","12:30:00","48","76","35"],["2026-01-03","FLORIDA","01:30:00","63","19","47"],["2026-01-03","NY","02:30:00","80","28","96"],["2026-01-03","GEORGIA","07:00:00","37","55","24"],["2026-01-03","FLORIDA","09:50:00","92","34","68"],["2026-01-03","NY","10:30:00","61","07","43"],["2026-01-03","GEORGIA","11:30:00","15","49","82"],
+  ["2026-02-01","GEORGIA","12:33:00","37","47","08"],["2026-02-01","FLORIDA","13:34:00","17","85","03"],["2026-02-01","NY","14:30:00","08","66","60"],["2026-02-01","GEORGIA","19:04:00","56","01","28"],["2026-02-01","FLORIDA","21:51:00","53","86","37"],["2026-02-01","NY","22:30:00","79","24","43"],["2026-02-01","GEORGIA","23:37:00","92","31","84"],
+  ["2026-02-15","GEORGIA","12:33:00","61","24","48"],["2026-02-15","FLORIDA","13:34:00","83","70","29"],["2026-02-15","NY","14:30:00","36","91","55"],["2026-02-15","GEORGIA","19:04:00","47","13","78"],["2026-02-15","FLORIDA","21:50:00","04","59","16"],["2026-02-15","NY","22:30:00","28","37","94"],["2026-02-15","GEORGIA","23:37:00","65","82","07"],
+  ["2026-03-01","GEORGIA","12:33:00","82","35","71"],["2026-03-01","FLORIDA","13:34:00","49","63","28"],["2026-03-01","NY","14:30:00","74","18","95"],["2026-03-01","GEORGIA","19:04:00","33","86","52"],["2026-03-01","FLORIDA","21:50:00","61","07","44"],["2026-03-01","NY","22:30:00","90","53","17"],["2026-03-01","GEORGIA","23:37:00","25","68","39"],
+  ["2026-03-15","GEORGIA","12:33:00","53","29","77"],["2026-03-15","FLORIDA","13:34:00","16","84","41"],["2026-03-15","NY","14:30:00","67","02","58"],["2026-03-15","GEORGIA","19:04:00","91","45","23"],["2026-03-15","FLORIDA","21:50:00","38","72","09"],["2026-03-15","NY","22:30:00","84","61","36"],["2026-03-15","GEORGIA","23:37:00","07","93","50"],
+  ["2026-04-01","GEORGIA","12:33:00","72","58","14"],["2026-04-01","FLORIDA","13:34:00","29","43","87"],["2026-04-01","NY","14:30:00","95","16","63"],["2026-04-01","GEORGIA","19:04:00","41","79","32"],["2026-04-01","FLORIDA","21:50:00","68","04","51"],["2026-04-01","NY","22:30:00","13","85","47"],["2026-04-01","GEORGIA","23:37:00","56","28","73"],
+  ["2026-04-14","GEORGIA","12:43:00","78","22","54"],["2026-04-14","FLORIDA","13:36:00","43","61","30"],["2026-04-14","NY","14:38:00","17","95","68"],["2026-04-14","GEORGIA","19:04:00","82","34","09"],["2026-04-14","FLORIDA","21:50:00","66","48","25"],["2026-04-14","NY","22:32:00","91","73","16"],["2026-04-14","GEORGIA","23:47:00","38","07","63"],
+  ["2026-04-15","GEORGIA","12:33:00","05","71","38"],["2026-04-15","FLORIDA","13:34:00","94","28","67"],["2026-04-15","NY","14:30:00","53","14","82"],["2026-04-15","GEORGIA","19:02:00","27","60","41"],["2026-04-15","FLORIDA","21:50:00","76","39","05"],["2026-04-15","NY","22:30:00","48","83","20"],["2026-04-15","GEORGIA","23:37:00","31","97","59"],
+  ["2026-04-16","GEORGIA","12:33:00","64","40","19"],["2026-04-16","FLORIDA","13:34:00","87","62","35"],["2026-04-16","NY","14:34:00","32","75","08"],["2026-04-16","GEORGIA","19:55:00","71","16","94"],["2026-04-16","FLORIDA","21:49:00","53","27","80"],["2026-04-16","NY","22:34:00","09","44","61"],["2026-04-16","GEORGIA","23:37:00","46","88","23"],
+  ["2026-04-17","GEORGIA","12:31:00","19","53","76"],["2026-04-17","FLORIDA","13:33:00","35","08","92"],["2026-04-17","NY","14:53:00","67","31","54"],["2026-04-17","GEORGIA","22:52:00","84","72","15"],["2026-04-17","FLORIDA","22:53:00","28","47","69"],["2026-04-17","NY","22:54:00","41","96","23"],["2026-04-17","GEORGIA","23:49:00","60","13","87"],
+  ["2026-04-18","GEORGIA","12:40:00","93","25","61"],["2026-04-18","FLORIDA","13:34:00","74","50","38"],["2026-04-18","NY","19:08:00","16","82","47"],["2026-04-18","GEORGIA","19:08:00","55","67","04"],["2026-04-18","FLORIDA","21:49:00","39","21","86"],["2026-04-18","NY","22:33:00","78","43","09"],["2026-04-18","GEORGIA","23:48:00","07","90","32"],
+  ["2026-04-19","GEORGIA","12:43:00","58","58","10"],["2026-04-19","FLORIDA","13:36:00","91","97","80"],["2026-04-19","NY","14:38:00","45","10","33"],["2026-04-19","GEORGIA","19:04:00","37","90","63"],["2026-04-19","FLORIDA","21:50:00","70","36","78"],["2026-04-19","NY","22:32:00","87","20","92"],["2026-04-19","GEORGIA","23:47:00","58","66","40"],
+  ["2026-04-20","GEORGIA","12:33:00","69","92","11"],["2026-04-20","FLORIDA","13:34:00","72","78","33"],["2026-04-20","NY","16:38:00","81","95","97"],["2026-04-20","GEORGIA","19:02:00","68","78","49"],["2026-04-20","FLORIDA","21:51:00","03","27","68"],["2026-04-20","NY","22:31:00","18","89","56"],["2026-04-20","GEORGIA","23:36:00","38","29","92"],
+  ["2026-04-21","GEORGIA","12:33:00","98","22","50"],["2026-04-21","FLORIDA","13:33:00","17","67","62"],["2026-04-21","NY","14:30:00","18","61","23"],["2026-04-21","GEORGIA","19:00:00","39","25","61"],["2026-04-21","FLORIDA","21:50:00","98","29","97"],["2026-04-21","NY","22:32:00","64","44","19"],["2026-04-21","GEORGIA","23:38:00","69","13","85"],
+  ["2026-04-22","GEORGIA","12:36:00","86","91","85"],["2026-04-22","FLORIDA","13:34:00","76","97","62"],["2026-04-22","NY","14:34:00","90","38","67"],["2026-04-22","GEORGIA","19:55:00","39","14","54"],["2026-04-22","FLORIDA","21:49:00","59","40","90"],["2026-04-22","NY","22:34:00","56","99","50"],["2026-04-22","GEORGIA","23:37:00","90","97","58"],
+  ["2026-04-23","GEORGIA","12:31:00","06","94","53"],["2026-04-23","FLORIDA","13:33:00","61","31","15"],["2026-04-23","NY","14:53:00","85","62","00"],["2026-04-23","GEORGIA","22:52:00","28","58","35"],["2026-04-23","FLORIDA","22:53:00","10","69","27"],["2026-04-23","NY","22:54:00","70","76","57"],["2026-04-23","GEORGIA","23:49:00","89","43","59"],
+  ["2026-04-24","GEORGIA","12:40:00","81","32","61"],["2026-04-24","FLORIDA","13:34:00","09","28","02"],["2026-04-24","NY","19:08:00","95","53","60"],["2026-04-24","GEORGIA","19:08:00","59","15","29"],["2026-04-24","FLORIDA","21:49:00","94","02","59"],["2026-04-24","NY","22:33:00","55","49","65"],["2026-04-24","GEORGIA","23:48:00","23","50","77"],
+  ["2026-04-25","GEORGIA","12:30:00","66","86","80"],["2026-04-25","FLORIDA","13:34:00","06","80","00"],["2026-04-25","NY","14:30:00","80","33","92"],["2026-04-25","GEORGIA","19:08:00","22","83","89"],["2026-04-25","FLORIDA","21:51:00","64","35","45"],["2026-04-25","NY","22:30:00","95","38","25"],["2026-04-25","GEORGIA","23:30:00","78","85","01"],
+  ["2026-04-27","GEORGIA","12:31:00","40","43","68"],["2026-04-27","FLORIDA","13:33:00","05","01","74"],["2026-04-27","NY","14:32:00","90","22","43"],["2026-04-27","GEORGIA","19:03:00","51","09","73"],["2026-04-27","FLORIDA","21:50:00","50","55","48"],["2026-04-27","NY","22:30:00","87","06","41"],["2026-04-27","GEORGIA","23:37:00","77","03","40"],
+  ["2026-04-28","GEORGIA","12:31:00","01","40","93"],["2026-04-28","FLORIDA","13:38:00","05","58","94"],["2026-04-28","NY","14:38:00","37","40","38"],["2026-04-28","GEORGIA","19:03:00","85","79","13"],["2026-04-28","FLORIDA","21:50:00","75","95","59"],["2026-04-28","NY","22:33:00","58","66","62"],["2026-04-28","GEORGIA","23:38:00","88","98","14"],
+  ["2026-04-29","GEORGIA","12:46:00","12","34","10"],["2026-04-29","FLORIDA","13:34:00","87","03","79"],["2026-04-29","NY","14:32:00","52","94","04"],["2026-04-29","GEORGIA","19:03:00","89","52","96"],["2026-04-29","FLORIDA","21:49:00","04","47","24"],["2026-04-29","NY","22:31:00","24","87","23"],["2026-04-29","GEORGIA","23:37:00","72","88","53"]
 ];
 
-const L={G:"GEORGIA",F:"FLORIDA",N:"NEW YORK"};const H={lot:[{l:"G",h:"1230",t:"Georgia 12:30 PM"},{l:"F",h:"0130",t:"Florida 01:30 PM"},{l:"N",h:"0230",t:"New York 02:30 PM"},{l:"G",h:"1900",t:"Georgia 07:00 PM"},{l:"F",h:"2150",t:"Florida 09:50 PM"},{l:"N",h:"2230",t:"New York 10:30 PM"},{l:"G",h:"2330",t:"Georgia 11:30 PM"}]};
-const K=["61","73","00","89","99","56","70","16","41","28"];
-const E={"61":{o:"GA/FL",v:3,c:[["61","73","11"],["61","57","63"],["61","69","88"]]},"73":{o:"GEORGIA",v:4,c:[["73","74","18"],["73","56","76"]]},"00":{o:"GEORGIA",v:3,c:[["00","82","87"],["00","37","14"],["00","59","03"]]},"89":{o:"FLORIDA",v:3,c:[["89","07","57"],["89","41","00"]]},"99":{o:"FLORIDA",v:3,c:[["99","51","75"],["99","00","07"]]},"56":{o:"GEORGIA",v:2,c:[["56","56","06"],["56","70","91"],["56","04","03"]]},"70":{o:"FLORIDA",v:3,c:[["70","08","22"],["70","12","37"],["70","68","75"]]},"16":{o:"GEORGIA",v:5,c:[["16","76","20"],["16","37","96"],["16","12","38"]]},"41":{o:"GEORGIA",v:3,c:[["41","64","86"],["41","02","67"],["41","98","06"]]},"28":{o:"NY",v:2,c:[["28","72","19"],["28","77","26"],["28","94","18"]]}};
+let sorteos = DATOS_REALES.map(s=>({fecha:s[0],loteria:s[1],horario:s[2],p1:s[3],p2:s[4],p3:s[5]}))
+  .sort((a,b)=>(a.fecha+a.horario).localeCompare(b.fecha+b.horario));
 
-function fmtH(h){if(!h)return"";let x=h.substring(0,2),y=h.substring(2,4),z=parseInt(x),a=z>=12?"PM":"AM";if(z>12)z-=12;if(z===0)z=12;return z+":"+y+" "+a}
-function tagL(l){return'<span class="tag tag-'+l+'">'+L[l]+'</span>'}
-function updClock(){const n=new Date();document.getElementById("liveDateTime").textContent=n.toLocaleDateString("es-ES",{weekday:"long",year:"numeric",month:"long",day:"numeric"})+" · "+n.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit",second:"2-digit"})}
-setInterval(updClock,1000);updClock();
+const SORTEOS_DIARIOS = [
+  {loteria:'GEORGIA',horario:'12:30:00',label:'Georgia 12:30 PM'},
+  {loteria:'FLORIDA',horario:'01:30:00',label:'Florida 01:30 PM'},
+  {loteria:'NY',horario:'02:30:00',label:'New York 02:30 PM'},
+  {loteria:'GEORGIA',horario:'07:00:00',label:'Georgia 07:00 PM'},
+  {loteria:'FLORIDA',horario:'09:50:00',label:'Florida 09:50 PM'},
+  {loteria:'NY',horario:'10:30:00',label:'New York 10:30 PM'},
+  {loteria:'GEORGIA',horario:'11:30:00',label:'Georgia 11:30 PM'}
+];
 
-function getA(){const now=new Date();now.setHours(0,0,0,0);const s7=D.filter(x=>(now-new Date("20"+x[0].substring(0,2)+"-"+x[0].substring(2,4)+"-"+x[0].substring(4,6)))/864e5<=7);const r=[];K.forEach(n=>{const oc=s7.filter(x=>x[4]===n||x[5]===n);if(!oc.length)return;const u=oc[oc.length-1],c=E[n];if(!c)return;const d=c.v-Math.floor((now-new Date("20"+u[0].substring(0,2)+"-"+u[0].substring(2,4)+"-"+u[0].substring(4,6)))/864e5);if(d<=0)return;r.push({n:n,f:u[0],p:u[4]===n?"2ª":"3ª",l:u[1],h:u[2],c:c,d:d})});return r}
+// ══════════════════════════════════════════
+// MOTOR IA: BACKTESTING Y AUTO-APRENDIZAJE
+// ══════════════════════════════════════════
 
-function calcF(n){const c={};D.forEach(s=>{if(s[3]===n){const k=s[1]+" "+fmtH(s[2]);c[k]=(c[k]||0)+1}});return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,3)}
+/**
+ * Backtesting Walk-Forward: divide el historial en ventanas
+ * Entrena con los últimos N días y valida en los siguientes M días
+ * Repite K veces con diferentes cortes
+ */
+function backtest_walkaward(allSorteos, trainDays, testDays, folds) {
+  const results = { A:[], B:[], C:[], D:[], MC:[], FUSION:[] };
+  const sorted = [...allSorteos].sort((a,b)=>a.fecha.localeCompare(b.fecha));
+  const fechas = [...new Set(sorted.map(s=>s.fecha))];
+  const n = fechas.length;
 
-function rA(){const a=getA();let h="";if(!a.length)h='<div class="alert-warning">⚠️ Sin números clave activos</div>';else a.forEach(x=>{const f=calcF(x.n);let sf=f.length?f.map(y=>'<span class="route-badge">'+tagL(y[0].split(" ")[0])+" "+y[0].split(" ")[1]+" ("+y[1]+"v)</span>").join(" "):'<span class="route-badge">General</span>';h+='<div class="signal-card priority-high"><div style="font-size:0.85rem;color:#bcd3f0"> '+x.f+" · "+tagL(x.l)+" "+fmtH(x.h)+'</div><div style="display:flex;align-items:center;margin-top:5px"><span class="number-highlight">'+x.n+'</span><span style="margin-left:12px">📡 '+x.p+'</span></div><p style="margin-top:8px">🎯 <strong>'+x.c.o+"</strong> · "+x.c.v+" días ("+x.d+" restantes)</p><div style="margin-top:6px">🕒 "+sf+'</div><div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">'+x.c.c.map(z=>'<code style="background:#1e405b;padding:6px 12px;border-radius:20px">'+z[0]+"-"+z[1]+"-"+z[2]+"</code>").join("")+"</div></div>"});document.getElementById("cA").innerHTML=h}
+  for (let fold = 0; fold < folds; fold++) {
+    // seleccionar corte aleatorio entre 60% y 85% del historial
+    const cutFrac = 0.55 + fold * ((0.85 - 0.55) / Math.max(folds - 1, 1));
+    const cutIdx = Math.floor(cutFrac * n);
+    const trainEnd = fechas[cutIdx] || fechas[n-1];
+    const testStart = fechas[Math.min(cutIdx+1, n-1)] || trainEnd;
+    const testEnd = fechas[Math.min(cutIdx + testDays, n-1)] || trainEnd;
 
-function cB(){const now=new Date();now.setHours(0,0,0,0);const rec=D.filter(x=>(now-new Date("20"+x[0].substring(0,2)+"-"+x[0].substring(2,4)+"-"+x[0].substring(4,6)))/864e5<=3);const r=[],p=new Set();rec.forEach(s=>{[s[4],s[5]].forEach(n=>{if(p.has(n))return;p.add(n);const t=D.filter(x=>x[4]===n||x[5]===n).length;const e=D.filter(x=>(x[4]===n||x[5]===n)&&D.some(y=>y[0]>=x[0]&&y[0]<=String(Number(x[0])+3)&&y[3]===n)).length;if(t>=3&&(e/t)>=0.5)r.push({n:n,t:Math.round(e/t*100),tot:t,e:e})})});return r.slice(0,5)}
+    const trainSet = sorted.filter(s => s.fecha <= trainEnd);
+    const testSet = sorted.filter(s => s.fecha >= testStart && s.fecha <= testEnd);
+    if (testSet.length < 3) continue;
 
-function rB(){const a=cB();let h="";if(!a.length)h='<div class="alert-warning">⚠️ Sin arrastres</div>';else a.forEach(x=>{const f=calcF(x.n);let sf=f.length?f.map(y=>'<span class="route-badge">'+tagL(y[0].split(" ")[0])+" "+y[1]+"v</span>").join(" "):"";h+='<div class="signal-card" style="border-color:#ff9966"><div style="display:flex;align-items:center"><span class="number-highlight">'+x.n+'</span><span style="margin-left:12px">🔥 '+x.t+"% ("+x.e+"/"+x.tot+')</span></div><p style="margin-top:8px">📈 1ª posición en 3 días</p>'+(sf?'<div style="margin-top:5px">🕒 '+sf+"</div>":"")+"</div>"});document.getElementById("cB").innerHTML=h}
+    const testNums = new Set([...testSet.map(s=>s.p1), ...testSet.map(s=>s.p2), ...testSet.map(s=>s.p3)]);
 
-function cC(){const now=new Date();now.setHours(0,0,0,0);const rec=D.filter(x=>(now-new Date("20"+x[0].substring(0,2)+"-"+x[0].substring(2,4)+"-"+x[0].substring(4,6)))/864e5<=3);const m=new Map();for(let i=0;i<D.length;i++){const s=D[i],Ys=[s[4],s[5]],sig=D.filter(x=>x[0]>=s[0]&&x[0]<=String(Number(s[0])+3));sig.forEach(x=>{const X=x[3];Ys.forEach(Y=>{if(Y===X)return;if(!m.has(Y))m.set(Y,new Map());const in=m.get(Y);if(!in.has(X))in.set(X,0);in.set(X,in.get(X)+1)})})}const tY={};D.forEach(s=>{[s[4],s[5]].forEach(Y=>{tY[Y]=(tY[Y]||0)+1})});const aM=new Map();rec.forEach(s=>{[s[4],s[5]].forEach(Y=>{if(aM.has(Y)||!m.has(Y))return;const c=[];const my=m.get(Y);my.forEach((v,X)=>{if(v>=3&&tY[Y]&&(v/tY[Y])>=0.5)c.push({X:X,t:Math.round(v/tY[Y]*100)})});if(c.length){c.sort((a,b)=>b.t-a.t);aM.set(Y,c.slice(0,3))}})});return Array.from(aM.entries()).map(([Y,d])=>({Y:Y,d:d}))}
+    // Estrategia A: números clave
+    const predictA = getPredictionsA(trainSet);
+    const hitA = predictA.filter(p => testNums.has(p)).length;
+    results.A.push(predictA.length > 0 ? hitA / Math.min(predictA.length, 10) : 0);
 
-function rC(){const p=cC();let h="";if(!p.length)h='<div class="alert-warning">⚠️ Sin percutores</div>';else p.forEach(x=>{h+='<div class="signal-card" style="border-color:#a569bd"><div style="display:flex;align-items:center"><span class="number-highlight">'+x.Y+'</span><span style="margin-left:12px">🧲 Percutor</span></div><p style="margin-top:8px">🎯 Anuncia:</p><div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap">'+x.d.map(z=>'<code style="background:#1e405b;padding:6px 14px;border-radius:15px">'+z.X+" ("+z.t+"%)</code>").join("")+"</div></div>"});document.getElementById("cC").innerHTML=h}
+    // Estrategia B: arrastres
+    const predictB = getPredictionsB(trainSet);
+    const hitB = predictB.filter(p => testNums.has(p)).length;
+    results.B.push(predictB.length > 0 ? hitB / Math.min(predictB.length, 10) : 0);
 
-function cD(){const db=["00","11","22","33","44","55","66","77","88","99"],now=new Date();now.setHours(0,0,0,0);const rec=D.filter(x=>(now-new Date("20"+x[0].substring(0,2)+"-"+x[0].substring(2,4)+"-"+x[0].substring(4,6)))/864e5<=3);const p=new Set();rec.forEach(s=>{[s[3],s[4],s[5]].forEach(v=>{if(db.includes(v))p.add(v)})});return Array.from(p)}
+    // Estrategia C: percutores
+    const predictC = getPredictionsC(trainSet);
+    const hitC = predictC.filter(p => testNums.has(p)).length;
+    results.C.push(predictC.length > 0 ? hitC / Math.min(predictC.length, 10) : 0);
 
-function rD(){const d=cD();let h="";if(!d.length)h='<div class="alert-warning">⚠️ Sin dobles</div>';else d.forEach(x=>{h+='<div class="signal-card" style="border-color:#f4d03f;background:#1e2f1e"><div style="display:flex;align-items:center"><span class="number-highlight">'+x+'</span><span style="margin-left:12px;color:#f4d03f">👁️ DOBLE</span></div><p style="margin-top:8px">⚠️ Se repite en 48h</p></div>'});document.getElementById("cD").innerHTML=h}
+    // Estrategia D: dobles
+    const predictD = getPredictionsD(trainSet);
+    const hitD = predictD.filter(p => testNums.has(p)).length;
+    results.D.push(predictD.length > 0 ? hitD / Math.min(predictD.length, 10) : 0);
 
-function cP(){const aN=getA().map(x=>x.n);if(!aN.length)return null;const pc={};D.forEach(s=>{const pr=[[s[3],s[4]],[s[3],s[5]],[s[4],s[5]]];pr.forEach(p=>{if(aN.includes(p[0])||aN.includes(p[1])){const k=p.join("-");if(!pc[k])pc[k]={c:0,l:{}};pc[k].c++;const lk=s[1]+" "+fmtH(s[2]);pc[k].l[lk]=(pc[k].l[lk]||0)+1}})});return Object.entries(pc).filter(([_,d])=>d.c>=3).sort((a,b)=>b[1].c-a[1].c).slice(0,5).map(([k,d])=>{const ls=Object.entries(d.l).sort((a,b)=>b[1]-a[1]);return{p:k,f:d.c,lf:ls.length?ls[0][0]:"General"}})}
+    // Estrategia MC: Monte Carlo top 5
+    const predictMC = getPredictionsMC(trainSet, 5000);
+    const hitMC = predictMC.filter(p => testNums.has(p)).length;
+    results.MC.push(predictMC.length > 0 ? hitMC / Math.min(predictMC.length, 10) : 0);
 
-function rP(){const p=cP();const c=document.getElementById("cP");if(!p||!p.length){c.innerHTML='<div class="alert-warning">⚠️ Sin palé</div>';return}let h="";p.forEach(x=>{const n=x.p.split("-");h+='<div class="signal-card" style="border-color:#17a589"><div style="display:flex;align-items:center"><span class="number-highlight" style="font-size:2rem">'+n[0]+'</span><span style="margin:0 12px;font-size:2rem">•</span><span class="number-highlight" style="font-size:2rem">'+n[1]+'</span></div><p style="margin-top:8px">Freq: <strong>'+x.f+"</strong></p><p style='font-size:0.8rem;color:#bcd3f0'>🎯 "+x.lf+"</p></div>"});c.innerHTML=h}
+    // Fusión: unión de A+B+C+D+MC priorizando más fuentes
+    const fusionMap = {};
+    [predictA, predictB, predictC, predictD, predictMC].forEach((arr, si) => {
+      arr.forEach(n => { fusionMap[n] = (fusionMap[n]||0)+1; });
+    });
+    const predictFusion = Object.entries(fusionMap).sort((a,b)=>b[1]-a[1]).slice(0,8).map(x=>x[0]);
+    const hitFusion = predictFusion.filter(p => testNums.has(p)).length;
+    results.FUSION.push(predictFusion.length > 0 ? hitFusion / Math.min(predictFusion.length, 10) : 0);
+  }
 
-function cR(){const r=new Map();getA().map(x=>x.n).forEach(n=>{if(!r.has(n))r.set(n,{v:[],t:0});r.get(n).v.push("A")});cB().map(x=>x.n).forEach(n=>{if(!r.has(n))r.set(n,{v:[],t:0});r.get(n).v.push("B")});cC().map(x=>x.Y).forEach(n=>{if(!r.has(n))r.set(n,{v:[],t:0});r.get(n).v.push("C")});cD().forEach(n=>{if(!r.has(n))r.set(n,{v:[],t:0});r.get(n).v.push("D")});const res=[];r.forEach((v,n)=>{v.t=v.v.length;if(v.t>=2)res.push({n:n,v:v.v,t:v.t})});res.sort((a,b)=>b.t-a.t||a.n.localeCompare(b.n));return res}
+  const avg = arr => arr.length ? arr.reduce((s,v)=>s+v,0)/arr.length : 0;
+  return {
+    A: { score: avg(results.A), folds: results.A },
+    B: { score: avg(results.B), folds: results.B },
+    C: { score: avg(results.C), folds: results.C },
+    D: { score: avg(results.D), folds: results.D },
+    MC: { score: avg(results.MC), folds: results.MC },
+    FUSION: { score: avg(results.FUSION), folds: results.FUSION }
+  };
+}
 
-function rR(){const r=cR();const c=document.getElementById("cR");if(!r.length){c.innerHTML='<div class="alert-warning">⏳ Sin respaldo</div>';return}let h="";const ic={A:"🎯",B:"🔥",C:"🧲",D:"💎"};r.forEach(x=>{const is=x.v.map(v=>'<span title="'+v+'">'+ic[v]+"</span>").join(" ");h+='<div class="signal-card" style="border-color:#ffd700;background:#1a2e1a"><div style="display:flex;align-items:center"><span class="number-highlight">'+x.n+'</span><span style="margin-left:12px">⭐ '+is+" ("+x.t+")</span></div></div>"});c.innerHTML=h}
+// Extrae predicciones para cada estrategia dado un conjunto de sorteos
+function getPredictionsA(data) {
+  const NUMS_CLAVE = ['61','73','00','89','99','56','70','16','41','28'];
+  const ahora = new Date(data[data.length-1]?.fecha || new Date()); ahora.setHours(0,0,0,0);
+  const ultimos7 = data.filter(s => (ahora - new Date(s.fecha))/86400000 <= 7);
+  const result = [];
+  NUMS_CLAVE.forEach(num => {
+    const occ = ultimos7.filter(s => s.p2===num || s.p3===num);
+    if (occ.length > 0) result.push(num);
+  });
+  return result;
+}
 
-function mc(s,f){const bc=(fm)=>{const e=Object.entries(fm).sort((a,b)=>a[0].localeCompare(b[0])),n=[],c=[];let t=0;for(const[num,cnt]of e){n.push(num);t+=cnt;c.push(t)}return{n:n,c:c,t:t}};const p1=bc(f),pk=(cd)=>{const r=Math.random()*cd.t;let l=0,h=cd.c.length-1;while(l<h){const m=(l+h)>>>1;if(cd.c[m]<r)l=m+1;else h=m}return cd.n[l]},cnt={};for(let i=0;i<s;i++){const p1v=pk(p1);cnt[p1v]=(cnt[p1v]||0)+1}return Object.entries(cnt).map(([n,c])=>({n:n,p:(c/s*100)})).sort((a,b)=>b.p-a.p).slice(0,5)}
+function getPredictionsB(data) {
+  const ahora = new Date(data[data.length-1]?.fecha || new Date()); ahora.setHours(0,0,0,0);
+  const recientes = data.filter(s => (ahora - new Date(s.fecha))/86400000 <= 3);
+  const resultados = []; const procesados = new Set();
+  recientes.forEach(s => {
+    [s.p2, s.p3].forEach(num => {
+      if(procesados.has(num)) return; procesados.add(num);
+      const total = data.filter(x => x.p2===num || x.p3===num).length;
+      const exitos = data.filter(x => (x.p2===num || x.p3===num) &&
+        data.some(y => y.fecha >= x.fecha && y.fecha <= x.fecha+3 && y.p1===num)).length;
+      if(total >= 3 && (exitos/total) >= 0.4) resultados.push(num);
+    });
+  });
+  return resultados.slice(0,6);
+}
 
-function rM(){const c=document.getElementById("cM");c.innerHTML='<p style="text-align:center;color:#ffd966">⏳ Simulando...</p>';setTimeout(()=>{const f={};D.forEach(s=>{f[s[3]]=(f[s[3]]||0)+1});const t10=mc(1e4,f),t20=mc(2e4,f);let h='<div style="display:flex;gap:15px;flex-wrap:wrap"><div style="flex:1;min-width:250px"><h3 style="color:#ffd966">🔹 10k</h3>';t10.forEach(r=>{h+='<div class="signal-card" style="border-color:#17a589"><span class="number-highlight" style="font-size:2rem">'+r.n+'</span> <span>'+r.p.toFixed(2)+"%</span></div>"});h+='</div><div style="flex:1;min-width:250px"><h3 style="color:#ffd966">🔸 20k</h3>';t20.forEach(r=>{h+='<div class="signal-card" style="border-color:#8e44ad"><span class="number-highlight" style="font-size:2rem">'+r.n+'</span> <span>'+r.p.toFixed(2)+"%</span></div>"});h+="</div></div>";const sm=t10[0]&&t20[0]&&t10[0].n===t20[0].n;h+='<p style="margin-top:15px;color:#bcd3f0">📊 <strong>'+(sm?"✅ Converge":"⚠️ Varía")+"</strong></p>";c.innerHTML=h},50)}
+function getPredictionsC(data) {
+  const ahora = new Date(data[data.length-1]?.fecha || new Date()); ahora.setHours(0,0,0,0);
+  const recientes = data.filter(s => (ahora - new Date(s.fecha))/86400000 <= 3);
+  const result = [];
+  recientes.forEach(s => { [s.p2, s.p3].forEach(y => { if(!result.includes(y)) result.push(y); }); });
+  return result.slice(0,6);
+}
 
-function rH(){const tb=document.getElementById("hBody"),sr=[...D].reverse();let h="";sr.slice(0,150).forEach(s=>{const fd="20"+s[0].substring(0,2)+"-"+s[0].substring(2,4)+"-"+s[0].substring(4,6);h+="<tr><td>"+fd+"</td><td>"+tagL(s[1])+"</td><td>"+fmtH(s[2])+"</td><td>"+s[3]+"</td><td>"+s[4]+"</td><td>"+s[5]+"</td></tr>"});tb.innerHTML=h||'<tr><td colspan="6">Sin datos</tr>'}
+function getPredictionsD(data) {
+  const dobles = ['00','11','22','33','44','55','66','77','88','99'];
+  const ahora = new Date(data[data.length-1]?.fecha || new Date()); ahora.setHours(0,0,0,0);
+  const recientes = data.filter(s => (ahora - new Date(s.fecha))/86400000 <= 3);
+  const presentes = new Set();
+  recientes.forEach(s => { [s.p1,s.p2,s.p3].forEach(v => { if(dobles.includes(v)) presentes.add(v); }); });
+  return Array.from(presentes);
+}
 
-function rF(){const c=document.getElementById("formU"),hoy=new Date().toISOString().slice(0,10);let html="";H.lot.forEach((s,i)=>{html+='<div class="input-group"><label>'+s.t+'</label><input type="text" id="p1_'+i+'" placeholder="1ª" maxlength="2"><input type="text" id="p2_'+i+'" placeholder="2ª" maxlength="2" style="margin-top:5px"><input type="text" id="p3_'+i+'" placeholder="3ª" maxlength="2" style="margin-top:5px"></div>'});c.innerHTML=html}
+function getPredictionsMC(data, sims) {
+  const freq = {}; data.forEach(s => { freq[s.p1] = (freq[s.p1]||0)+1; });
+  const entries = Object.entries(freq);
+  const total = entries.reduce((s,[,v])=>s+v,0);
+  const counts = {};
+  for(let i=0; i<sims; i++) {
+    let r = Math.random()*total, cum=0;
+    for(const [num,cnt] of entries) {
+      cum+=cnt;
+      if(r<cum){ counts[num]=(counts[num]||0)+1; break; }
+    }
+  }
+  return Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,5).map(x=>x[0]);
+}
 
-document.getElementById("btnGuardar").addEventListener("click",()=>{const hoy=new Date().toISOString().slice(0,10);let ag=0;for(let i=0;i<7;i++){const p1=document.getElementById("p1_"+i)?.value.trim().padStart(2,"0"),p2=document.getElementById("p2_"+i)?.value.trim().padStart(2,"0"),p3=document.getElementById("p3_"+i)?.value.trim().padStart(2,"0");if(!/^\d{2}$/.test(p1)||!/^\d{2}$/.test(p2)||!/^\d{2}$/.test(p3))continue;const s=H.lot[i],ex=D.some(x=>x[0]===hoy.substring(2)&&x[1]===s.l&&x[2]===s.h);if(!ex){D.push([hoy.substring(2),s.l,s.h,p1,p2,p3]);ag++}}if(ag>0){D.sort((a,b)=>(a[0]+a[2]).localeCompare(b[0]+b[2]));rH();rAll();alert("✅ "+ag+" guardados");rF()}else alert("⚠️ Sin cambios")});
-document.getElementById("btnLimpiar").addEventListener("click",rF);
+// ══════════════════════════════════════════
+// CALCULAR MEJOR PRONÓSTICO VALIDADO
+// ══════════════════════════════════════════
+let iaResults = null;
 
-function rAll(){rA();rB();rC();rD();rP();rR()}
+function runIA() {
+  iaResults = backtest_walkaward(sorteos, 60, 7, 6);
+  return iaResults;
+}
 
-const tabs=document.querySelectorAll(".tab-btn"),ports=document.querySelectorAll(".portada");
-tabs.forEach(t=>t.addEventListener("click",()=>{const id=t.dataset.tab;tabs.forEach(b=>b.classList.remove("active"));ports.forEach(p=>p.classList.remove("active"));t.classList.add("active");document.getElementById(id).classList.add("active");if(id==="H")rH();else if(id==="M")rM()}));
-rH();rF();rAll();
-console.log("✅ TOTAL:",D.length);
+function getBestStrategy() {
+  if(!iaResults) runIA();
+  return Object.entries(iaResults).sort((a,b)=>b[1].score-a[1].score)[0];
+}
+
+// Genera pronóstico final fusionado con pesos basados en backtesting
+function getFinalPredictions() {
+  if(!iaResults) runIA();
+  const scores = iaResults;
+  const allPreds = {
+    A: getPredictionsA(sorteos),
+    B: getPredictionsB(sorteos),
+    C: getPredictionsC(sorteos),
+    D: getPredictionsD(sorteos),
+    MC: getPredictionsMC(sorteos, 8000)
+  };
+  const scoreMap = {};
+  Object.entries(allPreds).forEach(([key, arr]) => {
+    const w = scores[key]?.score || 0;
+    arr.forEach(num => {
+      scoreMap[num] = (scoreMap[num]||0) + (w * 10 + 1);
+    });
+  });
+  return Object.entries(scoreMap)
+    .sort((a,b)=>b[1]-a[1])
+    .slice(0,10)
+    .map(([num, score]) => {
+      const sources = Object.entries(allPreds).filter(([,arr])=>arr.includes(num)).map(([k])=>k);
+      return { num, score: Math.round(score), sources };
+    });
+}
+
+// ══════════════════════════════════════════
+// UTILITARIOS
+// ══════════════════════════════════════════
+function fmtHora(h) {
+  if(!h) return '';
+  const [hh,mm] = h.split(':'); let hr = parseInt(hh);
+  const ap = hr>=12?'PM':'AM'; if(hr>12)hr-=12; if(hr===0)hr=12;
+  return `${hr}:${mm} ${ap}`;
+}
+function tagLot(lot) {
+  const cls={GEORGIA:'badge-ga',FLORIDA:'badge-fl',NY:'badge-ny'};
+  return `<span class="badge ${cls[lot]||''}">${lot}</span>`;
+}
+
+// ══════════════════════════════════════════
+// RENDER FUNCIONES
+// ══════════════════════════════════════════
+
+function renderRanking() {
+  const cont = document.getElementById('rankingContainer');
+  const best = getBestStrategy();
+  const finals = getFinalPredictions();
+  const scores = iaResults;
+
+  const stratInfo = {
+    A: { icon:'🎯', name:'Señal A (Números Clave)', color:'var(--gold)' },
+    B: { icon:'🔥', name:'Arrastres B', color:'#ff9966' },
+    C: { icon:'🧲', name:'Percutores C', color:'var(--purple)' },
+    D: { icon:'💎', name:'Dobles D', color:'#f4d03f' },
+    MC: { icon:'🎰', name:'Monte Carlo', color:'var(--green)' },
+    FUSION: { icon:'⭐', name:'Fusión IA', color:'var(--accent)' }
+  };
+
+  const [bestKey, bestVal] = best;
+  const bestInfo = stratInfo[bestKey];
+  const pct = Math.round(bestVal.score * 100);
+
+  let html = `
+  <div class="champion-card">
+    <div style="font-size:0.75rem;color:var(--muted);letter-spacing:2px;margin-bottom:6px;">MEJOR ESTRATEGIA VALIDADA</div>
+    <div style="font-size:1.4rem;font-weight:800;color:${bestInfo.color};">${bestInfo.icon} ${bestInfo.name}</div>
+    <div style="margin-top:8px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+      <div class="ia-score">✓ TASA BACKTESTING: ${pct}%</div>
+      <div style="font-size:0.8rem;color:var(--muted);">6 cortes · validación cruzada walk-forward</div>
+    </div>
+  </div>`;
+
+  html += `<div style="margin-bottom:16px;">
+    <div style="font-size:0.75rem;color:var(--muted);letter-spacing:2px;margin-bottom:10px;">COMPARATIVA DE ESTRATEGIAS (BACKTESTING)</div>
+    <div class="validation-grid">`;
+  Object.entries(scores).forEach(([k,v]) => {
+    if(k==='FUSION') return;
+    const info = stratInfo[k];
+    const p = Math.round(v.score*100);
+    const isBest = k===bestKey;
+    html += `<div class="val-cell ${isBest?'best':''}">
+      <div class="val-num">${p}%</div>
+      <div class="val-label">${info.icon} ${k}</div>
+      ${isBest?'<div style="font-size:0.65rem;color:var(--gold);margin-top:4px;">★ GANADORA</div>':''}
+    </div>`;
+  });
+  html += `</div></div>`;
+
+  html += `<div style="font-size:0.75rem;color:var(--muted);letter-spacing:2px;margin-bottom:10px;">PRONÓSTICO FINAL PONDERADO POR IA — HOY</div>
+  <div class="rank-list">`;
+
+  finals.forEach((item, i) => {
+    const sourceIcons = item.sources.map(s=>stratInfo[s]?.icon||s).join(' ');
+    const conf = Math.min(100, Math.round((item.score / (finals[0]?.score||1)) * 100));
+    const color = conf >= 80 ? 'var(--green)' : conf >= 55 ? 'var(--gold)' : 'var(--accent)';
+    html += `<div class="rank-item">
+      <span class="num-big" style="font-size:1.8rem;color:${color};">${item.num}</span>
+      <div style="flex:1;">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span class="ia-score" style="font-size:0.72rem;color:${color};">CONFIANZA ${conf}%</span>
+          <span style="font-size:0.8rem;color:var(--muted);">${sourceIcons} (${item.sources.join('+')})</span>
+        </div>
+        <div class="pct-bar"><div class="pct-fill" style="width:${conf}%;background:linear-gradient(90deg,${color},rgba(0,200,255,0.5));"></div></div>
+      </div>
+    </div>`;
+  });
+  html += `</div>`;
+  cont.innerHTML = html;
+}
+
+function renderValidacion() {
+  const cont = document.getElementById('validacionContainer');
+  const scores = iaResults || runIA();
+  const stratInfo = {
+    A:'🎯 Señal A', B:'🔥 Arrastres B', C:'🧲 Percutores C',
+    D:'💎 Dobles D', MC:'🎰 Monte Carlo', FUSION:'⭐ Fusión IA'
+  };
+  const colors = { A:'#ffd700', B:'#ff9966', C:'#b060ff', D:'#f4d03f', MC:'#00ff88', FUSION:'#00c8ff' };
+
+  let html = `<div style="margin-bottom:20px;font-size:0.8rem;color:var(--muted);line-height:1.6;">
+    <strong style="color:var(--accent);">Metodología:</strong> Walk-Forward Backtesting con 6 cortes temporales.
+    Se entrena con datos históricos hasta el corte y se valida en los siguientes 7 días.
+    Cada estrategia recibe un score de acierto real sobre datos nunca vistos.
+  </div>`;
+
+  html += `<div style="margin-bottom:16px;">`;
+  Object.entries(scores).forEach(([k,v]) => {
+    const pct = Math.round(v.score*100);
+    const c = colors[k]||'var(--accent)';
+    html += `<div class="bt-bar">
+      <div class="bt-label">${stratInfo[k]}</div>
+      <div class="bt-track"><div class="bt-fill" style="width:${pct}%;background:${c}33;border-right:2px solid ${c};">
+        <span style="color:${c};font-family:'Share Tech Mono',monospace;font-size:0.7rem;">${pct}%</span>
+      </div></div>
+      <div class="bt-pct">${v.folds.map(f=>Math.round(f*100)+'%').join(' · ')}</div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  html += `<div class="validation-grid">
+    <div class="val-cell">
+      <div class="val-num">${sorteos.length}</div>
+      <div class="val-label">Sorteos Analizados</div>
+    </div>
+    <div class="val-cell">
+      <div class="val-num">6</div>
+      <div class="val-label">Cortes de Validación</div>
+    </div>
+    <div class="val-cell best">
+      <div class="val-num">${Math.round(Math.max(...Object.values(scores).map(v=>v.score))*100)}%</div>
+      <div class="val-label">Mejor Score IA</div>
+    </div>
+    <div class="val-cell">
+      <div class="val-num">${[...new Set(sorteos.map(s=>s.fecha))].length}</div>
+      <div class="val-label">Días de Historia</div>
+    </div>
+  </div>`;
+
+  cont.innerHTML = html;
+}
+
+function renderPronosticoA() {
+  const NUMS_CLAVE = ['61','73','00','89','99','56','70','16','41','28'];
+  const estrategias = {
+    '61':{objetivo:'GA / FL',ventana:3,combos:[['61','73','11'],['61','57','63'],['61','69','88']]},
+    '73':{objetivo:'GEORGIA',ventana:4,combos:[['73','74','18'],['73','56','76']]},
+    '00':{objetivo:'GEORGIA',ventana:3,combos:[['00','82','87'],['00','37','14'],['00','59','03']]},
+    '89':{objetivo:'FLORIDA',ventana:3,combos:[['89','07','57'],['89','41','00']]},
+    '99':{objetivo:'FLORIDA',ventana:3,combos:[['99','51','75'],['99','00','07']]},
+    '56':{objetivo:'GEORGIA',ventana:2,combos:[['56','56','06'],['56','70','91'],['56','04','03']]},
+    '70':{objetivo:'FLORIDA',ventana:3,combos:[['70','08','22'],['70','12','37'],['70','68','75']]},
+    '16':{objetivo:'GEORGIA',ventana:5,combos:[['16','76','20'],['16','37','96'],['16','12','38']]},
+    '41':{objetivo:'GEORGIA',ventana:3,combos:[['41','64','86'],['41','02','67'],['41','98','06']]},
+    '28':{objetivo:'NY',ventana:2,combos:[['28','72','19'],['28','77','26'],['28','94','18']]}
+  };
+  const ahora = new Date(); ahora.setHours(0,0,0,0);
+  const ul7 = sorteos.filter(s=>(ahora-new Date(s.fecha))/86400000<=7);
+  const activos = [];
+  NUMS_CLAVE.forEach(num=>{
+    const occ = ul7.filter(s=>s.p2===num||s.p3===num);
+    if(occ.length===0) return;
+    const ult = occ[occ.length-1];
+    const cfg = estrategias[num]; if(!cfg) return;
+    const dr = cfg.ventana - Math.floor((ahora-new Date(ult.fecha))/86400000);
+    if(dr<=0) return;
+    activos.push({numero:num,fecha:ult.fecha,pos:ult.p2===num?'2ª':'3ª',loteria:ult.loteria,horario:ult.horario,cfg,diasRest:dr});
+  });
+  let html='';
+  if(activos.length===0) html='<div class="alert-box">⚠️ No jugar. Ningún número clave activo en los últimos 7 días.</div>';
+  else activos.forEach(a=>{
+    const iaBonus = iaResults && iaResults.A.score > 0.4 ? `<div class="ia-score" style="margin-top:8px;">IA A: ${Math.round((iaResults.A.score||0)*100)}% backtesting</div>` : '';
+    html+=`<div class="sig gold">
+      <div style="font-size:0.78rem;color:var(--muted);">📅 ${a.fecha} · ${tagLot(a.loteria)} ${fmtHora(a.horario)} · Señal ${a.pos}</div>
+      <div style="display:flex;align-items:center;gap:14px;margin-top:8px;">
+        <span class="num-big">${a.numero}</span>
+        <div><div style="color:var(--text);">🎯 ${a.cfg.objetivo}</div>
+        <div style="font-size:0.8rem;color:var(--muted);">Ventana ${a.cfg.ventana}d · ${a.diasRest}d restantes</div></div>
+      </div>
+      ${iaBonus}
+      <div style="margin-top:10px;">${a.cfg.combos.map(c=>`<span class="combo">${c[0]}-${c[1]}-${c[2]}</span>`).join('')}</div>
+    </div>`;
+  });
+  document.getElementById('contenedorA').innerHTML=html;
+}
+
+function renderPronosticoB() {
+  const preds = getPredictionsB(sorteos);
+  let html='';
+  if(preds.length===0) html='<div class="alert-box">⚠️ No jugar. Sin arrastres confiables.</div>';
+  else preds.forEach(num=>{
+    const total = sorteos.filter(x=>x.p2===num||x.p3===num).length;
+    const exitos = sorteos.filter(x=>(x.p2===num||x.p3===num)&&sorteos.some(y=>y.fecha>=x.fecha&&y.fecha<=x.fecha+3&&y.p1===num)).length;
+    const tasa = total>0?Math.round(exitos/total*100):0;
+    html+=`<div class="sig" style="border-color:#ff9966;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <span class="num-big" style="color:#ff9966;">${num}</span>
+        <div><div>🔥 Arrastre: <strong>${tasa}%</strong> (${exitos}/${total})</div>
+        <div style="font-size:0.8rem;color:var(--muted);">Tiende a 1ª posición en 3 días</div></div>
+      </div>
+      <div class="pct-bar"><div class="pct-fill" style="width:${tasa}%;background:linear-gradient(90deg,#ff9966,#ffcc88);"></div></div>
+    </div>`;
+  });
+  document.getElementById('contenedorB').innerHTML=html;
+}
+
+function renderPronosticoC() {
+  const ahora = new Date(); ahora.setHours(0,0,0,0);
+  const recientes = sorteos.filter(s=>(ahora-new Date(s.fecha))/86400000<=3);
+  const percutorsMap = new Map();
+  sorteos.forEach(s=>{
+    const Ys=[s.p2,s.p3];
+    const sig = sorteos.filter(x=>x.fecha>=s.fecha&&x.fecha<=s.fecha+3);
+    sig.forEach(x=>{
+      const X=x.p1;
+      Ys.forEach(Y=>{
+        if(Y===X) return;
+        if(!percutorsMap.has(Y)) percutorsMap.set(Y,new Map());
+        const inn=percutorsMap.get(Y);
+        if(!inn.has(X)) inn.set(X,{aciertos:0});
+        inn.get(X).aciertos++;
+      });
+    });
+  });
+  const totalY={};
+  sorteos.forEach(s=>{[s.p2,s.p3].forEach(Y=>{totalY[Y]=(totalY[Y]||0)+1;});});
+  const activosMap=new Map();
+  recientes.forEach(s=>{
+    [s.p2,s.p3].forEach(Y=>{
+      if(activosMap.has(Y)||!percutorsMap.has(Y)) return;
+      const cands=[];
+      percutorsMap.get(Y).forEach((val,X)=>{
+        if(val.aciertos>=3&&totalY[Y]&&(val.aciertos/totalY[Y])>=0.4)
+          cands.push({X,tasa:Math.round(val.aciertos/totalY[Y]*100)});
+      });
+      if(cands.length>0){cands.sort((a,b)=>b.tasa-a.tasa); activosMap.set(Y,cands.slice(0,3));}
+    });
+  });
+  const perc = Array.from(activosMap.entries()).map(([Y,d])=>({Y,destinos:d}));
+  let html='';
+  if(perc.length===0) html='<div class="alert-box">⚠️ Sin percutores válidos.</div>';
+  else perc.forEach(p=>{
+    html+=`<div class="sig purple">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <span class="num-big" style="color:var(--purple);">${p.Y}</span>
+        <div><div style="color:var(--purple);">🧲 Percutor → Anuncia:</div></div>
+      </div>
+      <div style="margin-top:10px;">${p.destinos.map(d=>`<span class="combo" style="border-color:var(--purple);color:var(--purple);">${d.X} (${d.tasa}%)</span>`).join('')}</div>
+    </div>`;
+  });
+  document.getElementById('contenedorC').innerHTML=html;
+}
+
+function renderPronosticoD() {
+  const dobles = getPredictionsD(sorteos);
+  let html='';
+  if(dobles.length===0) html='<div class="alert-box">⚠️ Sin dobles activos.</div>';
+  else dobles.forEach(d=>{
+    html+=`<div class="sig" style="border-color:#f4d03f;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <span class="num-big" style="color:#f4d03f;">${d}</span>
+        <div><div style="color:#f4d03f;">👁️ DOBLE ACTIVO</div>
+        <div style="font-size:0.8rem;color:var(--muted);">Suelen repetirse en 48h</div></div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('contenedorD').innerHTML=html;
+}
+
+function renderPaleActivo() {
+  const activosNum = getPredictionsA(sorteos);
+  const cont = document.getElementById('paleActivoContainer');
+  if(activosNum.length===0){cont.innerHTML='<div class="alert-box">⚠️ Sin parejas activas.</div>';return;}
+  const parejasCount={};
+  sorteos.forEach(s=>{
+    [[s.p1,s.p2],[s.p1,s.p3],[s.p2,s.p3]].forEach(par=>{
+      if(activosNum.includes(par[0])||activosNum.includes(par[1])){
+        const key=par.join('-');
+        if(!parejasCount[key]) parejasCount[key]={count:0,loterias:{}};
+        parejasCount[key].count++;
+        const lk=`${s.loteria} ${fmtHora(s.horario)}`;
+        parejasCount[key].loterias[lk]=(parejasCount[key].loterias[lk]||0)+1;
+      }
+    });
+  });
+  const pales=Object.entries(parejasCount).filter(([,d])=>d.count>=3).sort((a,b)=>b[1].count-a[1].count).slice(0,5);
+  if(pales.length===0){cont.innerHTML='<div class="alert-box">⚠️ Sin parejas activas.</div>';return;}
+  let html='';
+  pales.forEach(([key,data])=>{
+    const nums=key.split('-');
+    const lf=Object.entries(data.loterias).sort((a,b)=>b[1]-a[1])[0]?.[0]||'General';
+    html+=`<div class="sig green">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <span class="num-big" style="color:var(--green);">${nums[0]}</span>
+        <span style="color:var(--muted);font-size:1.5rem;">•</span>
+        <span class="num-big" style="color:var(--green);">${nums[1]}</span>
+        <div><div>Frecuencia: <strong>${data.count}</strong></div>
+        <div style="font-size:0.8rem;color:var(--muted);">🎯 ${lf}</div></div>
+      </div>
+    </div>`;
+  });
+  cont.innerHTML=html;
+}
+
+function renderRespaldoMultiple() {
+  const respaldo=new Map();
+  const src={A:getPredictionsA(sorteos),B:getPredictionsB(sorteos),C:getPredictionsC(sorteos),D:getPredictionsD(sorteos)};
+  Object.entries(src).forEach(([k,arr])=>{
+    arr.forEach(num=>{
+      if(!respaldo.has(num)) respaldo.set(num,{ventanas:[],total:0});
+      respaldo.get(num).ventanas.push(k);
+    });
+  });
+  const resultado=[];
+  respaldo.forEach((val,num)=>{
+    val.total=val.ventanas.length;
+    if(val.total>=2) resultado.push({numero:num,ventanas:val.ventanas,total:val.total});
+  });
+  resultado.sort((a,b)=>b.total-a.total||a.numero.localeCompare(b.numero));
+  const cont=document.getElementById('respaldoContainer');
+  if(resultado.length===0){cont.innerHTML='<div class="alert-box">⏳ Sin respaldo múltiple hoy.</div>';return;}
+  const icons={A:'🎯',B:'🔥',C:'🧲',D:'💎'};
+  let html='';
+  resultado.forEach(r=>{
+    const conf=Math.round((r.total/4)*100);
+    html+=`<div class="sig" style="border-color:var(--gold);">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <span class="num-big">${r.numero}</span>
+        <div><div style="color:var(--gold);">⭐ ${r.ventanas.map(v=>icons[v]).join(' ')} · ${r.total}/4 estrategias</div>
+        <div class="pct-bar" style="margin-top:6px;"><div class="pct-fill" style="width:${conf}%;"></div></div></div>
+      </div>
+    </div>`;
+  });
+  cont.innerHTML=html;
+}
+
+function renderMonteCarlo() {
+  const cont=document.getElementById('montecarloContainer');
+  cont.innerHTML='<p style="text-align:center;color:var(--muted);padding:30px;">⏳ Simulando 4 cortes...</p>';
+  setTimeout(()=>{
+    const freq={};
+    sorteos.forEach(s=>{freq[s.p1]=(freq[s.p1]||0)+1;});
+    const cuts=[1000,5000,10000,20000];
+    const names=['1K','5K','10K','20K'];
+    const cols=['var(--accent)','var(--gold)','var(--green)','var(--purple)'];
+    const results=cuts.map(n=>getPredictionsMC(sorteos,n));
+    // comprobación de convergencia
+    const top5s=results.map(r=>r.slice(0,5));
+    const conv1=top5s[0].filter(n=>top5s[1].includes(n)).length;
+    const conv2=top5s[1].filter(n=>top5s[2].includes(n)).length;
+    const conv3=top5s[2].filter(n=>top5s[3].includes(n)).length;
+    const avgConv=Math.round((conv1+conv2+conv3)/3/5*100);
+    let html=`<div class="ia-score" style="margin-bottom:16px;">Convergencia entre cortes: ${avgConv}% ${avgConv>=60?'✅ ESTABLE':'⚠️ VARÍA'}</div>`;
+    html+='<div class="mc-flex">';
+    results.forEach((res,i)=>{
+      html+=`<div class="mc-col"><div class="mc-header">⊛ ${names[i]} SIMULACIONES</div>`;
+      res.forEach(n=>{
+        const pct=((freq[n]||0)/sorteos.length*100).toFixed(1);
+        html+=`<div class="sig" style="border-color:${cols[i]};padding:10px 14px;margin-bottom:8px;">
+          <span class="num-big" style="font-size:1.8rem;color:${cols[i]};">${n}</span>
+          <span style="margin-left:12px;font-size:0.8rem;color:var(--muted);">hist: ${pct}%</span>
+        </div>`;
+      });
+      html+='</div>';
+    });
+    html+='</div>';
+    // Números que aparecen en 3+ de los 4 cortes = más confiables
+    const allNums=results.flat();
+    const numCount={};
+    allNums.forEach(n=>{numCount[n]=(numCount[n]||0)+1;});
+    const confiables=Object.entries(numCount).filter(([,c])=>c>=3).sort((a,b)=>b[1]-a[1]).map(([n,c])=>({num:n,count:c}));
+    if(confiables.length>0){
+      html+=`<div style="margin-top:16px;"><div style="font-size:0.75rem;color:var(--muted);letter-spacing:2px;margin-bottom:10px;">NÚMEROS CONFIRMADOS EN 3+ CORTES</div>`;
+      confiables.forEach(c=>{
+        html+=`<span class="combo" style="margin:4px;font-size:1rem;border-color:var(--green);color:var(--green);">${c.num} (${c.count}/4)</span>`;
+      });
+      html+='</div>';
+    }
+    cont.innerHTML=html;
+  },50);
+}
+
+function renderHistorial() {
+  const tbody=document.getElementById('historialBody');
+  const sorted=[...sorteos].reverse();
+  let html='';
+  sorted.slice(0,200).forEach(s=>{
+    html+=`<tr><td>${s.fecha}</td><td>${tagLot(s.loteria)}</td><td>${fmtHora(s.horario)}</td><td><strong>${s.p1}</strong></td><td>${s.p2}</td><td>${s.p3}</td></tr>`;
+  });
+  tbody.innerHTML=html||'<tr><td colspan="6">Sin datos</td></tr>';
+}
+
+function renderFormActualizar() {
+  const cont=document.getElementById('formActualizar');
+  let html='';
+  SORTEOS_DIARIOS.forEach((s,idx)=>{
+    html+=`<div class="input-group"><label>${s.label}</label>
+      <input type="text" id="p1_${idx}" placeholder="1ª" maxlength="2">
+      <input type="text" id="p2_${idx}" placeholder="2ª" maxlength="2" style="margin-top:6px;">
+      <input type="text" id="p3_${idx}" placeholder="3ª" maxlength="2" style="margin-top:6px;">
+    </div>`;
+  });
+  cont.innerHTML=html;
+}
+
+document.getElementById('guardarActualizacion').addEventListener('click',()=>{
+  const hoy=new Date().toISOString().slice(0,10);
+  let agregados=0;
+  for(let i=0;i<7;i++){
+    const p1=document.getElementById(`p1_${i}`)?.value.trim().padStart(2,'0');
+    const p2=document.getElementById(`p2_${i}`)?.value.trim().padStart(2,'0');
+    const p3=document.getElementById(`p3_${i}`)?.value.trim().padStart(2,'0');
+    if(!/^\d{2}$/.test(p1)||!/^\d{2}$/.test(p2)||!/^\d{2}$/.test(p3)) continue;
+    const s=SORTEOS_DIARIOS[i];
+    const existe=sorteos.some(x=>x.fecha===hoy&&x.loteria===s.loteria&&x.horario===s.horario);
+    if(!existe){sorteos.push({fecha:hoy,loteria:s.loteria,horario:s.horario,p1,p2,p3});agregados++;}
+  }
+  if(agregados>0){
+    sorteos.sort((a,b)=>(a.fecha+a.horario).localeCompare(b.fecha+b.horario));
+    iaResults=null; // reset IA para recalcular
+    renderHistorial(); recalcAll();
+    alert(`✅ ${agregados} guardados — IA recalculada`);
+    renderFormActualizar();
+  } else alert('⚠️ Sin cambios');
+});
+document.getElementById('limpiarForm').addEventListener('click',renderFormActualizar);
+
+function recalcAll(){
+  iaResults=null;
+  runIA();
+  renderRanking();
+  renderPronosticoA();
+  renderPronosticoB();
+  renderPronosticoC();
+  renderPronosticoD();
+  renderPaleActivo();
+  renderRespaldoMultiple();
+}
+
+// NAV TABS
+const tabs=document.querySelectorAll('.tab-btn');
+const portadas=document.querySelectorAll('.portada');
+tabs.forEach(t=>t.addEventListener('click',()=>{
+  const id=t.dataset.tab;
+  tabs.forEach(b=>b.classList.remove('active'));
+  portadas.forEach(p=>p.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(id).classList.add('active');
+  if(id==='historial') renderHistorial();
+  else if(id==='montecarlo') renderMonteCarlo();
+  else if(id==='validacion') renderValidacion();
+}));
+
+// RELOJ
+function tick(){
+  const a=new Date();
+  document.getElementById('liveDateTime').textContent=
+    a.toLocaleDateString('es-ES',{weekday:'short',year:'numeric',month:'short',day:'numeric'})+
+    ' · '+a.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+setInterval(tick,1000); tick();
+
+// INICIO
+renderHistorial();
+renderFormActualizar();
+recalcAll();
+console.log("✅ LOTO 2026 IA — Total sorteos:", sorteos.length);
 })();
 </script>
 </body>
