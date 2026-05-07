@@ -1607,7 +1607,13 @@ const DATOS_BASE=[
   {fecha:"2026-05-06",loteria:"GEORGIA",horario:"12:30",p1:"18",p2:"36",p3:"54"},
   {fecha:"2026-05-06",loteria:"FLORIDA",horario:"13:30",p1:"72",p2:"25",p3:"60"},
   {fecha:"2026-05-06",loteria:"NY",horario:"14:30",p1:"19",p2:"59",p3:"54"},
-  {fecha:"2026-05-06",loteria:"GEORGIA",horario:"19:00",p1:"05",p2:"29",p3:"54"}
+  {fecha:"2026-05-06",loteria:"GEORGIA",horario:"19:00",p1:"05",p2:"29",p3:"54"},
+  {fecha:"2026-05-06",loteria:"FLORIDA",horario:"21:50",p1:"17",p2:"93",p3:"36"},
+  {fecha:"2026-05-06",loteria:"NY",horario:"22:30",p1:"02",p2:"26",p3:"53"},
+  {fecha:"2026-05-06",loteria:"GEORGIA",horario:"23:30",p1:"07",p2:"25",p3:"04"},
+  {fecha:"2026-05-07",loteria:"GEORGIA",horario:"12:30",p1:"94",p2:"42",p3:"36"},
+  {fecha:"2026-05-07",loteria:"FLORIDA",horario:"13:30",p1:"05",p2:"20",p3:"34"},
+  {fecha:"2026-05-07",loteria:"NY",horario:"14:30",p1:"14",p2:"10",p3:"59"}
 ];
 
 const STORAGE_KEY='loto2026_v6';
@@ -1625,6 +1631,8 @@ function cargar(){
   const ap=localStorage.getItem(APREND_KEY);if(ap)bitacora=JSON.parse(ap);}catch(e){}
 }
 cargar();
+sorteos=sorteos.filter(s=>!(s.p1==='00'&&s.p2==='00'&&s.p3==='00'));
+guardar();
 
 const DIAS=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
 function fmt(h){if(!h)return'';const[hh,mm]=h.split(':');let hr=parseInt(hh);const ap=hr>=12?'PM':'AM';if(hr>12)hr-=12;if(hr===0)hr=12;return`${hr}:${mm} ${ap}`;}
@@ -1644,6 +1652,9 @@ function cicloConsumido(num,todos){
   const u23=[...todos].reverse().find(s=>s.p2===num||s.p3===num);
   if(!u1||!u23)return false;
   return(u1.fecha+'T'+u1.horario)>(u23.fecha+'T'+u23.horario);
+}
+function cayoReciente(num,todos,n){
+  return todos.slice(-n).some(s=>s.p1===num);
 }
 
 // Solo sorteos futuros (no jugados hoy)
@@ -1682,7 +1693,7 @@ function renderEstadoBar(){
     <span class="estado-pill ${cls}">📅 ${uf} · ${DIAS[dSem(uf)]}</span>
     <span class="estado-pill ${cls}">${comp}/7 sorteos</span>
     ${pend>0?`<span class="estado-pill pendiente">⏳ Faltan ${pend}</span>`:''}
-    ${(()=>{const _f=getFechaPronostico();return comp>=7?`<span class="estado-pill completo">🎯 Pronósticos: ${_f.fecha} · ${DIAS[_f.dsRef]}</span>`:''})()}`;
+    ${comp>=7?`<span class="estado-pill completo">🎯 Pronósticos: ${getFechaPronostico().fecha} · ${DIAS[getFechaPronostico().dsRef]}</span>`:''}`;
 }
 
 // ══════════ ARRASTRES ══════════
@@ -1939,7 +1950,7 @@ function getPale(){
 // ══════════ SCORE MULTIFACTORIAL ══════════
 function scoreMF(num){
   const todos=crono();const uf=getUltimaFecha();if(!uf)return{score:0};
-  const _fp3=getFechaPronostico();const dsRef=_fp3.dsRef;const mesRef=new Date(_fp3.fecha+'T12:00:00').getMonth();
+  const _fp3=getFechaPronostico();const dsRef=_fp3.dsRef;const mesRef=new Date(uf+'T12:00:00').getMonth();
   const enPri=todos.filter(s=>s.p1===num).length;
   const freqG=enPri/todos.length;
   const enDia=todos.filter(s=>s.p1===num&&dSem(s.fecha)===dsRef).length;
@@ -1967,14 +1978,18 @@ function getMonteCarlo(){
   const cands=[...new Set([...arrs.map(a=>a.num),...percs])];
   if(!cands.length)return{res:[],razon:'Sin candidatos activos'};
   const scored=cands.map(num=>{const mf=scoreMF(num);return{num,score:mf.score,mf};}).filter(x=>x.score>0);
-  if(!scored.length)return{res:[],razon:'Sin score válido'};
+  const _arrN=new Set(getArrastres().map(a=>a.num));
+  const _percN=new Set(getPercutores().flatMap(p=>[p.Y,...p.dests.map(d=>d.X)]));
+  const _td=crono();
+  const scored2=scored.filter(s=>cayoReciente(s.num,_td,3)?(_arrN.has(s.num)||_percN.has(s.num)):true);
+  if(!scored2.length)return{res:[],razon:'Sin candidatos válidos'};
   const N=20000,conteos={};
-  const totSc=scored.reduce((a,b)=>a+b.score,0);
-  const cum=[];let c=0;scored.forEach(s=>{c+=s.score/totSc;cum.push({num:s.num,cum:c,mf:s.mf});});
+  const totSc=scored2.reduce((a,b)=>a+b.score,0);
+  const cum=[];let c=0;scored2.forEach(s=>{c+=s.score/totSc;cum.push({num:s.num,cum:c,mf:s.mf});});
   for(let i=0;i<N;i++){const r=Math.random();const w=cum.find(x=>x.cum>=r)||cum[cum.length-1];conteos[w.num]=(conteos[w.num]||0)+1;}
   const jh=jugadosHoy(crono());
   const res=Object.entries(conteos).map(([num,ct])=>{
-    const mf=scored.find(s=>s.num===num)?.mf||{};
+    const mf=scored2.find(s=>s.num===num)?.mf||{};
     const prob=(ct/N*100).toFixed(2);
     const lhTop=mf.lhTop||[];
     const noJugar=lhTop.filter(([k])=>{const[l,h]=k.split('|');return jh.has(l+'|'+h.slice(0,4));}).map(([k])=>{const[l,h]=k.split('|');return{lot:l,hora:h};});
@@ -2301,5 +2316,3 @@ renderEstadoBar();renderHistorial();renderForm();renderAll();
 </script>
 </body>
 </html>
-
- 
