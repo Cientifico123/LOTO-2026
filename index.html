@@ -103,7 +103,7 @@ tr:hover td{background:rgba(0,200,255,0.03);}
 <div id="paleactivo" class="portada"><div class="card"><div class="card-title">🎲 PALÉ ACTIVO</div><div id="contPale"></div></div></div>
 <div id="montecarlo" class="portada"><div class="card"><div class="card-title">🎰 MONTE CARLO MULTIFACTORIAL</div><div id="contMC"></div></div></div>
 <div id="respaldo" class="portada"><div class="card"><div class="card-title">⭐ PUESTO DE MANDO — RESPALDO INTEGRAL</div><div id="contRespaldo"></div></div></div>
-<div id="aprendido" class="portada"><div class="card"><div class="card-title">📚 BITÁCORA DE APRENDIZAJE</div><div id="contAprendido"></div><div style="margin-top:12px;"><button class="btn-red" id="btnLimpiarApr">🗑 Limpiar bitácora</button></div></div></div>
+<div id="aprendido" class="portada"><div class="card"><div class="card-title">📚 BITÁCORA DE APRENDIZAJE</div><div id="contAprendido"></div></div></div>
 <div id="historial" class="portada">
   <div class="card"><div class="card-title">📜 HISTORIAL COMPLETO</div>
     <div style="display:flex;gap:7px;margin-bottom:9px;flex-wrap:wrap;">
@@ -1603,7 +1603,11 @@ const DATOS_BASE=[
   {fecha:"2026-05-05",loteria:"GEORGIA",horario:"19:00",p1:"41",p2:"11",p3:"73"},
   {fecha:"2026-05-05",loteria:"FLORIDA",horario:"21:50",p1:"01",p2:"57",p3:"23"},
   {fecha:"2026-05-05",loteria:"NY",horario:"22:30",p1:"45",p2:"75",p3:"56"},
-  {fecha:"2026-05-05",loteria:"GEORGIA",horario:"23:30",p1:"44",p2:"05",p3:"14"}
+  {fecha:"2026-05-05",loteria:"GEORGIA",horario:"23:30",p1:"44",p2:"05",p3:"14"},
+  {fecha:"2026-05-06",loteria:"GEORGIA",horario:"12:30",p1:"18",p2:"36",p3:"54"},
+  {fecha:"2026-05-06",loteria:"FLORIDA",horario:"13:30",p1:"72",p2:"25",p3:"60"},
+  {fecha:"2026-05-06",loteria:"NY",horario:"14:30",p1:"19",p2:"59",p3:"54"},
+  {fecha:"2026-05-06",loteria:"GEORGIA",horario:"19:00",p1:"05",p2:"29",p3:"54"}
 ];
 
 const STORAGE_KEY='loto2026_v6';
@@ -1643,12 +1647,21 @@ function cicloConsumido(num,todos){
 }
 
 // Solo sorteos futuros (no jugados hoy)
-function jugadosHoy(todos){
-  const uf=getUltimaFecha();
-  const s=new Set();
-  todos.filter(x=>x.fecha===uf).forEach(x=>s.add(x.loteria+'|'+x.horario.slice(0,4)));
-  return s;
+function getFechaPronostico(){
+  const todos=crono();const uf=getUltimaFecha();
+  if(!uf)return{fecha:uf,jugados:new Set(),dsRef:0};
+  const delDia=todos.filter(s=>s.fecha===uf);
+  const jugados=new Set(delDia.map(s=>s.loteria+'|'+s.horario.slice(0,4)));
+  if(jugados.size>=7){
+    const d=new Date(uf+'T12:00:00');d.setDate(d.getDate()+1);
+    const manana=d.toISOString().slice(0,10);
+    const delManana=todos.filter(s=>s.fecha===manana);
+    const jugadosManana=new Set(delManana.map(s=>s.loteria+'|'+s.horario.slice(0,4)));
+    return{fecha:manana,jugados:jugadosManana,dsRef:d.getDay()};
+  }
+  return{fecha:uf,jugados,dsRef:new Date(uf+'T12:00:00').getDay()};
 }
+function jugadosHoy(todos){return getFechaPronostico().jugados;}
 
 const SORTEOS_DIA=[
   {loteria:'GEORGIA',horario:'12:30',label:'Georgia 12:30 PM'},
@@ -1668,7 +1681,8 @@ function renderEstadoBar(){
   document.getElementById('estadoBar').innerHTML=`
     <span class="estado-pill ${cls}">📅 ${uf} · ${DIAS[dSem(uf)]}</span>
     <span class="estado-pill ${cls}">${comp}/7 sorteos</span>
-    ${pend>0?`<span class="estado-pill pendiente">⏳ Faltan ${pend}</span>`:''}`;
+    ${pend>0?`<span class="estado-pill pendiente">⏳ Faltan ${pend}</span>`:''}
+    ${(()=>{const _f=getFechaPronostico();return comp>=7?`<span class="estado-pill completo">🎯 Pronósticos: ${_f.fecha} · ${DIAS[_f.dsRef]}</span>`:''})()}`;
 }
 
 // ══════════ ARRASTRES ══════════
@@ -1836,7 +1850,7 @@ function getDominantes(){
   const todos=crono();if(!todos.length)return{};
   const uf=getUltimaFecha();
   const jh=jugadosHoy(todos);
-  const dsRef=dSem(uf);
+  const _fp2=getFechaPronostico();const dsRef=_fp2.dsRef;
   const HLOT={GEORGIA:['12:30','19:00','23:30'],FLORIDA:['13:30','21:50'],NY:['14:30','22:30']};
   const arrNums=new Set(getArrastres().map(a=>a.num));
   const percNums=new Set(getPercutores().flatMap(p=>[p.Y,...p.dests.map(d=>d.X)]));
@@ -1925,7 +1939,7 @@ function getPale(){
 // ══════════ SCORE MULTIFACTORIAL ══════════
 function scoreMF(num){
   const todos=crono();const uf=getUltimaFecha();if(!uf)return{score:0};
-  const dsRef=dSem(uf);const mesRef=new Date(uf+'T12:00:00').getMonth();
+  const _fp3=getFechaPronostico();const dsRef=_fp3.dsRef;const mesRef=new Date(_fp3.fecha+'T12:00:00').getMonth();
   const enPri=todos.filter(s=>s.p1===num).length;
   const freqG=enPri/todos.length;
   const enDia=todos.filter(s=>s.p1===num&&dSem(s.fecha)===dsRef).length;
@@ -2264,9 +2278,7 @@ document.getElementById('btnGuardar').addEventListener('click',()=>{
   }else alert('Sin nuevos datos.');
 });
 document.getElementById('btnLimpiar').addEventListener('click',renderForm);
-document.getElementById('btnLimpiarApr').addEventListener('click',()=>{
-  if(confirm('¿Borrar bitácora y resetear pesos?')){bitacora=[];pesos={arrastre:1.0,percutor:1.0,montecarlo:1.0,pale:0.7,diaSemana:0.8,tendencia:0.9,ciclo:0.85,mes:0.75};guardar();renderAprendido();}
-});
+
 
 document.querySelectorAll('.tab-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
@@ -2290,4 +2302,4 @@ renderEstadoBar();renderHistorial();renderForm();renderAll();
 </body>
 </html>
 
-    
+ 
