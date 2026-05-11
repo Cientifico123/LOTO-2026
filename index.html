@@ -3,137 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>LOTO 2026 · Sistema Inteligente</title>
+<title>LOTO 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#020d18;--surface:rgba(4,20,38,0.92);--border:rgba(0,200,255,0.18);--accent:#00c8ff;--gold:#ffd700;--green:#00ff88;--red:#ff4060;--purple:#b060ff;--orange:#ff9944;--text:#d0eaff;--muted:#6090b0;}
+:root{--bg:#020d18;--card:rgba(4,20,38,0.95);--b:rgba(0,200,255,0.13);--ac:#00c8ff;--go:#ffd700;--gr:#00ff88;--rd:#ff4060;--pu:#b060ff;--or:#ff9944;--tx:#d0eaff;--mu:#5a8099;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);background-image:radial-gradient(ellipse at 10% 0%,rgba(0,100,200,0.18),transparent 60%),radial-gradient(ellipse at 90% 80%,rgba(60,0,120,0.15),transparent 50%);min-height:100vh;font-family:'Exo 2',sans-serif;color:var(--text);padding:10px;}
-.app{max-width:1400px;margin:0 auto;}
-.header{text-align:center;padding:14px 0 10px;}
-.logo{font-family:'Orbitron',monospace;font-size:clamp(1.6rem,5vw,3.2rem);font-weight:900;letter-spacing:4px;background:linear-gradient(90deg,#00c8ff,#fff,#ffd700,#00ff88,#00c8ff);background-size:300% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 4s linear infinite;}
-@keyframes shimmer{to{background-position:300% center;}}
-.clock{display:inline-flex;align-items:center;gap:10px;margin-top:8px;background:rgba(0,200,255,0.08);border:1px solid var(--border);border-radius:50px;padding:6px 18px;font-family:'Share Tech Mono',monospace;color:var(--gold);font-size:0.88rem;}
-.estado-bar{display:flex;justify-content:center;gap:10px;margin:7px 0;flex-wrap:wrap;}
-.estado-pill{padding:3px 12px;border-radius:20px;font-size:0.72rem;font-weight:700;font-family:'Share Tech Mono',monospace;}
-.estado-pill.completo{background:rgba(0,255,136,0.12);border:1px solid rgba(0,255,136,0.4);color:var(--green);}
-.estado-pill.parcial{background:rgba(255,153,68,0.12);border:1px solid rgba(255,153,68,0.4);color:var(--orange);}
-.estado-pill.pendiente{background:rgba(255,64,96,0.12);border:1px solid rgba(255,64,96,0.4);color:var(--red);}
-.nav-tabs{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:12px 0 8px;border-bottom:1px solid var(--border);padding-bottom:8px;}
-.tab-btn{font-family:'Exo 2',sans-serif;background:transparent;border:1px solid rgba(0,200,255,0.2);padding:7px 12px;font-size:0.78rem;font-weight:600;color:var(--muted);border-radius:6px;cursor:pointer;transition:0.2s;}
-.tab-btn:hover{color:var(--accent);border-color:var(--accent);}
-.tab-btn.active{background:linear-gradient(135deg,rgba(0,200,255,0.15),rgba(0,100,200,0.1));color:var(--accent);border-color:var(--accent);box-shadow:0 0 12px rgba(0,200,255,0.2);}
-.portada{display:none;animation:fadeIn 0.3s ease;}.portada.active{display:block;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.card{background:var(--surface);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 8px 32px rgba(0,0,0,0.5);}
-.card-title{font-family:'Orbitron',monospace;font-size:0.85rem;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
-.signal-card{background:rgba(0,10,25,0.6);border-left:4px solid var(--accent);border-radius:10px;padding:12px 14px;margin-bottom:11px;}
-.num-big{font-family:'Orbitron',monospace;font-size:1.9rem;font-weight:900;color:var(--gold);text-shadow:0 0 20px rgba(255,215,0,0.4);display:inline-block;min-width:60px;text-align:center;background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.2);border-radius:8px;padding:2px 10px;}
-.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:0.7rem;font-weight:700;}
-.badge-ga{background:#c41e3a33;color:#ff6680;}.badge-fl{background:#ff6b3533;color:#ffaa77;}.badge-ny{background:#4169e133;color:#88aaff;}
-.ia-score{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,rgba(0,255,136,0.12),rgba(0,200,255,0.08));border:1px solid rgba(0,255,136,0.3);border-radius:20px;padding:3px 9px;font-size:0.72rem;font-weight:700;color:var(--green);font-family:'Share Tech Mono',monospace;}
-.alert-box{background:rgba(255,64,96,0.08);border:1px solid rgba(255,64,96,0.3);border-radius:10px;padding:12px;color:#ff8fa0;text-align:center;font-size:0.85rem;}
-.warn-box{background:rgba(255,153,68,0.08);border:1px solid rgba(255,153,68,0.3);border-radius:10px;padding:12px;color:var(--orange);margin-bottom:10px;font-size:0.82rem;}
-.info-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;align-items:center;}
-.tag{display:inline-block;padding:2px 7px;border-radius:12px;font-size:0.7rem;font-family:'Share Tech Mono',monospace;background:rgba(0,200,255,0.07);border:1px solid rgba(0,200,255,0.18);color:var(--accent);}
-.tag.gold{background:rgba(255,215,0,0.07);border-color:rgba(255,215,0,0.25);color:var(--gold);}
-.tag.green{background:rgba(0,255,136,0.07);border-color:rgba(0,255,136,0.25);color:var(--green);}
-.tag.red{background:rgba(255,64,96,0.07);border-color:rgba(255,64,96,0.25);color:var(--red);}
-.tag.purple{background:rgba(176,96,255,0.07);border-color:rgba(176,96,255,0.25);color:var(--purple);}
-.tag.orange{background:rgba(255,153,68,0.07);border-color:rgba(255,153,68,0.25);color:var(--orange);}
-.num-perc{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:900;display:inline-block;padding:2px 9px;border-radius:6px;min-width:46px;text-align:center;}
-.num-perc.src{color:var(--purple);background:rgba(176,96,255,0.1);border:1px solid rgba(176,96,255,0.3);}
-.num-perc.dst{color:var(--gold);background:rgba(255,215,0,0.07);border:1px solid rgba(255,215,0,0.22);}
-.evidence-list{margin-top:7px;font-size:0.73rem;color:var(--muted);font-family:'Share Tech Mono',monospace;}
-.evidence-list span{display:block;padding:2px 0;border-bottom:1px solid rgba(0,200,255,0.05);}
-table{width:100%;border-collapse:collapse;font-size:0.8rem;}
-th{background:rgba(0,200,255,0.08);color:var(--accent);padding:8px;text-align:left;font-size:0.76rem;}
-td{padding:7px 8px;border-bottom:1px solid rgba(0,200,255,0.06);}
-tr:hover td{background:rgba(0,200,255,0.03);}
-.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:9px;}
-.input-group{background:rgba(0,200,255,0.05);border:1px solid var(--border);border-radius:10px;padding:10px;}
-.input-group label{display:block;color:var(--gold);font-size:0.72rem;font-weight:700;margin-bottom:6px;}
-.input-group input{width:100%;padding:7px;border-radius:6px;border:1px solid var(--border);background:rgba(0,10,30,0.7);color:white;font-family:'Share Tech Mono',monospace;text-align:center;margin-top:3px;}
-.btn-gold{background:linear-gradient(145deg,#f3c84e,#c99d1e);border:none;padding:11px 24px;border-radius:8px;font-family:'Exo 2',sans-serif;font-weight:800;font-size:0.9rem;color:#0a1c2c;cursor:pointer;box-shadow:0 4px 0 #7a5c00;}
-.btn-gold:active{transform:translateY(3px);box-shadow:0 1px 0 #7a5c00;}
-.btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted);padding:11px 18px;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;}
-.btn-outline:hover{border-color:var(--accent);color:var(--accent);}
-.btn-red{background:rgba(255,64,96,0.1);border:1px solid rgba(255,64,96,0.3);color:var(--red);padding:8px 16px;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.8rem;}
-.pronostico-box{border-radius:14px;padding:16px;margin-bottom:14px;}
-.pronostico-box.fuerte{background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(0,200,255,0.06));border:2px solid rgba(255,215,0,0.5);}
-.pronostico-box.medio{background:linear-gradient(135deg,rgba(0,200,255,0.08),rgba(0,100,200,0.05));border:1px solid rgba(0,200,255,0.35);}
-.score-bar{height:6px;background:rgba(255,255,255,0.07);border-radius:3px;margin-top:5px;}
-.score-fill{height:100%;border-radius:3px;}
-.aprendido-entry{background:rgba(0,10,25,0.7);border-left:3px solid var(--purple);border-radius:8px;padding:10px 12px;margin-bottom:8px;font-family:'Share Tech Mono',monospace;font-size:0.73rem;}
-.aprendido-entry.acierto{border-color:var(--green);}
-.aprendido-entry.fallo{border-color:var(--red);}
-.aprendido-entry.patron{border-color:var(--gold);}
-.conf-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.72rem;font-weight:700;font-family:'Share Tech Mono',monospace;}
-.conf-alta{background:rgba(0,255,136,0.15);border:1px solid rgba(0,255,136,0.4);color:var(--green);}
-.conf-media{background:rgba(255,215,0,0.12);border:1px solid rgba(255,215,0,0.35);color:var(--gold);}
-.conf-baja{background:rgba(255,64,96,0.1);border:1px solid rgba(255,64,96,0.3);color:var(--red);}
-.emollis{font-family:'Orbitron',monospace;font-size:0.7rem;letter-spacing:2px;color:var(--orange);background:rgba(255,153,68,0.1);border:1px solid rgba(255,153,68,0.3);border-radius:4px;padding:2px 7px;display:inline-block;}
-.debil-card{background:rgba(255,153,68,0.04);border-left:4px solid rgba(255,153,68,0.5);border-radius:10px;padding:12px 14px;margin-bottom:11px;}
-@media(max-width:600px){.num-big{font-size:1.4rem}.num-perc{font-size:1rem}}
+body{background:var(--bg);background-image:radial-gradient(ellipse at 10% 0%,rgba(0,100,200,.13),transparent 55%),radial-gradient(ellipse at 90% 85%,rgba(60,0,120,.09),transparent 50%);min-height:100vh;font-family:'Exo 2',sans-serif;color:var(--tx);padding:10px;}
+.app{max-width:860px;margin:0 auto;}
+.hdr{text-align:center;padding:14px 0 6px;}
+.logo{font-family:'Orbitron',monospace;font-size:clamp(1.4rem,5vw,2.6rem);font-weight:900;letter-spacing:4px;background:linear-gradient(90deg,#00c8ff,#fff,#ffd700,#00ff88,#00c8ff);background-size:300%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 4s linear infinite;}
+@keyframes sh{to{background-position:300% center;}}
+.clk{display:inline-flex;align-items:center;margin-top:6px;background:rgba(0,200,255,.07);border:1px solid var(--b);border-radius:50px;padding:5px 15px;font-family:'Share Tech Mono',monospace;color:var(--go);font-size:.78rem;}
+.sbar{display:flex;justify-content:center;gap:7px;margin:6px 0;flex-wrap:wrap;}
+.pill{padding:3px 11px;border-radius:20px;font-size:.68rem;font-weight:700;font-family:'Share Tech Mono',monospace;}
+.pill.ok{background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.4);color:var(--gr);}
+.pill.par{background:rgba(255,153,68,.1);border:1px solid rgba(255,153,68,.4);color:var(--or);}
+.pill.pend{background:rgba(255,64,96,.1);border:1px solid rgba(255,64,96,.3);color:var(--rd);}
+.tabs{display:flex;gap:5px;justify-content:center;margin:10px 0 8px;border-bottom:1px solid var(--b);padding-bottom:8px;flex-wrap:wrap;}
+.tb{background:transparent;border:1px solid rgba(0,200,255,.17);padding:9px 15px;font-size:.8rem;font-weight:700;color:var(--mu);border-radius:8px;cursor:pointer;transition:.2s;font-family:'Exo 2',sans-serif;}
+.tb:hover{color:var(--ac);border-color:var(--ac);}
+.tb.on{background:linear-gradient(135deg,rgba(0,200,255,.14),rgba(0,100,200,.07));color:var(--ac);border-color:var(--ac);box-shadow:0 0 12px rgba(0,200,255,.16);}
+.pg{display:none;animation:fi .3s ease;}.pg.on{display:block;}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.card{background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--b);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 8px 32px rgba(0,0,0,.5);}
+.ctit{font-family:'Orbitron',monospace;font-size:.78rem;font-weight:700;color:var(--go);letter-spacing:2px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--b);}
+
+/* QUÉ HAGO HOY */
+.qhh{border-radius:14px;padding:16px;margin-bottom:10px;}
+.qhh.jugar{background:linear-gradient(135deg,rgba(0,255,136,.08),rgba(0,200,255,.04));border:2px solid rgba(0,255,136,.4);}
+.qhh.esperar{background:rgba(255,153,68,.06);border:1px solid rgba(255,153,68,.35);}
+.qhh.nojugar{background:rgba(255,64,96,.06);border:1px solid rgba(255,64,96,.3);}
+.qhh-icon{font-size:1.6rem;margin-bottom:6px;}
+.qhh-num{font-family:'Orbitron',monospace;font-size:2rem;font-weight:900;display:inline-block;padding:2px 12px;border-radius:8px;margin:0 6px;}
+.qhh-num.j{color:var(--go);background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.25);}
+.qhh-num.e{color:var(--or);background:rgba(255,153,68,.06);border:1px solid rgba(255,153,68,.22);}
+.qhh-num.n{color:var(--rd);background:rgba(255,64,96,.06);border:1px solid rgba(255,64,96,.22);}
+.qhh-main{font-size:1rem;font-weight:800;margin-bottom:4px;}
+.qhh-sub{font-size:.8rem;color:var(--mu);line-height:1.6;}
+.qhh-dest{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.lp{display:inline-block;padding:5px 11px;border-radius:8px;font-size:.76rem;font-weight:700;font-family:'Share Tech Mono',monospace;}
+.lp.ga{background:#c41e3a22;color:#ff6680;border:1px solid #c41e3a44;}
+.lp.fl{background:#ff6b3522;color:#ffaa77;border:1px solid #ff6b3544;}
+.lp.ny{background:#4169e122;color:#88aaff;border:1px solid #4169e144;}
+.nojugar-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;align-items:center;}
+.njlp{display:inline-block;padding:3px 9px;border-radius:6px;font-size:.7rem;font-family:'Share Tech Mono',monospace;background:rgba(255,64,96,.07);border:1px solid rgba(255,64,96,.22);color:#ff8fa0;}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(0,200,255,.13),transparent);margin:12px 0;}
+
+/* PRONÓSTICO DETALLE */
+.pc{border-radius:14px;padding:16px;margin-bottom:13px;}
+.pc.A{background:linear-gradient(135deg,rgba(255,215,0,.09),rgba(255,153,68,.05));border:2px solid rgba(255,215,0,.45);}
+.pc.B{background:linear-gradient(135deg,rgba(0,200,255,.07),rgba(0,100,200,.04));border:1px solid rgba(0,200,255,.32);}
+.pc.C{background:rgba(176,96,255,.05);border:1px solid rgba(176,96,255,.25);}
+.nd{font-family:'Orbitron',monospace;font-size:2.5rem;font-weight:900;display:inline-block;min-width:72px;text-align:center;padding:4px 12px;border-radius:10px;}
+.nd.A{color:var(--go);text-shadow:0 0 24px rgba(255,215,0,.45);background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.25);}
+.nd.B{color:var(--ac);text-shadow:0 0 20px rgba(0,200,255,.35);background:rgba(0,200,255,.05);border:1px solid rgba(0,200,255,.2);}
+.nd.C{color:var(--pu);background:rgba(176,96,255,.05);border:1px solid rgba(176,96,255,.2);}
+.nlbl{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.68rem;font-weight:900;font-family:'Share Tech Mono',monospace;}
+.nlbl.A{background:rgba(255,215,0,.13);border:1px solid rgba(255,215,0,.38);color:var(--go);}
+.nlbl.B{background:rgba(0,200,255,.11);border:1px solid rgba(0,200,255,.28);color:var(--ac);}
+.nlbl.C{background:rgba(176,96,255,.09);border:1px solid rgba(176,96,255,.23);color:var(--pu);}
+.jbox{background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.2);border-radius:10px;padding:10px 13px;margin-top:9px;}
+.jtit{font-size:.68rem;color:var(--gr);font-weight:700;margin-bottom:6px;font-family:'Share Tech Mono',monospace;letter-spacing:1px;}
+.jrow{display:flex;align-items:center;gap:8px;margin:4px 0;flex-wrap:wrap;}
+.njbox{background:rgba(255,64,96,.05);border:1px solid rgba(255,64,96,.2);border-radius:8px;padding:8px 12px;margin-top:7px;}
+.njtit{font-size:.68rem;color:var(--rd);font-weight:700;margin-bottom:4px;font-family:'Share Tech Mono',monospace;}
+.sr{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.st{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.66rem;font-family:'Share Tech Mono',monospace;background:rgba(0,200,255,.05);border:1px solid rgba(0,200,255,.12);color:var(--mu);}
+.st.go{background:rgba(255,215,0,.05);border-color:rgba(255,215,0,.16);color:var(--go);}
+.st.gr{background:rgba(0,255,136,.05);border-color:rgba(0,255,136,.16);color:var(--gr);}
+.st.or{background:rgba(255,153,68,.05);border-color:rgba(255,153,68,.16);color:var(--or);}
+.st.rd{background:rgba(255,64,96,.05);border-color:rgba(255,64,96,.16);color:var(--rd);}
+.st.pu{background:rgba(176,96,255,.05);border-color:rgba(176,96,255,.16);color:var(--pu);}
+.imbox{background:rgba(0,10,25,.5);border-left:3px solid var(--pu);border-radius:8px;padding:8px 11px;margin-top:8px;font-size:.71rem;font-family:'Share Tech Mono',monospace;line-height:1.5;}
+.imbox.cerca{border-color:var(--gr);}
+.imbox.viaje{border-color:var(--ac);}
+.imbox.inicio{border-color:var(--or);}
+.evl{margin-top:8px;font-size:.68rem;font-family:'Share Tech Mono',monospace;color:var(--mu);}
+.evl span{display:block;padding:2px 0;border-bottom:1px solid rgba(0,200,255,.05);}
+.njtotal{background:rgba(255,64,96,.06);border:2px solid rgba(255,64,96,.32);border-radius:14px;padding:26px;text-align:center;}
+.njtotal h2{font-family:'Orbitron',monospace;font-size:1.2rem;color:var(--rd);letter-spacing:3px;margin-bottom:10px;}
+.njtotal p{color:#ff8fa0;font-size:.83rem;line-height:1.7;}
+.apr-e{border-left:3px solid var(--pu);border-radius:8px;padding:9px 12px;margin-bottom:7px;font-family:'Share Tech Mono',monospace;font-size:.7rem;background:rgba(0,10,25,.6);}
+.apr-e.ok{border-color:var(--gr);}
+.apr-e.fail{border-color:var(--rd);}
+.apr-e.pat{border-color:var(--go);}
+table{width:100%;border-collapse:collapse;font-size:.78rem;}
+th{background:rgba(0,200,255,.07);color:var(--ac);padding:8px;text-align:left;font-size:.72rem;position:sticky;top:0;z-index:1;}
+td{padding:7px 8px;border-bottom:1px solid rgba(0,200,255,.05);}
+tr:hover td{background:rgba(0,200,255,.03);}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:8px;}
+.ig{background:rgba(0,200,255,.04);border:1px solid var(--b);border-radius:10px;padding:9px;}
+.ig label{display:block;color:var(--go);font-size:.68rem;font-weight:700;margin-bottom:4px;}
+.ig input{width:100%;padding:7px;border-radius:6px;border:1px solid var(--b);background:rgba(0,10,30,.7);color:white;font-family:'Share Tech Mono',monospace;text-align:center;margin-top:2px;font-size:.88rem;}
+.btn-g{background:linear-gradient(145deg,#f3c84e,#c99d1e);border:none;padding:12px 26px;border-radius:8px;font-family:'Exo 2',sans-serif;font-weight:800;font-size:.9rem;color:#0a1c2c;cursor:pointer;box-shadow:0 4px 0 #7a5c00;}
+.btn-g:active{transform:translateY(3px);box-shadow:0 1px 0 #7a5c00;}
+.btn-o{background:transparent;border:1px solid var(--b);color:var(--mu);padding:11px 18px;border-radius:8px;font-weight:600;cursor:pointer;font-size:.84rem;}
+.btn-o:hover{border-color:var(--ac);color:var(--ac);}
+.wbox{background:rgba(255,153,68,.07);border:1px solid rgba(255,153,68,.28);border-radius:10px;padding:10px;color:var(--or);margin-bottom:10px;font-size:.78rem;}
+@media(max-width:480px){.nd{font-size:1.9rem;min-width:58px;}.qhh-num{font-size:1.6rem;}}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="header">
+<div class="hdr">
   <div class="logo">LOTO 2026</div>
-  <div class="clock" id="liveDateTime">--</div>
-  <div class="estado-bar" id="estadoBar"></div>
+  <div class="clk" id="clk">--</div>
+  <div class="sbar" id="sbar"></div>
 </div>
-<div class="nav-tabs">
-  <button class="tab-btn active" data-tab="arrastre">🔥 Arrastre</button>
-  <button class="tab-btn" data-tab="percutores">🧲 Percutores</button>
-  <button class="tab-btn" data-tab="dominantes">🏆 Dominantes</button>
-  <button class="tab-btn" data-tab="debiles">⚠️ Señales</button>
-  <button class="tab-btn" data-tab="paleactivo">🎲 Palé</button>
-  <button class="tab-btn" data-tab="montecarlo">🎰 Monte Carlo</button>
-  <button class="tab-btn" data-tab="respaldo">⭐ Respaldo</button>
-  <button class="tab-btn" data-tab="aprendido">📚 Aprendido</button>
-  <button class="tab-btn" data-tab="historial">📜 Historial</button>
-  <button class="tab-btn" data-tab="actualizar">🔄 Actualizar</button>
+<div class="tabs">
+  <button class="tb on" data-tab="hoy">💡 ¿Qué hago hoy?</button>
+  <button class="tb" data-tab="prono">🎯 Pronósticos</button>
+  <button class="tb" data-tab="hist">📜 Historial</button>
+  <button class="tb" data-tab="act">🔄 Actualizar</button>
+  <button class="tb" data-tab="apr">📚 Aprendido</button>
 </div>
-<div id="arrastre" class="portada active"><div class="card"><div class="card-title">🔥 ARRASTRES — ANÁLISIS PROFUNDO</div><div id="contArrastre"></div></div></div>
-<div id="percutores" class="portada"><div class="card"><div class="card-title">🧲 PERCUTORES — ÚLTIMOS 14 SORTEOS</div><div id="contPercutores"></div></div></div>
-<div id="dominantes" class="portada"><div class="card"><div class="card-title">🏆 SEÑALES DEL DOMINIO</div><div id="contDominantes"></div></div></div>
-<div id="debiles" class="portada"><div class="card"><div class="card-title">⚠️ SEÑALES DÉBILES — 2 MEJORES CANDIDATOS</div><div id="contDebiles"></div></div></div>
-<div id="paleactivo" class="portada"><div class="card"><div class="card-title">🎲 PALÉ ACTIVO</div><div id="contPale"></div></div></div>
-<div id="montecarlo" class="portada"><div class="card"><div class="card-title">🎰 MONTE CARLO MULTIFACTORIAL</div><div id="contMC"></div></div></div>
-<div id="respaldo" class="portada"><div class="card"><div class="card-title">⭐ PUESTO DE MANDO — RESPALDO INTEGRAL</div><div id="contRespaldo"></div></div></div>
-<div id="aprendido" class="portada"><div class="card"><div class="card-title">📚 BITÁCORA DE APRENDIZAJE</div><div id="contAprendido"></div></div></div>
-<div id="historial" class="portada">
-  <div class="card"><div class="card-title">📜 HISTORIAL COMPLETO</div>
-    <div style="display:flex;gap:7px;margin-bottom:9px;flex-wrap:wrap;">
-      <select id="filtroLot" style="background:rgba(0,10,30,0.8);border:1px solid var(--border);color:var(--text);padding:5px 9px;border-radius:6px;font-size:0.82rem;">
+
+<div id="hoy" class="pg on"><div class="card"><div class="ctit" id="hoyTit">💡 ¿QUÉ HAGO HOY?</div><div id="cHoy"></div></div></div>
+<div id="prono" class="pg"><div class="card"><div class="ctit" id="pronoTit">🎯 PRONÓSTICOS DETALLADOS</div><div id="cProno"></div></div></div>
+<div id="hist" class="pg">
+  <div class="card">
+    <div class="ctit">📜 HISTORIAL COMPLETO</div>
+    <div style="display:flex;gap:6px;margin-bottom:9px;flex-wrap:wrap;">
+      <select id="fL" style="background:rgba(0,10,30,.8);border:1px solid var(--b);color:var(--tx);padding:5px 8px;border-radius:6px;font-size:.78rem;">
         <option value="">Todas</option><option value="GEORGIA">Georgia</option><option value="FLORIDA">Florida</option><option value="NY">NY</option>
       </select>
-      <input type="date" id="filtroFecha" style="background:rgba(0,10,30,0.8);border:1px solid var(--border);color:var(--text);padding:5px 9px;border-radius:6px;font-size:0.82rem;">
-      <button class="btn-outline" onclick="renderHistorial()" style="padding:5px 12px;font-size:0.78rem;">Filtrar</button>
-      <button class="btn-outline" onclick="document.getElementById('filtroLot').value='';document.getElementById('filtroFecha').value='';renderHistorial();" style="padding:5px 12px;font-size:0.78rem;">Todo</button>
+      <input type="date" id="fF" style="background:rgba(0,10,30,.8);border:1px solid var(--b);color:var(--tx);padding:5px 8px;border-radius:6px;font-size:.78rem;">
+      <button class="btn-o" onclick="renderHist()" style="padding:5px 10px;font-size:.74rem;">Filtrar</button>
+      <button class="btn-o" onclick="document.getElementById('fL').value='';document.getElementById('fF').value='';renderHist();" style="padding:5px 10px;font-size:.74rem;">Todo</button>
     </div>
-    <div style="max-height:520px;overflow-y:auto">
+    <div style="max-height:540px;overflow-y:auto;">
       <table><thead><tr><th>Fecha</th><th>Lotería</th><th>Hora</th><th>1ª</th><th>2ª</th><th>3ª</th></tr></thead>
-      <tbody id="historialBody"></tbody></table>
+      <tbody id="hBody"></tbody></table>
     </div>
   </div>
 </div>
-<div id="actualizar" class="portada">
-  <div class="card"><div class="card-title">🔄 ACTUALIZAR SORTEOS</div>
-    <div id="warnAct" class="warn-box" style="display:none;"></div>
-    <div class="form-grid" id="formAct"></div>
-    <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;">
-      <button class="btn-gold" id="btnGuardar">💾 Guardar y Recalcular</button>
-      <button class="btn-outline" id="btnLimpiar">🧹 Limpiar</button>
+<div id="act" class="pg">
+  <div class="card">
+    <div class="ctit">🔄 ACTUALIZAR SORTEOS</div>
+    <div id="wAct" class="wbox" style="display:none;"></div>
+    <div class="fgrid" id="fAct"></div>
+    <div style="display:flex;gap:10px;margin-top:15px;flex-wrap:wrap;">
+      <button class="btn-g" id="btnS">💾 Guardar y Recalcular</button>
+      <button class="btn-o" id="btnC">🧹 Limpiar</button>
     </div>
+  </div>
+</div>
+<div id="apr" class="pg">
+  <div class="card">
+    <div class="ctit">📚 BITÁCORA DE APRENDIZAJE</div>
+    <div id="cApr"></div>
   </div>
 </div>
 </div>
 
 <script>
-const DATOS_BASE=[
+const DB=[
   {fecha:"2025-10-01",loteria:"GEORGIA",horario:"12:30",p1:"33",p2:"06",p3:"40"},
   {fecha:"2025-10-01",loteria:"FLORIDA",horario:"13:30",p1:"12",p2:"49",p3:"11"},
   {fecha:"2025-10-01",loteria:"NY",horario:"14:30",p1:"83",p2:"57",p3:"41"},
@@ -1613,708 +1637,470 @@ const DATOS_BASE=[
   {fecha:"2026-05-06",loteria:"GEORGIA",horario:"23:30",p1:"07",p2:"25",p3:"04"},
   {fecha:"2026-05-07",loteria:"GEORGIA",horario:"12:30",p1:"94",p2:"42",p3:"36"},
   {fecha:"2026-05-07",loteria:"FLORIDA",horario:"13:30",p1:"05",p2:"20",p3:"34"},
-  {fecha:"2026-05-07",loteria:"NY",horario:"14:30",p1:"14",p2:"10",p3:"59"}
+  {fecha:"2026-05-07",loteria:"NY",horario:"14:30",p1:"14",p2:"10",p3:"59"},
+  {fecha:"2026-05-07",loteria:"GEORGIA",horario:"19:00",p1:"92",p2:"59",p3:"97"},
+  {fecha:"2026-05-07",loteria:"FLORIDA",horario:"21:50",p1:"88",p2:"43",p3:"47"},
+  {fecha:"2026-05-07",loteria:"NY",horario:"22:30",p1:"61",p2:"19",p3:"18"},
+  {fecha:"2026-05-07",loteria:"GEORGIA",horario:"23:30",p1:"04",p2:"98",p3:"30"},
+  {fecha:"2026-05-08",loteria:"NY",horario:"14:30",p1:"97",p2:"17",p3:"92"},
+  {fecha:"2026-05-08",loteria:"GEORGIA",horario:"19:00",p1:"54",p2:"38",p3:"10"},
+  {fecha:"2026-05-08",loteria:"FLORIDA",horario:"21:50",p1:"20",p2:"19",p3:"86"},
+  {fecha:"2026-05-08",loteria:"NY",horario:"22:30",p1:"17",p2:"96",p3:"73"},
+  {fecha:"2026-05-08",loteria:"GEORGIA",horario:"23:30",p1:"47",p2:"06",p3:"13"},
+  {fecha:"2026-05-09",loteria:"GEORGIA",horario:"12:30",p1:"79",p2:"52",p3:"62"},
+  {fecha:"2026-05-09",loteria:"FLORIDA",horario:"13:30",p1:"15",p2:"05",p3:"78"},
+  {fecha:"2026-05-09",loteria:"NY",horario:"14:30",p1:"32",p2:"48",p3:"88"},
+  {fecha:"2026-05-09",loteria:"GEORGIA",horario:"19:00",p1:"92",p2:"98",p3:"20"},
+  {fecha:"2026-05-09",loteria:"FLORIDA",horario:"21:50",p1:"89",p2:"55",p3:"21"},
+  {fecha:"2026-05-09",loteria:"NY",horario:"22:30",p1:"96",p2:"18",p3:"23"},
+  {fecha:"2026-05-09",loteria:"GEORGIA",horario:"23:30",p1:"05",p2:"69",p3:"79"}
 ];
-
-const STORAGE_KEY='loto2026_v6';
-const APREND_KEY='loto2026_apr_v6';
-const PESOS_KEY='loto2026_pesos_v6';
-let sorteos=[...DATOS_BASE];
-let bitacora=[];
-let pesos={arrastre:1.0,percutor:1.0,montecarlo:1.0,pale:0.7,diaSemana:0.8,tendencia:0.9,ciclo:0.85,mes:0.75};
-let ultimosPronosticos=null;
-
-function guardar(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(sorteos));localStorage.setItem(APREND_KEY,JSON.stringify(bitacora));localStorage.setItem(PESOS_KEY,JSON.stringify(pesos));}catch(e){}}
-function cargar(){
-  try{const s=localStorage.getItem(STORAGE_KEY);if(s){const p=JSON.parse(s);if(p.length>DATOS_BASE.length)sorteos=p;}
-  const pw=localStorage.getItem(PESOS_KEY);if(pw)pesos={...pesos,...JSON.parse(pw)};
-  const ap=localStorage.getItem(APREND_KEY);if(ap)bitacora=JSON.parse(ap);}catch(e){}
-}
-cargar();
-sorteos=sorteos.filter(s=>!(s.p1==='00'&&s.p2==='00'&&s.p3==='00'));
-guardar();
-
+const SK='loto2026_v9',AK='loto2026_apr_v9',PK='loto2026_pw_v9';
 const DIAS=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-function fmt(h){if(!h)return'';const[hh,mm]=h.split(':');let hr=parseInt(hh);const ap=hr>=12?'PM':'AM';if(hr>12)hr-=12;if(hr===0)hr=12;return`${hr}:${mm} ${ap}`;}
-function badgeLot(l){const c={GEORGIA:'badge-ga',FLORIDA:'badge-fl',NY:'badge-ny'};return`<span class="badge ${c[l]||''}">${l}</span>`;}
-function crono(){return[...sorteos].sort((a,b)=>(a.fecha+'T'+a.horario).localeCompare(b.fecha+'T'+b.horario));}
-function dSem(f){return new Date(f+'T12:00:00').getDay();}
-function getUltimaFecha(){const c=crono();return c.length?c[c.length-1].fecha:null;}
+const SD=[
+  {l:'GEORGIA',h:'12:30',lb:'Georgia 12:30 PM'},
+  {l:'FLORIDA',h:'13:30',lb:'Florida 1:30 PM'},
+  {l:'NY',     h:'14:30',lb:'NY 2:30 PM'},
+  {l:'GEORGIA',h:'19:00',lb:'Georgia 7:00 PM'},
+  {l:'FLORIDA',h:'21:50',lb:'Florida 9:50 PM'},
+  {l:'NY',     h:'22:30',lb:'NY 10:30 PM'},
+  {l:'GEORGIA',h:'23:30',lb:'Georgia 11:30 PM'}
+];
+let sorteos=[...DB];
+let bitacora=[];
+let pesos={arr:1.0,dia:1.0,perc:0.8,ciclo:0.9};
+let ultPronos=null;
 
-// ══════════════════════════════════════════
-// CORRECCIÓN UNIVERSAL: ciclo consumido
-// Un número tiene ciclo consumido si su última
-// aparición en 1ª es MÁS RECIENTE que su última
-// en 2ª/3ª. Se aplica en TODAS las pestañas.
-// ══════════════════════════════════════════
-function cicloConsumido(num,todos){
-  const u1=[...todos].reverse().find(s=>s.p1===num);
-  const u23=[...todos].reverse().find(s=>s.p2===num||s.p3===num);
+function sv(){try{localStorage.setItem(SK,JSON.stringify(sorteos));localStorage.setItem(AK,JSON.stringify(bitacora));localStorage.setItem(PK,JSON.stringify(pesos));}catch(e){}}
+function ld(){
+  try{
+    const s=localStorage.getItem(SK);if(s){const p=JSON.parse(s);if(p.length>DB.length)sorteos=p;}
+    const a=localStorage.getItem(AK);if(a)bitacora=JSON.parse(a);
+    const pw=localStorage.getItem(PK);if(pw)pesos={...pesos,...JSON.parse(pw)};
+  }catch(e){}
+  sorteos=sorteos.filter(s=>!(s.p1==='00'&&s.p2==='00'&&s.p3==='00'));
+}
+ld();
+
+function fH(h){if(!h)return'';const[hh,mm]=h.split(':');let hr=parseInt(hh);const ap=hr>=12?'PM':'AM';if(hr>12)hr-=12;if(hr===0)hr=12;return`${hr}:${mm} ${ap}`;}
+function bL(l){const c={GEORGIA:'ga',FLORIDA:'fl',NY:'ny'};return`<span class="lp ${c[l]||''}">${l}</span>`;}
+function crn(){return[...sorteos].sort((a,b)=>(a.fecha+'T'+a.horario).localeCompare(b.fecha+'T'+b.horario));}
+function dS(f){return new Date(f+'T12:00:00').getDay();}
+function getUF(){const c=crn();return c.length?c[c.length-1].fecha:null;}
+
+function getFP(){
+  const t=crn();const uf=getUF();
+  if(!uf)return{fecha:null,jug:new Set(),ds:0,dn:'?'};
+  const del=t.filter(s=>s.fecha===uf);
+  const jug=new Set(del.map(s=>s.loteria+'|'+s.horario.slice(0,4)));
+  if(jug.size>=7){
+    const d=new Date(uf+'T12:00:00');d.setDate(d.getDate()+1);
+    const man=d.toISOString().slice(0,10);
+    const jM=new Set(t.filter(s=>s.fecha===man).map(s=>s.loteria+'|'+s.horario.slice(0,4)));
+    return{fecha:man,jug:jM,ds:d.getDay(),dn:DIAS[d.getDay()]};
+  }
+  return{fecha:uf,jug,ds:new Date(uf+'T12:00:00').getDay(),dn:DIAS[dS(uf)]};
+}
+
+function cicConsum(num,t){
+  const u1=[...t].reverse().find(s=>s.p1===num);
+  const u23=[...t].reverse().find(s=>s.p2===num||s.p3===num);
   if(!u1||!u23)return false;
   return(u1.fecha+'T'+u1.horario)>(u23.fecha+'T'+u23.horario);
 }
-function cayoReciente(num,todos,n){
-  return todos.slice(-n).some(s=>s.p1===num);
-}
 
-// Solo sorteos futuros (no jugados hoy)
-function getFechaPronostico(){
-  const todos=crono();const uf=getUltimaFecha();
-  if(!uf)return{fecha:uf,jugados:new Set(),dsRef:0};
-  const delDia=todos.filter(s=>s.fecha===uf);
-  const jugados=new Set(delDia.map(s=>s.loteria+'|'+s.horario.slice(0,4)));
-  if(jugados.size>=7){
-    const d=new Date(uf+'T12:00:00');d.setDate(d.getDate()+1);
-    const manana=d.toISOString().slice(0,10);
-    const delManana=todos.filter(s=>s.fecha===manana);
-    const jugadosManana=new Set(delManana.map(s=>s.loteria+'|'+s.horario.slice(0,4)));
-    return{fecha:manana,jugados:jugadosManana,dsRef:d.getDay()};
-  }
-  return{fecha:uf,jugados,dsRef:new Date(uf+'T12:00:00').getDay()};
-}
-function jugadosHoy(todos){return getFechaPronostico().jugados;}
-
-const SORTEOS_DIA=[
-  {loteria:'GEORGIA',horario:'12:30',label:'Georgia 12:30 PM'},
-  {loteria:'FLORIDA',horario:'13:30',label:'Florida 1:30 PM'},
-  {loteria:'NY',horario:'14:30',label:'NY 2:30 PM'},
-  {loteria:'GEORGIA',horario:'19:00',label:'Georgia 7:00 PM'},
-  {loteria:'FLORIDA',horario:'21:50',label:'Florida 9:50 PM'},
-  {loteria:'NY',horario:'22:30',label:'NY 10:30 PM'},
-  {loteria:'GEORGIA',horario:'23:30',label:'Georgia 11:30 PM'}
-];
-
-function renderEstadoBar(){
-  const uf=getUltimaFecha();if(!uf){document.getElementById('estadoBar').innerHTML='';return;}
-  const del_dia=sorteos.filter(s=>s.fecha===uf);
-  const comp=SORTEOS_DIA.filter(e=>del_dia.some(s=>s.loteria===e.loteria&&s.horario.startsWith(e.horario.slice(0,4)))).length;
-  const pend=7-comp;const cls=comp===7?'completo':comp>0?'parcial':'pendiente';
-  document.getElementById('estadoBar').innerHTML=`
-    <span class="estado-pill ${cls}">📅 ${uf} · ${DIAS[dSem(uf)]}</span>
-    <span class="estado-pill ${cls}">${comp}/7 sorteos</span>
-    ${pend>0?`<span class="estado-pill pendiente">⏳ Faltan ${pend}</span>`:''}
-    ${comp>=7?`<span class="estado-pill completo">🎯 Pronósticos: ${getFechaPronostico().fecha} · ${DIAS[getFechaPronostico().dsRef]}</span>`:''}`;
-}
-
-// ══════════ ARRASTRES ══════════
-function getArrastres(){
-  const todos=crono();if(!todos.length)return[];
-  const uf=getUltimaFecha();
-  const jh=jugadosHoy(todos);
-  const fechas=[...new Set(todos.map(s=>s.fecha))].sort();
-  const idx=fechas.indexOf(uf);
-  const ventana=fechas.slice(Math.max(0,idx-2),idx+1);
-  const rec=todos.filter(s=>ventana.includes(s.fecha));
-
-  const cands=new Map();
-  rec.forEach(s=>{
-    ['p2','p3'].forEach((p,pi)=>{
-      const v=s[p];if(!v)return;
-      const pos=pi===0?'2ª':'3ª';
-      if(!cands.has(v)||cands.get(v).fecha+cands.get(v).horario<s.fecha+s.horario)
-        cands.set(v,{fecha:s.fecha,horario:s.horario,loteria:s.loteria,pos});
-    });
-  });
-
-  const res=[];
-  cands.forEach((ult,num)=>{
-    if(cicloConsumido(num,todos))return;
-    const casos=[];let t23=0;
-    for(let i=0;i<todos.length;i++){
-      const s=todos[i];
-      const pos=s.p2===num?'2ª':(s.p3===num?'3ª':null);
-      if(!pos)continue;t23++;
-      for(let j=i+1;j<todos.length&&j<=i+14;j++){
-        const sig=todos[j];
-        const dd=(new Date(sig.fecha+'T12:00:00')-new Date(s.fecha+'T12:00:00'))/86400000;
-        if(dd>5)break;
-        if(sig.p1===num){casos.push({desde:s,hasta:sig,saltos:j-i,ruta:`${s.loteria}→${sig.loteria}`});break;}
-      }
-    }
-    if(casos.length<2)return;
-    const tasa=Math.round(casos.length/t23*100);
-    if(tasa<30)return;
-    const destC={};casos.forEach(c=>{const k=c.hasta.loteria+'|'+c.hasta.horario.slice(0,5);destC[k]=(destC[k]||0)+1;});
-    const dTop=Object.entries(destC).sort((a,b)=>b[1]-a[1])[0];
-    const[dL,dH]=dTop[0].split('|');
-    if(jh.has(dL+'|'+dH.slice(0,4)))return;
-    const saltos=casos.map(c=>c.saltos);
-    res.push({num,ult,casos:casos.length,t23,tasa,dL,dH,dN:dTop[1],
-      saltoProm:(saltos.reduce((a,b)=>a+b,0)/saltos.length).toFixed(1),
-      saltoMin:Math.min(...saltos),saltoMax:Math.max(...saltos),
-      impProm:((saltos.reduce((a,b)=>a+b,0)/saltos.length)-1).toFixed(1),
-      evids:casos.slice(-3)});
-  });
-  return res.sort((a,b)=>b.tasa-a.tasa||b.casos-a.casos).slice(0,6);
-}
-
-// ══════════ PERCUTORES ══════════
-function getPercutores(){
-  const todos=crono();if(todos.length<15)return[];
-  const uf=getUltimaFecha();
-  const jh=jugadosHoy(todos);
-  const ult14=todos.slice(-14);
-  const cands=new Set();
-  ult14.forEach(s=>{if(s.p2)cands.add(s.p2);if(s.p3)cands.add(s.p3);});
-
-  const res=[];
-  cands.forEach(Y=>{
-    if(cicloConsumido(Y,todos))return;
-    const ll=new Map();
-    for(let i=0;i<todos.length-1;i++){
-      const s=todos[i];
-      if(s.p2!==Y&&s.p3!==Y)continue;
-      const pos=s.p2===Y?'2ª':'3ª';
-      for(let j=i+1;j<todos.length&&j<=i+7;j++){
-        const sig=todos[j];const X=sig.p1;if(X===Y)continue;
-        if(!ll.has(X))ll.set(X,[]);
-        ll.get(X).push({saltos:j-i,pos,lotO:s.loteria,horaO:s.horario,lotD:sig.loteria,horaD:sig.horario,fecha:s.fecha,dia:dSem(s.fecha)});
+function analizar(num,t){
+  const tr=[];let t23=0;
+  for(let i=0;i<t.length;i++){
+    if(t[i].p2!==num&&t[i].p3!==num)continue;
+    const pos=t[i].p2===num?'2ª':'3ª';
+    t23++;let is=0,i23=0,ac=[];
+    for(let j=i+1;j<t.length&&j<=i+20;j++){
+      const s=t[j];
+      const dd=(new Date(s.fecha+'T12:00:00')-new Date(t[i].fecha+'T12:00:00'))/86400000;
+      if(dd>6)break;
+      if(s.p1===num){
+        tr.push({pos,lotO:t[i].loteria,hO:t[i].horario,fO:t[i].fecha,dO:dS(t[i].fecha),
+                 lotD:s.loteria,hD:s.horario,fD:s.fecha,dD:dS(s.fecha),
+                 saltos:j-i,dias:dd,is,i23,ac:ac.slice(0,3)});
         break;
       }
+      if(s.p2===num||s.p3===num)i23++;else is++;
+      ac.push(s.p1);
     }
-    const totalY=todos.filter(s=>s.p2===Y||s.p3===Y).length;
-    const dests=[];
-    ll.forEach((casos,X)=>{
-      if(casos.length<2)return;
-      const tasa=Math.round(casos.length/totalY*100);if(tasa<8)return;
-      const ld={};casos.forEach(c=>{const k=c.lotD+'|'+c.horaD.slice(0,5);ld[k]=(ld[k]||0)+1;});
-      const ldTop=Object.entries(ld).sort((a,b)=>b[1]-a[1])[0];
-      const[ll2,lh]=ldTop[0].split('|');
-      if(jh.has(ll2+'|'+lh.slice(0,4)))return;
-      const sp=(casos.reduce((a,c)=>a+c.saltos,0)/casos.length).toFixed(1);
-      const impMin=Math.min(...casos.map(c=>c.saltos));
-      const impMax=Math.max(...casos.map(c=>c.saltos));
-      const diasC={};casos.forEach(c=>{diasC[c.dia]=(diasC[c.dia]||0)+1;});
-      const diaTop=Object.entries(diasC).sort((a,b)=>b[1]-a[1])[0];
-      const posC={};casos.forEach(c=>{posC[c.pos]=(posC[c.pos]||0)+1;});
-      const posTop=Object.entries(posC).sort((a,b)=>b[1]-a[1])[0]?.[0]||'?';
-      dests.push({X,veces:casos.length,tasa,ll:ll2,lh,ldN:ldTop[1],sp,impMin,impMax,
-        diaActivo:DIAS[parseInt(diaTop[0])]+'('+diaTop[1]+'x)',posTop,casos:casos.slice(-3)});
-    });
-    if(!dests.length)return;
-    const ap14=ult14.filter(s=>s.p2===Y||s.p3===Y);
-    res.push({Y,dests:dests.sort((a,b)=>b.veces-a.veces).slice(0,3),ap14,totalY});
-  });
-  return res.sort((a,b)=>b.dests[0].veces-a.dests[0].veces);
+  }
+  if(!tr.length)return null;
+  const tasa=Math.round(tr.length/t23*100);
+  const sal=tr.map(x=>x.saltos);
+  const imp=tr.map(x=>x.is);
+  const sp=(sal.reduce((a,b)=>a+b,0)/sal.length).toFixed(1);
+  const ip=(imp.reduce((a,b)=>a+b,0)/imp.length).toFixed(1);
+  const dC={};tr.forEach(x=>{const k=x.lotD+'|'+x.hD.slice(0,5);dC[k]=(dC[k]||0)+1;});
+  const dTop=Object.entries(dC).sort((a,b)=>b[1]-a[1]);
+  const rC={};tr.forEach(x=>{const k=x.lotO+'→'+x.lotD;rC[k]=(rC[k]||0)+1;});
+  const rTop=Object.entries(rC).sort((a,b)=>b[1]-a[1])[0];
+  const dAC={};tr.forEach(x=>{dAC[x.dO]=(dAC[x.dO]||0)+1;});
+  const dAT=Object.entries(dAC).sort((a,b)=>b[1]-a[1])[0];
+  const dDC={};tr.forEach(x=>{dDC[x.dD]=(dDC[x.dD]||0)+1;});
+  const dDT=Object.entries(dDC).sort((a,b)=>b[1]-a[1])[0];
+  const reap=tr.filter(x=>x.i23>0).length;
+  return{tr,t23,tasa,sp,ip,smin:Math.min(...sal),smax:Math.max(...sal),
+         imin:Math.min(...imp),imax:Math.max(...imp),dTop,
+         ruta:rTop?.[0]||'?',diaAct:DIAS[parseInt(dAT?.[0]||0)],
+         diaCae:DIAS[parseInt(dDT?.[0]||0)],reap,pReap:Math.round(reap/tr.length*100)};
 }
 
-// ══════════ SEÑALES DÉBILES ══════════
-function getDebiles(){
-  const todos=crono();if(!todos.length)return[];
-  const uf=getUltimaFecha();
-  const jh=jugadosHoy(todos);
-  const fechas=[...new Set(todos.map(s=>s.fecha))].sort();
-  const idx=fechas.indexOf(uf);
-  const ventana=fechas.slice(Math.max(0,idx-2),idx+1);
-  const rec=todos.filter(s=>ventana.includes(s.fecha));
-  const dsRef=dSem(uf);
+function impasActual(num,t,ult){
+  const idx=t.findIndex(s=>s.fecha===ult.fecha&&s.loteria===ult.lot&&s.horario===ult.h);
+  if(idx<0)return null;
+  let sp=0,reap=0;
+  for(let j=idx+1;j<t.length;j++){
+    if(t[j].p1===num)return{consumido:true};
+    if(t[j].p2===num||t[j].p3===num)reap++;else sp++;
+  }
+  return{consumido:false,sp,reap,rebota:reap>0};
+}
 
-  const cands=new Map();
-  rec.forEach(s=>{
+function calcDia(num,ds,t){
+  const dd=t.filter(s=>dS(s.fecha)===ds);
+  const en=dd.filter(s=>s.p1===num).length;
+  const g=t.filter(s=>s.p1===num).length/t.length;
+  const d=dd.length>0?en/dd.length:0;
+  return{pD:(d*100).toFixed(1),pG:(g*100).toFixed(1),v:(g>0?d/g:0).toFixed(2)};
+}
+
+function calcPerc(num,t){
+  let v=0;for(let i=1;i<t.length;i++){if(t[i].p1!==num)continue;const p=t[i-1];if(p.p2||p.p3)v++;}
+  return v;
+}
+
+function getCandidatos(){
+  const t=crn();const fp=getFP();const uf=getUF();
+  if(!uf)return{cands:[],fp};
+  const fechas=[...new Set(t.map(s=>s.fecha))].sort();
+  const idx=fechas.indexOf(uf);
+  const vent=fechas.slice(Math.max(0,idx-2),idx+1);
+  const cm=new Map();
+  t.filter(s=>vent.includes(s.fecha)).forEach(s=>{
     ['p2','p3'].forEach((p,pi)=>{
       const v=s[p];if(!v)return;
       const pos=pi===0?'2ª':'3ª';
-      if(!cands.has(v)||cands.get(v).fecha+cands.get(v).horario<s.fecha+s.horario)
-        cands.set(v,{fecha:s.fecha,horario:s.horario,loteria:s.loteria,pos});
+      if(!cm.has(v)||cm.get(v).fecha+cm.get(v).h<s.fecha+s.horario)
+        cm.set(v,{fecha:s.fecha,h:s.horario,lot:s.loteria,pos});
     });
   });
+  const res=[];
+  cm.forEach((ult,num)=>{
+    if(cicConsum(num,t))return;
+    const an=analizar(num,t);
+    if(!an||an.t23<5||an.tr.length<2)return;
+    const imp=impasActual(num,t,ult);
+    if(imp&&imp.consumido)return;
+    const jugar=an.dTop.filter(([k])=>{const[l,h]=k.split('|');return!fp.jug.has(l+'|'+h.slice(0,4));});
+    const noJugar=an.dTop.filter(([k])=>{const[l,h]=k.split('|');return fp.jug.has(l+'|'+h.slice(0,4));});
+    const dia=calcDia(num,fp.ds,t);
+    const perc=calcPerc(num,t);
+    const sArr=an.tasa*2.2*pesos.arr;
+    const sDia=parseFloat(dia.v)*9*pesos.dia;
+    const sPerc=Math.min(perc/60*18,18)*pesos.perc;
+    const sJ=jugar.length>0?10:0;
+    const pen=an.pReap>40?-12:an.pReap>25?-6:0;
+    const score=sArr+sDia+sPerc+sJ+pen;
+    let niv='C';
+    if(an.tasa>=25&&jugar.length>0&&an.pReap<=25)niv='A';
+    else if(an.tasa>=18&&jugar.length>0)niv='B';
+    res.push({num,ult,an,imp,jugar,noJugar,tot:an.dTop.reduce((a,[,v])=>a+v,0),
+              dia,perc,niv,score:score.toFixed(1)});
+  });
+  res.sort((a,b)=>parseFloat(b.score)-parseFloat(a.score));
+  return{cands:res.slice(0,4),fp};
+}
 
-  const señales=[];
-  cands.forEach((ult,num)=>{
-    if(cicloConsumido(num,todos))return;
-    const casos=[];let t23=0;
-    for(let i=0;i<todos.length;i++){
-      const s=todos[i];
-      const pos=s.p2===num?'2ª':(s.p3===num?'3ª':null);
-      if(!pos)continue;t23++;
-      for(let j=i+1;j<todos.length&&j<=i+14;j++){
-        const sig=todos[j];
-        const dd=(new Date(sig.fecha+'T12:00:00')-new Date(s.fecha+'T12:00:00'))/86400000;
-        if(dd>5)break;
-        if(sig.p1===num){casos.push({desde:s,hasta:sig,saltos:j-i});break;}
-      }
+// ── QUÉ HAGO HOY ──
+function renderHoy(){
+  const{cands,fp}=getCandidatos();
+  document.getElementById('hoyTit').textContent=`💡 ¿QUÉ HAGO HOY? — ${fp.dn||'?'} ${fp.fecha||''}`;
+  if(!cands.length){
+    document.getElementById('cHoy').innerHTML=`<div class="njtotal">
+      <h2>🚫 NO JUGAR HOY</h2>
+      <p>Sin señales activas con evidencia suficiente.<br>
+      Actualiza los sorteos del día para recalcular.</p></div>`;
+    ultPronos=null;return;
+  }
+  ultPronos=cands.map(c=>({num:c.num,niv:c.niv,
+    destLot:c.jugar.length>0?c.jugar[0][0].split('|')[0]:null,fecha:fp.fecha}));
+
+  let html='';
+  cands.forEach((c,idx)=>{
+    const imp=c.imp;
+    const tot=c.tot||1;
+    // Decidir acción
+    let accion,tipo,icono;
+    const impasPct=imp?parseFloat(c.an.ip)>0?imp.sp/parseFloat(c.an.ip):0:0;
+    if(c.jugar.length===0){
+      accion='esperar'; tipo='esperar'; icono='⏳';
+    } else if(c.niv==='A'&&!imp?.rebota){
+      accion='jugar'; tipo='jugar'; icono='✅';
+    } else if(c.niv==='B'&&impasPct>=0.7){
+      accion='jugar'; tipo='jugar'; icono='✅';
+    } else if(imp&&imp.sp<parseFloat(c.an.ip)*0.5){
+      accion='esperar'; tipo='esperar'; icono='⏳';
+    } else if(imp?.rebota){
+      accion='precaución'; tipo='esperar'; icono='⚠️';
+    } else {
+      accion='jugar'; tipo='jugar'; icono='✅';
     }
-    if(!casos.length)return;
-    const tasa=Math.round(casos.length/t23*100);
-    const destC={};casos.forEach(c=>{const k=c.hasta.loteria+'|'+c.hasta.horario.slice(0,5);destC[k]=(destC[k]||0)+1;});
-    const dTop=Object.entries(destC).sort((a,b)=>b[1]-a[1])[0];
-    const[dL,dH]=dTop[0].split('|');
-    if(jh.has(dL+'|'+dH.slice(0,4)))return;
-    const enDia=todos.filter(s=>s.p1===num&&dSem(s.fecha)===dsRef).length;
-    const totDia=todos.filter(s=>dSem(s.fecha)===dsRef).length;
-    const freqDia=totDia>0?(enDia/totDia*100).toFixed(1):0;
-    const percP={};
-    todos.forEach((s,i)=>{if(s.p1!==num||i===0)return;[todos[i-1].p2,todos[i-1].p3].forEach(x=>{if(x)percP[x]=(percP[x]||0)+1;});});
-    const percTop=Object.entries(percP).sort((a,b)=>b[1]-a[1]).slice(0,2);
-    const saltos=casos.map(c=>c.saltos);
-    const score=tasa*2+parseFloat(freqDia)+casos.length;
-    señales.push({num,ult,casos:casos.length,t23,tasa,dL,dH,dN:dTop[1],
-      saltoProm:(saltos.reduce((a,b)=>a+b,0)/saltos.length).toFixed(1),
-      saltoMin:Math.min(...saltos),saltoMax:Math.max(...saltos),
-      freqDia,percTop,score,evids:casos.slice(-3)});
+
+    html+=`<div class="qhh ${tipo}">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;">
+        <span style="font-size:1.5rem;">${icono}</span>
+        <span class="qhh-num ${tipo==='jugar'?'j':'e'}">${c.num}</span>
+        <div>
+          <div class="qhh-main" style="color:${tipo==='jugar'?'var(--gr)':tipo==='esperar'?'var(--or)':'var(--rd)'};">
+            ${tipo==='jugar'?'JUGAR':tipo==='esperar'?'ESPERAR — aún en tránsito':'PRECAUCIÓN — rebotando'}
+          </div>
+          <div style="font-size:.75rem;color:var(--mu);">
+            Última: ${c.ult.pos} · ${c.ult.lot} ${fH(c.ult.h)} · ${c.ult.fecha}
+          </div>
+        </div>
+      </div>
+
+      ${tipo==='jugar'&&c.jugar.length>0?`
+      <div style="font-size:.76rem;color:var(--gr);font-weight:700;margin-bottom:5px;">🎯 Jugar en:</div>
+      <div class="qhh-dest">
+        ${c.jugar.slice(0,2).map(([k,v])=>{
+          const[l,h]=k.split('|');const pct=Math.round(v/tot*100);
+          const lc={GEORGIA:'ga',FLORIDA:'fl',NY:'ny'};
+          return`<span class="lp ${lc[l]||''}" style="font-size:.82rem;">${l} ${fH(h)} <span style="opacity:.7;">(${v}x · ${pct}%)</span></span>`;
+        }).join('')}
+      </div>`:''}
+
+      ${tipo==='esperar'&&imp?`
+      <div style="font-size:.78rem;color:var(--or);margin-top:4px;">
+        ⏸ Lleva ${imp.sp} sorteos de silencio — prom histórico: ${c.an.ip} sorteos
+        ${imp.rebota?'<br>⚠️ Reapareció en 2ª/3ª — puede tardar más':''}
+        ${imp.sp>=parseFloat(c.an.ip)?'<br>🟢 Ya está en zona de activación':''}
+      </div>`:''}
+
+      ${c.noJugar.length>0?`
+      <div class="nojugar-row">
+        <span style="font-size:.68rem;color:var(--rd);">🚫 No jugar:</span>
+        ${c.noJugar.slice(0,3).map(([k])=>{const[l,h]=k.split('|');return`<span class="njlp">${l} ${fH(h)}</span>`;}).join('')}
+      </div>`:''}
+
+      ${idx<cands.length-1?'<div class="divider"></div>':''}
+    </div>`;
   });
-  return señales.sort((a,b)=>b.score-a.score).slice(0,2);
-}
 
-// ══════════ DOMINANTES ══════════
-function getDominantes(){
-  const todos=crono();if(!todos.length)return{};
-  const uf=getUltimaFecha();
-  const jh=jugadosHoy(todos);
-  const _fp2=getFechaPronostico();const dsRef=_fp2.dsRef;
-  const HLOT={GEORGIA:['12:30','19:00','23:30'],FLORIDA:['13:30','21:50'],NY:['14:30','22:30']};
-  const arrNums=new Set(getArrastres().map(a=>a.num));
-  const percNums=new Set(getPercutores().flatMap(p=>[p.Y,...p.dests.map(d=>d.X)]));
-  const señalExtra=new Set([...arrNums,...percNums]);
-  const porLot={};
-
-  Object.entries(HLOT).forEach(([lot,horas])=>{
-    const subLot=todos.filter(s=>s.loteria===lot);
-    const fLot={};subLot.forEach(s=>{fLot[s.p1]=(fLot[s.p1]||0)+1;});
-    const topLot=Object.entries(fLot).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([n])=>n);
-
-    horas.forEach(hora=>{
-      if(jh.has(lot+'|'+hora.slice(0,4)))return;
-      const subH=todos.filter(s=>s.loteria===lot&&s.horario.startsWith(hora.slice(0,4)));
-      if(subH.length<20)return;
-      const fH={};subH.forEach(s=>{fH[s.p1]=(fH[s.p1]||0)+1;});
-      const topH=Object.entries(fH).sort((a,b)=>b[1]-a[1]).slice(0,6);
-      const salida=[];
-
-      topH.forEach(([num,cnt])=>{
-        if(cnt<3)return;
-        if(cicloConsumido(num,todos)&&!señalExtra.has(num))return;
-        const posH=subH.map((s,i)=>s.p1===num?i:-1).filter(i=>i>=0);
-        const sinSalir=posH.length>0?subH.length-1-posH[posH.length-1]:subH.length;
-        const ciclo=posH.length>=2?(posH[posH.length-1]-posH[0])/(posH.length-1):subH.length/cnt;
-        const cicloPct=sinSalir/Math.max(ciclo,1);
-        if(cicloPct<0.4)return;
-        if(cicloPct>1.5&&!señalExtra.has(num))return;
-        const pct=cnt/subH.length*100;
-        if(pct<2.0&&!señalExtra.has(num))return;
-        const subHDia=subH.filter(s=>dSem(s.fecha)===dsRef);
-        const enDia=subHDia.filter(s=>s.p1===num).length;
-        const freqDia=subHDia.length>0?(enDia/subHDia.length*100).toFixed(1):0;
-        const percP={};
-        posH.forEach(i=>{if(i>0){const p=subH[i-1];[p.p2,p.p3].forEach(x=>{if(x)percP[x]=(percP[x]||0)+1;});}});
-        const percTop=Object.entries(percP).sort((a,b)=>b[1]-a[1]).slice(0,2);
-        const actP={};
-        posH.forEach(i=>{if(i>0){const k=subH[i-1].loteria+'|'+subH[i-1].p1;actP[k]=(actP[k]||0)+1;}});
-        const actTop=Object.entries(actP).sort((a,b)=>b[1]-a[1]).slice(0,1);
-        const impas=posH.length>=2?((posH[posH.length-1]-posH[0])/(posH.length-1)).toFixed(1):'?';
-        const topLotOk=topLot.includes(num);
-        const seCruz=señalExtra.has(num);
-        const score=pct*3+parseFloat(freqDia)*2+cicloPct*20+(topLotOk?15:0)+(seCruz?25:0);
-        salida.push({num,cnt,pct:pct.toFixed(1),sinSalir,ciclo:ciclo.toFixed(1),
-          cicloPct:cicloPct.toFixed(2),freqDia,percTop,actTop,impas,
-          topLotOk,seCruz,score:score.toFixed(1),total:subH.length,hora,lot});
-      });
-
-      salida.sort((a,b)=>b.score-a.score);
-      const top2=salida.slice(0,2);
-      if(!top2.length)return;
-      if(!porLot[lot])porLot[lot]=[];
-      top2.forEach(r=>porLot[lot].push(r));
-    });
+  // Resumen global al final
+  const paraJugar=cands.filter(c=>{
+    const imp=c.imp;const impasPct=imp?imp.sp/Math.max(parseFloat(c.an.ip),1):0;
+    return c.jugar.length>0&&(c.niv==='A'||(c.niv==='B'&&impasPct>=0.7));
   });
-  return porLot;
+  const enTransito=cands.filter(c=>c.jugar.length>0&&!paraJugar.includes(c));
+
+  html+=`<div style="background:rgba(0,10,25,.6);border:1px solid var(--b);border-radius:12px;padding:14px;margin-top:4px;">
+    <div style="font-size:.72rem;color:var(--mu);margin-bottom:8px;font-family:'Share Tech Mono',monospace;">📋 RESUMEN DEL DÍA</div>
+    ${paraJugar.length>0?`<div style="color:var(--gr);font-size:.82rem;margin-bottom:4px;">✅ Para jugar: ${paraJugar.map(c=>`<strong>${c.num}</strong>`).join(', ')}</div>`:''}
+    ${enTransito.length>0?`<div style="color:var(--or);font-size:.82rem;margin-bottom:4px;">⏳ En tránsito (esperar): ${enTransito.map(c=>`<strong>${c.num}</strong>`).join(', ')}</div>`:''}
+    ${paraJugar.length===0&&enTransito.length===0?`<div style="color:var(--rd);font-size:.82rem;">🚫 Hoy no hay señal clara — mejor no jugar</div>`:''}
+  </div>`;
+
+  document.getElementById('cHoy').innerHTML=html;
 }
 
-// ══════════ PALÉ ══════════
-function getPale(){
-  const arrs=getArrastres().map(a=>a.num);
-  const percs=getPercutores().flatMap(p=>[p.Y,...p.dests.map(d=>d.X)]);
-  const act=new Set([...arrs,...percs]);if(!act.size)return[];
-  const pc={};
-  sorteos.forEach(s=>{
-    [[s.p1,s.p2],[s.p1,s.p3],[s.p2,s.p3]].forEach(par=>{
-      if(!par[0]||!par[1])return;
-      if(act.has(par[0])||act.has(par[1])){
-        const k=[...par].sort().join('-');
-        if(!pc[k])pc[k]={count:0,loterias:{}};
-        pc[k].count++;
-        const lk=s.loteria+'|'+s.horario.slice(0,5);
-        pc[k].loterias[lk]=(pc[k].loterias[lk]||0)+1;
-      }
-    });
-  });
-  return Object.entries(pc).filter(([_,d])=>d.count>=4)
-    .sort((a,b)=>b[1].count-a[1].count).slice(0,8)
-    .map(([key,data])=>{
-      const ls=Object.entries(data.loterias).sort((a,b)=>b[1]-a[1]);
-      const[lLot,lHora]=(ls[0]?.[0]||'?|?').split('|');
-      return{pareja:key,frec:data.count,lot:lLot,hora:lHora};
-    });
-}
-
-// ══════════ SCORE MULTIFACTORIAL ══════════
-function scoreMF(num){
-  const todos=crono();const uf=getUltimaFecha();if(!uf)return{score:0};
-  const _fp3=getFechaPronostico();const dsRef=_fp3.dsRef;const mesRef=new Date(uf+'T12:00:00').getMonth();
-  const enPri=todos.filter(s=>s.p1===num).length;
-  const freqG=enPri/todos.length;
-  const enDia=todos.filter(s=>s.p1===num&&dSem(s.fecha)===dsRef).length;
-  const totDia=todos.filter(s=>dSem(s.fecha)===dsRef).length;
-  const freqD=totDia>0?enDia/totDia:freqG;
-  const enMes=todos.filter(s=>s.p1===num&&new Date(s.fecha+'T12:00:00').getMonth()===mesRef).length;
-  const totMes=todos.filter(s=>new Date(s.fecha+'T12:00:00').getMonth()===mesRef).length;
-  const freqM=totMes>0?enMes/totMes:freqG;
-  const ult30=todos.slice(-30);
-  const enRec=ult30.filter(s=>s.p1===num).length;
-  const tend=enRec/30/Math.max(freqG,0.001);
-  const pos=todos.map((s,i)=>s.p1===num?i:-1).filter(i=>i>=0);
-  let cicloProm=999,sinSalir=0;
-  if(pos.length>=2){const diffs=[];for(let i=1;i<pos.length;i++)diffs.push(pos[i]-pos[i-1]);cicloProm=diffs.reduce((a,b)=>a+b,0)/diffs.length;sinSalir=todos.length-1-pos[pos.length-1];}
-  const cicloSc=cicloProm>0?Math.min(sinSalir/cicloProm,2.0):0;
-  const porLH={};todos.filter(s=>s.p1===num).forEach(s=>{const k=s.loteria+'|'+s.horario.slice(0,5);porLH[k]=(porLH[k]||0)+1;});
-  const lhTop=Object.entries(porLH).sort((a,b)=>b[1]-a[1]).slice(0,3);
-  const score=freqD*100*pesos.diaSemana+freqM*100*pesos.mes+tend*15*pesos.tendencia+cicloSc*20*pesos.ciclo;
-  return{score,enPri,freqD,freqM,tend:tend.toFixed(2),cicloProm:cicloProm.toFixed(1),sinSalir,lhTop};
-}
-
-// ══════════ MONTE CARLO ══════════
-function getMonteCarlo(){
-  const arrs=getArrastres();const percs=getPercutores().flatMap(p=>p.dests.map(d=>d.X));
-  const cands=[...new Set([...arrs.map(a=>a.num),...percs])];
-  if(!cands.length)return{res:[],razon:'Sin candidatos activos'};
-  const scored=cands.map(num=>{const mf=scoreMF(num);return{num,score:mf.score,mf};}).filter(x=>x.score>0);
-  const _arrN=new Set(getArrastres().map(a=>a.num));
-  const _percN=new Set(getPercutores().flatMap(p=>[p.Y,...p.dests.map(d=>d.X)]));
-  const _td=crono();
-  const scored2=scored.filter(s=>cayoReciente(s.num,_td,3)?(_arrN.has(s.num)||_percN.has(s.num)):true);
-  if(!scored2.length)return{res:[],razon:'Sin candidatos válidos'};
-  const N=20000,conteos={};
-  const totSc=scored2.reduce((a,b)=>a+b.score,0);
-  const cum=[];let c=0;scored2.forEach(s=>{c+=s.score/totSc;cum.push({num:s.num,cum:c,mf:s.mf});});
-  for(let i=0;i<N;i++){const r=Math.random();const w=cum.find(x=>x.cum>=r)||cum[cum.length-1];conteos[w.num]=(conteos[w.num]||0)+1;}
-  const jh=jugadosHoy(crono());
-  const res=Object.entries(conteos).map(([num,ct])=>{
-    const mf=scored2.find(s=>s.num===num)?.mf||{};
-    const prob=(ct/N*100).toFixed(2);
-    const lhTop=mf.lhTop||[];
-    const noJugar=lhTop.filter(([k])=>{const[l,h]=k.split('|');return jh.has(l+'|'+h.slice(0,4));}).map(([k])=>{const[l,h]=k.split('|');return{lot:l,hora:h};});
-    const jugar=lhTop.filter(([k])=>{const[l,h]=k.split('|');return!jh.has(l+'|'+h.slice(0,4));});
-    return{num,prob,mf,jugar,noJugar};
-  }).sort((a,b)=>parseFloat(b.prob)-parseFloat(a.prob)).slice(0,2);
-  return{res};
-}
-
-// ══════════ RESPALDO ══════════
-function getRespaldo(){
-  const arrs=getArrastres();const percs=getPercutores();const pales=getPale();const mc=getMonteCarlo();
-  const map={};
-  arrs.forEach(a=>{if(!map[a.num])map[a.num]={num:a.num,scores:{},razones:[],noJugar:[]};map[a.num].scores.arrastre=a.tasa*pesos.arrastre;map[a.num].razones.push(`ARR:${a.tasa}%(${a.casos}ev)`);map[a.num].destArr={lot:a.dL,hora:a.dH};});
-  percs.forEach(p=>p.dests.forEach(d=>{if(!map[d.X])map[d.X]={num:d.X,scores:{},razones:[],noJugar:[]};map[d.X].scores.percutor=(d.tasa*pesos.percutor)+(d.veces*2);map[d.X].razones.push(`PERC:${p.Y}→${d.X} ${d.veces}x`);if(!map[d.X].destPerc)map[d.X].destPerc={lot:d.ll,hora:d.lh};}));
-  if(mc.res)mc.res.forEach(m=>{if(!map[m.num])map[m.num]={num:m.num,scores:{},razones:[],noJugar:[]};map[m.num].scores.montecarlo=parseFloat(m.prob)*pesos.montecarlo;map[m.num].razones.push(`MC:${m.prob}%`);map[m.num].noJugar=m.noJugar||[];map[m.num].jugar=m.jugar||[];});
-  pales.forEach(p=>{const[n1,n2]=p.pareja.split('-');[n1,n2].forEach(n=>{if(!map[n])map[n]={num:n,scores:{},razones:[],noJugar:[]};map[n].scores.pale=(p.frec/10)*pesos.pale;map[n].razones.push(`PALÉ:${p.pareja} ${p.frec}x`);});});
-  Object.values(map).forEach(c=>{const mf=scoreMF(c.num);c.scores.diaSem=mf.freqD*100*pesos.diaSemana;c.scores.tend=parseFloat(mf.tend)*10*pesos.tendencia;c.scores.ciclo=parseFloat((mf.sinSalir/Math.max(parseFloat(mf.cicloProm),1)).toFixed(2))*20*pesos.ciclo;c.mf=mf;});
-  const cands=Object.values(map).map(c=>{const tot=Object.values(c.scores).reduce((a,b)=>a+b,0);const nF=Object.keys(c.scores).length;const bon=nF>=4?1.35:nF>=3?1.2:nF>=2?1.1:1.0;return{...c,scoreTotal:tot*bon,nF};});
-  cands.sort((a,b)=>b.scoreTotal-a.scoreTotal);
+// ── PRONÓSTICOS DETALLADOS ──
+function renderProno(){
+  const{cands,fp}=getCandidatos();
+  document.getElementById('pronoTit').textContent=`🎯 PRONÓSTICOS — ${fp.dn||'?'} ${fp.fecha||''}`;
+  if(!cands.length){
+    document.getElementById('cProno').innerHTML=`<div class="njtotal"><h2>🚫 NO JUGAR HOY</h2><p>Sin candidatos con evidencia suficiente.</p></div>`;
+    return;
+  }
+  let html='';
   cands.forEach(c=>{
-    const lh=c.mf?.lhTop||[];
-    const jh=jugadosHoy(crono());
-    const jugar=lh.filter(([k])=>{const[l,h]=k.split('|');return!jh.has(l+'|'+h.slice(0,4));});
-    if(jugar.length>0){const[k,v]=jugar[0];const[l,h]=k.split('|');c.destFinal={lot:l,hora:h,veces:v};}
-    else if(c.destArr)c.destFinal=c.destArr;
-    else if(c.destPerc)c.destFinal=c.destPerc;
-    else c.destFinal={lot:'?',hora:'?',veces:0};
+    const N=c.niv;
+    const imp=c.imp;
+    const tot=c.tot||1;
+    const impasPct=imp&&parseFloat(c.an.ip)>0?imp.sp/parseFloat(c.an.ip):0;
+    let impFase='',impCls='viaje';
+    if(imp&&!imp.consumido){
+      if(impasPct<0.4){impFase=`🟡 Inicio del impás — ${imp.sp} sorteos (esperar, prom ${c.an.ip})`;impCls='inicio';}
+      else if(impasPct<0.8){impFase=`🟠 Viajando — ${imp.sp} sort. de ${c.an.ip} prom`;impCls='viaje';}
+      else{impFase=`🟢 Zona de activación — ${imp.sp} sort. (${Math.round(impasPct*100)}% del ciclo completado)`;impCls='cerca';}
+      if(imp.rebota)impFase+=`<br><span style="color:var(--or);">⚠️ Reapareció en 2ª/3ª ${imp.reap}x — puede demorar más</span>`;
+    }
+
+    html+=`<div class="pc ${N}">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px;">
+        <span class="nd ${N}">${c.num}</span>
+        <div>
+          <span class="nlbl ${N}">${N==='A'?'🔥 FUERTE':N==='B'?'⚡ MEDIA':'📊 DÉBIL'}</span>
+          <div style="margin-top:5px;font-size:.7rem;color:var(--mu);">
+            Última: ${c.ult.pos} · ${bL(c.ult.lot)} ${fH(c.ult.h)} · ${c.ult.fecha}
+          </div>
+        </div>
+      </div>
+      <div class="sr">
+        <span class="st go">📊 Arrastre ${c.an.tasa}% — ${c.an.tr.length}/${c.an.t23} casos</span>
+        <span class="st ${parseFloat(c.dia.v)>=2?'gr':parseFloat(c.dia.v)>=1.2?'or':''}">📅 ${fp.dn} ${c.dia.pD}% (${c.dia.v}x prom)</span>
+        <span class="st pu">🧲 Percutado ${c.perc}x</span>
+        <span class="st">⏱ Salto: prom ${c.an.sp} (${c.an.smin}-${c.an.smax} sort.)</span>
+        <span class="st ${c.an.pReap>40?'rd':c.an.pReap>25?'or':'gr'}">🔁 Rebote ${c.an.pReap}% ${c.an.pReap>40?'⚠️ riesgo':''}</span>
+        <span class="st or">📅 Se activa ${c.an.diaAct} → cae ${c.an.diaCae}</span>
+        <span class="st">🛣 Ruta: ${c.an.ruta}</span>
+      </div>
+      ${impFase?`<div class="imbox ${impCls}">${impFase}</div>`:''}
+      ${c.jugar.length>0?`<div class="jbox">
+        <div class="jtit">🎯 JUGAR EN — ordenado por evidencia:</div>
+        ${c.jugar.slice(0,3).map(([k,v])=>{
+          const[l,h]=k.split('|');const pct=Math.round(v/tot*100);
+          return`<div class="jrow">${bL(l)} <strong style="font-family:'Share Tech Mono',monospace;">${fH(h)}</strong>
+            <span style="color:var(--gr);font-size:.68rem;">${v}x comprobado · ${pct}% de los tránsitos</span></div>`;
+        }).join('')}
+      </div>`:`<div class="njbox"><div class="njtit">🚫 Todos los horarios ya se jugaron hoy</div></div>`}
+      ${c.noJugar.length>0?`<div class="njbox">
+        <div class="njtit">🚫 NO JUGAR EN:</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">${c.noJugar.slice(0,3).map(([k])=>{const[l,h]=k.split('|');return`${bL(l)}<span style="font-family:'Share Tech Mono',monospace;font-size:.7rem;"> ${fH(h)}</span>`;}).join('')}</div>
+      </div>`:''}
+      <div class="divider"></div>
+      <div class="evl">
+        <span style="color:var(--mu);font-size:.63rem;display:block;margin-bottom:3px;">📋 Últimas evidencias comprobadas:</span>
+        ${c.an.tr.slice(-3).map(e=>`<span>📌 ${e.fO} ${bL(e.lotO)} ${e.pos} → ${e.saltos}sort (${e.is}impás) → ${bL(e.lotD)} ${fH(e.hD)} ${DIAS[e.dD]}</span>`).join('')}
+      </div>
+    </div>`;
   });
-  return cands.slice(0,2);
+  document.getElementById('cProno').innerHTML=html;
 }
 
-// ══════════ APRENDIZAJE ══════════
+// ── HISTORIAL ──
+function renderHist(){
+  const fLv=document.getElementById('fL')?.value||'';
+  const fFv=document.getElementById('fF')?.value||'';
+  let d=[...sorteos].sort((a,b)=>(b.fecha+'T'+b.horario).localeCompare(a.fecha+'T'+a.horario));
+  if(fLv)d=d.filter(s=>s.loteria===fLv);
+  if(fFv)d=d.filter(s=>s.fecha===fFv);
+  const lc={GEORGIA:'ga',FLORIDA:'fl',NY:'ny'};
+  document.getElementById('hBody').innerHTML=d.slice(0,500).map(s=>`<tr>
+    <td>${s.fecha}</td><td>${bL(s.loteria)}</td>
+    <td style="font-family:'Share Tech Mono',monospace;">${fH(s.horario)}</td>
+    <td><strong style="color:var(--go);font-family:'Share Tech Mono',monospace;">${s.p1}</strong></td>
+    <td style="font-family:'Share Tech Mono',monospace;">${s.p2}</td>
+    <td style="font-family:'Share Tech Mono',monospace;">${s.p3}</td>
+  </tr>`).join('')||'<tr><td colspan="6" style="text-align:center;color:var(--mu)">Sin resultados</td></tr>';
+}
+
+// ── ESTADO BAR ──
+function renderSbar(){
+  const uf=getUF();if(!uf){document.getElementById('sbar').innerHTML='';return;}
+  const del=sorteos.filter(s=>s.fecha===uf);
+  const comp=SD.filter(e=>del.some(s=>s.loteria===e.l&&s.horario.startsWith(e.h.slice(0,4)))).length;
+  const pend=7-comp;const cls=comp===7?'ok':comp>0?'par':'pend';
+  const fp=getFP();
+  document.getElementById('sbar').innerHTML=
+    `<span class="pill ${cls}">📅 ${uf} · ${DIAS[dS(uf)]}</span>`+
+    `<span class="pill ${cls}">${comp}/7</span>`+
+    (pend>0?`<span class="pill pend">⏳ ${pend} pendientes</span>`:'')+
+    (comp>=7?`<span class="pill ok">🎯 ${fp.fecha} · ${fp.dn}</span>`:'');
+}
+
+// ── APRENDIZAJE ──
 function evaluar(){
-  if(!ultimosPronosticos||!ultimosPronosticos.length)return;
-  const uf=getUltimaFecha();const todos=crono();
-  ultimosPronosticos.forEach(p=>{
-    const rec=todos.filter(s=>s.fecha>=p.fecha&&s.fecha<=uf);
+  if(!ultPronos||!ultPronos.length)return;
+  const t=crn();const uf=getUF();
+  ultPronos.forEach(p=>{
+    const rec=t.filter(s=>s.fecha>=p.fecha&&s.fecha<=uf);
     const acerto=rec.some(s=>s.p1===p.num);
-    const acertoLot=acerto&&rec.filter(s=>s.p1===p.num).some(s=>s.loteria===p.destLot);
-    let tipo,codigo,msg;
-    if(acerto&&acertoLot){tipo='acierto';codigo=`ACK-${p.num}-${p.destLot?.slice(0,2)||'?'}-OK`;msg=`✅ ${p.num} acertó en ${p.destLot}`;if(p.factor==='arrastre')pesos.arrastre=Math.min(pesos.arrastre*1.05,2.0);if(p.factor==='percutor')pesos.percutor=Math.min(pesos.percutor*1.05,2.0);}
-    else if(acerto){tipo='acierto';codigo=`ACK-${p.num}-LOTERIA-MISS`;msg=`⚠️ ${p.num} acertó número, lotería distinta`;}
-    else{tipo='fallo';codigo=`MISS-${p.num}-${p.destLot?.slice(0,2)||'?'}`;msg=`❌ ${p.num} no cayó en 1ª. Factor:${p.factor||'multi'}`;if(p.factor==='arrastre')pesos.arrastre=Math.max(pesos.arrastre*0.96,0.4);if(p.factor==='percutor')pesos.percutor=Math.max(pesos.percutor*0.96,0.4);}
-    bitacora.unshift({fecha:uf,tipo,codigo,msg,pesos_post:{...pesos},timestamp:Date.now()});
+    const acLot=acerto&&p.destLot&&rec.filter(s=>s.p1===p.num).some(s=>s.loteria===p.destLot);
+    let tipo,cod,msg;
+    if(acerto&&acLot){tipo='ok';cod=`✅ ${p.num} acertó lotería`;msg=`${p.num} cayó en 1ª en ${p.destLot} — pronóstico correcto.`;pesos.arr=Math.min(pesos.arr*1.04,2.0);}
+    else if(acerto){tipo='ok';cod=`⚠️ ${p.num} acertó número`;msg=`${p.num} cayó en 1ª pero en otra lotería.`;pesos.dia=Math.min(pesos.dia*1.02,2.0);}
+    else{tipo='fail';cod=`❌ ${p.num} falló`;msg=`${p.num} no cayó en 1ª. Nivel ${p.niv}.`;pesos.arr=Math.max(pesos.arr*0.97,0.5);}
+    bitacora.unshift({fecha:uf,tipo,cod,msg,pesos:{...pesos},ts:Date.now()});
   });
-  // Detectar patrón: mismo número en 1ª dos sorteos seguidos
-  const todos2=crono();
-  if(todos2.length>=2){const u=todos2.slice(-2);if(u[0].p1===u[1].p1){const num=u[0].p1;bitacora.unshift({fecha:uf,tipo:'patron',codigo:`PAT-CONSEC-${num}`,msg:`🔍 PATRÓN: ${num} en 1ª dos sorteos seguidos (${u[0].loteria}→${u[1].loteria})`,pesos_post:{...pesos},timestamp:Date.now()});}}
+  const t2=crn();
+  if(t2.length>=2){const u=t2.slice(-2);if(u[0].p1===u[1].p1)bitacora.unshift({fecha:uf,tipo:'pat',cod:`🔍 ${u[0].p1} consecutivo`,msg:`${u[0].p1} en 1ª dos sorteos seguidos (${u[0].loteria}→${u[1].loteria}).`,pesos:{...pesos},ts:Date.now()});}
   if(bitacora.length>150)bitacora=bitacora.slice(0,150);
 }
 
-// ══════════ RENDERS ══════════
-function renderArrastres(){
-  const arrs=getArrastres();
-  if(!arrs.length){document.getElementById('contArrastre').innerHTML='<div class="alert-box">⛔ Sin arrastres activos con evidencia suficiente (mín 30%, 2 casos, ciclo no consumido)</div>';return;}
-  document.getElementById('contArrastre').innerHTML=arrs.map(a=>`
-    <div class="signal-card" style="border-color:var(--orange);">
-      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-        <span class="num-big">${a.num}</span>
-        <span class="ia-score">📊 ${a.tasa}% (${a.casos}/${a.t23} casos)</span>
-      </div>
-      <div class="info-row" style="margin-top:8px;">
-        <span class="tag orange">Última: ${a.ult.pos} · ${badgeLot(a.ult.loteria)} ${fmt(a.ult.horario)} · ${a.ult.fecha}</span>
-      </div>
-      <div class="info-row" style="margin-top:5px;">
-        <span class="tag gold">🎯 Jugar: ${badgeLot(a.dL)} ${fmt(a.dH)} (${a.dN}x)</span>
-        <span class="tag">⏱ Saltos: prom ${a.saltoProm} (${a.saltoMin}-${a.saltoMax})</span>
-        <span class="tag">💤 Impás: ${a.impProm}</span>
-      </div>
-      <div class="evidence-list" style="margin-top:7px;">
-        <span style="color:var(--muted);font-size:0.68rem;">Últimas evidencias:</span>
-        ${a.evids.map(e=>`<span>📌 ${e.desde.fecha} ${badgeLot(e.desde.loteria)} ${e.desde.pos} → ${e.saltos}sort → ${badgeLot(e.hasta.loteria)} ${fmt(e.hasta.horario)}</span>`).join('')}
-      </div>
-    </div>`).join('');
-}
-
-function renderPercutores(){
-  const percs=getPercutores();const todos=crono();const ult14=todos.slice(-14);
-  let html=`<div style="background:rgba(0,10,25,0.5);border:1px solid var(--border);border-radius:10px;padding:11px;margin-bottom:13px;">
-    <div style="font-size:0.74rem;color:var(--muted);margin-bottom:7px;">📍 Últimos 14 sorteos:</div>
-    <div style="display:flex;flex-wrap:wrap;gap:4px;">${ult14.map(s=>`<span class="tag">${badgeLot(s.loteria)} ${fmt(s.horario)} ${s.fecha.slice(5)} · <strong>${s.p1}</strong>·${s.p2}·${s.p3}</span>`).join('')}</div>
-  </div>`;
-  if(!percs.length){html+='<div class="alert-box">⛔ Sin percutores con evidencia suficiente en estos 14 sorteos (mín 2 casos, 8%)</div>';document.getElementById('contPercutores').innerHTML=html;return;}
-  percs.forEach(p=>{
-    const ap=p.ap14.map(s=>`${badgeLot(s.loteria)} ${fmt(s.horario)} ${s.p2===p.Y?'2ª':'3ª'}`).join(' · ');
-    html+=`<div style="background:rgba(0,10,25,0.6);border:1px solid var(--border);border-radius:10px;padding:11px;margin-bottom:9px;">
-      <div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
-        <span class="num-perc src">${p.Y}</span>
-        <span style="color:var(--purple);font-size:0.85rem;">⚡ percute →</span>
-        ${p.dests.map(d=>`<div style="text-align:center;"><span class="num-perc dst">${d.X}</span><div style="font-size:0.65rem;color:var(--muted);margin-top:2px;">${d.veces}x·${d.tasa}%</div></div>`).join('')}
-      </div>
-      <div class="info-row"><span class="tag purple">U14: ${ap||'presente'}</span><span class="tag">Total historial: ${p.totalY}</span></div>
-      ${p.dests.map(d=>`<div style="margin-top:7px;padding-top:7px;border-top:1px solid rgba(0,200,255,0.07);">
-        <div class="info-row">
-          <span style="color:var(--purple);font-size:0.76rem;font-weight:700;">${p.Y}→${d.X}</span>
-          <span class="tag green">${d.veces}x (${d.tasa}%)</span>
-          <span class="tag">Desde ${d.posTop}</span>
-          <span class="tag gold">Cae: ${badgeLot(d.ll)} ${fmt(d.lh)}</span>
-          <span class="tag">Impás: prom ${d.sp} (${d.impMin}-${d.impMax})</span>
-          <span class="tag">📅 ${d.diaActivo}</span>
-        </div>
-        <div class="evidence-list">${d.casos.map(c=>`<span>📌 ${c.fecha} ${badgeLot(c.lotO)} ${c.pos} → ${c.saltos}sort → ${badgeLot(c.lotD)} ${fmt(c.horaD)}</span>`).join('')}</div>
-      </div>`).join('')}
-    </div>`;
-  });
-  document.getElementById('contPercutores').innerHTML=html;
-}
-
-function renderDebiles(){
-  const señales=getDebiles();
-  if(!señales.length){document.getElementById('contDebiles').innerHTML='<div class="alert-box">⛔ Sin señales débiles disponibles actualmente</div>';return;}
-  document.getElementById('contDebiles').innerHTML=señales.map(s=>`
-    <div class="debil-card">
-      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;">
-        <span class="num-big" style="color:var(--orange);border-color:rgba(255,153,68,0.3);">${s.num}</span>
-        <span style="background:rgba(255,153,68,0.12);border:1px solid rgba(255,153,68,0.4);color:var(--orange);padding:3px 10px;border-radius:20px;font-size:0.72rem;font-weight:700;font-family:'Share Tech Mono',monospace;">⚠️ SEÑAL DÉBIL</span>
-        <span class="tag orange">${s.tasa}% (${s.casos}/${s.t23})</span>
-      </div>
-      <div class="info-row">
-        <span class="tag orange">Última: ${s.ult.pos} · ${badgeLot(s.ult.loteria)} ${fmt(s.ult.horario)} · ${s.ult.fecha}</span>
-      </div>
-      <div class="info-row" style="margin-top:5px;">
-        <span class="tag gold">🎯 Propuesta: ${badgeLot(s.dL)} ${fmt(s.dH)} (${s.dN}x)</span>
-        <span class="tag">📅 ${DIAS[dSem(getUltimaFecha())]} freq: ${s.freqDia}%</span>
-      </div>
-      <div class="info-row" style="margin-top:5px;">
-        <span class="tag">Saltos: prom ${s.saltoProm} (${s.saltoMin}-${s.saltoMax})</span>
-        ${s.percTop.length>0?s.percTop.map(([p,v])=>`<span class="tag purple">🧲 ${p}(${v}x)</span>`).join(''):''}
-      </div>
-      <div class="evidence-list" style="margin-top:7px;">
-        <span style="color:var(--orange);font-size:0.68rem;">⚠️ Evidencia limitada — precaución:</span>
-        ${s.evids.map(c=>`<span>📌 ${c.desde.fecha} ${badgeLot(c.desde.loteria)} ${c.desde.pos} → ${c.saltos}sort → ${badgeLot(c.hasta.loteria)} ${fmt(c.hasta.horario)}</span>`).join('')}
-      </div>
-    </div>`).join('');
-}
-
-function renderDominantes(){
-  const dom=getDominantes();const lots=['GEORGIA','FLORIDA','NY'];
-  let html='';const hayAlgo=lots.some(l=>dom[l]&&dom[l].length>0);
-  if(!hayAlgo){html='<div class="alert-box">⛔ Sin dominantes con evidencia suficiente para los sorteos pendientes</div>';document.getElementById('contDominantes').innerHTML=html;return;}
-  lots.forEach(lot=>{
-    const nums=dom[lot]||[];
-    const col=lot==='GEORGIA'?'196,30,58':lot==='FLORIDA'?'255,107,53':'65,105,225';
-    const colT=lot==='GEORGIA'?'#ff6680':lot==='FLORIDA'?'#ffaa77':'#88aaff';
-    html+=`<div style="margin-bottom:18px;"><div style="font-family:'Orbitron',monospace;font-size:0.78rem;font-weight:700;letter-spacing:2px;padding:5px 13px;border-radius:6px;display:inline-block;margin-bottom:10px;background:rgba(${col},0.15);color:${colT};border:1px solid rgba(${col},0.35);">◆ ${lot}</div>`;
-    if(!nums.length){html+=`<div class="alert-box" style="margin-bottom:8px;">🚫 No jugar en ${lot} — sin evidencia suficiente</div>`;}
-    else nums.forEach((r,idx)=>{
-      const conf=r.seCruz&&r.topLotOk?'alta':r.seCruz||r.topLotOk?'media':'baja';
-      const confLabel={alta:'ALTA',media:'MEDIA',baja:'PRECAUCIÓN'}[conf];
-      const zona=parseFloat(r.cicloPct)>=0.85;
-      html+=`<div class="signal-card" style="border-color:${idx===0?'var(--gold)':'var(--accent)'};margin-bottom:9px;">
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;">
-          <span class="num-big">${r.num}</span>
-          <span class="conf-badge conf-${conf}">${confLabel}</span>
-          ${r.seCruz?'<span class="tag green">🔗 Señal cruzada</span>':''}
-          ${r.topLotOk?'<span class="tag gold">👑 Top lotería</span>':''}
-          ${zona?'<span class="emollis">🔥 ZONA ACTIVA</span>':''}
-        </div>
-        <div class="info-row">
-          <span class="tag gold">🎯 Jugar: ${badgeLot(r.lot)} ${fmt(r.hora)}</span>
-          <span class="tag">${r.cnt}x en ${r.total} sorteos (${r.pct}%)</span>
-          <span class="tag">📅 ${DIAS[dSem(getUltimaFecha())]} freq: ${r.freqDia}%</span>
-        </div>
-        <div class="info-row" style="margin-top:5px;">
-          <span class="tag">🔄 Ciclo: ${r.ciclo} sort | sin salir: ${r.sinSalir} (${Math.round(parseFloat(r.cicloPct)*100)}%)</span>
-          <span class="tag">💤 Impás: ${r.impas}</span>
-        </div>
-        ${r.percTop.length>0?`<div class="info-row" style="margin-top:5px;"><span style="font-size:0.7rem;color:var(--purple);">🧲 Percutores propios:</span>${r.percTop.map(([p,v])=>`<span class="tag purple">${p}(${v}x)</span>`).join('')}</div>`:''}
-        ${r.actTop.length>0?`<div class="info-row" style="margin-top:4px;"><span style="font-size:0.7rem;color:var(--muted);">⚡ Activado cuando:</span>${r.actTop.map(([k,v])=>{const[l,n]=k.split('|');return`<span class="tag">${badgeLot(l)} ${n}(${v}x)</span>`;}).join('')}</div>`:''}
-      </div>`;
-    });
-    html+='</div>';
-  });
-  document.getElementById('contDominantes').innerHTML=html;
-}
-
-function renderPale(){
-  const p=getPale();
-  document.getElementById('contPale').innerHTML=!p.length?'<div class="alert-box">⛔ Sin palés activos</div>':
-    p.map(x=>{const[n1,n2]=x.pareja.split('-');return`<div class="signal-card" style="border-color:var(--green);"><span class="num-big">${n1}</span><span style="color:var(--muted);margin:0 7px;">•</span><span class="num-big">${n2}</span><span class="ia-score" style="margin-left:8px;">${x.frec}x juntos</span><div style="margin-top:5px;font-size:0.78rem;color:var(--muted);">🎯 Más fuerte: ${badgeLot(x.lot)} ${fmt(x.hora)}</div></div>`;}).join('');
-}
-
-function renderMonteCarlo(){
-  document.getElementById('contMC').innerHTML='<p style="color:var(--muted);text-align:center;padding:18px;">⏳ Calculando...</p>';
-  setTimeout(()=>{
-    const mc=getMonteCarlo();
-    if(!mc.res||!mc.res.length){document.getElementById('contMC').innerHTML=`<div class="alert-box">⛔ Sin pronóstico Monte Carlo. ${mc.razon||'Sin candidatos activos'}</div>`;return;}
-    document.getElementById('contMC').innerHTML=mc.res.map((r,idx)=>{
-      const conf=parseFloat(r.prob)>25?'alta':parseFloat(r.prob)>15?'media':'baja';
-      const mf=r.mf||{};
-      return`<div class="pronostico-box ${idx===0?'fuerte':'medio'}">
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;">
-          <span class="num-big">${r.num}</span>
-          <span class="conf-badge conf-${conf}">${conf.toUpperCase()}</span>
-          <span class="emollis">${idx===0?'🔥 PRIMERO':'⚡ SEGUNDO'}</span>
-          <span class="ia-score">${r.prob}% prob. simulada</span>
-        </div>
-        <div class="info-row">
-          <span class="tag ${parseFloat(mf.tend||1)>1?'green':'red'}">📈 ${parseFloat(mf.tend||1)>1?'CALIENTE':'FRÍO'} (${mf.tend||'?'}x)</span>
-          <span class="tag">📅 ${DIAS[dSem(getUltimaFecha())]} freq: ${(parseFloat(mf.freqD||0)*100).toFixed(1)}%</span>
-          <span class="tag">🔄 Sin salir: ${mf.sinSalir||'?'} sort (ciclo ${mf.cicloProm||'?'})</span>
-        </div>
-        ${r.jugar&&r.jugar.length>0?`<div class="info-row" style="margin-top:5px;"><span style="font-size:0.72rem;color:var(--muted);">🎯 Jugar:</span>${r.jugar.slice(0,3).map(([k,v])=>{const[l,h]=k.split('|');return`<span class="tag gold">${badgeLot(l)} ${fmt(h)} (${v}x)</span>`;}).join('')}</div>`:''}
-        ${r.noJugar&&r.noJugar.length>0?`<div class="info-row" style="margin-top:4px;"><span style="font-size:0.72rem;color:var(--red);">🚫 No jugar:</span>${r.noJugar.slice(0,3).map(nj=>`<span class="tag red">${badgeLot(nj.lot)} ${fmt(nj.hora)}</span>`).join('')}</div>`:''}
-        <div class="score-bar" style="margin-top:8px;"><div class="score-fill" style="width:${Math.min(parseFloat(r.prob)*2,100)}%;background:linear-gradient(90deg,var(--accent),var(--green));"></div></div>
-      </div>`;
-    }).join('');
-  },60);
-}
-
-function renderRespaldo(){
-  const cands=getRespaldo();
-  if(!cands.length){document.getElementById('contRespaldo').innerHTML='<div class="alert-box">⭐ Sin candidatos con respaldo multifactorial</div>';return;}
-  ultimosPronosticos=cands.map(c=>({num:c.num,fecha:getUltimaFecha(),destLot:c.destFinal?.lot,factor:Object.entries(c.scores).sort((a,b)=>b[1]-a[1])[0]?.[0]||'multi',scoreTotal:c.scoreTotal}));
-  document.getElementById('contRespaldo').innerHTML=cands.map((c,idx)=>{
-    const conf=c.nF>=4?'alta':c.nF>=3?'media':'baja';
-    const mf=c.mf||{};
-    return`<div class="pronostico-box ${idx===0?'fuerte':'medio'}">
-      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
-        <span class="num-big">${c.num}</span>
-        <span class="conf-badge conf-${conf}">${conf.toUpperCase()}</span>
-        <span class="emollis">${idx===0?'🔥 CANDELA #1':'⚡ CANDELA #2'}</span>
-      </div>
-      <div class="info-row">
-        <span class="tag gold">Score: ${c.scoreTotal.toFixed(1)} · ${c.nF} factores</span>
-      </div>
-      ${c.destFinal?.lot&&c.destFinal.lot!=='?'?`<div class="info-row" style="margin-top:7px;"><span style="color:var(--gold);font-size:0.8rem;font-weight:700;">🎯 JUGAR:</span><span class="tag gold" style="font-size:0.82rem;">${badgeLot(c.destFinal.lot)} ${fmt(c.destFinal.hora)}</span></div>`:''}
-      ${c.noJugar&&c.noJugar.length>0?`<div class="info-row" style="margin-top:5px;"><span style="color:var(--red);font-size:0.76rem;">🚫 NO JUGAR:</span>${c.noJugar.slice(0,3).map(nj=>`<span class="tag red">${badgeLot(nj.lot)} ${fmt(nj.hora)}</span>`).join('')}</div>`:''}
-      <div style="margin-top:8px;font-size:0.7rem;color:var(--muted);">${c.razones.slice(0,4).join(' · ')}</div>
-      <div class="info-row" style="margin-top:6px;">
-        <span class="tag ${parseFloat(mf.tend||1)>1?'green':'red'}">📈 ${parseFloat(mf.tend||1)>1?'CALIENTE':'FRÍO'}</span>
-        <span class="tag">📊 En 1ª: ${mf.enPri||0}x historial</span>
-      </div>
-      <div class="score-bar" style="margin-top:8px;"><div class="score-fill" style="width:${Math.min(c.scoreTotal/3,100)}%;background:linear-gradient(90deg,var(--gold),var(--orange));"></div></div>
-    </div>`;
-  }).join('');
-}
-
-function renderAprendido(){
-  const ac=bitacora.filter(b=>b.tipo==='acierto').length;
-  const fa=bitacora.filter(b=>b.tipo==='fallo').length;
-  const pa=bitacora.filter(b=>b.tipo==='patron').length;
-  const tot=ac+fa;
-  let html=`<div style="background:rgba(176,96,255,0.07);border:1px solid rgba(176,96,255,0.25);border-radius:10px;padding:12px;margin-bottom:14px;">
-    <div style="font-size:0.78rem;color:var(--purple);font-weight:700;margin-bottom:8px;">⚖️ PESOS ACTUALES</div>
-    <div style="display:flex;flex-wrap:wrap;gap:5px;">${Object.entries(pesos).map(([k,v])=>`<span class="tag purple">${k}:${v.toFixed(3)}</span>`).join('')}</div>
+function renderApr(){
+  const ok=bitacora.filter(b=>b.tipo==='ok').length;
+  const fail=bitacora.filter(b=>b.tipo==='fail').length;
+  const pat=bitacora.filter(b=>b.tipo==='pat').length;
+  const tot=ok+fail;
+  let html=`<div style="background:rgba(176,96,255,.07);border:1px solid rgba(176,96,255,.2);border-radius:10px;padding:12px;margin-bottom:12px;">
+    <div style="font-size:.74rem;color:var(--pu);font-weight:700;margin-bottom:7px;">⚖️ PESOS ACTUALES</div>
+    <div style="display:flex;flex-wrap:wrap;gap:5px;">${Object.entries(pesos).map(([k,v])=>`<span class="st pu">${k}: ${v.toFixed(3)}</span>`).join('')}</div>
   </div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-    <span class="tag green">✅ Aciertos: ${ac}</span><span class="tag red">❌ Fallos: ${fa}</span>
-    <span class="tag gold">🔍 Patrones: ${pa}</span>
-    ${tot>0?`<span class="tag">📊 Precisión: ${Math.round(ac/tot*100)}%</span>`:''}
+  <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px;">
+    <span class="st gr">✅ ${ok} aciertos</span><span class="st rd">❌ ${fail} fallos</span>
+    <span class="st go">🔍 ${pat} patrones</span>
+    ${tot>0?`<span class="st">📊 ${Math.round(ok/tot*100)}% precisión</span>`:''}
   </div>`;
-  if(!bitacora.length)html+='<div class="warn-box">📭 Bitácora vacía. Se llena al actualizar sorteos.</div>';
-  else html+=bitacora.slice(0,60).map(b=>`<div class="aprendido-entry ${b.tipo}"><span style="color:var(--muted);font-size:0.65rem;">${b.fecha} · ${b.codigo}</span><div style="margin-top:3px;color:var(--text);font-size:0.74rem;">${b.msg}</div></div>`).join('');
-  document.getElementById('contAprendido').innerHTML=html;
+  html+=bitacora.length?bitacora.slice(0,60).map(b=>`<div class="apr-e ${b.tipo}">
+    <span style="color:var(--mu);font-size:.63rem;">${b.fecha} · ${b.cod}</span>
+    <div style="margin-top:3px;font-size:.71rem;">${b.msg}</div>
+  </div>`).join(''):'<div class="wbox">📭 Sin entradas aún. Se llena al actualizar sorteos.</div>';
+  document.getElementById('cApr').innerHTML=html;
 }
 
-function renderHistorial(){
-  const fL=document.getElementById('filtroLot')?.value||'';
-  const fF=document.getElementById('filtroFecha')?.value||'';
-  let d=[...sorteos].sort((a,b)=>(b.fecha+'T'+b.horario).localeCompare(a.fecha+'T'+a.horario));
-  if(fL)d=d.filter(s=>s.loteria===fL);if(fF)d=d.filter(s=>s.fecha===fF);d=d.slice(0,500);
-  const lc={GEORGIA:'badge-ga',FLORIDA:'badge-fl',NY:'badge-ny'};
-  document.getElementById('historialBody').innerHTML=d.map(s=>`<tr><td>${s.fecha}</td><td><span class="badge ${lc[s.loteria]||''}">${s.loteria}</span></td><td>${fmt(s.horario)}</td><td><strong style="color:var(--gold)">${s.p1}</strong></td><td>${s.p2}</td><td>${s.p3}</td></tr>`).join('')||'<tr><td colspan="6" style="text-align:center;color:var(--muted)">Sin resultados</td></tr>';
-}
-
+// ── FORM ──
 function renderForm(){
   const hoy=new Date().toISOString().slice(0,10);
-  const hayHoy=sorteos.filter(s=>s.fecha===hoy);
-  const falt=SORTEOS_DIA.filter(e=>!hayHoy.some(s=>s.loteria===e.loteria&&s.horario.startsWith(e.horario.slice(0,4))));
-  const warn=document.getElementById('warnAct');
-  if(falt.length>0&&falt.length<7){warn.style.display='block';warn.innerHTML=`⚠️ Día ${hoy}: ${7-falt.length}/7 completos. Faltan: ${falt.map(f=>f.label).join(', ')}`;}
-  else warn.style.display='none';
-  const loterias=['GEORGIA','FLORIDA','NY','GEORGIA','FLORIDA','NY','GEORGIA'];
-  const horarios=['12:30','13:30','14:30','19:00','21:50','22:30','23:30'];
-  const labels=['Georgia 12:30 PM','Florida 1:30 PM','NY 2:30 PM','Georgia 7:00 PM','Florida 9:50 PM','NY 10:30 PM','Georgia 11:30 PM'];
-  document.getElementById('formAct').innerHTML=loterias.map((lot,i)=>{
-    const ya=hayHoy.find(s=>s.loteria===lot&&s.horario.startsWith(horarios[i].slice(0,4)));
-    return`<div class="input-group" style="${ya?'opacity:0.65;':''}"><label>${labels[i]} ${ya?'<span style="color:var(--green)">✅</span>':''}</label><input type="text" id="p1_${i}" placeholder="1ª" maxlength="2" value="${ya?.p1||''}"><input type="text" id="p2_${i}" placeholder="2ª" maxlength="2" style="margin-top:4px;" value="${ya?.p2||''}"><input type="text" id="p3_${i}" placeholder="3ª" maxlength="2" style="margin-top:4px;" value="${ya?.p3||''}"></div>`;
+  const hay=sorteos.filter(s=>s.fecha===hoy);
+  const falt=SD.filter(e=>!hay.some(s=>s.loteria===e.l&&s.horario.startsWith(e.h.slice(0,4))));
+  const w=document.getElementById('wAct');
+  if(falt.length>0&&falt.length<7){w.style.display='block';w.innerHTML=`⚠️ ${hoy}: ${7-falt.length}/7 — Faltan: ${falt.map(f=>f.lb).join(', ')}`;}
+  else w.style.display='none';
+  document.getElementById('fAct').innerHTML=SD.map((sd,i)=>{
+    const ya=hay.find(s=>s.loteria===sd.l&&s.horario.startsWith(sd.h.slice(0,4)));
+    return`<div class="ig" style="${ya?'opacity:.62;':''}">
+      <label>${sd.lb} ${ya?'<span style="color:var(--gr)">✅</span>':''}</label>
+      <input type="text" id="p1_${i}" placeholder="1ª" maxlength="2" value="${ya?.p1||''}">
+      <input type="text" id="p2_${i}" placeholder="2ª" maxlength="2" style="margin-top:4px;" value="${ya?.p2||''}">
+      <input type="text" id="p3_${i}" placeholder="3ª" maxlength="2" style="margin-top:4px;" value="${ya?.p3||''}">
+    </div>`;
   }).join('');
 }
 
-document.getElementById('btnGuardar').addEventListener('click',()=>{
+document.getElementById('btnS').addEventListener('click',()=>{
   const hoy=new Date().toISOString().slice(0,10);
-  const loterias=['GEORGIA','FLORIDA','NY','GEORGIA','FLORIDA','NY','GEORGIA'];
-  const horarios=['12:30','13:30','14:30','19:00','21:50','22:30','23:30'];
   let ag=0;
-  for(let i=0;i<7;i++){
+  SD.forEach((sd,i)=>{
     const p1=document.getElementById(`p1_${i}`)?.value.trim().padStart(2,'0');
     const p2=document.getElementById(`p2_${i}`)?.value.trim().padStart(2,'0');
     const p3=document.getElementById(`p3_${i}`)?.value.trim().padStart(2,'0');
-    if(!/^\d{2}$/.test(p1)||!/^\d{2}$/.test(p2)||!/^\d{2}$/.test(p3))continue;
-    const ex=sorteos.some(s=>s.fecha===hoy&&s.loteria===loterias[i]&&s.horario.startsWith(horarios[i].slice(0,4)));
-    if(!ex){sorteos.push({fecha:hoy,loteria:loterias[i],horario:horarios[i],p1,p2,p3});ag++;}
-  }
+    if(!/^\d{2}$/.test(p1)||!/^\d{2}$/.test(p2)||!/^\d{2}$/.test(p3))return;
+    if(p1==='00'&&p2==='00'&&p3==='00')return;
+    if(!sorteos.some(s=>s.fecha===hoy&&s.loteria===sd.l&&s.horario.startsWith(sd.h.slice(0,4)))){
+      sorteos.push({fecha:hoy,loteria:sd.l,horario:sd.h,p1,p2,p3});ag++;
+    }
+  });
   if(ag>0){
     sorteos.sort((a,b)=>(a.fecha+'T'+a.horario).localeCompare(b.fecha+'T'+b.horario));
-    evaluar();guardar();renderAll();renderHistorial();renderForm();renderEstadoBar();
+    evaluar();sv();renderHoy();renderProno();renderHist();renderForm();renderSbar();
     alert(`✅ ${ag} sorteos guardados. Sistema recalculado.`);
   }else alert('Sin nuevos datos.');
 });
-document.getElementById('btnLimpiar').addEventListener('click',renderForm);
+document.getElementById('btnC').addEventListener('click',renderForm);
 
-
-document.querySelectorAll('.tab-btn').forEach(btn=>{
+document.querySelectorAll('.tb').forEach(btn=>{
   btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.portada').forEach(p=>p.classList.remove('active'));
-    btn.classList.add('active');document.getElementById(btn.dataset.tab).classList.add('active');
-    const t=btn.dataset.tab;
-    if(t==='arrastre')renderArrastres();if(t==='percutores')renderPercutores();
-    if(t==='dominantes')renderDominantes();if(t==='debiles')renderDebiles();
-    if(t==='paleactivo')renderPale();if(t==='montecarlo')renderMonteCarlo();
-    if(t==='respaldo')renderRespaldo();if(t==='aprendido')renderAprendido();
-    if(t==='historial')renderHistorial();if(t==='actualizar')renderForm();
+    document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+    document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+    btn.classList.add('on');const tab=btn.dataset.tab;
+    document.getElementById(tab).classList.add('on');
+    if(tab==='hoy')renderHoy();
+    if(tab==='prono')renderProno();
+    if(tab==='hist')renderHist();
+    if(tab==='act')renderForm();
+    if(tab==='apr')renderApr();
   });
 });
 
-setInterval(()=>{const d=new Date();document.getElementById('liveDateTime').textContent=d.toLocaleDateString('es-ES',{weekday:'short',year:'numeric',month:'short',day:'numeric'})+' · '+d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit'});},1000);
+setInterval(()=>{const d=new Date();document.getElementById('clk').textContent=d.toLocaleDateString('es-ES',{weekday:'short',year:'numeric',month:'short',day:'numeric'})+' · '+d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit'});},1000);
 
-function renderAll(){renderArrastres();renderPercutores();renderDominantes();renderDebiles();renderPale();renderRespaldo();}
-renderEstadoBar();renderHistorial();renderForm();renderAll();
+renderSbar();renderHoy();renderProno();renderHist();renderForm();renderApr();
 </script>
 </body>
 </html>
-
-
