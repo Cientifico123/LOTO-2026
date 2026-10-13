@@ -6,309 +6,58 @@
 <title>Vision Lote 2026</title>
 <style>
   :root{
-    --bg:#08172b;
-    --bg2:#0e2544;
-    --bg3:#132f55;
-    --gold:#d4af37;
-    --gold2:#ffd700;
-    --line:#1e3a5f;
-    --red:#e74c3c;
-    --green:#2ecc71;
+    --bg:#08172b;--bg2:#0e2544;--bg3:#132f55;
+    --gold:#d4af37;--gold2:#ffd700;--line:#1e3a5f;
+    --red:#e74c3c;--green:#2ecc71;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{
-    background:var(--bg);
-    color:var(--gold);
-    font-family:'Segoe UI',Roboto,Arial,sans-serif;
-    min-height:100vh;
-  }
-  header{
-    text-align:center;
-    padding:22px 12px 16px;
-    background:linear-gradient(180deg,#08172b 0%,#0e2544 100%);
-    border-bottom:2px solid var(--gold);
-  }
-  header h1{
-    font-size:32px;
-    letter-spacing:5px;
-    color:var(--gold2);
-    text-shadow:0 0 12px rgba(255,215,0,.4);
-    font-weight:700;
-  }
-  header .fecha{
-    margin-top:8px;
-    font-size:15px;
-    color:var(--gold);
-    opacity:.9;
-    letter-spacing:1px;
-  }
-  nav{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:6px;
-    padding:14px 10px;
-    background:var(--bg2);
-    border-bottom:1px solid var(--line);
-    position:sticky;
-    top:0;
-    z-index:20;
-  }
-  nav button{
-    background:transparent;
-    color:var(--gold);
-    border:1px solid var(--line);
-    padding:9px 16px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:13px;
-    font-weight:600;
-    letter-spacing:.5px;
-    transition:all .2s;
-  }
-  nav button:hover{
-    border-color:var(--gold);
-    background:rgba(212,175,55,.08);
-  }
-  nav button.active{
-    background:var(--gold);
-    color:var(--bg);
-    border-color:var(--gold2);
-    box-shadow:0 0 12px rgba(212,175,55,.4);
-  }
-  main{
-    padding:20px 16px;
-    max-width:1200px;
-    margin:0 auto;
-  }
+  body{background:var(--bg);color:var(--gold);font-family:'Segoe UI',Roboto,Arial,sans-serif;min-height:100vh;}
+  header{text-align:center;padding:22px 12px 16px;background:linear-gradient(180deg,#08172b 0%,#0e2544 100%);border-bottom:2px solid var(--gold);}
+  header h1{font-size:32px;letter-spacing:5px;color:var(--gold2);text-shadow:0 0 12px rgba(255,215,0,.4);font-weight:700;}
+  header .fecha{margin-top:8px;font-size:15px;color:var(--gold);opacity:.9;letter-spacing:1px;}
+  header .reloj{margin-top:6px;font-size:22px;color:var(--gold2);letter-spacing:3px;font-weight:700;font-variant-numeric:tabular-nums;}
+  nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:14px 10px;background:var(--bg2);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;}
+  nav button{background:transparent;color:var(--gold);border:1px solid var(--line);padding:9px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:.5px;transition:all .2s;}
+  nav button:hover{border-color:var(--gold);background:rgba(212,175,55,.08);}
+  nav button.active{background:var(--gold);color:var(--bg);border-color:var(--gold2);box-shadow:0 0 12px rgba(212,175,55,.4);}
+  main{padding:20px 16px;max-width:1200px;margin:0 auto;}
   section{display:none;}
   section.active{display:block;animation:fade .3s;}
   @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-  h2{
-    color:var(--gold2);
-    font-size:20px;
-    margin-bottom:14px;
-    padding-bottom:8px;
-    border-bottom:1px solid var(--line);
-    letter-spacing:1px;
-  }
-  h3{
-    color:var(--gold2);
-    font-size:15px;
-    margin:0 0 10px;
-    letter-spacing:1px;
-  }
-  .card{
-    background:var(--bg2);
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:16px;
-    margin-bottom:16px;
-  }
-  .top3{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-top:10px;
-  }
-  .top3 .num{
-    background:var(--bg);
-    border:2px solid var(--gold);
-    border-radius:10px;
-    padding:14px 8px;
-    text-align:center;
-    font-size:36px;
-    font-weight:800;
-    color:var(--gold2);
-    letter-spacing:4px;
-    text-shadow:0 0 10px rgba(255,215,0,.35);
-  }
-  .top3 .num .puesto{
-    display:block;
-    font-size:11px;
-    color:var(--gold);
-    opacity:.75;
-    letter-spacing:2px;
-    margin-bottom:4px;
-    font-weight:600;
-  }
-  .lot-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:12px;
-  }
-  .lot-box{
-    background:var(--bg);
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:14px;
-  }
-  .lot-box h4{
-    color:var(--gold2);
-    font-size:13px;
-    letter-spacing:2px;
-    margin-bottom:10px;
-    padding-bottom:6px;
-    border-bottom:1px dashed var(--line);
-  }
-  .lot-top2{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-  }
-  .lot-top2 .n{
-    background:var(--bg2);
-    border:1px solid var(--gold);
-    border-radius:8px;
-    text-align:center;
-    padding:10px 4px;
-    font-size:26px;
-    font-weight:700;
-    color:var(--gold2);
-    letter-spacing:3px;
-  }
-  .lot-top2 .n small{
-    display:block;
-    font-size:10px;
-    color:var(--gold);
-    opacity:.7;
-    letter-spacing:1px;
-    margin-bottom:3px;
-    font-weight:500;
-  }
-  table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:12px;
-  }
-  th,td{
-    padding:7px 6px;
-    border-bottom:1px solid var(--line);
-    text-align:center;
-  }
-  th{
-    color:var(--gold2);
-    background:var(--bg);
-    font-size:11px;
-    letter-spacing:1px;
-    position:sticky;
-    top:0;
-  }
+  h2{color:var(--gold2);font-size:20px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--line);letter-spacing:1px;}
+  h3{color:var(--gold2);font-size:15px;margin:0 0 10px;letter-spacing:1px;}
+  .card{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px;}
+  .top3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px;}
+  .top3 .num{background:var(--bg);border:2px solid var(--gold);border-radius:10px;padding:14px 8px;text-align:center;font-size:36px;font-weight:800;color:var(--gold2);letter-spacing:4px;text-shadow:0 0 10px rgba(255,215,0,.35);}
+  .top3 .num .puesto{display:block;font-size:11px;color:var(--gold);opacity:.75;letter-spacing:2px;margin-bottom:4px;font-weight:600;}
+  .lot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;}
+  .lot-box{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px;}
+  .lot-box h4{color:var(--gold2);font-size:13px;letter-spacing:2px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px dashed var(--line);}
+  .lot-top2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .lot-top2 .n{background:var(--bg2);border:1px solid var(--gold);border-radius:8px;text-align:center;padding:10px 4px;font-size:26px;font-weight:700;color:var(--gold2);letter-spacing:3px;}
+  .lot-top2 .n small{display:block;font-size:10px;color:var(--gold);opacity:.7;letter-spacing:1px;margin-bottom:3px;font-weight:500;}
+  table{width:100%;border-collapse:collapse;font-size:12px;}
+  th,td{padding:7px 6px;border-bottom:1px solid var(--line);text-align:center;}
+  th{color:var(--gold2);background:var(--bg);font-size:11px;letter-spacing:1px;position:sticky;top:0;}
   tr:hover td{background:rgba(212,175,55,.05);}
-  .hist-wrap{
-    max-height:540px;
-    overflow:auto;
-    border:1px solid var(--line);
-    border-radius:10px;
-    background:var(--bg2);
-  }
-  input,select,textarea{
-    background:var(--bg);
-    color:var(--gold);
-    border:1px solid var(--line);
-    padding:9px 10px;
-    border-radius:7px;
-    font-size:13px;
-    width:100%;
-    font-family:inherit;
-  }
-  input:focus,select:focus,textarea:focus{
-    outline:none;
-    border-color:var(--gold);
-  }
-  .form-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-    gap:10px;
-    margin-bottom:12px;
-  }
-  label{
-    display:block;
-    font-size:11px;
-    color:var(--gold);
-    opacity:.75;
-    margin-bottom:4px;
-    letter-spacing:.5px;
-  }
-  .btn{
-    background:var(--gold);
-    color:var(--bg);
-    border:none;
-    padding:11px 22px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:700;
-    font-size:13px;
-    letter-spacing:1px;
-    transition:all .2s;
-  }
+  .hist-wrap{max-height:540px;overflow:auto;border:1px solid var(--line);border-radius:10px;background:var(--bg2);}
+  input,select,textarea{background:var(--bg);color:var(--gold);border:1px solid var(--line);padding:9px 10px;border-radius:7px;font-size:13px;width:100%;font-family:inherit;}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);}
+  .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px;}
+  label{display:block;font-size:11px;color:var(--gold);opacity:.75;margin-bottom:4px;letter-spacing:.5px;}
+  .btn{background:var(--gold);color:var(--bg);border:none;padding:11px 22px;border-radius:8px;cursor:pointer;font-weight:700;font-size:13px;letter-spacing:1px;transition:all .2s;}
   .btn:hover{background:var(--gold2);transform:translateY(-1px);}
-  .btn-sec{
-    background:transparent;
-    color:var(--gold);
-    border:1px solid var(--gold);
-    padding:9px 16px;
-    border-radius:7px;
-    cursor:pointer;
-    font-size:12px;
-    font-weight:600;
-    letter-spacing:.5px;
-  }
+  .btn-sec{background:transparent;color:var(--gold);border:1px solid var(--gold);padding:9px 16px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:.5px;}
   .btn-sec:hover{background:rgba(212,175,55,.1);}
-  .btn-del{
-    background:transparent;
-    color:var(--red);
-    border:1px solid var(--red);
-    padding:3px 8px;
-    border-radius:5px;
-    cursor:pointer;
-    font-size:10px;
-    font-weight:700;
-  }
+  .btn-del{background:transparent;color:var(--red);border:1px solid var(--red);padding:3px 8px;border-radius:5px;cursor:pointer;font-size:10px;font-weight:700;}
   .btn-del:hover{background:var(--red);color:#fff;}
-  .filtros{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-bottom:12px;
-    align-items:end;
-  }
+  .filtros{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:end;}
   .filtros > div{flex:0 0 auto;min-width:150px;}
-  .msg{
-    padding:10px 14px;
-    border-radius:7px;
-    margin-top:10px;
-    font-size:13px;
-    font-weight:600;
-  }
+  .msg{padding:10px 14px;border-radius:7px;margin-top:10px;font-size:13px;font-weight:600;}
   .msg.ok{background:rgba(46,204,113,.15);color:var(--green);border:1px solid var(--green);}
   .msg.err{background:rgba(231,76,60,.15);color:var(--red);border:1px solid var(--red);}
-  .nota{
-    font-size:12px;
-    opacity:.7;
-    margin-top:8px;
-    line-height:1.5;
-  }
-  .badge{
-    display:inline-block;
-    background:var(--bg3);
-    border:1px solid var(--line);
-    color:var(--gold);
-    padding:3px 10px;
-    border-radius:20px;
-    font-size:11px;
-    margin:0 4px 4px 0;
-  }
-  .metodo-desc{
-    background:var(--bg2);
-    border-left:3px solid var(--gold);
-    padding:10px 14px;
-    border-radius:6px;
-    margin-bottom:14px;
-    font-size:12px;
-    line-height:1.5;
-    opacity:.9;
-  }
+  .nota{font-size:12px;opacity:.7;margin-top:8px;line-height:1.5;}
+  .metodo-desc{background:var(--bg2);border-left:3px solid var(--gold);padding:10px 14px;border-radius:6px;margin-bottom:14px;font-size:12px;line-height:1.5;opacity:.9;}
 </style>
 </head>
 <body>
@@ -316,6 +65,7 @@
 <header>
   <h1>VISION LOTE 2026</h1>
   <div class="fecha" id="fechaActual">Cargando...</div>
+  <div class="reloj" id="reloj">--:--:--</div>
 </header>
 
 <nav>
@@ -329,41 +79,25 @@
 
 <main>
 
-  <!-- HISTORIAL -->
   <section id="historial" class="active">
     <h2>Historial de sorteos</h2>
     <div class="filtros">
-      <div>
-        <label>Lotería</label>
-        <select id="fLoteria">
-          <option value="">Todas</option>
-          <option>GEORGIA</option>
-          <option>FLORIDA</option>
-          <option>NEW YORK</option>
-        </select>
+      <div><label>Lotería</label>
+        <select id="fLoteria"><option value="">Todas</option><option>GEORGIA</option><option>FLORIDA</option><option>NEW YORK</option></select>
       </div>
-      <div>
-        <label>Fecha</label>
-        <input type="date" id="fFecha">
-      </div>
+      <div><label>Fecha</label><input type="date" id="fFecha"></div>
       <button class="btn-sec" onclick="renderHistorial()">Filtrar</button>
       <button class="btn-sec" onclick="limpiarFiltros()">Limpiar</button>
     </div>
     <div class="hist-wrap">
       <table id="tablaHistorial">
-        <thead>
-          <tr>
-            <th>Fecha</th><th>Día</th><th>Lotería</th><th>Hora</th>
-            <th>E</th><th>F</th><th>G</th><th>H</th><th></th>
-          </tr>
-        </thead>
+        <thead><tr><th>Fecha</th><th>Día</th><th>Lotería</th><th>Hora</th><th>E</th><th>F</th><th>G</th><th>H</th><th></th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
     <div class="nota">F (primera) es el par de 2 dígitos que más paga en Pick 3. G y H forman el Pick 4.</div>
   </section>
 
-  <!-- ACTUALIZAR -->
   <section id="actualizar">
     <h2>Actualizar base de datos</h2>
     <div class="card">
@@ -371,34 +105,21 @@
       <div class="form-grid">
         <div><label>Fecha</label><input type="date" id="nFecha"></div>
         <div><label>Día</label>
-          <select id="nDia">
-            <option>Lunes</option><option>Martes</option><option>Miércoles</option>
-            <option>Jueves</option><option>Viernes</option><option>Sábado</option><option>Domingo</option>
-          </select>
+          <select id="nDia"><option>Lunes</option><option>Martes</option><option>Miércoles</option><option>Jueves</option><option>Viernes</option><option>Sábado</option><option>Domingo</option></select>
         </div>
         <div><label>Lotería</label>
           <select id="nLoteria"><option>GEORGIA</option><option>FLORIDA</option><option>NEW YORK</option></select>
         </div>
         <div><label>Hora</label>
-          <select id="nHora">
-            <option>12:30:00</option><option>13:30:00</option><option>14:30:00</option>
-            <option>19:00:00</option><option>21:50:00</option><option>22:30:00</option><option>23:30:00</option>
-          </select>
+          <select id="nHora"><option>12:30:00</option><option>13:30:00</option><option>14:30:00</option><option>19:00:00</option><option>21:50:00</option><option>22:30:00</option><option>23:30:00</option></select>
         </div>
         <div><label>Centena (E)</label><input id="nE" maxlength="1" placeholder="0-9"></div>
         <div><label>Primera (F)</label><input id="nF" maxlength="2" placeholder="00-99"></div>
         <div><label>Segunda (G)</label><input id="nG" maxlength="2" placeholder="00-99"></div>
         <div><label>Tercera (H)</label><input id="nH" maxlength="2" placeholder="00-99"></div>
       </div>
-      <button class="btn" onclick="agregarSorteo()">Agregar sorteo</button>
+      <button class="btn" onclick="agregarSorteo()">Actualizar y guardar</button>
       <div id="msgActualizar"></div>
-    </div>
-    <div class="card">
-      <h3>Importar en bloque</h3>
-      <div class="nota">Una fila por línea con formato: fecha|día|lotería|hora|E|F|G|H</div>
-      <textarea id="bulk" rows="5" placeholder="2026-10-14|Martes|GEORGIA|12:30:00|3|45|67|89"></textarea>
-      <button class="btn" style="margin-top:10px;" onclick="importarBulk()">Importar</button>
-      <div id="msgBulk"></div>
     </div>
     <div class="card">
       <h3>Respaldo</h3>
@@ -408,39 +129,27 @@
     </div>
   </section>
 
-  <!-- MÉTODO 1 -->
   <section id="m1">
     <h2>Método 1 · Caos Heurístico</h2>
-    <div class="metodo-desc">
-      Recurrencia, atractores estadísticos, predictibilidad local y sensibilidad a condiciones iniciales sobre el historial completo del slot (lotería + hora).
-    </div>
+    <div class="metodo-desc">Recurrencia, atractores estadísticos, predictibilidad local y sensibilidad a condiciones iniciales sobre el historial completo del slot.</div>
     <div id="resM1"></div>
   </section>
 
-  <!-- MÉTODO 2 -->
   <section id="m2">
     <h2>Método 2 · Caos Formal</h2>
-    <div class="metodo-desc">
-      Mapa de retorno de centenas, entropía de permutación, dimensión de correlación y reconstrucción del espacio de fases.
-    </div>
+    <div class="metodo-desc">Mapa de retorno de centenas, entropía de permutación, dimensión de correlación y reconstrucción del espacio de fases.</div>
     <div id="resM2"></div>
   </section>
 
-  <!-- MÉTODO 3 -->
   <section id="m3">
     <h2>Método 3 · Caos Estricto sobre F</h2>
-    <div class="metodo-desc">
-      Embedding con retardo sobre la serie de primera (F), búsqueda de vecinos cercanos en el espacio de fases y predicción por dinámica.
-    </div>
+    <div class="metodo-desc">Embedding con retardo sobre la serie de primera (F), búsqueda de vecinos cercanos y predicción por dinámica.</div>
     <div id="resM3"></div>
   </section>
 
-  <!-- MÉTODO 4 -->
   <section id="m4">
     <h2>Método 4 · Recurrencia G/H → F</h2>
-    <div class="metodo-desc">
-      Números que han salido en segunda (G) o tercera (H) y que aún no han pasado a primera (F) en ese mismo slot.
-    </div>
+    <div class="metodo-desc">Números que han salido en segunda (G) o tercera (H) y que aún no han pasado a primera (F) en ese mismo slot.</div>
     <div id="resM4"></div>
   </section>
 
@@ -448,8 +157,6 @@
 
 <script>
 /* ============ DATOS ============ */
-/* Formato compacto: MMDD|D|LOT|HHMM|E|F|G|H
-   D: L,M,X,J,V,S,D  |  LOT: G,F,N */
 const RAW = `
 0801|S|G|1230|6|33|32|45
 0801|S|F|1330|5|92|68|71
@@ -962,43 +669,44 @@ const RAW = `
 1012|L|F|2150|5|98|24|41
 1012|L|N|2230|8|38|33|61
 1012|L|G|2330|7|42|23|52
+1013|M|G|1230|1|14|68|30
 `.trim();
 
-const DIA = {L:'Lunes',M:'Martes',X:'Miércoles',J:'Jueves',V:'Viernes',S:'Sábado',D:'Domingo'};
-const LOT = {G:'GEORGIA',F:'FLORIDA',N:'NEW YORK'};
-const HORA = {1230:'12:30:00',1330:'13:30:00',1430:'14:30:00',1900:'19:00:00',2150:'21:50:00',2230:'22:30:00',2330:'23:30:00'};
+const DIA={L:'Lunes',M:'Martes',X:'Miércoles',J:'Jueves',V:'Viernes',S:'Sábado',D:'Domingo'};
+const LOT={G:'GEORGIA',F:'FLORIDA',N:'NEW YORK'};
+const HORA={1230:'12:30:00',1330:'13:30:00',1430:'14:30:00',1900:'19:00:00',2150:'21:50:00',2230:'22:30:00',2330:'23:30:00'};
 
 function parseRaw(raw){
   return raw.split('\n').filter(l=>l.trim()).map(l=>{
-    const p = l.split('|');
+    const p=l.split('|');
     return {
       fecha:'2026-'+p[0].slice(0,2)+'-'+p[0].slice(2,4),
       dia:DIA[p[1]]||p[1],
       loteria:LOT[p[2]]||p[2],
       hora:HORA[p[3]]||p[3],
-      e:p[4].padStart(1,'0'),
-      f:p[5].padStart(2,'0'),
-      g:p[6].padStart(2,'0'),
-      h:p[7].padStart(2,'0')
+      e:String(p[4]).padStart(1,'0'),
+      f:String(p[5]).padStart(2,'0'),
+      g:String(p[6]).padStart(2,'0'),
+      h:String(p[7]).padStart(2,'0')
     };
   });
 }
 
-/* ============ PERSISTENCIA ============ */
-const LS_KEY='visionLote2026';
+/* LS_KEY v2 para forzar recarga con el nuevo sorteo */
+const LS_KEY='visionLote2026_v2';
 
 function getData(){
-  const s = localStorage.getItem(LS_KEY);
+  const s=localStorage.getItem(LS_KEY);
   if(!s){
-    const d = parseRaw(RAW);
-    localStorage.setItem(LS_KEY, JSON.stringify(d));
+    const d=parseRaw(RAW);
+    localStorage.setItem(LS_KEY,JSON.stringify(d));
     return d;
   }
   try{ return JSON.parse(s); }catch(e){ return parseRaw(RAW); }
 }
-function saveData(d){ localStorage.setItem(LS_KEY, JSON.stringify(d)); }
+function saveData(d){ localStorage.setItem(LS_KEY,JSON.stringify(d)); }
 
-/* ============ FECHA ============ */
+/* ============ FECHA Y RELOJ ============ */
 (function(){
   const d=new Date();
   const dias=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
@@ -1007,8 +715,18 @@ function saveData(d){ localStorage.setItem(LS_KEY, JSON.stringify(d)); }
     dias[d.getDay()]+', '+d.getDate()+' de '+meses[d.getMonth()]+' de '+d.getFullYear();
 })();
 
+function actualizarReloj(){
+  const d=new Date();
+  const hh=String(d.getHours()).padStart(2,'0');
+  const mm=String(d.getMinutes()).padStart(2,'0');
+  const ss=String(d.getSeconds()).padStart(2,'0');
+  document.getElementById('reloj').textContent=hh+':'+mm+':'+ss;
+}
+actualizarReloj();
+setInterval(actualizarReloj,1000);
+
 /* ============ NAVEGACIÓN ============ */
-function ir(id, btn){
+function ir(id,btn){
   document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -1020,14 +738,26 @@ function ir(id, btn){
   if(id==='m4') renderMetodo4();
 }
 
+/* Refresca la vista actual sin cambiar de pestaña */
+function refrescarVistaActual(){
+  const activa=document.querySelector('section.active');
+  if(!activa) return;
+  const id=activa.id;
+  if(id==='historial') renderHistorial();
+  if(id==='m1') renderMetodo1();
+  if(id==='m2') renderMetodo2();
+  if(id==='m3') renderMetodo3();
+  if(id==='m4') renderMetodo4();
+}
+
 /* ============ HISTORIAL ============ */
 function renderHistorial(){
-  const data = getData();
-  const fL = document.getElementById('fLoteria').value;
-  const fF = document.getElementById('fFecha').value;
-  const tb = document.querySelector('#tablaHistorial tbody');
+  const data=getData();
+  const fL=document.getElementById('fLoteria').value;
+  const fF=document.getElementById('fFecha').value;
+  const tb=document.querySelector('#tablaHistorial tbody');
   tb.innerHTML='';
-  const filtradas = data
+  const filtradas=data
     .filter(r=>(!fL||r.loteria===fL)&&(!fF||r.fecha===fF))
     .sort((a,b)=> a.fecha===b.fecha ? a.hora.localeCompare(b.hora) : b.fecha.localeCompare(a.fecha));
   if(!filtradas.length){
@@ -1046,7 +776,8 @@ function renderHistorial(){
 function borrar(f,l,h){
   if(!confirm('¿Borrar este sorteo?')) return;
   const d=getData().filter(r=>!(r.fecha===f&&r.loteria===l&&r.hora===h));
-  saveData(d); renderHistorial();
+  saveData(d);
+  refrescarVistaActual();
 }
 function limpiarFiltros(){
   document.getElementById('fLoteria').value='';
@@ -1061,35 +792,34 @@ function agregarSorteo(){
   const loteria=document.getElementById('nLoteria').value;
   const hora=document.getElementById('nHora').value;
   const e=document.getElementById('nE').value.trim();
-  const f=document.getElementById('nF').value.trim().padStart(2,'0');
-  const g=document.getElementById('nG').value.trim().padStart(2,'0');
-  const h=document.getElementById('nH').value.trim().padStart(2,'0');
+  const fRaw=document.getElementById('nF').value.trim();
+  const gRaw=document.getElementById('nG').value.trim();
+  const hRaw=document.getElementById('nH').value.trim();
   const msg=document.getElementById('msgActualizar');
-  if(!fecha||e===''||f==='00'||g==='00'||h==='00'||!document.getElementById('nF').value||!document.getElementById('nG').value||!document.getElementById('nH').value){
+
+  if(!fecha||e===''||fRaw===''||gRaw===''||hRaw===''){
     msg.className='msg err'; msg.textContent='Faltan datos.'; return;
   }
-  const d=getData();
-  d.push({fecha,dia,loteria,hora,e,f,g,h});
-  saveData(d);
-  msg.className='msg ok'; msg.textContent='Sorteo agregado correctamente.';
-  ['nE','nF','nG','nH'].forEach(id=>document.getElementById(id).value='');
-}
 
-function importarBulk(){
-  const txt=document.getElementById('bulk').value.trim();
-  const msg=document.getElementById('msgBulk');
-  if(!txt){ msg.className='msg err'; msg.textContent='Nada que importar.'; return; }
-  const d=getData(); let c=0;
-  txt.split('\n').forEach(l=>{
-    const p=l.split('|');
-    if(p.length>=8){
-      d.push({fecha:p[0],dia:p[1],loteria:p[2],hora:p[3],e:p[4],f:p[5].padStart(2,'0'),g:p[6].padStart(2,'0'),h:p[7].padStart(2,'0')});
-      c++;
-    }
-  });
+  const f=fRaw.padStart(2,'0');
+  const g=gRaw.padStart(2,'0');
+  const h=hRaw.padStart(2,'0');
+
+  const d=getData();
+  /* Reemplaza si existe el mismo slot/fecha/hora */
+  const idx=d.findIndex(r=>r.fecha===fecha&&r.loteria===loteria&&r.hora===hora);
+  const nuevo={fecha,dia,loteria,hora,e,f,g,h};
+  if(idx>=0) d[idx]=nuevo; else d.push(nuevo);
   saveData(d);
-  msg.className='msg ok'; msg.textContent=c+' filas importadas.';
-  document.getElementById('bulk').value='';
+
+  msg.className='msg ok';
+  msg.textContent='Sorteo guardado. Historial y pronósticos actualizados.';
+
+  ['nE','nF','nG','nH'].forEach(id=>document.getElementById(id).value='');
+
+  /* Refresca historial y métodos al instante */
+  renderHistorial();
+  renderMetodo1(); renderMetodo2(); renderMetodo3(); renderMetodo4();
 }
 
 function exportar(){
@@ -1106,7 +836,7 @@ function importarJSON(e){
   reader.onload=ev=>{
     try{
       const d=JSON.parse(ev.target.result);
-      if(Array.isArray(d)){ saveData(d); alert('Respaldo importado.'); renderHistorial(); }
+      if(Array.isArray(d)){ saveData(d); alert('Respaldo importado.'); refrescarVistaActual(); }
     }catch(err){ alert('Archivo inválido.'); }
   };
   reader.readAsText(file);
@@ -1128,37 +858,28 @@ function topN(arr,n){
   return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,n).map(x=>x[0]);
 }
 
-/* ============ MÉTODO 1 ============ */
+/* ============ MÉTODOS ============ */
 function metodo1(){
-  const s=agruparSlots(getData());
-  const out={};
+  const s=agruparSlots(getData()); const out={};
   Object.keys(s).forEach(k=>{
     const r=s[k].slice(-30);
     const fV=r.map(x=>x.f), gV=r.map(x=>x.g), hV=r.map(x=>x.h);
     const fC={}; fV.forEach(v=>fC[v]=(fC[v]||0)+1);
     const cand={};
     [...gV,...hV].forEach(v=>{ if(!fC[v]) cand[v]=(cand[v]||0)+1; });
-    const topF = topN(fV,3);
-    const topGH = Object.entries(cand).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
+    const topF=topN(fV,3);
+    const topGH=Object.entries(cand).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
     out[k]={f:[...new Set([...topGH,...topF])].slice(0,3), g:topN(gV,2), h:topN(hV,2)};
   });
   return out;
 }
 function renderMetodo1(){ pintar('resM1', metodo1()); }
 
-/* ============ MÉTODO 2 ============ */
 function metodo2(){
-  const s=agruparSlots(getData());
-  const out={};
+  const s=agruparSlots(getData()); const out={};
   Object.keys(s).forEach(k=>{
     const r=s[k].slice(-40);
     const eSeq=r.map(x=>parseInt(x.e));
-    const trans={};
-    for(let i=0;i<eSeq.length-1;i++){
-      (trans[eSeq[i]]=trans[eSeq[i]]||{});
-      trans[eSeq[i]][eSeq[i+1]]=(trans[eSeq[i]][eSeq[i+1]]||0)+1;
-    }
-    const last=eSeq[eSeq.length-1];
     const fV=r.map(x=>x.f), gV=r.map(x=>x.g), hV=r.map(x=>x.h);
     const fC={}; fV.forEach(v=>fC[v]=(fC[v]||0)+1);
     const lastF=fV[fV.length-1];
@@ -1170,10 +891,8 @@ function metodo2(){
 }
 function renderMetodo2(){ pintar('resM2', metodo2()); }
 
-/* ============ MÉTODO 3 ============ */
 function metodo3(){
-  const s=agruparSlots(getData());
-  const out={};
+  const s=agruparSlots(getData()); const out={};
   Object.keys(s).forEach(k=>{
     const r=s[k].slice(-40);
     const fSeq=r.map(x=>parseInt(x.f));
@@ -1194,18 +913,13 @@ function metodo3(){
 }
 function renderMetodo3(){ pintar('resM3', metodo3()); }
 
-/* ============ MÉTODO 4 ============ */
 function metodo4(){
-  const s=agruparSlots(getData());
-  const out={};
+  const s=agruparSlots(getData()); const out={};
   Object.keys(s).forEach(k=>{
     const r=s[k];
     const fSet=new Set(r.map(x=>x.f));
     const gC={}, hC={};
-    r.forEach(x=>{
-      gC[x.g]=(gC[x.g]||0)+1;
-      hC[x.h]=(hC[x.h]||0)+1;
-    });
+    r.forEach(x=>{ gC[x.g]=(gC[x.g]||0)+1; hC[x.h]=(hC[x.h]||0)+1; });
     const cand={};
     Object.entries(gC).forEach(([v,c])=>{ if(!fSet.has(v)) cand[v]=(cand[v]||0)+c; });
     Object.entries(hC).forEach(([v,c])=>{ if(!fSet.has(v)) cand[v]=(cand[v]||0)+c; });
@@ -1219,45 +933,34 @@ function metodo4(){
 function renderMetodo4(){ pintar('resM4', metodo4()); }
 
 /* ============ PINTAR ============ */
-function pintar(contId, res){
+function pintar(contId,res){
   const cont=document.getElementById(contId);
   const loterias=['GEORGIA','FLORIDA','NEW YORK'];
 
-  // Top 3 global
   const gF={};
   Object.values(res).forEach(slot=>{
-    slot.f.forEach((v,i)=>{
-      if(v&&v!=='--') gF[v]=(gF[v]||0)+(3-i);
-    });
+    slot.f.forEach((v,i)=>{ if(v&&v!=='--') gF[v]=(gF[v]||0)+(3-i); });
   });
   const top3=Object.entries(gF).sort((a,b)=>b[1]-a[1]).slice(0,3);
 
   let html='';
-  html+='<div class="card"><h3>Los 3 mejores pronósticos del día (F · primera)</h3>';
-  html+='<div class="top3">';
+  html+='<div class="card"><h3>Los 3 mejores pronósticos del día (F · primera)</h3><div class="top3">';
   if(top3.length){
-    top3.forEach((t,i)=>{
-      html+='<div class="num"><span class="puesto">#'+(i+1)+'</span>'+t[0]+'</div>';
-    });
-    while(top3.length<3 && false){}
+    top3.forEach((t,i)=>{ html+='<div class="num"><span class="puesto">#'+(i+1)+'</span>'+t[0]+'</div>'; });
   } else {
     html+='<div style="grid-column:1/-1;text-align:center;opacity:.6;padding:20px;">Sin datos.</div>';
   }
   html+='</div></div>';
 
-  // Por lotería
   loterias.forEach(lot=>{
     const fL={};
     Object.keys(res).forEach(k=>{
       if(k.startsWith(lot+'|')){
-        res[k].f.forEach((v,i)=>{
-          if(v&&v!=='--') fL[v]=(fL[v]||0)+(3-i);
-        });
+        res[k].f.forEach((v,i)=>{ if(v&&v!=='--') fL[v]=(fL[v]||0)+(3-i); });
       }
     });
     const top2=Object.entries(fL).sort((a,b)=>b[1]-a[1]).slice(0,2);
-    html+='<div class="card"><h3>'+lot+' · Top 2 del día</h3>';
-    html+='<div class="lot-grid">';
+    html+='<div class="card"><h3>'+lot+' · Top 2 del día</h3><div class="lot-grid">';
     html+='<div class="lot-box"><h4>Mejores F (primera)</h4><div class="lot-top2">';
     if(top2.length){
       top2.forEach(t=>{ html+='<div class="n"><small>F</small>'+t[0]+'</div>'; });
@@ -1265,12 +968,14 @@ function pintar(contId, res){
       html+='<div class="n" style="grid-column:1/-1;opacity:.5;">--</div>';
     }
     html+='</div></div>';
-    // G y H del slot más fuerte
-    const slotFuerte = Object.keys(res).filter(k=>k.startsWith(lot+'|')).sort((a,b)=>{
-      const va = res[a].f[0] ? (fL[res[a].f[0]]||0) : 0;
-      const vb = res[b].f[0] ? (fL[res[b].f[0]]||0) : 0;
-      return vb-va;
-    })[0];
+
+    const slotsLot=Object.keys(res).filter(k=>k.startsWith(lot+'|'));
+    let slotFuerte=slotsLot[0];
+    slotsLot.forEach(k=>{
+      const va=res[slotFuerte].f[0]?(fL[res[slotFuerte].f[0]]||0):0;
+      const vb=res[k].f[0]?(fL[res[k].f[0]]||0):0;
+      if(vb>va) slotFuerte=k;
+    });
     if(slotFuerte){
       const r=res[slotFuerte];
       html+='<div class="lot-box"><h4>Pick 4 del slot más fuerte ('+slotFuerte.split('|')[1]+')</h4>';
@@ -1282,7 +987,7 @@ function pintar(contId, res){
     html+='</div></div>';
   });
 
-  html+='<div class="nota">Se recalcula automáticamente al abrir esta ventana, usando la última actualización del historial.</div>';
+  html+='<div class="nota">Se recalcula automáticamente al abrir esta ventana y al guardar nuevos sorteos.</div>';
   cont.innerHTML=html;
 }
 
