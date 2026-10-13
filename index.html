@@ -2,206 +2,329 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vision Lota 2026</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vision Lote 2026</title>
 <style>
   :root{
-    --bg:#0a1a2f;
-    --bg2:#0d2440;
+    --bg:#08172b;
+    --bg2:#0e2544;
+    --bg3:#132f55;
     --gold:#d4af37;
     --gold2:#ffd700;
     --line:#1e3a5f;
-    --red:#c0392b;
+    --red:#e74c3c;
+    --green:#2ecc71;
   }
-  *{box-sizing:border-box;}
+  *{box-sizing:border-box;margin:0;padding:0;}
   body{
-    margin:0;
     background:var(--bg);
     color:var(--gold);
-    font-family:'Segoe UI',Arial,sans-serif;
+    font-family:'Segoe UI',Roboto,Arial,sans-serif;
+    min-height:100vh;
   }
   header{
     text-align:center;
-    padding:18px 10px 10px;
+    padding:22px 12px 16px;
+    background:linear-gradient(180deg,#08172b 0%,#0e2544 100%);
     border-bottom:2px solid var(--gold);
-    background:linear-gradient(180deg,#0a1a2f,#0d2440);
   }
   header h1{
-    margin:0;
-    font-size:28px;
-    letter-spacing:3px;
+    font-size:32px;
+    letter-spacing:5px;
     color:var(--gold2);
-    text-shadow:0 0 8px rgba(212,175,55,.5);
+    text-shadow:0 0 12px rgba(255,215,0,.4);
+    font-weight:700;
   }
-  #fechaActual{
-    margin-top:6px;
-    font-size:14px;
+  header .fecha{
+    margin-top:8px;
+    font-size:15px;
     color:var(--gold);
-    opacity:.85;
+    opacity:.9;
+    letter-spacing:1px;
   }
   nav{
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
-    gap:8px;
-    padding:12px;
+    gap:6px;
+    padding:14px 10px;
     background:var(--bg2);
     border-bottom:1px solid var(--line);
     position:sticky;
     top:0;
-    z-index:10;
+    z-index:20;
   }
   nav button{
     background:transparent;
     color:var(--gold);
-    border:1px solid var(--gold);
-    padding:8px 14px;
-    border-radius:6px;
+    border:1px solid var(--line);
+    padding:9px 16px;
+    border-radius:8px;
     cursor:pointer;
     font-size:13px;
-    transition:.2s;
+    font-weight:600;
+    letter-spacing:.5px;
+    transition:all .2s;
   }
-  nav button:hover,nav button.active{
+  nav button:hover{
+    border-color:var(--gold);
+    background:rgba(212,175,55,.08);
+  }
+  nav button.active{
     background:var(--gold);
     color:var(--bg);
-    font-weight:bold;
+    border-color:var(--gold2);
+    box-shadow:0 0 12px rgba(212,175,55,.4);
   }
-  main{padding:16px;max-width:1300px;margin:0 auto;}
+  main{
+    padding:20px 16px;
+    max-width:1200px;
+    margin:0 auto;
+  }
   section{display:none;}
-  section.active{display:block;}
+  section.active{display:block;animation:fade .3s;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
   h2{
     color:var(--gold2);
+    font-size:20px;
+    margin-bottom:14px;
+    padding-bottom:8px;
     border-bottom:1px solid var(--line);
-    padding-bottom:6px;
-    margin-top:0;
+    letter-spacing:1px;
   }
-  h3{color:var(--gold2);margin:14px 0 6px;font-size:16px;}
+  h3{
+    color:var(--gold2);
+    font-size:15px;
+    margin:0 0 10px;
+    letter-spacing:1px;
+  }
   .card{
     background:var(--bg2);
     border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:16px;
+  }
+  .top3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:10px;
+  }
+  .top3 .num{
+    background:var(--bg);
+    border:2px solid var(--gold);
+    border-radius:10px;
+    padding:14px 8px;
+    text-align:center;
+    font-size:36px;
+    font-weight:800;
+    color:var(--gold2);
+    letter-spacing:4px;
+    text-shadow:0 0 10px rgba(255,215,0,.35);
+  }
+  .top3 .num .puesto{
+    display:block;
+    font-size:11px;
+    color:var(--gold);
+    opacity:.75;
+    letter-spacing:2px;
+    margin-bottom:4px;
+    font-weight:600;
+  }
+  .lot-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:12px;
+  }
+  .lot-box{
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px;
+  }
+  .lot-box h4{
+    color:var(--gold2);
+    font-size:13px;
+    letter-spacing:2px;
+    margin-bottom:10px;
+    padding-bottom:6px;
+    border-bottom:1px dashed var(--line);
+  }
+  .lot-top2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+  .lot-top2 .n{
+    background:var(--bg2);
+    border:1px solid var(--gold);
     border-radius:8px;
-    padding:12px;
-    margin-bottom:12px;
+    text-align:center;
+    padding:10px 4px;
+    font-size:26px;
+    font-weight:700;
+    color:var(--gold2);
+    letter-spacing:3px;
+  }
+  .lot-top2 .n small{
+    display:block;
+    font-size:10px;
+    color:var(--gold);
+    opacity:.7;
+    letter-spacing:1px;
+    margin-bottom:3px;
+    font-weight:500;
   }
   table{
     width:100%;
     border-collapse:collapse;
-    font-size:13px;
+    font-size:12px;
   }
   th,td{
-    padding:6px 8px;
+    padding:7px 6px;
     border-bottom:1px solid var(--line);
     text-align:center;
   }
-  th{color:var(--gold2);background:#0a1a2f;position:sticky;top:0;}
-  tr:hover{background:#102a4a;}
-  .hist-wrap{max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:8px;}
-  input,select{
-    background:#0a1a2f;
+  th{
+    color:var(--gold2);
+    background:var(--bg);
+    font-size:11px;
+    letter-spacing:1px;
+    position:sticky;
+    top:0;
+  }
+  tr:hover td{background:rgba(212,175,55,.05);}
+  .hist-wrap{
+    max-height:540px;
+    overflow:auto;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--bg2);
+  }
+  input,select,textarea{
+    background:var(--bg);
     color:var(--gold);
     border:1px solid var(--line);
-    padding:6px 8px;
-    border-radius:5px;
+    padding:9px 10px;
+    border-radius:7px;
     font-size:13px;
     width:100%;
+    font-family:inherit;
+  }
+  input:focus,select:focus,textarea:focus{
+    outline:none;
+    border-color:var(--gold);
   }
   .form-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-    gap:8px;
-    margin-bottom:10px;
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:10px;
+    margin-bottom:12px;
   }
-  button.action{
+  label{
+    display:block;
+    font-size:11px;
+    color:var(--gold);
+    opacity:.75;
+    margin-bottom:4px;
+    letter-spacing:.5px;
+  }
+  .btn{
     background:var(--gold);
     color:var(--bg);
     border:none;
-    padding:9px 16px;
-    border-radius:6px;
+    padding:11px 22px;
+    border-radius:8px;
     cursor:pointer;
-    font-weight:bold;
+    font-weight:700;
     font-size:13px;
+    letter-spacing:1px;
+    transition:all .2s;
   }
-  button.action:hover{background:var(--gold2);}
-  button.del{
+  .btn:hover{background:var(--gold2);transform:translateY(-1px);}
+  .btn-sec{
+    background:transparent;
+    color:var(--gold);
+    border:1px solid var(--gold);
+    padding:9px 16px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.5px;
+  }
+  .btn-sec:hover{background:rgba(212,175,55,.1);}
+  .btn-del{
     background:transparent;
     color:var(--red);
     border:1px solid var(--red);
     padding:3px 8px;
-    border-radius:4px;
+    border-radius:5px;
     cursor:pointer;
-    font-size:11px;
+    font-size:10px;
+    font-weight:700;
   }
-  .pred-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:12px;
-  }
-  .pred-box{
-    background:#0a1a2f;
-    border:1px solid var(--gold);
-    border-radius:8px;
-    padding:12px;
-  }
-  .pred-box .titulo{
-    color:var(--gold2);
-    font-size:13px;
-    margin-bottom:8px;
-    border-bottom:1px dashed var(--line);
-    padding-bottom:4px;
-  }
-  .num-grande{
-    font-size:28px;
-    color:var(--gold2);
-    font-weight:bold;
-    letter-spacing:3px;
-  }
-  .num-alt{
-    font-size:15px;
-    color:var(--gold);
-    margin-top:4px;
-  }
-  .tag{
-    display:inline-block;
-    background:#0a1a2f;
-    border:1px solid var(--line);
-    color:var(--gold);
-    padding:2px 7px;
-    border-radius:10px;
-    font-size:11px;
-    margin:2px;
-  }
-  .filtro{
+  .btn-del:hover{background:var(--red);color:#fff;}
+  .filtros{
     display:flex;
     gap:8px;
     flex-wrap:wrap;
-    margin-bottom:10px;
+    margin-bottom:12px;
+    align-items:end;
   }
-  .filtro input,.filtro select{width:auto;min-width:130px;}
+  .filtros > div{flex:0 0 auto;min-width:150px;}
   .msg{
-    padding:8px;
-    border-radius:5px;
-    margin-top:8px;
+    padding:10px 14px;
+    border-radius:7px;
+    margin-top:10px;
     font-size:13px;
+    font-weight:600;
   }
-  .msg.ok{background:#0d3a1e;color:#7fffa0;border:1px solid #1e7a3e;}
-  .msg.err{background:#3a0d0d;color:#ff8a8a;border:1px solid #7a1e1e;}
-  .nota{font-size:12px;opacity:.75;margin-top:6px;}
+  .msg.ok{background:rgba(46,204,113,.15);color:var(--green);border:1px solid var(--green);}
+  .msg.err{background:rgba(231,76,60,.15);color:var(--red);border:1px solid var(--red);}
+  .nota{
+    font-size:12px;
+    opacity:.7;
+    margin-top:8px;
+    line-height:1.5;
+  }
+  .badge{
+    display:inline-block;
+    background:var(--bg3);
+    border:1px solid var(--line);
+    color:var(--gold);
+    padding:3px 10px;
+    border-radius:20px;
+    font-size:11px;
+    margin:0 4px 4px 0;
+  }
+  .metodo-desc{
+    background:var(--bg2);
+    border-left:3px solid var(--gold);
+    padding:10px 14px;
+    border-radius:6px;
+    margin-bottom:14px;
+    font-size:12px;
+    line-height:1.5;
+    opacity:.9;
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>VISION LOTA 2026</h1>
-  <div id="fechaActual"></div>
+  <h1>VISION LOTE 2026</h1>
+  <div class="fecha" id="fechaActual">Cargando...</div>
 </header>
 
 <nav>
-  <button data-sec="historial" class="active">Historial</button>
-  <button data-sec="actualizar">Actualizar</button>
-  <button data-sec="m1">Método 1 · Caos Heurístico</button>
-  <button data-sec="m2">Método 2 · Caos Formal</button>
-  <button data-sec="m3">Método 3 · Caos Estricto F</button>
-  <button data-sec="m4">Método 4 · Recurrencia G/H→F</button>
+  <button onclick="ir('historial',this)" class="active">Historial</button>
+  <button onclick="ir('actualizar',this)">Actualizar</button>
+  <button onclick="ir('m1',this)">Método 1</button>
+  <button onclick="ir('m2',this)">Método 2</button>
+  <button onclick="ir('m3',this)">Método 3</button>
+  <button onclick="ir('m4',this)">Método 4</button>
 </nav>
 
 <main>
@@ -209,16 +332,22 @@
   <!-- HISTORIAL -->
   <section id="historial" class="active">
     <h2>Historial de sorteos</h2>
-    <div class="filtro">
-      <select id="fLoteria">
-        <option value="">Todas las loterías</option>
-        <option>GEORGIA</option>
-        <option>FLORIDA</option>
-        <option>NEW YORK</option>
-      </select>
-      <input type="date" id="fFecha">
-      <button class="action" onclick="renderHistorial()">Filtrar</button>
-      <button class="action" onclick="limpiarFiltros()">Limpiar</button>
+    <div class="filtros">
+      <div>
+        <label>Lotería</label>
+        <select id="fLoteria">
+          <option value="">Todas</option>
+          <option>GEORGIA</option>
+          <option>FLORIDA</option>
+          <option>NEW YORK</option>
+        </select>
+      </div>
+      <div>
+        <label>Fecha</label>
+        <input type="date" id="fFecha">
+      </div>
+      <button class="btn-sec" onclick="renderHistorial()">Filtrar</button>
+      <button class="btn-sec" onclick="limpiarFiltros()">Limpiar</button>
     </div>
     <div class="hist-wrap">
       <table id="tablaHistorial">
@@ -231,981 +360,934 @@
         <tbody></tbody>
       </table>
     </div>
-    <div class="nota">La columna F es la que más paga en Pick 3. G y H son las que pagan en Pick 4.</div>
+    <div class="nota">F (primera) es el par de 2 dígitos que más paga en Pick 3. G y H forman el Pick 4.</div>
   </section>
 
   <!-- ACTUALIZAR -->
   <section id="actualizar">
     <h2>Actualizar base de datos</h2>
     <div class="card">
+      <h3>Agregar un sorteo</h3>
       <div class="form-grid">
-        <input type="date" id="nFecha">
-        <select id="nDia">
-          <option>Lunes</option><option>Martes</option><option>Miércoles</option>
-          <option>Jueves</option><option>Viernes</option><option>Sábado</option><option>Domingo</option>
-        </select>
-        <select id="nLoteria">
-          <option>GEORGIA</option><option>FLORIDA</option><option>NEW YORK</option>
-        </select>
-        <select id="nHora">
-          <option>12:30:00</option><option>13:30:00</option><option>14:30:00</option>
-          <option>19:00:00</option><option>21:50:00</option><option>22:30:00</option>
-          <option>23:30:00</option>
-        </select>
-        <input type="text" id="nE" placeholder="Centena (0-9)" maxlength="1">
-        <input type="text" id="nF" placeholder="Primera (00-99)" maxlength="2">
-        <input type="text" id="nG" placeholder="Segunda (00-99)" maxlength="2">
-        <input type="text" id="nH" placeholder="Tercera (00-99)" maxlength="2">
+        <div><label>Fecha</label><input type="date" id="nFecha"></div>
+        <div><label>Día</label>
+          <select id="nDia">
+            <option>Lunes</option><option>Martes</option><option>Miércoles</option>
+            <option>Jueves</option><option>Viernes</option><option>Sábado</option><option>Domingo</option>
+          </select>
+        </div>
+        <div><label>Lotería</label>
+          <select id="nLoteria"><option>GEORGIA</option><option>FLORIDA</option><option>NEW YORK</option></select>
+        </div>
+        <div><label>Hora</label>
+          <select id="nHora">
+            <option>12:30:00</option><option>13:30:00</option><option>14:30:00</option>
+            <option>19:00:00</option><option>21:50:00</option><option>22:30:00</option><option>23:30:00</option>
+          </select>
+        </div>
+        <div><label>Centena (E)</label><input id="nE" maxlength="1" placeholder="0-9"></div>
+        <div><label>Primera (F)</label><input id="nF" maxlength="2" placeholder="00-99"></div>
+        <div><label>Segunda (G)</label><input id="nG" maxlength="2" placeholder="00-99"></div>
+        <div><label>Tercera (H)</label><input id="nH" maxlength="2" placeholder="00-99"></div>
       </div>
-      <button class="action" onclick="agregarSorteo()">Agregar sorteo</button>
+      <button class="btn" onclick="agregarSorteo()">Agregar sorteo</button>
       <div id="msgActualizar"></div>
     </div>
     <div class="card">
       <h3>Importar en bloque</h3>
-      <div class="nota">Pega filas con formato: fecha|día|lotería|hora|E|F|G|H (una por línea)</div>
-      <textarea id="bulk" rows="6" style="width:100%;background:#0a1a2f;color:var(--gold);border:1px solid var(--line);border-radius:5px;padding:8px;font-size:12px;"></textarea>
-      <button class="action" style="margin-top:8px;" onclick="importarBulk()">Importar</button>
+      <div class="nota">Una fila por línea con formato: fecha|día|lotería|hora|E|F|G|H</div>
+      <textarea id="bulk" rows="5" placeholder="2026-10-14|Martes|GEORGIA|12:30:00|3|45|67|89"></textarea>
+      <button class="btn" style="margin-top:10px;" onclick="importarBulk()">Importar</button>
       <div id="msgBulk"></div>
+    </div>
+    <div class="card">
+      <h3>Respaldo</h3>
+      <div class="nota">Descarga una copia de tu historial para no perderlo si borras el navegador.</div>
+      <button class="btn-sec" style="margin-top:8px;" onclick="exportar()">Exportar JSON</button>
+      <input type="file" id="fileImport" accept=".json" style="margin-top:10px;" onchange="importarJSON(event)">
     </div>
   </section>
 
   <!-- MÉTODO 1 -->
   <section id="m1">
     <h2>Método 1 · Caos Heurístico</h2>
-    <div class="nota">Recurrencia, atractores estadísticos y predictibilidad local.</div>
+    <div class="metodo-desc">
+      Recurrencia, atractores estadísticos, predictibilidad local y sensibilidad a condiciones iniciales sobre el historial completo del slot (lotería + hora).
+    </div>
     <div id="resM1"></div>
   </section>
 
   <!-- MÉTODO 2 -->
   <section id="m2">
     <h2>Método 2 · Caos Formal</h2>
-    <div class="nota">Mapa de retorno, entropía de permutación, espacio de fases.</div>
+    <div class="metodo-desc">
+      Mapa de retorno de centenas, entropía de permutación, dimensión de correlación y reconstrucción del espacio de fases.
+    </div>
     <div id="resM2"></div>
   </section>
 
   <!-- MÉTODO 3 -->
   <section id="m3">
     <h2>Método 3 · Caos Estricto sobre F</h2>
-    <div class="nota">Embedding con retardo + vecinos cercanos sobre la serie de primera.</div>
+    <div class="metodo-desc">
+      Embedding con retardo sobre la serie de primera (F), búsqueda de vecinos cercanos en el espacio de fases y predicción por dinámica.
+    </div>
     <div id="resM3"></div>
   </section>
 
   <!-- MÉTODO 4 -->
   <section id="m4">
     <h2>Método 4 · Recurrencia G/H → F</h2>
-    <div class="nota">Números que salen en segunda o tercera y aún no han pasado a primera.</div>
+    <div class="metodo-desc">
+      Números que han salido en segunda (G) o tercera (H) y que aún no han pasado a primera (F) en ese mismo slot.
+    </div>
     <div id="resM4"></div>
   </section>
 
 </main>
 
 <script>
-/* =========================================================
-   DATOS INICIALES (historial completo)
-   Formato: fecha|día|lotería|hora|E|F|G|H
-   ========================================================= */
-const RAW = `2026-08-01|Sábado|GEORGIA|12:30:00|6|33|32|45
-2026-08-01|Sábado|FLORIDA|13:30:00|5|92|68|71
-2026-08-01|Sábado|NEW YORK|14:30:00|2|76|08|13
-2026-08-01|Sábado|GEORGIA|19:00:00|5|87|87|50
-2026-08-01|Sábado|FLORIDA|21:50:00|3|13|08|80
-2026-08-01|Sábado|NEW YORK|22:30:00|5|55|59|22
-2026-08-01|Sábado|GEORGIA|23:30:00|0|37|42|98
-2026-08-02|Domingo|GEORGIA|12:30:00|2|45|56|69
-2026-08-02|Domingo|FLORIDA|13:30:00|4|44|85|86
-2026-08-02|Domingo|NEW YORK|14:30:00|0|78|59|22
-2026-08-02|Domingo|GEORGIA|19:00:00|2|71|96|44
-2026-08-02|Domingo|FLORIDA|21:50:00|4|72|18|70
-2026-08-02|Domingo|NEW YORK|22:30:00|2|46|93|88
-2026-08-02|Domingo|GEORGIA|23:30:00|8|21|62|65
-2026-08-03|Lunes|GEORGIA|12:30:00|8|49|22|63
-2026-08-03|Lunes|FLORIDA|13:30:00|4|64|46|96
-2026-08-03|Lunes|NEW YORK|14:30:00|5|58|31|21
-2026-08-03|Lunes|GEORGIA|19:00:00|4|73|36|16
-2026-08-03|Lunes|FLORIDA|21:50:00|0|43|38|09
-2026-08-03|Lunes|NEW YORK|22:30:00|8|73|58|06
-2026-08-03|Lunes|GEORGIA|23:30:00|1|23|26|16
-2026-08-04|Martes|GEORGIA|12:30:00|4|77|57|65
-2026-08-04|Martes|FLORIDA|13:30:00|5|82|18|16
-2026-08-04|Martes|NEW YORK|14:30:00|0|70|87|98
-2026-08-04|Martes|GEORGIA|19:00:00|7|66|75|23
-2026-08-04|Martes|FLORIDA|21:50:00|6|50|62|28
-2026-08-04|Martes|NEW YORK|22:30:00|0|91|92|26
-2026-08-04|Martes|GEORGIA|23:30:00|6|07|47|95
-2026-08-05|Miércoles|GEORGIA|12:30:00|3|12|23|93
-2026-08-05|Miércoles|FLORIDA|13:30:00|7|76|39|07
-2026-08-05|Miércoles|NEW YORK|14:30:00|1|85|70|82
-2026-08-05|Miércoles|GEORGIA|19:00:00|0|89|20|83
-2026-08-05|Miércoles|FLORIDA|21:50:00|1|52|09|41
-2026-08-05|Miércoles|NEW YORK|22:30:00|4|91|85|49
-2026-08-05|Miércoles|GEORGIA|23:30:00|3|13|00|23
-2026-08-06|Jueves|GEORGIA|12:30:00|9|36|74|24
-2026-08-06|Jueves|FLORIDA|13:30:00|8|69|29|94
-2026-08-06|Jueves|NEW YORK|14:30:00|3|25|83|91
-2026-08-06|Jueves|GEORGIA|19:00:00|0|30|53|88
-2026-08-06|Jueves|FLORIDA|21:50:00|9|56|10|48
-2026-08-06|Jueves|NEW YORK|22:30:00|4|08|61|48
-2026-08-06|Jueves|GEORGIA|23:30:00|5|59|80|55
-2026-08-07|Viernes|GEORGIA|12:30:00|1|52|32|50
-2026-08-07|Viernes|FLORIDA|13:30:00|3|64|80|05
-2026-08-07|Viernes|NEW YORK|14:30:00|7|32|05|88
-2026-08-07|Viernes|GEORGIA|19:00:00|3|93|46|68
-2026-08-07|Viernes|FLORIDA|21:50:00|0|49|77|66
-2026-08-07|Viernes|NEW YORK|22:30:00|6|38|18|96
-2026-08-07|Viernes|GEORGIA|23:30:00|9|19|32|27
-2026-08-08|Sábado|GEORGIA|12:30:00|9|47|37|40
-2026-08-08|Sábado|FLORIDA|13:30:00|1|57|27|21
-2026-08-08|Sábado|NEW YORK|14:30:00|4|48|53|56
-2026-08-08|Sábado|GEORGIA|19:00:00|9|37|70|37
-2026-08-08|Sábado|FLORIDA|21:50:00|6|43|96|97
-2026-08-08|Sábado|NEW YORK|22:30:00|3|79|98|17
-2026-08-08|Sábado|GEORGIA|23:30:00|3|16|31|08
-2026-08-09|Domingo|GEORGIA|12:30:00|4|11|23|32
-2026-08-09|Domingo|FLORIDA|13:30:00|5|31|99|91
-2026-08-09|Domingo|NEW YORK|14:30:00|8|52|33|73
-2026-08-09|Domingo|GEORGIA|19:00:00|2|71|97|95
-2026-08-09|Domingo|FLORIDA|21:50:00|6|72|24|34
-2026-08-09|Domingo|NEW YORK|22:30:00|2|73|88|89
-2026-08-09|Domingo|GEORGIA|23:30:00|4|68|86|68
-2026-08-10|Lunes|GEORGIA|12:30:00|8|18|64|10
-2026-08-10|Lunes|FLORIDA|13:30:00|7|64|50|97
-2026-08-10|Lunes|NEW YORK|14:30:00|1|91|29|20
-2026-08-10|Lunes|GEORGIA|19:00:00|3|72|21|51
-2026-08-10|Lunes|FLORIDA|21:50:00|7|43|94|75
-2026-08-10|Lunes|NEW YORK|22:30:00|2|54|29|87
-2026-08-10|Lunes|GEORGIA|23:30:00|0|94|92|56
-2026-08-11|Martes|GEORGIA|12:30:00|9|88|27|65
-2026-08-11|Martes|FLORIDA|13:30:00|2|75|75|05
-2026-08-11|Martes|NEW YORK|14:30:00|1|17|99|90
-2026-08-11|Martes|GEORGIA|19:00:00|8|91|72|52
-2026-08-11|Martes|FLORIDA|21:50:00|5|39|55|91
-2026-08-11|Martes|NEW YORK|22:30:00|5|57|06|36
-2026-08-11|Martes|GEORGIA|23:30:00|7|18|06|05
-2026-08-12|Miércoles|GEORGIA|12:30:00|9|51|97|27
-2026-08-12|Miércoles|FLORIDA|13:30:00|4|64|85|58
-2026-08-12|Miércoles|NEW YORK|14:30:00|0|14|36|89
-2026-08-12|Miércoles|GEORGIA|19:00:00|6|15|06|18
-2026-08-12|Miércoles|FLORIDA|21:50:00|2|81|56|51
-2026-08-12|Miércoles|NEW YORK|22:30:00|0|57|24|58
-2026-08-12|Miércoles|GEORGIA|23:30:00|1|43|46|87
-2026-08-13|Jueves|GEORGIA|12:30:00|7|62|79|00
-2026-08-13|Jueves|FLORIDA|13:30:00|6|64|3|84
-2026-08-13|Jueves|NEW YORK|14:30:00|1|28|34|66
-2026-08-13|Jueves|GEORGIA|19:00:00|3|78|88|25
-2026-08-13|Jueves|FLORIDA|21:50:00|3|20|83|35
-2026-08-13|Jueves|NEW YORK|22:30:00|4|93|5|79
-2026-08-13|Jueves|GEORGIA|23:30:00|9|97|83|84
-2026-08-14|Viernes|GEORGIA|12:30:00|0|17|70|0
-2026-08-14|Viernes|FLORIDA|13:30:00|9|2|53|93
-2026-08-14|Viernes|NEW YORK|14:30:00|8|80|28|94
-2026-08-14|Viernes|GEORGIA|19:00:00|5|10|38|59
-2026-08-14|Viernes|FLORIDA|21:50:00|2|55|67|58
-2026-08-14|Viernes|NEW YORK|22:30:00|0|21|41|61
-2026-08-14|Viernes|GEORGIA|23:30:00|1|57|72|60
-2026-08-15|Sábado|GEORGIA|12:30:00|2|33|74|52
-2026-08-15|Sábado|FLORIDA|13:30:00|1|82|13|66
-2026-08-15|Sábado|NEW YORK|14:30:00|5|23|9|74
-2026-08-15|Sábado|GEORGIA|19:00:00|2|84|71|98
-2026-08-15|Sábado|FLORIDA|21:50:00|9|9|59|21
-2026-08-15|Sábado|NEW YORK|22:30:00|2|25|38|36
-2026-08-15|Sábado|GEORGIA|23:30:00|2|92|79|60
-2026-08-16|Domingo|GEORGIA|12:30:00|2|92|30|87
-2026-08-16|Domingo|FLORIDA|13:30:00|4|74|49|14
-2026-08-16|Domingo|NEW YORK|14:30:00|4|85|18|7
-2026-08-16|Domingo|GEORGIA|19:00:00|0|55|66|69
-2026-08-16|Domingo|FLORIDA|21:50:00|1|62|81|33
-2026-08-16|Domingo|NEW YORK|22:30:00|4|29|80|34
-2026-08-16|Domingo|GEORGIA|23:30:00|3|36|90|89
-2026-08-17|Lunes|GEORGIA|12:30:00|7|79|96|50
-2026-08-17|Lunes|FLORIDA|13:30:00|0|22|30|67
-2026-08-17|Lunes|NEW YORK|14:30:00|0|3|83|70
-2026-08-17|Lunes|GEORGIA|19:00:00|6|19|40|61
-2026-08-17|Lunes|FLORIDA|21:50:00|7|66|33|40
-2026-08-17|Lunes|NEW YORK|22:30:00|9|52|52|31
-2026-08-17|Lunes|GEORGIA|23:30:00|3|8|89|30
-2026-08-18|Martes|GEORGIA|12:30:00|9|51|22|47
-2026-08-18|Martes|FLORIDA|13:30:00|3|44|92|8
-2026-08-18|Martes|NEW YORK|14:30:00|5|82|15|13
-2026-08-18|Martes|GEORGIA|19:00:00|3|66|20|75
-2026-08-18|Martes|FLORIDA|21:50:00|8|96|43|32
-2026-08-18|Martes|NEW YORK|22:30:00|4|15|92|56
-2026-08-18|Martes|GEORGIA|23:30:00|0|3|32|6
-2026-08-19|Miércoles|GEORGIA|12:30:00|0|43|77|43
-2026-08-19|Miércoles|FLORIDA|13:30:00|6|70|85|24
-2026-08-19|Miércoles|NEW YORK|14:30:00|4|3|58|34
-2026-08-19|Miércoles|GEORGIA|19:00:00|8|15|29|9
-2026-08-19|Miércoles|FLORIDA|21:50:00|1|60|68|14
-2026-08-19|Miércoles|NEW YORK|22:30:00|2|90|0|72
-2026-08-19|Miércoles|GEORGIA|23:30:00|8|95|96|12
-2026-08-20|Jueves|GEORGIA|12:30:00|6|92|57|11
-2026-08-20|Jueves|FLORIDA|13:30:00|4|52|76|54
-2026-08-20|Jueves|NEW YORK|14:30:00|2|25|17|18
-2026-08-20|Jueves|GEORGIA|19:00:00|1|76|9|54
-2026-08-20|Jueves|FLORIDA|21:50:00|5|18|54|89
-2026-08-20|Jueves|NEW YORK|22:30:00|9|7|26|15
-2026-08-20|Jueves|GEORGIA|23:30:00|8|18|75|60
-2026-08-21|Viernes|GEORGIA|12:30:00|4|16|59|97
-2026-08-21|Viernes|FLORIDA|13:30:00|9|50|92|68
-2026-08-21|Viernes|NEW YORK|14:30:00|9|75|99|53
-2026-08-21|Viernes|GEORGIA|19:00:00|8|85|95|84
-2026-08-21|Viernes|FLORIDA|21:50:00|0|54|16|8
-2026-08-21|Viernes|NEW YORK|22:30:00|2|41|79|40
-2026-08-21|Viernes|GEORGIA|23:30:00|0|84|41|94
-2026-08-22|Sábado|GEORGIA|12:30:00|9|59|16|91
-2026-08-22|Sábado|FLORIDA|13:30:00|3|79|5|2
-2026-08-22|Sábado|NEW YORK|14:30:00|5|58|88|97
-2026-08-22|Sábado|GEORGIA|19:00:00|8|55|32|30
-2026-08-22|Sábado|FLORIDA|21:50:00|6|89|11|37
-2026-08-22|Sábado|NEW YORK|22:30:00|5|71|85|50
-2026-08-22|Sábado|GEORGIA|23:30:00|6|56|64|58
-2026-08-23|Domingo|GEORGIA|12:30:00|1|67|86|38
-2026-08-23|Domingo|FLORIDA|13:30:00|7|60|28|63
-2026-08-23|Domingo|NEW YORK|14:30:00|7|65|95|32
-2026-08-23|Domingo|GEORGIA|19:00:00|3|23|32|52
-2026-08-23|Domingo|FLORIDA|21:50:00|8|44|43|53
-2026-08-23|Domingo|NEW YORK|22:30:00|4|85|1|25
-2026-08-23|Domingo|GEORGIA|23:30:00|2|38|83|49
-2026-08-24|Lunes|GEORGIA|12:30:00|5|22|15|85
-2026-08-24|Lunes|FLORIDA|13:30:00|6|28|98|6
-2026-08-24|Lunes|NEW YORK|14:30:00|8|29|71|93
-2026-08-24|Lunes|GEORGIA|19:00:00|8|98|63|4
-2026-08-24|Lunes|FLORIDA|21:50:00|4|67|2|9
-2026-08-24|Lunes|NEW YORK|22:30:00|6|81|64|42
-2026-08-24|Lunes|GEORGIA|23:30:00|9|9|61|48
-2026-08-25|Martes|GEORGIA|12:30:00|9|35|65|70
-2026-08-25|Martes|FLORIDA|13:30:00|7|55|55|82
-2026-08-25|Martes|NEW YORK|14:30:00|6|82|47|11
-2026-08-25|Martes|GEORGIA|19:00:00|1|21|3|18
-2026-08-25|Martes|FLORIDA|21:50:00|2|99|30|95
-2026-08-25|Martes|NEW YORK|22:30:00|8|63|74|9
-2026-08-25|Martes|GEORGIA|23:30:00|0|2|1|86
-2026-08-26|Miércoles|GEORGIA|12:30:00|2|22|53|51
-2026-08-26|Miércoles|FLORIDA|13:30:00|5|39|83|75
-2026-08-26|Miércoles|NEW YORK|14:30:00|9|7|69|5
-2026-08-26|Miércoles|GEORGIA|19:00:00|0|66|6|35
-2026-08-26|Miércoles|FLORIDA|21:50:00|3|29|25|52
-2026-08-26|Miércoles|NEW YORK|22:30:00|0|68|37|60
-2026-08-26|Miércoles|GEORGIA|23:30:00|5|36|33|28
-2026-08-27|Jueves|GEORGIA|12:30:00|3|97|35|36
-2026-08-27|Jueves|FLORIDA|13:30:00|0|28|83|60
-2026-08-27|Jueves|NEW YORK|14:30:00|0|78|15|40
-2026-08-27|Jueves|GEORGIA|19:00:00|4|94|79|40
-2026-08-27|Jueves|FLORIDA|21:50:00|2|11|17|37
-2026-08-27|Jueves|NEW YORK|22:30:00|7|68|34|75
-2026-08-27|Jueves|GEORGIA|23:30:00|5|98|20|89
-2026-08-28|Viernes|GEORGIA|12:30:00|8|94|32|34
-2026-08-28|Viernes|FLORIDA|13:30:00|4|93|21|60
-2026-08-28|Viernes|NEW YORK|14:30:00|8|43|81|53
-2026-08-28|Viernes|GEORGIA|19:00:00|6|61|41|5
-2026-08-28|Viernes|FLORIDA|21:50:00|6|25|75|29
-2026-08-28|Viernes|NEW YORK|22:30:00|6|48|16|21
-2026-08-28|Viernes|GEORGIA|23:30:00|3|95|51|62
-2026-08-29|Sábado|GEORGIA|12:30:00|6|15|63|91
-2026-08-29|Sábado|FLORIDA|13:30:00|3|71|85|83
-2026-08-29|Sábado|NEW YORK|14:30:00|6|59|35|97
-2026-08-29|Sábado|GEORGIA|19:00:00|4|78|84|81
-2026-08-29|Sábado|FLORIDA|21:50:00|2|4|35|43
-2026-08-29|Sábado|NEW YORK|22:30:00|8|42|62|39
-2026-08-29|Sábado|GEORGIA|23:30:00|2|8|53|24
-2026-08-30|Domingo|GEORGIA|12:30:00|4|20|58|5
-2026-08-30|Domingo|FLORIDA|13:30:00|6|44|48|63
-2026-08-30|Domingo|NEW YORK|14:30:00|1|47|82|39
-2026-08-30|Domingo|GEORGIA|19:00:00|2|23|12|22
-2026-08-30|Domingo|FLORIDA|21:50:00|3|23|4|6
-2026-08-30|Domingo|NEW YORK|22:30:00|0|96|22|45
-2026-08-30|Domingo|GEORGIA|23:30:00|8|62|13|66
-2026-08-31|Lunes|GEORGIA|12:30:00|7|68|12|17
-2026-08-31|Lunes|FLORIDA|13:30:00|4|3|36|89
-2026-08-31|Lunes|NEW YORK|14:30:00|1|15|82|4
-2026-08-31|Lunes|GEORGIA|19:00:00|3|89|22|15
-2026-08-31|Lunes|FLORIDA|21:50:00|0|25|73|95
-2026-08-31|Lunes|NEW YORK|22:30:00|6|64|58|97
-2026-08-31|Lunes|GEORGIA|23:30:00|9|68|85|3
-2026-09-01|Martes|GEORGIA|12:30:00|9|79|45|98
-2026-09-01|Martes|FLORIDA|13:30:00|6|30|97|69
-2026-09-01|Martes|NEW YORK|14:30:00|6|9|26|18
-2026-09-01|Martes|GEORGIA|19:00:00|2|89|24|57
-2026-09-01|Martes|FLORIDA|21:50:00|4|9|25|11
-2026-09-01|Martes|NEW YORK|22:30:00|7|48|56|16
-2026-09-01|Martes|GEORGIA|23:30:00|4|37|84|43
-2026-09-02|Miércoles|GEORGIA|12:30:00|5|63|3|31
-2026-09-02|Miércoles|FLORIDA|13:30:00|3|40|10|95
-2026-09-02|Miércoles|NEW YORK|14:30:00|9|13|16|14
-2026-09-02|Miércoles|GEORGIA|19:00:00|0|87|16|77
-2026-09-02|Miércoles|FLORIDA|21:50:00|2|36|24|93
-2026-09-02|Miércoles|NEW YORK|22:30:00|4|68|12|93
-2026-09-02|Miércoles|GEORGIA|23:30:00|3|18|55|91
-2026-09-03|Jueves|GEORGIA|12:30:00|2|15|19|35
-2026-09-03|Jueves|FLORIDA|13:30:00|3|66|18|83
-2026-09-03|Jueves|NEW YORK|14:30:00|3|94|43|68
-2026-09-03|Jueves|GEORGIA|19:00:00|6|72|2|41
-2026-09-03|Jueves|FLORIDA|21:50:00|7|78|57|6
-2026-09-03|Jueves|NEW YORK|22:30:00|1|16|60|0
-2026-09-03|Jueves|GEORGIA|23:30:00|9|2|65|9
-2026-09-04|Viernes|GEORGIA|12:30:00|3|72|93|8
-2026-09-04|Viernes|FLORIDA|13:30:00|3|9|94|15
-2026-09-04|Viernes|NEW YORK|14:30:00|8|86|56|1
-2026-09-04|Viernes|GEORGIA|19:00:00|4|76|94|92
-2026-09-04|Viernes|FLORIDA|21:50:00|9|59|23|71
-2026-09-04|Viernes|NEW YORK|22:30:00|6|30|47|62
-2026-09-04|Viernes|GEORGIA|23:30:00|4|72|26|78
-2026-09-05|Sábado|GEORGIA|12:30:00|3|23|62|23
-2026-09-05|Sábado|FLORIDA|13:30:00|9|11|99|34
-2026-09-05|Sábado|NEW YORK|14:30:00|4|38|13|49
-2026-09-05|Sábado|GEORGIA|19:00:00|5|77|44|42
-2026-09-05|Sábado|FLORIDA|21:50:00|2|92|52|60
-2026-09-05|Sábado|NEW YORK|22:30:00|0|86|81|71
-2026-09-05|Sábado|GEORGIA|23:30:00|6|83|1|93
-2026-09-06|Domingo|GEORGIA|12:30:00|5|5|10|61
-2026-09-06|Domingo|FLORIDA|13:30:00|1|19|61|32
-2026-09-06|Domingo|NEW YORK|14:30:00|0|77|13|58
-2026-09-06|Domingo|GEORGIA|19:00:00|6|65|47|90
-2026-09-06|Domingo|FLORIDA|21:50:00|2|98|6|81
-2026-09-06|Domingo|NEW YORK|22:30:00|0|90|24|14
-2026-09-06|Domingo|GEORGIA|23:30:00|7|83|68|46
-2026-09-07|Lunes|GEORGIA|12:30:00|2|98|83|40
-2026-09-07|Lunes|FLORIDA|13:30:00|2|39|37|18
-2026-09-07|Lunes|NEW YORK|14:30:00|3|43|44|44
-2026-09-07|Lunes|GEORGIA|19:00:00|1|69|90|63
-2026-09-07|Lunes|FLORIDA|21:50:00|8|25|31|92
-2026-09-07|Lunes|NEW YORK|22:30:00|6|82|72|29
-2026-09-07|Lunes|GEORGIA|23:30:00|0|30|52|93
-2026-09-08|Martes|GEORGIA|12:30:00|7|18|76|63
-2026-09-08|Martes|FLORIDA|13:30:00|3|65|38|19
-2026-09-08|Martes|NEW YORK|14:30:00|6|55|98|72
-2026-09-08|Martes|GEORGIA|19:00:00|8|50|34|16
-2026-09-08|Martes|FLORIDA|21:50:00|9|95|31|76
-2026-09-08|Martes|NEW YORK|22:30:00|1|4|76|25
-2026-09-08|Martes|GEORGIA|23:30:00|5|3|48|65
-2026-09-09|Miércoles|GEORGIA|12:30:00|6|37|73|85
-2026-09-09|Miércoles|FLORIDA|13:30:00|7|40|91|82
-2026-09-09|Miércoles|NEW YORK|14:30:00|3|10|19|59
-2026-09-09|Miércoles|GEORGIA|19:00:00|4|81|40|86
-2026-09-09|Miércoles|FLORIDA|21:50:00|1|66|26|84
-2026-09-09|Miércoles|NEW YORK|22:30:00|0|15|98|49
-2026-09-09|Miércoles|GEORGIA|23:30:00|8|58|25|51
-2026-09-10|Jueves|GEORGIA|12:30:00|4|13|50|71
-2026-09-10|Jueves|FLORIDA|13:30:00|0|89|25|52
-2026-09-10|Jueves|NEW YORK|14:30:00|1|16|56|89
-2026-09-10|Jueves|GEORGIA|19:00:00|8|4|81|84
-2026-09-10|Jueves|FLORIDA|21:50:00|3|69|13|12
-2026-09-10|Jueves|NEW YORK|22:30:00|0|37|56|60
-2026-09-10|Jueves|GEORGIA|23:30:00|0|10|46|58
-2026-09-11|Viernes|GEORGIA|12:30:00|6|76|44|53
-2026-09-11|Viernes|FLORIDA|13:30:00|3|81|61|45
-2026-09-11|Viernes|NEW YORK|14:30:00|6|55|80|2
-2026-09-11|Viernes|GEORGIA|19:00:00|8|51|75|50
-2026-09-11|Viernes|FLORIDA|21:50:00|3|67|51|96
-2026-09-11|Viernes|NEW YORK|22:30:00|9|91|99|14
-2026-09-11|Viernes|GEORGIA|23:30:00|0|56|20|6
-2026-09-12|Sábado|GEORGIA|12:30:00|3|46|30|82
-2026-09-12|Sábado|FLORIDA|13:30:00|2|79|66|7
-2026-09-12|Sábado|NEW YORK|14:30:00|0|97|14|60
-2026-09-12|Sábado|GEORGIA|19:00:00|2|93|4|49
-2026-09-12|Sábado|FLORIDA|21:50:00|9|18|62|45
-2026-09-12|Sábado|NEW YORK|22:30:00|0|15|84|23
-2026-09-12|Sábado|GEORGIA|23:30:00|1|27|98|48
-2026-09-13|Domingo|GEORGIA|12:30:00|6|48|35|74
-2026-09-13|Domingo|FLORIDA|13:30:00|5|38|45|80
-2026-09-13|Domingo|NEW YORK|14:30:00|3|40|72|70
-2026-09-13|Domingo|GEORGIA|19:00:00|3|32|65|52
-2026-09-13|Domingo|FLORIDA|21:50:00|2|21|89|14
-2026-09-13|Domingo|NEW YORK|22:30:00|5|53|32|38
-2026-09-13|Domingo|GEORGIA|23:30:00|0|10|5|60
-2026-09-14|Lunes|GEORGIA|12:30:00|8|67|76|73
-2026-09-14|Lunes|FLORIDA|13:30:00|7|53|22|17
-2026-09-14|Lunes|NEW YORK|14:30:00|6|97|94|94
-2026-09-14|Lunes|GEORGIA|19:00:00|8|98|9|56
-2026-09-14|Lunes|FLORIDA|21:50:00|2|0|89|88
-2026-09-14|Lunes|NEW YORK|22:30:00|5|24|58|35
-2026-09-14|Lunes|GEORGIA|23:30:00|6|47|83|10
-2026-09-15|Martes|GEORGIA|12:30:00|9|8|47|13
-2026-09-15|Martes|FLORIDA|13:30:00|0|2|7|85
-2026-09-15|Martes|NEW YORK|14:30:00|9|65|42|84
-2026-09-15|Martes|GEORGIA|19:00:00|1|2|18|77
-2026-09-15|Martes|FLORIDA|21:50:00|4|5|68|68
-2026-09-15|Martes|NEW YORK|22:30:00|2|73|68|58
-2026-09-15|Martes|GEORGIA|23:30:00|1|11|9|64
-2026-09-16|Miércoles|GEORGIA|12:30:00|1|95|47|17
-2026-09-16|Miércoles|FLORIDA|13:30:00|7|19|99|95
-2026-09-16|Miércoles|NEW YORK|14:30:00|2|58|54|73
-2026-09-16|Miércoles|GEORGIA|19:00:00|1|44|97|0
-2026-09-16|Miércoles|FLORIDA|21:50:00|8|67|78|8
-2026-09-16|Miércoles|NEW YORK|22:30:00|7|30|17|75
-2026-09-16|Miércoles|GEORGIA|23:30:00|0|88|77|81
-2026-09-17|Jueves|GEORGIA|12:30:00|7|2|27|96
-2026-09-17|Jueves|FLORIDA|13:30:00|8|22|99|91
-2026-09-17|Jueves|NEW YORK|14:30:00|7|22|55|69
-2026-09-17|Jueves|GEORGIA|19:00:00|8|10|28|24
-2026-09-17|Jueves|FLORIDA|21:50:00|3|0|89|43
-2026-09-17|Jueves|NEW YORK|22:30:00|1|97|59|69
-2026-09-17|Jueves|GEORGIA|23:30:00|5|85|11|97
-2026-09-18|Viernes|GEORGIA|12:30:00|4|86|79|31
-2026-09-18|Viernes|FLORIDA|13:30:00|4|66|14|72
-2026-09-18|Viernes|NEW YORK|14:30:00|7|63|78|66
-2026-09-18|Viernes|GEORGIA|19:00:00|2|40|4|1
-2026-09-18|Viernes|FLORIDA|21:50:00|8|68|47|4
-2026-09-18|Viernes|NEW YORK|22:30:00|3|9|31|47
-2026-09-18|Viernes|GEORGIA|23:30:00|6|67|29|31
-2026-09-19|Sábado|GEORGIA|12:30:00|8|10|64|44
-2026-09-19|Sábado|FLORIDA|13:30:00|6|33|93|31
-2026-09-19|Sábado|NEW YORK|14:30:00|9|26|74|86
-2026-09-19|Sábado|GEORGIA|19:00:00|3|38|38|6
-2026-09-19|Sábado|FLORIDA|21:50:00|6|9|89|36
-2026-09-19|Sábado|NEW YORK|22:30:00|9|80|84|88
-2026-09-19|Sábado|GEORGIA|23:30:00|2|80|53|62
-2026-09-20|Domingo|GEORGIA|12:30:00|7|97|29|34
-2026-09-20|Domingo|FLORIDA|13:30:00|9|25|77|19
-2026-09-20|Domingo|NEW YORK|14:30:00|9|36|10|35
-2026-09-20|Domingo|GEORGIA|19:00:00|8|58|62|42
-2026-09-20|Domingo|FLORIDA|21:50:00|6|17|88|22
-2026-09-20|Domingo|NEW YORK|22:30:00|6|7|44|7
-2026-09-20|Domingo|GEORGIA|23:30:00|4|73|42|33
-2026-09-21|Lunes|GEORGIA|12:30:00|8|63|99|62
-2026-09-21|Lunes|FLORIDA|13:30:00|9|58|14|61
-2026-09-21|Lunes|NEW YORK|14:30:00|5|62|17|9
-2026-09-21|Lunes|GEORGIA|19:00:00|5|10|48|34
-2026-09-21|Lunes|FLORIDA|21:50:00|5|50|31|8
-2026-09-21|Lunes|NEW YORK|22:30:00|0|46|43|6
-2026-09-21|Lunes|GEORGIA|23:30:00|5|79|26|91
-2026-09-22|Martes|GEORGIA|12:30:00|7|1|21|38
-2026-09-22|Martes|FLORIDA|13:30:00|9|64|28|55
-2026-09-22|Martes|NEW YORK|14:30:00|7|64|84|1
-2026-09-22|Martes|GEORGIA|19:00:00|6|20|15|57
-2026-09-22|Martes|FLORIDA|21:50:00|7|2|26|82
-2026-09-22|Martes|NEW YORK|22:30:00|9|56|11|74
-2026-09-22|Martes|GEORGIA|23:30:00|1|89|35|11
-2026-09-23|Miércoles|GEORGIA|12:30:00|9|35|75|72
-2026-09-23|Miércoles|FLORIDA|13:30:00|5|70|2|58
-2026-09-23|Miércoles|NEW YORK|14:30:00|2|1|72|4
-2026-09-23|Miércoles|GEORGIA|19:00:00|0|2|64|97
-2026-09-23|Miércoles|FLORIDA|21:50:00|0|3|29|79
-2026-09-23|Miércoles|NEW YORK|22:30:00|3|51|3|54
-2026-09-23|Miércoles|GEORGIA|23.30|5|97|1|66
-2026-09-24|Jueves|GEORGIA|12:30:00|2|79|96|68
-2026-09-24|Jueves|FLORIDA|13:30:00|6|59|18|2
-2026-09-24|Jueves|NEW YORK|14:30:00|0|39|1|41
-2026-09-24|Jueves|GEORGIA|19:00:00|2|97|46|68
-2026-09-24|Jueves|FLORIDA|21:50:00|6|63|68|88
-2026-09-24|Jueves|NEW YORK|22:30:00|6|30|29|69
-2026-09-24|Jueves|GEORGIA|23.30|0|19|98|12
-2026-09-25|Viernes|GEORGIA|12:30:00|7|97|04|54
-2026-09-25|Viernes|FLORIDA|13:30:00|5|28|66|28
-2026-09-25|Viernes|NEW YORK|14:30:00|8|98|79|66
-2026-09-25|Viernes|GEORGIA|19:00:00|9|18|61|78
-2026-09-25|Viernes|FLORIDA|21:50:00|5|06|85|90
-2026-09-25|Viernes|NEW YORK|22:30:00|3|58|95|41
-2026-09-25|Viernes|GEORGIA|23.30|3|78|63|64
-2026-09-26|Sábado|GEORGIA|12:30:00|1|40|48|23
-2026-09-26|Sábado|FLORIDA|13:30:00|6|29|69|20
-2026-09-26|Sábado|NEW YORK|14:30:00|5|03|99|61
-2026-09-26|Sábado|GEORGIA|19:00:00|6|15|36|65
-2026-09-26|Sábado|FLORIDA|21:50:00|9|61|36|65
-2026-09-26|Sábado|NEW YORK|22:30:00|0|43|18|04
-2026-09-26|Sábado|GEORGIA|23.30|4|55|22|57
-2026-09-27|Domingo|GEORGIA|12:30:00|1|18|68|23
-2026-09-27|Domingo|FLORIDA|13:30:00|2|02|92|75
-2026-09-27|Domingo|NEW YORK|14:30:00|9|80|90|75
-2026-09-27|Domingo|GEORGIA|19:00:00|0|81|98|47
-2026-09-27|Domingo|FLORIDA|21:50:00|1|47|91|86
-2026-09-27|Domingo|NEW YORK|22:30:00|7|82|96|49
-2026-09-27|Domingo|GEORGIA|23.30|6|63|15|47
-2026-09-28|Lunes|GEORGIA|12:30:00|6|42|73|24
-2026-09-28|Lunes|FLORIDA|13:30:00|7|88|91|68
-2026-09-28|Lunes|NEW YORK|14:30:00|6|13|91|41
-2026-09-28|Lunes|GEORGIA|19:00:00|6|70|27|03
-2026-09-28|Lunes|FLORIDA|21:50:00|1|76|03|99
-2026-09-28|Lunes|NEW YORK|22:30:00|4|73|48|07
-2026-09-28|Lunes|GEORGIA|23.30|2|94|37|70
-2026-09-29|Martes|GEORGIA|12:30:00|0|88|43|75
-2026-09-29|Martes|FLORIDA|13:30:00|0|68|16|37
-2026-09-29|Martes|NEW YORK|14:30:00|9|12|38|36
-2026-09-29|Martes|GEORGIA|19:00:00|7|63|78|91
-2026-09-29|Martes|FLORIDA|21:50:00|4|19|37|56
-2026-09-29|Martes|NEW YORK|22:30:00|2|19|67|17
-2026-09-29|Martes|GEORGIA|23.30|3|27|49|03
-2026-09-30|Miércoles|GEORGIA|12:30:00|8|97|60|26
-2026-09-30|Miércoles|FLORIDA|13:30:00|6|74|95|27
-2026-09-30|Miércoles|NEW YORK|14:30:00|7|29|28|78
-2026-09-30|Miércoles|GEORGIA|19:00:00|6|56|37|33
-2026-09-30|Miércoles|FLORIDA|21:50:00|4|24|14|43
-2026-09-30|Miércoles|NEW YORK|22:30:00|2|25|97|06
-2026-09-30|Miércoles|GEORGIA|23.30|6|39|84|55
-2026-10-01|Jueves|GEORGIA|12:30:00|1|64|40|69
-2026-10-01|Jueves|FLORIDA|13:30:00|3|88|53|62
-2026-10-01|Jueves|NEW YORK|14:30:00|7|00|34|65
-2026-10-01|Jueves|GEORGIA|19:00:00|3|62|01|82
-2026-10-01|Jueves|FLORIDA|21:50:00|3|28|15|57
-2026-10-01|Jueves|NEW YORK|22:30:00|6|46|78|15
-2026-10-01|Jueves|GEORGIA|23.30|2|74|77|75
-2026-10-02|Viernes|GEORGIA|12:30:00|6|71|24|30
-2026-10-02|Viernes|FLORIDA|13:30:00|6|06|92|52
-2026-10-02|Viernes|NEW YORK|14:30:00|0|21|05|53
-2026-10-02|Viernes|GEORGIA|19:00:00|9|36|59|84
-2026-10-02|Viernes|FLORIDA|21:50:00|6|53|56|91
-2026-10-02|Viernes|NEW YORK|22:30:00|8|56|80|50
-2026-10-02|Viernes|GEORGIA|23.30|7|00|65|08
-2026-10-03|Sábado|GEORGIA|12:30:00|5|13|13|74
-2026-10-03|Sábado|FLORIDA|13:30:00|2|85|83|23
-2026-10-03|Sábado|NEW YORK|14:30:00|4|77|21|02
-2026-10-03|Sábado|GEORGIA|19:00:00|5|79|03|67
-2026-10-03|Sábado|FLORIDA|21:50:00|2|90|50|00
-2026-10-03|Sábado|NEW YORK|22:30:00|8|57|06|16
-2026-10-03|Sábado|GEORGIA|23.30|8|98|65|79
-2026-10-04|Domingo|GEORGIA|12:30:00|4|63|89|05
-2026-10-04|Domingo|FLORIDA|13:30:00|1|24|78|11
-2026-10-04|Domingo|NEW YORK|14:30:00|0|94|20|99
-2026-10-04|Domingo|GEORGIA|19:00:00|8|65|95|87
-2026-10-04|Domingo|FLORIDA|21:50:00|9|02|72|83
-2026-10-04|Domingo|NEW YORK|22:30:00|9|91|53|45
-2026-10-04|Domingo|GEORGIA|23.30|6|08|68|38
-2026-10-05|Lunes|GEORGIA|12:30:00|6|33|14|43
-2026-10-05|Lunes|FLORIDA|13:30:00|6|54|14|65
-2026-10-05|Lunes|NEW YORK|14:30:00|1|82|34|34
-2026-10-05|Lunes|GEORGIA|19:00:00|9|44|25|89
-2026-10-05|Lunes|FLORIDA|21:50:00|8|98|95|17
-2026-10-05|Lunes|NEW YORK|22:30:00|5|46|95|94
-2026-10-05|Lunes|GEORGIA|23.30|7|98|18|71
-2026-10-06|Martes|GEORGIA|12:30:00|2|40|53|60
-2026-10-06|Martes|FLORIDA|13:30:00|2|38|87|22
-2026-10-06|Martes|NEW YORK|14:30:00|0|28|74|22
-2026-10-06|Martes|GEORGIA|19:00:00|2|55|13|46
-2026-10-06|Martes|FLORIDA|21:50:00|5|95|71|17
-2026-10-06|Martes|NEW YORK|22:30:00|8|86|68|14
-2026-10-06|Martes|GEORGIA|23.30|2|67|44|14
-2026-10-07|Miércoles|GEORGIA|12:30:00|8|47|12|51
-2026-10-07|Miércoles|FLORIDA|13:30:00|0|46|05|60
-2026-10-07|Miércoles|NEW YORK|14:30:00|2|41|17|82
-2026-10-07|Miércoles|GEORGIA|19:00:00|5|72|93|71
-2026-10-07|Miércoles|FLORIDA|21:50:00|3|30|93|97
-2026-10-07|Miércoles|NEW YORK|22:30:00|3|61|19|15
-2026-10-07|Miércoles|GEORGIA|23.30|8|64|60|29
-2026-10-08|Jueves|GEORGIA|12:30:00|5|02|27|04
-2026-10-08|Jueves|FLORIDA|13:30:00|4|89|19|63
-2026-10-08|Jueves|NEW YORK|14:30:00|5|49|98|74
-2026-10-08|Jueves|GEORGIA|19:00:00|5|17|04|42
-2026-10-08|Jueves|FLORIDA|21:50:00|5|15|28|84
-2026-10-08|Jueves|NEW YORK|22:30:00|7|94|48|59
-2026-10-08|Jueves|GEORGIA|23.30|4|57|71|91
-2026-10-09|Viernes|GEORGIA|12:30:00|0|92|06|93
-2026-10-09|Viernes|FLORIDA|13:30:00|1|74|20|33
-2026-10-09|Viernes|NEW YORK|14:30:00|1|33|62|79
-2026-10-09|Viernes|GEORGIA|19:00:00|6|18|22|71
-2026-10-09|Viernes|FLORIDA|21:50:00|0|97|11|97
-2026-10-09|Viernes|NEW YORK|22:30:00|7|50|86|00
-2026-10-09|Viernes|GEORGIA|23.30|5|53|86|00
-2026-10-10|Sábado|GEORGIA|12:30:00|5|32|53|93
-2026-10-10|Sábado|FLORIDA|13:30:00|7|44|35|47
-2026-10-10|Sábado|NEW YORK|14:30:00|5|06|62|64
-2026-10-10|Sábado|GEORGIA|19:00:00|7|86|17|36
-2026-10-10|Sábado|FLORIDA|21:50:00|1|52|37|53
-2026-10-10|Sábado|NEW YORK|22:30:00|9|23|83|44
-2026-10-10|Sábado|GEORGIA|23.30|9|38|40|66
-2026-10-11|Domingo|GEORGIA|12:30:00|1|23|29|28
-2026-10-11|Domingo|FLORIDA|13:30:00|5|16|53|29
-2026-10-11|Domingo|NEW YORK|14:30:00|1|45|73|78
-2026-10-11|Domingo|GEORGIA|19:00:00|6|47|82|46
-2026-10-11|Domingo|FLORIDA|21:50:00|6|48|77|97
-2026-10-11|Domingo|NEW YORK|22:30:00|3|21|73|19
-2026-10-11|Domingo|GEORGIA|23.30|7|62|55|48
-2026-10-12|Lunes|GEORGIA|12:30:00|6|43|37|16
-2026-10-12|Lunes|FLORIDA|13:30:00|5|08|11|84
-2026-10-12|Lunes|NEW YORK|14:30:00|0|57|40|58
-2026-10-12|Lunes|GEORGIA|19:00:00|5|67|59|27
-2026-10-12|Lunes|FLORIDA|21:50:00|5|98|24|41
-2026-10-12|Lunes|NEW YORK|22:30:00|8|38|33|61
-2026-10-12|Lunes|GEORGIA|23.30|7|42|23|52`;
+/* ============ DATOS ============ */
+/* Formato compacto: MMDD|D|LOT|HHMM|E|F|G|H
+   D: L,M,X,J,V,S,D  |  LOT: G,F,N */
+const RAW = `
+0801|S|G|1230|6|33|32|45
+0801|S|F|1330|5|92|68|71
+0801|S|N|1430|2|76|08|13
+0801|S|G|1900|5|87|87|50
+0801|S|F|2150|3|13|08|80
+0801|S|N|2230|5|55|59|22
+0801|S|G|2330|0|37|42|98
+0802|D|G|1230|2|45|56|69
+0802|D|F|1330|4|44|85|86
+0802|D|N|1430|0|78|59|22
+0802|D|G|1900|2|71|96|44
+0802|D|F|2150|4|72|18|70
+0802|D|N|2230|2|46|93|88
+0802|D|G|2330|8|21|62|65
+0803|L|G|1230|8|49|22|63
+0803|L|F|1330|4|64|46|96
+0803|L|N|1430|5|58|31|21
+0803|L|G|1900|4|73|36|16
+0803|L|F|2150|0|43|38|09
+0803|L|N|2230|8|73|58|06
+0803|L|G|2330|1|23|26|16
+0804|M|G|1230|4|77|57|65
+0804|M|F|1330|5|82|18|16
+0804|M|N|1430|0|70|87|98
+0804|M|G|1900|7|66|75|23
+0804|M|F|2150|6|50|62|28
+0804|M|N|2230|0|91|92|26
+0804|M|G|2330|6|07|47|95
+0805|X|G|1230|3|12|23|93
+0805|X|F|1330|7|76|39|07
+0805|X|N|1430|1|85|70|82
+0805|X|G|1900|0|89|20|83
+0805|X|F|2150|1|52|09|41
+0805|X|N|2230|4|91|85|49
+0805|X|G|2330|3|13|00|23
+0806|J|G|1230|9|36|74|24
+0806|J|F|1330|8|69|29|94
+0806|J|N|1430|3|25|83|91
+0806|J|G|1900|0|30|53|88
+0806|J|F|2150|9|56|10|48
+0806|J|N|2230|4|08|61|48
+0806|J|G|2330|5|59|80|55
+0807|V|G|1230|1|52|32|50
+0807|V|F|1330|3|64|80|05
+0807|V|N|1430|7|32|05|88
+0807|V|G|1900|3|93|46|68
+0807|V|F|2150|0|49|77|66
+0807|V|N|2230|6|38|18|96
+0807|V|G|2330|9|19|32|27
+0808|S|G|1230|9|47|37|40
+0808|S|F|1330|1|57|27|21
+0808|S|N|1430|4|48|53|56
+0808|S|G|1900|9|37|70|37
+0808|S|F|2150|6|43|96|97
+0808|S|N|2230|3|79|98|17
+0808|S|G|2330|3|16|31|08
+0809|D|G|1230|4|11|23|32
+0809|D|F|1330|5|31|99|91
+0809|D|N|1430|8|52|33|73
+0809|D|G|1900|2|71|97|95
+0809|D|F|2150|6|72|24|34
+0809|D|N|2230|2|73|88|89
+0809|D|G|2330|4|68|86|68
+0810|L|G|1230|8|18|64|10
+0810|L|F|1330|7|64|50|97
+0810|L|N|1430|1|91|29|20
+0810|L|G|1900|3|72|21|51
+0810|L|F|2150|7|43|94|75
+0810|L|N|2230|2|54|29|87
+0810|L|G|2330|0|94|92|56
+0811|M|G|1230|9|88|27|65
+0811|M|F|1330|2|75|75|05
+0811|M|N|1430|1|17|99|90
+0811|M|G|1900|8|91|72|52
+0811|M|F|2150|5|39|55|91
+0811|M|N|2230|5|57|06|36
+0811|M|G|2330|7|18|06|05
+0812|X|G|1230|9|51|97|27
+0812|X|F|1330|4|64|85|58
+0812|X|N|1430|0|14|36|89
+0812|X|G|1900|6|15|06|18
+0812|X|F|2150|2|81|56|51
+0812|X|N|2230|0|57|24|58
+0812|X|G|2330|1|43|46|87
+0813|J|G|1230|7|62|79|00
+0813|J|F|1330|6|64|03|84
+0813|J|N|1430|1|28|34|66
+0813|J|G|1900|3|78|88|25
+0813|J|F|2150|3|20|83|35
+0813|J|N|2230|4|93|05|79
+0813|J|G|2330|9|97|83|84
+0814|V|G|1230|0|17|70|00
+0814|V|F|1330|9|02|53|93
+0814|V|N|1430|8|80|28|94
+0814|V|G|1900|5|10|38|59
+0814|V|F|2150|2|55|67|58
+0814|V|N|2230|0|21|41|61
+0814|V|G|2330|1|57|72|60
+0815|S|G|1230|2|33|74|52
+0815|S|F|1330|1|82|13|66
+0815|S|N|1430|5|23|09|74
+0815|S|G|1900|2|84|71|98
+0815|S|F|2150|9|09|59|21
+0815|S|N|2230|2|25|38|36
+0815|S|G|2330|2|92|79|60
+0816|D|G|1230|2|92|30|87
+0816|D|F|1330|4|74|49|14
+0816|D|N|1430|4|85|18|07
+0816|D|G|1900|0|55|66|69
+0816|D|F|2150|1|62|81|33
+0816|D|N|2230|4|29|80|34
+0816|D|G|2330|3|36|90|89
+0817|L|G|1230|7|79|96|50
+0817|L|F|1330|0|22|30|67
+0817|L|N|1430|0|03|83|70
+0817|L|G|1900|6|19|40|61
+0817|L|F|2150|7|66|33|40
+0817|L|N|2230|9|52|52|31
+0817|L|G|2330|3|08|89|30
+0818|M|G|1230|9|51|22|47
+0818|M|F|1330|3|44|92|08
+0818|M|N|1430|5|82|15|13
+0818|M|G|1900|3|66|20|75
+0818|M|F|2150|8|96|43|32
+0818|M|N|2230|4|15|92|56
+0818|M|G|2330|0|03|32|06
+0819|X|G|1230|0|43|77|43
+0819|X|F|1330|6|70|85|24
+0819|X|N|1430|4|03|58|34
+0819|X|G|1900|8|15|29|09
+0819|X|F|2150|1|60|68|14
+0819|X|N|2230|2|90|00|72
+0819|X|G|2330|8|95|96|12
+0820|J|G|1230|6|92|57|11
+0820|J|F|1330|4|52|76|54
+0820|J|N|1430|2|25|17|18
+0820|J|G|1900|1|76|09|54
+0820|J|F|2150|5|18|54|89
+0820|J|N|2230|9|07|26|15
+0820|J|G|2330|8|18|75|60
+0821|V|G|1230|4|16|59|97
+0821|V|F|1330|9|50|92|68
+0821|V|N|1430|9|75|99|53
+0821|V|G|1900|8|85|95|84
+0821|V|F|2150|0|54|16|08
+0821|V|N|2230|2|41|79|40
+0821|V|G|2330|0|84|41|94
+0822|S|G|1230|9|59|16|91
+0822|S|F|1330|3|79|05|02
+0822|S|N|1430|5|58|88|97
+0822|S|G|1900|8|55|32|30
+0822|S|F|2150|6|89|11|37
+0822|S|N|2230|5|71|85|50
+0822|S|G|2330|6|56|64|58
+0823|D|G|1230|1|67|86|38
+0823|D|F|1330|7|60|28|63
+0823|D|N|1430|7|65|95|32
+0823|D|G|1900|3|23|32|52
+0823|D|F|2150|8|44|43|53
+0823|D|N|2230|4|85|01|25
+0823|D|G|2330|2|38|83|49
+0824|L|G|1230|5|22|15|85
+0824|L|F|1330|6|28|98|06
+0824|L|N|1430|8|29|71|93
+0824|L|G|1900|8|98|63|04
+0824|L|F|2150|4|67|02|09
+0824|L|N|2230|6|81|64|42
+0824|L|G|2330|9|09|61|48
+0825|M|G|1230|9|35|65|70
+0825|M|F|1330|7|55|55|82
+0825|M|N|1430|6|82|47|11
+0825|M|G|1900|1|21|03|18
+0825|M|F|2150|2|99|30|95
+0825|M|N|2230|8|63|74|09
+0825|M|G|2330|0|02|01|86
+0826|X|G|1230|2|22|53|51
+0826|X|F|1330|5|39|83|75
+0826|X|N|1430|9|07|69|05
+0826|X|G|1900|0|66|06|35
+0826|X|F|2150|3|29|25|52
+0826|X|N|2230|0|68|37|60
+0826|X|G|2330|5|36|33|28
+0827|J|G|1230|3|97|35|36
+0827|J|F|1330|0|28|83|60
+0827|J|N|1430|0|78|15|40
+0827|J|G|1900|4|94|79|40
+0827|J|F|2150|2|11|17|37
+0827|J|N|2230|7|68|34|75
+0827|J|G|2330|5|98|20|89
+0828|V|G|1230|8|94|32|34
+0828|V|F|1330|4|93|21|60
+0828|V|N|1430|8|43|81|53
+0828|V|G|1900|6|61|41|05
+0828|V|F|2150|6|25|75|29
+0828|V|N|2230|6|48|16|21
+0828|V|G|2330|3|95|51|62
+0829|S|G|1230|6|15|63|91
+0829|S|F|1330|3|71|85|83
+0829|S|N|1430|6|59|35|97
+0829|S|G|1900|4|78|84|81
+0829|S|F|2150|2|04|35|43
+0829|S|N|2230|8|42|62|39
+0829|S|G|2330|2|08|53|24
+0830|D|G|1230|4|20|58|05
+0830|D|F|1330|6|44|48|63
+0830|D|N|1430|1|47|82|39
+0830|D|G|1900|2|23|12|22
+0830|D|F|2150|3|23|04|06
+0830|D|N|2230|0|96|22|45
+0830|D|G|2330|8|62|13|66
+0831|L|G|1230|7|68|12|17
+0831|L|F|1330|4|03|36|89
+0831|L|N|1430|1|15|82|04
+0831|L|G|1900|3|89|22|15
+0831|L|F|2150|0|25|73|95
+0831|L|N|2230|6|64|58|97
+0831|L|G|2330|9|68|85|03
+0901|M|G|1230|9|79|45|98
+0901|M|F|1330|6|30|97|69
+0901|M|N|1430|6|09|26|18
+0901|M|G|1900|2|89|24|57
+0901|M|F|2150|4|09|25|11
+0901|M|N|2230|7|48|56|16
+0901|M|G|2330|4|37|84|43
+0902|X|G|1230|5|63|03|31
+0902|X|F|1330|3|40|10|95
+0902|X|N|1430|9|13|16|14
+0902|X|G|1900|0|87|16|77
+0902|X|F|2150|2|36|24|93
+0902|X|N|2230|4|68|12|93
+0902|X|G|2330|3|18|55|91
+0903|J|G|1230|2|15|19|35
+0903|J|F|1330|3|66|18|83
+0903|J|N|1430|3|94|43|68
+0903|J|G|1900|6|72|02|41
+0903|J|F|2150|7|78|57|06
+0903|J|N|2230|1|16|60|00
+0903|J|G|2330|9|02|65|09
+0904|V|G|1230|3|72|93|08
+0904|V|F|1330|3|09|94|15
+0904|V|N|1430|8|86|56|01
+0904|V|G|1900|4|76|94|92
+0904|V|F|2150|9|59|23|71
+0904|V|N|2230|6|30|47|62
+0904|V|G|2330|4|72|26|78
+0905|S|G|1230|3|23|62|23
+0905|S|F|1330|9|11|99|34
+0905|S|N|1430|4|38|13|49
+0905|S|G|1900|5|77|44|42
+0905|S|F|2150|2|92|52|60
+0905|S|N|2230|0|86|81|71
+0905|S|G|2330|6|83|01|93
+0906|D|G|1230|5|05|10|61
+0906|D|F|1330|1|19|61|32
+0906|D|N|1430|0|77|13|58
+0906|D|G|1900|6|65|47|90
+0906|D|F|2150|2|98|06|81
+0906|D|N|2230|0|90|24|14
+0906|D|G|2330|7|83|68|46
+0907|L|G|1230|2|98|83|40
+0907|L|F|1330|2|39|37|18
+0907|L|N|1430|3|43|44|44
+0907|L|G|1900|1|69|90|63
+0907|L|F|2150|8|25|31|92
+0907|L|N|2230|6|82|72|29
+0907|L|G|2330|0|30|52|93
+0908|M|G|1230|7|18|76|63
+0908|M|F|1330|3|65|38|19
+0908|M|N|1430|6|55|98|72
+0908|M|G|1900|8|50|34|16
+0908|M|F|2150|9|95|31|76
+0908|M|N|2230|1|04|76|25
+0908|M|G|2330|5|03|48|65
+0909|X|G|1230|6|37|73|85
+0909|X|F|1330|7|40|91|82
+0909|X|N|1430|3|10|19|59
+0909|X|G|1900|4|81|40|86
+0909|X|F|2150|1|66|26|84
+0909|X|N|2230|0|15|98|49
+0909|X|G|2330|8|58|25|51
+0910|J|G|1230|4|13|50|71
+0910|J|F|1330|0|89|25|52
+0910|J|N|1430|1|16|56|89
+0910|J|G|1900|8|04|81|84
+0910|J|F|2150|3|69|13|12
+0910|J|N|2230|0|37|56|60
+0910|J|G|2330|0|10|46|58
+0911|V|G|1230|6|76|44|53
+0911|V|F|1330|3|81|61|45
+0911|V|N|1430|6|55|80|02
+0911|V|G|1900|8|51|75|50
+0911|V|F|2150|3|67|51|96
+0911|V|N|2230|9|91|99|14
+0911|V|G|2330|0|56|20|06
+0912|S|G|1230|3|46|30|82
+0912|S|F|1330|2|79|66|07
+0912|S|N|1430|0|97|14|60
+0912|S|G|1900|2|93|04|49
+0912|S|F|2150|9|18|62|45
+0912|S|N|2230|0|15|84|23
+0912|S|G|2330|1|27|98|48
+0913|D|G|1230|6|48|35|74
+0913|D|F|1330|5|38|45|80
+0913|D|N|1430|3|40|72|70
+0913|D|G|1900|3|32|65|52
+0913|D|F|2150|2|21|89|14
+0913|D|N|2230|5|53|32|38
+0913|D|G|2330|0|10|05|60
+0914|L|G|1230|8|67|76|73
+0914|L|F|1330|7|53|22|17
+0914|L|N|1430|6|97|94|94
+0914|L|G|1900|8|98|09|56
+0914|L|F|2150|2|00|89|88
+0914|L|N|2230|5|24|58|35
+0914|L|G|2330|6|47|83|10
+0915|M|G|1230|9|08|47|13
+0915|M|F|1330|0|02|07|85
+0915|M|N|1430|9|65|42|84
+0915|M|G|1900|1|02|18|77
+0915|M|F|2150|4|05|68|68
+0915|M|N|2230|2|73|68|58
+0915|M|G|2330|1|11|09|64
+0916|X|G|1230|1|95|47|17
+0916|X|F|1330|7|19|99|95
+0916|X|N|1430|2|58|54|73
+0916|X|G|1900|1|44|97|00
+0916|X|F|2150|8|67|78|08
+0916|X|N|2230|7|30|17|75
+0916|X|G|2330|0|88|77|81
+0917|J|G|1230|7|02|27|96
+0917|J|F|1330|8|22|99|91
+0917|J|N|1430|7|22|55|69
+0917|J|G|1900|8|10|28|24
+0917|J|F|2150|3|00|89|43
+0917|J|N|2230|1|97|59|69
+0917|J|G|2330|5|85|11|97
+0918|V|G|1230|4|86|79|31
+0918|V|F|1330|4|66|14|72
+0918|V|N|1430|7|63|78|66
+0918|V|G|1900|2|40|04|01
+0918|V|F|2150|8|68|47|04
+0918|V|N|2230|3|09|31|47
+0918|V|G|2330|6|67|29|31
+0919|S|G|1230|8|10|64|44
+0919|S|F|1330|6|33|93|31
+0919|S|N|1430|9|26|74|86
+0919|S|G|1900|3|38|38|06
+0919|S|F|2150|6|09|89|36
+0919|S|N|2230|9|80|84|88
+0919|S|G|2330|2|80|53|62
+0920|D|G|1230|7|97|29|34
+0920|D|F|1330|9|25|77|19
+0920|D|N|1430|9|36|10|35
+0920|D|G|1900|8|58|62|42
+0920|D|F|2150|6|17|88|22
+0920|D|N|2230|6|07|44|07
+0920|D|G|2330|4|73|42|33
+0921|L|G|1230|8|63|99|62
+0921|L|F|1330|9|58|14|61
+0921|L|N|1430|5|62|17|09
+0921|L|G|1900|5|10|48|34
+0921|L|F|2150|5|50|31|08
+0921|L|N|2230|0|46|43|06
+0921|L|G|2330|5|79|26|91
+0922|M|G|1230|7|01|21|38
+0922|M|F|1330|9|64|28|55
+0922|M|N|1430|7|64|84|01
+0922|M|G|1900|6|20|15|57
+0922|M|F|2150|7|02|26|82
+0922|M|N|2230|9|56|11|74
+0922|M|G|2330|1|89|35|11
+0923|X|G|1230|9|35|75|72
+0923|X|F|1330|5|70|02|58
+0923|X|N|1430|2|01|72|04
+0923|X|G|1900|0|02|64|97
+0923|X|F|2150|0|03|29|79
+0923|X|N|2230|3|51|03|54
+0923|X|G|2330|5|97|01|66
+0924|J|G|1230|2|79|96|68
+0924|J|F|1330|6|59|18|02
+0924|J|N|1430|0|39|01|41
+0924|J|G|1900|2|97|46|68
+0924|J|F|2150|6|63|68|88
+0924|J|N|2230|6|30|29|69
+0924|J|G|2330|0|19|98|12
+0925|V|G|1230|7|97|04|54
+0925|V|F|1330|5|28|66|28
+0925|V|N|1430|8|98|79|66
+0925|V|G|1900|9|18|61|78
+0925|V|F|2150|5|06|85|90
+0925|V|N|2230|3|58|95|41
+0925|V|G|2330|3|78|63|64
+0926|S|G|1230|1|40|48|23
+0926|S|F|1330|6|29|69|20
+0926|S|N|1430|5|03|99|61
+0926|S|G|1900|6|15|36|65
+0926|S|F|2150|9|61|36|65
+0926|S|N|2230|0|43|18|04
+0926|S|G|2330|4|55|22|57
+0927|D|G|1230|1|18|68|23
+0927|D|F|1330|2|02|92|75
+0927|D|N|1430|9|80|90|75
+0927|D|G|1900|0|81|98|47
+0927|D|F|2150|1|47|91|86
+0927|D|N|2230|7|82|96|49
+0927|D|G|2330|6|63|15|47
+0928|L|G|1230|6|42|73|24
+0928|L|F|1330|7|88|91|68
+0928|L|N|1430|6|13|91|41
+0928|L|G|1900|6|70|27|03
+0928|L|F|2150|1|76|03|99
+0928|L|N|2230|4|73|48|07
+0928|L|G|2330|2|94|37|70
+0929|M|G|1230|0|88|43|75
+0929|M|F|1330|0|68|16|37
+0929|M|N|1430|9|12|38|36
+0929|M|G|1900|7|63|78|91
+0929|M|F|2150|4|19|37|56
+0929|M|N|2230|2|19|67|17
+0929|M|G|2330|3|27|49|03
+0930|X|G|1230|8|97|60|26
+0930|X|F|1330|6|74|95|27
+0930|X|N|1430|7|29|28|78
+0930|X|G|1900|6|56|37|33
+0930|X|F|2150|4|24|14|43
+0930|X|N|2230|2|25|97|06
+0930|X|G|2330|6|39|84|55
+1001|J|G|1230|1|64|40|69
+1001|J|F|1330|3|88|53|62
+1001|J|N|1430|7|00|34|65
+1001|J|G|1900|3|62|01|82
+1001|J|F|2150|3|28|15|57
+1001|J|N|2230|6|46|78|15
+1001|J|G|2330|2|74|77|75
+1002|V|G|1230|6|71|24|30
+1002|V|F|1330|6|06|92|52
+1002|V|N|1430|0|21|05|53
+1002|V|G|1900|9|36|59|84
+1002|V|F|2150|6|53|56|91
+1002|V|N|2230|8|56|80|50
+1002|V|G|2330|7|00|65|08
+1003|S|G|1230|5|13|13|74
+1003|S|F|1330|2|85|83|23
+1003|S|N|1430|4|77|21|02
+1003|S|G|1900|5|79|03|67
+1003|S|F|2150|2|90|50|00
+1003|S|N|2230|8|57|06|16
+1003|S|G|2330|8|98|65|79
+1004|D|G|1230|4|63|89|05
+1004|D|F|1330|1|24|78|11
+1004|D|N|1430|0|94|20|99
+1004|D|G|1900|8|65|95|87
+1004|D|F|2150|9|02|72|83
+1004|D|N|2230|9|91|53|45
+1004|D|G|2330|6|08|68|38
+1005|L|G|1230|6|33|14|43
+1005|L|F|1330|6|54|14|65
+1005|L|N|1430|1|82|34|34
+1005|L|G|1900|9|44|25|89
+1005|L|F|2150|8|98|95|17
+1005|L|N|2230|5|46|95|94
+1005|L|G|2330|7|98|18|71
+1006|M|G|1230|2|40|53|60
+1006|M|F|1330|2|38|87|22
+1006|M|N|1430|0|28|74|22
+1006|M|G|1900|2|55|13|46
+1006|M|F|2150|5|95|71|17
+1006|M|N|2230|8|86|68|14
+1006|M|G|2330|2|67|44|14
+1007|X|G|1230|8|47|12|51
+1007|X|F|1330|0|46|05|60
+1007|X|N|1430|2|41|17|82
+1007|X|G|1900|5|72|93|71
+1007|X|F|2150|3|30|93|97
+1007|X|N|2230|3|61|19|15
+1007|X|G|2330|8|64|60|29
+1008|J|G|1230|5|02|27|04
+1008|J|F|1330|4|89|19|63
+1008|J|N|1430|5|49|98|74
+1008|J|G|1900|5|17|04|42
+1008|J|F|2150|5|15|28|84
+1008|J|N|2230|7|94|48|59
+1008|J|G|2330|4|57|71|91
+1009|V|G|1230|0|92|06|93
+1009|V|F|1330|1|74|20|33
+1009|V|N|1430|1|33|62|79
+1009|V|G|1900|6|18|22|71
+1009|V|F|2150|0|97|11|97
+1009|V|N|2230|7|50|86|00
+1009|V|G|2330|5|53|86|00
+1010|S|G|1230|5|32|53|93
+1010|S|F|1330|7|44|35|47
+1010|S|N|1430|5|06|62|64
+1010|S|G|1900|7|86|17|36
+1010|S|F|2150|1|52|37|53
+1010|S|N|2230|9|23|83|44
+1010|S|G|2330|9|38|40|66
+1011|D|G|1230|1|23|29|28
+1011|D|F|1330|5|16|53|29
+1011|D|N|1430|1|45|73|78
+1011|D|G|1900|6|47|82|46
+1011|D|F|2150|6|48|77|97
+1011|D|N|2230|3|21|73|19
+1011|D|G|2330|7|62|55|48
+1012|L|G|1230|6|43|37|16
+1012|L|F|1330|5|08|11|84
+1012|L|N|1430|0|57|40|58
+1012|L|G|1900|5|67|59|27
+1012|L|F|2150|5|98|24|41
+1012|L|N|2230|8|38|33|61
+1012|L|G|2330|7|42|23|52
+`.trim();
 
-/* =========================================================
-   PERSISTENCIA
-   ========================================================= */
-const LS_KEY = 'visionLota2026_data';
+const DIA = {L:'Lunes',M:'Martes',X:'Miércoles',J:'Jueves',V:'Viernes',S:'Sábado',D:'Domingo'};
+const LOT = {G:'GEORGIA',F:'FLORIDA',N:'NEW YORK'};
+const HORA = {1230:'12:30:00',1330:'13:30:00',1430:'14:30:00',1900:'19:00:00',2150:'21:50:00',2230:'22:30:00',2330:'23:30:00'};
 
 function parseRaw(raw){
-  return raw.split('\n').filter(l=>l.trim()).map(line=>{
-    const p = line.split('|');
+  return raw.split('\n').filter(l=>l.trim()).map(l=>{
+    const p = l.split('|');
     return {
-      fecha: p[0], dia: p[1], loteria: p[2], hora: p[3],
-      e: p[4], f: p[5], g: p[6], h: p[7]
+      fecha:'2026-'+p[0].slice(0,2)+'-'+p[0].slice(2,4),
+      dia:DIA[p[1]]||p[1],
+      loteria:LOT[p[2]]||p[2],
+      hora:HORA[p[3]]||p[3],
+      e:p[4].padStart(1,'0'),
+      f:p[5].padStart(2,'0'),
+      g:p[6].padStart(2,'0'),
+      h:p[7].padStart(2,'0')
     };
   });
 }
 
+/* ============ PERSISTENCIA ============ */
+const LS_KEY='visionLote2026';
+
 function getData(){
-  const stored = localStorage.getItem(LS_KEY);
-  if(!stored){
+  const s = localStorage.getItem(LS_KEY);
+  if(!s){
     const d = parseRaw(RAW);
     localStorage.setItem(LS_KEY, JSON.stringify(d));
     return d;
   }
-  try { return JSON.parse(stored); } catch(e){ return parseRaw(RAW); }
+  try{ return JSON.parse(s); }catch(e){ return parseRaw(RAW); }
 }
+function saveData(d){ localStorage.setItem(LS_KEY, JSON.stringify(d)); }
 
-function saveData(d){
-  localStorage.setItem(LS_KEY, JSON.stringify(d));
-}
-
-/* =========================================================
-   FECHA ACTUAL
-   ========================================================= */
-function mostrarFechaActual(){
-  const d = new Date();
-  const dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+/* ============ FECHA ============ */
+(function(){
+  const d=new Date();
+  const dias=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  const meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
   document.getElementById('fechaActual').textContent =
-    `${dias[d.getDay()]}, ${d.getDate()} de ${meses[d.getMonth()]} de ${d.getFullYear()}`;
+    dias[d.getDay()]+', '+d.getDate()+' de '+meses[d.getMonth()]+' de '+d.getFullYear();
+})();
+
+/* ============ NAVEGACIÓN ============ */
+function ir(id, btn){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(id==='historial') renderHistorial();
+  if(id==='m1') renderMetodo1();
+  if(id==='m2') renderMetodo2();
+  if(id==='m3') renderMetodo3();
+  if(id==='m4') renderMetodo4();
 }
 
-/* =========================================================
-   NAVEGACIÓN
-   ========================================================= */
-document.querySelectorAll('nav button').forEach(b=>{
-  b.addEventListener('click', ()=>{
-    document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-    const sec = b.dataset.sec;
-    document.getElementById(sec).classList.add('active');
-    if(sec === 'm1') renderMetodo1();
-    if(sec === 'm2') renderMetodo2();
-    if(sec === 'm3') renderMetodo3();
-    if(sec === 'm4') renderMetodo4();
-  });
-});
-
-/* =========================================================
-   HISTORIAL
-   ========================================================= */
+/* ============ HISTORIAL ============ */
 function renderHistorial(){
   const data = getData();
-  const fLot = document.getElementById('fLoteria').value;
-  const fFec = document.getElementById('fFecha').value;
-  const tbody = document.querySelector('#tablaHistorial tbody');
-  tbody.innerHTML = '';
-  data
-    .filter(r => (!fLot || r.loteria === fLot) && (!fFec || r.fecha === fFec))
-    .slice()
-    .sort((a,b)=> a.fecha === b.fecha ? a.hora.localeCompare(b.hora) : a.fecha.localeCompare(b.fecha))
-    .forEach((r, idx)=>{
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${r.fecha}</td><td>${r.dia}</td><td>${r.loteria}</td><td>${r.hora}</td>
-        <td>${r.e}</td><td>${r.f}</td><td>${r.g}</td><td>${r.h}</td>
-        <td><button class="del" onclick="borrarFila('${r.fecha}','${r.loteria}','${r.hora}')">X</button></td>
-      `;
-      tbody.appendChild(tr);
-    });
+  const fL = document.getElementById('fLoteria').value;
+  const fF = document.getElementById('fFecha').value;
+  const tb = document.querySelector('#tablaHistorial tbody');
+  tb.innerHTML='';
+  const filtradas = data
+    .filter(r=>(!fL||r.loteria===fL)&&(!fF||r.fecha===fF))
+    .sort((a,b)=> a.fecha===b.fecha ? a.hora.localeCompare(b.hora) : b.fecha.localeCompare(a.fecha));
+  if(!filtradas.length){
+    tb.innerHTML='<tr><td colspan="9" style="padding:20px;opacity:.6;">Sin datos.</td></tr>';
+    return;
+  }
+  filtradas.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=
+      '<td>'+r.fecha+'</td><td>'+r.dia+'</td><td>'+r.loteria+'</td><td>'+r.hora+'</td>'+
+      '<td>'+r.e+'</td><td>'+r.f+'</td><td>'+r.g+'</td><td>'+r.h+'</td>'+
+      '<td><button class="btn-del" onclick="borrar(\''+r.fecha+'\',\''+r.loteria+'\',\''+r.hora+'\')">X</button></td>';
+    tb.appendChild(tr);
+  });
 }
-
-function borrarFila(fecha, loteria, hora){
+function borrar(f,l,h){
   if(!confirm('¿Borrar este sorteo?')) return;
-  let data = getData();
-  data = data.filter(r => !(r.fecha===fecha && r.loteria===loteria && r.hora===hora));
-  saveData(data);
-  renderHistorial();
+  const d=getData().filter(r=>!(r.fecha===f&&r.loteria===l&&r.hora===h));
+  saveData(d); renderHistorial();
 }
-
 function limpiarFiltros(){
-  document.getElementById('fLoteria').value = '';
-  document.getElementById('fFecha').value = '';
+  document.getElementById('fLoteria').value='';
+  document.getElementById('fFecha').value='';
   renderHistorial();
 }
 
-/* =========================================================
-   ACTUALIZAR
-   ========================================================= */
+/* ============ ACTUALIZAR ============ */
 function agregarSorteo(){
-  const fecha = document.getElementById('nFecha').value;
-  const dia = document.getElementById('nDia').value;
-  const loteria = document.getElementById('nLoteria').value;
-  const hora = document.getElementById('nHora').value;
-  const e = document.getElementById('nE').value.trim();
-  const f = document.getElementById('nF').value.trim().padStart(2,'0');
-  const g = document.getElementById('nG').value.trim().padStart(2,'0');
-  const h = document.getElementById('nH').value.trim().padStart(2,'0');
-  const msg = document.getElementById('msgActualizar');
-  if(!fecha || e==='' || f==='' || g==='' || h===''){
+  const fecha=document.getElementById('nFecha').value;
+  const dia=document.getElementById('nDia').value;
+  const loteria=document.getElementById('nLoteria').value;
+  const hora=document.getElementById('nHora').value;
+  const e=document.getElementById('nE').value.trim();
+  const f=document.getElementById('nF').value.trim().padStart(2,'0');
+  const g=document.getElementById('nG').value.trim().padStart(2,'0');
+  const h=document.getElementById('nH').value.trim().padStart(2,'0');
+  const msg=document.getElementById('msgActualizar');
+  if(!fecha||e===''||f==='00'||g==='00'||h==='00'||!document.getElementById('nF').value||!document.getElementById('nG').value||!document.getElementById('nH').value){
     msg.className='msg err'; msg.textContent='Faltan datos.'; return;
   }
-  const data = getData();
-  data.push({fecha, dia, loteria, hora, e, f, g, h});
-  saveData(data);
-  msg.className='msg ok'; msg.textContent='Sorteo agregado.';
+  const d=getData();
+  d.push({fecha,dia,loteria,hora,e,f,g,h});
+  saveData(d);
+  msg.className='msg ok'; msg.textContent='Sorteo agregado correctamente.';
   ['nE','nF','nG','nH'].forEach(id=>document.getElementById(id).value='');
 }
 
 function importarBulk(){
-  const txt = document.getElementById('bulk').value.trim();
-  const msg = document.getElementById('msgBulk');
+  const txt=document.getElementById('bulk').value.trim();
+  const msg=document.getElementById('msgBulk');
   if(!txt){ msg.className='msg err'; msg.textContent='Nada que importar.'; return; }
-  const data = getData();
-  let count = 0;
-  txt.split('\n').forEach(line=>{
-    const p = line.split('|');
-    if(p.length >= 8){
-      data.push({
-        fecha:p[0], dia:p[1], loteria:p[2], hora:p[3],
-        e:p[4], f:p[5].padStart(2,'0'), g:p[6].padStart(2,'0'), h:p[7].padStart(2,'0')
-      });
-      count++;
+  const d=getData(); let c=0;
+  txt.split('\n').forEach(l=>{
+    const p=l.split('|');
+    if(p.length>=8){
+      d.push({fecha:p[0],dia:p[1],loteria:p[2],hora:p[3],e:p[4],f:p[5].padStart(2,'0'),g:p[6].padStart(2,'0'),h:p[7].padStart(2,'0')});
+      c++;
     }
   });
-  saveData(data);
-  msg.className='msg ok'; msg.textContent=`${count} filas importadas.`;
+  saveData(d);
+  msg.className='msg ok'; msg.textContent=c+' filas importadas.';
   document.getElementById('bulk').value='';
 }
 
-/* =========================================================
-   UTILIDADES DE CÁLCULO
-   ========================================================= */
-function agruparPorSlot(data){
-  const slots = {};
+function exportar(){
+  const d=getData();
+  const blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='vision_lote_2026_respaldo.json';
+  a.click();
+}
+function importarJSON(e){
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const d=JSON.parse(ev.target.result);
+      if(Array.isArray(d)){ saveData(d); alert('Respaldo importado.'); renderHistorial(); }
+    }catch(err){ alert('Archivo inválido.'); }
+  };
+  reader.readAsText(file);
+}
+
+/* ============ UTILIDADES ============ */
+function agruparSlots(data){
+  const s={};
   data.forEach(r=>{
-    const key = r.loteria + '|' + r.hora;
-    if(!slots[key]) slots[key] = [];
-    slots[key].push(r);
+    const k=r.loteria+'|'+r.hora;
+    (s[k]=s[k]||[]).push(r);
   });
-  // ordenar cada slot por fecha
-  Object.keys(slots).forEach(k=>{
-    slots[k].sort((a,b)=> a.fecha.localeCompare(b.fecha));
+  Object.keys(s).forEach(k=>s[k].sort((a,b)=>a.fecha.localeCompare(b.fecha)));
+  return s;
+}
+function topN(arr,n){
+  const c={};
+  arr.forEach(v=>c[v]=(c[v]||0)+1);
+  return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,n).map(x=>x[0]);
+}
+
+/* ============ MÉTODO 1 ============ */
+function metodo1(){
+  const s=agruparSlots(getData());
+  const out={};
+  Object.keys(s).forEach(k=>{
+    const r=s[k].slice(-30);
+    const fV=r.map(x=>x.f), gV=r.map(x=>x.g), hV=r.map(x=>x.h);
+    const fC={}; fV.forEach(v=>fC[v]=(fC[v]||0)+1);
+    const cand={};
+    [...gV,...hV].forEach(v=>{ if(!fC[v]) cand[v]=(cand[v]||0)+1; });
+    const topF = topN(fV,3);
+    const topGH = Object.entries(cand).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
+    out[k]={f:[...new Set([...topGH,...topF])].slice(0,3), g:topN(gV,2), h:topN(hV,2)};
   });
-  return slots;
+  return out;
 }
+function renderMetodo1(){ pintar('resM1', metodo1()); }
 
-function topFrecuente(arr, n){
-  const c = {};
-  arr.forEach(v=> c[v]=(c[v]||0)+1);
-  return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,n);
-}
-
-/* =========================================================
-   MÉTODO 1 · CAOS HEURÍSTICO
-   ========================================================= */
-function calcularMetodo1(){
-  const data = getData();
-  const slots = agruparPorSlot(data);
-  const resultado = {};
-  Object.keys(slots).forEach(k=>{
-    const rows = slots[k].slice(-30);
-    const fVals = rows.map(r=>r.f);
-    const gVals = rows.map(r=>r.g);
-    const hVals = rows.map(r=>r.h);
-    const fCount = {};
-    fVals.forEach(v=> fCount[v]=(fCount[v]||0)+1);
-    const candidatos = {};
-    [...gVals, ...hVals].forEach(v=>{
-      if(!fCount[v]) candidatos[v]=(candidatos[v]||0)+1;
-    });
-    const topF = topFrecuente(fVals, 3).map(x=>x[0]);
-    const topGH = Object.entries(candidatos).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
-    const fFinal = [...new Set([...topGH, ...topF])].slice(0,3);
-    // Pick 4: G y H separados
-    const topG = topFrecuente(gVals, 2).map(x=>x[0]);
-    const topH = topFrecuente(hVals, 2).map(x=>x[0]);
-    resultado[k] = { f: fFinal, g: topG, h: topH };
-  });
-  return resultado;
-}
-
-function renderMetodo1(){
-  const r = calcularMetodo1();
-  pintarResultado('resM1', r, 'Caos Heurístico');
-}
-
-/* =========================================================
-   MÉTODO 2 · CAOS FORMAL
-   ========================================================= */
-function calcularMetodo2(){
-  const data = getData();
-  const slots = agruparPorSlot(data);
-  const resultado = {};
-  Object.keys(slots).forEach(k=>{
-    const rows = slots[k].slice(-40);
-    // mapa de retorno de E
-    const eSeq = rows.map(r=>parseInt(r.e));
-    const trans = {};
+/* ============ MÉTODO 2 ============ */
+function metodo2(){
+  const s=agruparSlots(getData());
+  const out={};
+  Object.keys(s).forEach(k=>{
+    const r=s[k].slice(-40);
+    const eSeq=r.map(x=>parseInt(x.e));
+    const trans={};
     for(let i=0;i<eSeq.length-1;i++){
-      const a = eSeq[i], b = eSeq[i+1];
-      if(!trans[a]) trans[a]={};
-      trans[a][b]=(trans[a][b]||0)+1;
+      (trans[eSeq[i]]=trans[eSeq[i]]||{});
+      trans[eSeq[i]][eSeq[i+1]]=(trans[eSeq[i]][eSeq[i+1]]||0)+1;
     }
-    const lastE = eSeq[eSeq.length-1];
-    let nextE = null;
-    if(trans[lastE]){
-      nextE = Object.entries(trans[lastE]).sort((a,b)=>b[1]-a[1])[0][0];
-    }
-    // frecuencia de F
-    const fVals = rows.map(r=>r.f);
-    const fCount = {};
-    fVals.forEach(v=> fCount[v]=(fCount[v]||0)+1);
-    // ranking: F que aparecen más y no son el último
-    const ultimoF = fVals[fVals.length-1];
-    const topF = Object.entries(fCount)
-      .filter(([v])=> v!==ultimoF)
-      .sort((a,b)=>b[1]-a[1])
-      .slice(0,3).map(x=>x[0]);
-    // G y H
-    const gVals = rows.map(r=>r.g);
-    const hVals = rows.map(r=>r.h);
-    const topG = topFrecuente(gVals, 2).map(x=>x[0]);
-    const topH = topFrecuente(hVals, 2).map(x=>x[0]);
-    resultado[k] = { f: topF, g: topG, h: topH, nextE };
+    const last=eSeq[eSeq.length-1];
+    const fV=r.map(x=>x.f), gV=r.map(x=>x.g), hV=r.map(x=>x.h);
+    const fC={}; fV.forEach(v=>fC[v]=(fC[v]||0)+1);
+    const lastF=fV[fV.length-1];
+    let topF=Object.entries(fC).filter(([v])=>v!==lastF).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
+    if(!topF.length) topF=topN(fV,3);
+    out[k]={f:topF, g:topN(gV,2), h:topN(hV,2)};
   });
-  return resultado;
+  return out;
 }
+function renderMetodo2(){ pintar('resM2', metodo2()); }
 
-function renderMetodo2(){
-  const r = calcularMetodo2();
-  pintarResultado('resM2', r, 'Caos Formal');
-}
-
-/* =========================================================
-   MÉTODO 3 · CAOS ESTRICTO SOBRE F
-   ========================================================= */
-function calcularMetodo3(){
-  const data = getData();
-  const slots = agruparPorSlot(data);
-  const resultado = {};
-  Object.keys(slots).forEach(k=>{
-    const rows = slots[k].slice(-40);
-    const fSeq = rows.map(r=>parseInt(r.f));
-    if(fSeq.length < 4){
-      resultado[k] = { f: ['--'], g:['--'], h:['--'] };
-      return;
-    }
-    // embedding (F(t-1), F(t)) -> F(t+1)
-    const vectores = [];
-    for(let i=0;i<fSeq.length-2;i++){
-      vectores.push({ v:[fSeq[i], fSeq[i+1]], next:fSeq[i+2] });
-    }
-    const last = [fSeq[fSeq.length-2], fSeq[fSeq.length-1]];
-    // distancia euclídea
-    const dist = vectores.map(o=>{
-      const d = Math.sqrt(Math.pow(o.v[0]-last[0],2) + Math.pow(o.v[1]-last[1],2));
-      return { d, next:o.next };
-    });
+/* ============ MÉTODO 3 ============ */
+function metodo3(){
+  const s=agruparSlots(getData());
+  const out={};
+  Object.keys(s).forEach(k=>{
+    const r=s[k].slice(-40);
+    const fSeq=r.map(x=>parseInt(x.f));
+    const gV=r.map(x=>x.g), hV=r.map(x=>x.h);
+    if(fSeq.length<4){ out[k]={f:['--'],g:topN(gV,2),h:topN(hV,2)}; return; }
+    const vec=[];
+    for(let i=0;i<fSeq.length-2;i++) vec.push({v:[fSeq[i],fSeq[i+1]],next:fSeq[i+2]});
+    const last=[fSeq[fSeq.length-2],fSeq[fSeq.length-1]];
+    const dist=vec.map(o=>({d:Math.sqrt(Math.pow(o.v[0]-last[0],2)+Math.pow(o.v[1]-last[1],2)),next:o.next}));
     dist.sort((a,b)=>a.d-b.d);
-    const k = dist.slice(0,3);
-    const votos = {};
-    k.forEach(o=> votos[o.next]=(votos[o.next]||0)+1);
-    const predF = Object.entries(votos).sort((a,b)=>b[1]-a[1]).map(x=>String(x[0]).padStart(2,'0'));
-    if(predF.length===0) predF.push('--');
-    // G y H por frecuencia reciente
-    const gVals = rows.map(r=>r.g);
-    const hVals = rows.map(r=>r.h);
-    const topG = topFrecuente(gVals, 2).map(x=>x[0]);
-    const topH = topFrecuente(hVals, 2).map(x=>x[0]);
-    resultado[k] = { f: predF, g: topG, h: topH };
+    const votos={};
+    dist.slice(0,3).forEach(o=>votos[o.next]=(votos[o.next]||0)+1);
+    let predF=Object.entries(votos).sort((a,b)=>b[1]-a[1]).map(x=>String(x[0]).padStart(2,'0'));
+    if(!predF.length) predF=['--'];
+    out[k]={f:predF.slice(0,3), g:topN(gV,2), h:topN(hV,2)};
   });
-  return resultado;
+  return out;
 }
+function renderMetodo3(){ pintar('resM3', metodo3()); }
 
-function renderMetodo3(){
-  const r = calcularMetodo3();
-  pintarResultado('resM3', r, 'Caos Estricto sobre F');
-}
-
-/* =========================================================
-   MÉTODO 4 · RECURRENCIA G/H → F
-   ========================================================= */
-function calcularMetodo4(){
-  const data = getData();
-  const slots = agruparPorSlot(data);
-  const resultado = {};
-  Object.keys(slots).forEach(k=>{
-    const rows = slots[k];
-    const fSet = new Set(rows.map(r=>r.f));
-    // contar cuántas veces sale cada G y cada H en TODA la historia del slot
-    const gCount = {}, hCount = {};
-    rows.forEach(r=>{
-      gCount[r.g] = (gCount[r.g]||0)+1;
-      hCount[r.h] = (hCount[r.h]||0)+1;
+/* ============ MÉTODO 4 ============ */
+function metodo4(){
+  const s=agruparSlots(getData());
+  const out={};
+  Object.keys(s).forEach(k=>{
+    const r=s[k];
+    const fSet=new Set(r.map(x=>x.f));
+    const gC={}, hC={};
+    r.forEach(x=>{
+      gC[x.g]=(gC[x.g]||0)+1;
+      hC[x.h]=(hC[x.h]||0)+1;
     });
-    // candidatos: los que están en G o H y NUNCA han salido en F
-    const cand = {};
-    Object.entries(gCount).forEach(([v,c])=>{ if(!fSet.has(v)) cand[v]=(cand[v]||0)+c; });
-    Object.entries(hCount).forEach(([v,c])=>{ if(!fSet.has(v)) cand[v]=(cand[v]||0)+c; });
-    const top = Object.entries(cand).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
-    // si no hay suficientes, completar con los G/H más frecuentes
-    const relleno = [...Object.entries(gCount), ...Object.entries(hCount)]
-      .sort((a,b)=>b[1]-a[1])
-      .map(x=>x[0])
-      .filter(v=>!top.includes(v));
-    const fFinal = [...top, ...relleno].slice(0,3);
-    // G y H
-    const topG = Object.entries(gCount).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]);
-    const topH = Object.entries(hCount).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]);
-    resultado[k] = { f: fFinal, g: topG, h: topH };
+    const cand={};
+    Object.entries(gC).forEach(([v,c])=>{ if(!fSet.has(v)) cand[v]=(cand[v]||0)+c; });
+    Object.entries(hC).forEach(([v,c])=>{ if(!fSet.has(v)) cand[v]=(cand[v]||0)+c; });
+    let top=Object.entries(cand).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
+    const relleno=[...Object.entries(gC),...Object.entries(hC)].sort((a,b)=>b[1]-a[1]).map(x=>x[0]).filter(v=>!top.includes(v));
+    const fFinal=[...top,...relleno].slice(0,3);
+    out[k]={f:fFinal, g:Object.entries(gC).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]), h:Object.entries(hC).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0])};
   });
-  return resultado;
+  return out;
 }
+function renderMetodo4(){ pintar('resM4', metodo4()); }
 
-function renderMetodo4(){
-  const r = calcularMetodo4();
-  pintarResultado('resM4', r, 'Recurrencia G/H → F');
-}
+/* ============ PINTAR ============ */
+function pintar(contId, res){
+  const cont=document.getElementById(contId);
+  const loterias=['GEORGIA','FLORIDA','NEW YORK'];
 
-/* =========================================================
-   PINTAR RESULTADOS
-   ========================================================= */
-function pintarResultado(contenedorId, resultado, nombreMetodo){
-  const cont = document.getElementById(contenedorId);
-  const loterias = ['GEORGIA','FLORIDA','NEW YORK'];
-  const horas = ['12:30:00','13:30:00','14:30:00','19:00:00','21:50:00','22:30:00','23:30:00'];
-
-  // mejores del día (global)
-  const globalF = {};
-  Object.values(resultado).forEach(slot=>{
-    slot.f.forEach((v,i)=>{ globalF[v] = (globalF[v]||0) + (3-i); });
+  // Top 3 global
+  const gF={};
+  Object.values(res).forEach(slot=>{
+    slot.f.forEach((v,i)=>{
+      if(v&&v!=='--') gF[v]=(gF[v]||0)+(3-i);
+    });
   });
-  const topGlobalF = Object.entries(globalF).sort((a,b)=>b[1]-a[1]).slice(0,2);
+  const top3=Object.entries(gF).sort((a,b)=>b[1]-a[1]).slice(0,3);
 
-  let html = '';
-  html += `<div class="card"><h3>Top 2 más fuertes del día · ${nombreMetodo}</h3>`;
-  if(topGlobalF.length){
-    html += `<div class="num-grande">${topGlobalF[0][0]}</div>`;
-    if(topGlobalF[1]) html += `<div class="num-alt">Alternativa: <b>${topGlobalF[1][0]}</b></div>`;
+  let html='';
+  html+='<div class="card"><h3>Los 3 mejores pronósticos del día (F · primera)</h3>';
+  html+='<div class="top3">';
+  if(top3.length){
+    top3.forEach((t,i)=>{
+      html+='<div class="num"><span class="puesto">#'+(i+1)+'</span>'+t[0]+'</div>';
+    });
+    while(top3.length<3 && false){}
   } else {
-    html += `<div class="nota">Sin datos suficientes.</div>`;
+    html+='<div style="grid-column:1/-1;text-align:center;opacity:.6;padding:20px;">Sin datos.</div>';
   }
-  html += `</div>`;
+  html+='</div></div>';
 
-  // por lotería
+  // Por lotería
   loterias.forEach(lot=>{
-    html += `<div class="card"><h3>${lot} · mejores pronósticos</h3>`;
-    html += `<div class="pred-grid">`;
-    horas.forEach(h=>{
-      const key = lot + '|' + h;
-      if(!resultado[key]) return;
-      const r = resultado[key];
-      html += `<div class="pred-box">
-        <div class="titulo">${h}</div>
-        <div style="font-size:12px;">F (primera) · paga más</div>
-        <div class="num-grande">${r.f[0] || '--'}</div>
-        <div class="num-alt">Alt: ${(r.f.slice(1)||[]).map(x=>`<span class="tag">${x}</span>`).join('') || '—'}</div>
-        <div style="margin-top:8px;font-size:12px;">G (Pick 4)</div>
-        <div class="num-alt">${(r.g||[]).map(x=>`<span class="tag">${x}</span>`).join('') || '—'}</div>
-        <div style="margin-top:6px;font-size:12px;">H (Pick 4)</div>
-        <div class="num-alt">${(r.h||[]).map(x=>`<span class="tag">${x}</span>`).join('') || '—'}</div>
-      </div>`;
+    const fL={};
+    Object.keys(res).forEach(k=>{
+      if(k.startsWith(lot+'|')){
+        res[k].f.forEach((v,i)=>{
+          if(v&&v!=='--') fL[v]=(fL[v]||0)+(3-i);
+        });
+      }
     });
-    html += `</div></div>`;
+    const top2=Object.entries(fL).sort((a,b)=>b[1]-a[1]).slice(0,2);
+    html+='<div class="card"><h3>'+lot+' · Top 2 del día</h3>';
+    html+='<div class="lot-grid">';
+    html+='<div class="lot-box"><h4>Mejores F (primera)</h4><div class="lot-top2">';
+    if(top2.length){
+      top2.forEach(t=>{ html+='<div class="n"><small>F</small>'+t[0]+'</div>'; });
+    } else {
+      html+='<div class="n" style="grid-column:1/-1;opacity:.5;">--</div>';
+    }
+    html+='</div></div>';
+    // G y H del slot más fuerte
+    const slotFuerte = Object.keys(res).filter(k=>k.startsWith(lot+'|')).sort((a,b)=>{
+      const va = res[a].f[0] ? (fL[res[a].f[0]]||0) : 0;
+      const vb = res[b].f[0] ? (fL[res[b].f[0]]||0) : 0;
+      return vb-va;
+    })[0];
+    if(slotFuerte){
+      const r=res[slotFuerte];
+      html+='<div class="lot-box"><h4>Pick 4 del slot más fuerte ('+slotFuerte.split('|')[1]+')</h4>';
+      html+='<div class="lot-top2">';
+      html+='<div class="n"><small>G</small>'+(r.g[0]||'--')+'</div>';
+      html+='<div class="n"><small>H</small>'+(r.h[0]||'--')+'</div>';
+      html+='</div></div>';
+    }
+    html+='</div></div>';
   });
 
-  html += `<div class="nota">Este método se recalcula automáticamente al abrir la ventana, con la última actualización del historial.</div>`;
-  cont.innerHTML = html;
+  html+='<div class="nota">Se recalcula automáticamente al abrir esta ventana, usando la última actualización del historial.</div>';
+  cont.innerHTML=html;
 }
 
-/* =========================================================
-   INICIALIZACIÓN
-   ========================================================= */
-mostrarFechaActual();
+/* ============ INICIO ============ */
 renderHistorial();
 </script>
 </body>
 </html>
-         
-   
-.',
-    
-  
