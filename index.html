@@ -1,1819 +1,1211 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Conócete | Lenguaje corporal</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision Lota 2026</title>
+<style>
+  :root{
+    --bg:#0a1a2f;
+    --bg2:#0d2440;
+    --gold:#d4af37;
+    --gold2:#ffd700;
+    --line:#1e3a5f;
+    --red:#c0392b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--gold);
+    font-family:'Segoe UI',Arial,sans-serif;
+  }
+  header{
+    text-align:center;
+    padding:18px 10px 10px;
+    border-bottom:2px solid var(--gold);
+    background:linear-gradient(180deg,#0a1a2f,#0d2440);
+  }
+  header h1{
+    margin:0;
+    font-size:28px;
+    letter-spacing:3px;
+    color:var(--gold2);
+    text-shadow:0 0 8px rgba(212,175,55,.5);
+  }
+  #fechaActual{
+    margin-top:6px;
+    font-size:14px;
+    color:var(--gold);
+    opacity:.85;
+  }
+  nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+    padding:12px;
+    background:var(--bg2);
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    z-index:10;
+  }
+  nav button{
+    background:transparent;
+    color:var(--gold);
+    border:1px solid var(--gold);
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:13px;
+    transition:.2s;
+  }
+  nav button:hover,nav button.active{
+    background:var(--gold);
+    color:var(--bg);
+    font-weight:bold;
+  }
+  main{padding:16px;max-width:1300px;margin:0 auto;}
+  section{display:none;}
+  section.active{display:block;}
+  h2{
+    color:var(--gold2);
+    border-bottom:1px solid var(--line);
+    padding-bottom:6px;
+    margin-top:0;
+  }
+  h3{color:var(--gold2);margin:14px 0 6px;font-size:16px;}
+  .card{
+    background:var(--bg2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:12px;
+    margin-bottom:12px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+  }
+  th,td{
+    padding:6px 8px;
+    border-bottom:1px solid var(--line);
+    text-align:center;
+  }
+  th{color:var(--gold2);background:#0a1a2f;position:sticky;top:0;}
+  tr:hover{background:#102a4a;}
+  .hist-wrap{max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:8px;}
+  input,select{
+    background:#0a1a2f;
+    color:var(--gold);
+    border:1px solid var(--line);
+    padding:6px 8px;
+    border-radius:5px;
+    font-size:13px;
+    width:100%;
+  }
+  .form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:8px;
+    margin-bottom:10px;
+  }
+  button.action{
+    background:var(--gold);
+    color:var(--bg);
+    border:none;
+    padding:9px 16px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:13px;
+  }
+  button.action:hover{background:var(--gold2);}
+  button.del{
+    background:transparent;
+    color:var(--red);
+    border:1px solid var(--red);
+    padding:3px 8px;
+    border-radius:4px;
+    cursor:pointer;
+    font-size:11px;
+  }
+  .pred-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:12px;
+  }
+  .pred-box{
+    background:#0a1a2f;
+    border:1px solid var(--gold);
+    border-radius:8px;
+    padding:12px;
+  }
+  .pred-box .titulo{
+    color:var(--gold2);
+    font-size:13px;
+    margin-bottom:8px;
+    border-bottom:1px dashed var(--line);
+    padding-bottom:4px;
+  }
+  .num-grande{
+    font-size:28px;
+    color:var(--gold2);
+    font-weight:bold;
+    letter-spacing:3px;
+  }
+  .num-alt{
+    font-size:15px;
+    color:var(--gold);
+    margin-top:4px;
+  }
+  .tag{
+    display:inline-block;
+    background:#0a1a2f;
+    border:1px solid var(--line);
+    color:var(--gold);
+    padding:2px 7px;
+    border-radius:10px;
+    font-size:11px;
+    margin:2px;
+  }
+  .filtro{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+  .filtro input,.filtro select{width:auto;min-width:130px;}
+  .msg{
+    padding:8px;
+    border-radius:5px;
+    margin-top:8px;
+    font-size:13px;
+  }
+  .msg.ok{background:#0d3a1e;color:#7fffa0;border:1px solid #1e7a3e;}
+  .msg.err{background:#3a0d0d;color:#ff8a8a;border:1px solid #7a1e1e;}
+  .nota{font-size:12px;opacity:.75;margin-top:6px;}
+</style>
 </head>
-<body style="margin:0;background:#050B18;">
-<div id="root"></div>
-<script type="text/babel">
-const { useState } = React;
-const {
-  Eye, Anchor, Hand, Footprints, RefreshCcw, Briefcase, Heart, Crown, Search, Smile, Fingerprint, Magnet,
-  ChevronRight, ChevronLeft, RotateCcw, Sparkles, Check, X: XIcon, Compass, BookHeart, Lightbulb
-} = Object.fromEntries([
-  ['Eye', '◉'], ['Anchor', '⚓'], ['Hand', '✋'], ['Footprints', '♧'], ['RefreshCcw', '↻'],
-  ['Briefcase', '▣'], ['Heart', '♥'], ['Crown', '♛'], ['Search', '⌕'], ['Smile', '☺'],
-  ['Fingerprint', '◌'], ['Magnet', '∪'], ['ChevronRight', '›'], ['ChevronLeft', '‹'],
-  ['RotateCcw', '↶'], ['Sparkles', '✦'], ['Check', '✓'], ['X', '×'], ['Compass', '⊙'],
-  ['BookHeart', '♡'], ['Lightbulb', '♧']
-].map(([name, symbol]) => [name, ({ size = 16, className = '', style = {} }) => (
-  <span aria-hidden="true" className={className} style={{ fontSize: size, lineHeight: 1, ...style }}>{symbol}</span>
-)]));
+<body>
 
-function ResponsiveContainer({ children }) { return <div className="w-full h-full">{children}</div>; }
-function RadarChart({ children }) { return <div className="w-full h-full flex items-center justify-center text-6xl" style={{ color: '#D4AF37' }}>◈</div>; }
-function PolarGrid() { return null; }
-function PolarAngleAxis() { return null; }
-function Radar() { return null; }
+<header>
+  <h1>VISION LOTA 2026</h1>
+  <div id="fechaActual"></div>
+</header>
 
-/* ------------------------------------------------------------------ */
-/* DATA: rasgos, plantillas de reflexión y módulos                     */
-/* ------------------------------------------------------------------ */
+<nav>
+  <button data-sec="historial" class="active">Historial</button>
+  <button data-sec="actualizar">Actualizar</button>
+  <button data-sec="m1">Método 1 · Caos Heurístico</button>
+  <button data-sec="m2">Método 2 · Caos Formal</button>
+  <button data-sec="m3">Método 3 · Caos Estricto F</button>
+  <button data-sec="m4">Método 4 · Recurrencia G/H→F</button>
+</nav>
 
-const TRAIT_INFO = {
-  apertura: {
-    label: 'Apertura', color: '#D4AF37', mirrorTitle: 'El cuerpo que se abre',
-    text: (tema) => `En ${tema}, tu cuerpo elige la apertura antes que la protección. Buscas contacto visual, ocupas tu espacio sin pedir permiso de más, y esa disposición suele leerse como seguridad genuina, no impostada.`
-  },
-  alerta: {
-    label: 'Alerta', color: '#C9744A', mirrorTitle: 'El cuerpo en vigilia',
-    text: (tema) => `En ${tema}, tu cuerpo entra en modo vigilancia. No es debilidad: es un sistema nervioso que ha aprendido a anticipar. El reto no es apagar esa alerta, sino aprender a nombrarla antes de que hable por ti.`
-  },
-  contencion: {
-    label: 'Contención', color: '#6E9BC7', mirrorTitle: 'El cuerpo que aún se protege',
-    text: (tema) => `En ${tema}, tu cuerpo sostiene una calma cuidada, incluso cuando algo distinto se mueve por dentro. No es falsedad: es una armadura que alguna vez te protegió. Vale la pena preguntarte, a solas, si todavía la necesitas.`
-  },
-  presencia: {
-    label: 'Presencia', color: '#A78BC4', mirrorTitle: 'El cuerpo que ya llegó',
-    text: (tema) => `En ${tema}, te mantienes centrado. No necesitas acelerar ni encogerte: tu cuerpo ya sabe ocupar su propio ritmo, y eso, como hemos visto en este viaje, se nota antes de decir una palabra.`
-  },
-  conexion: {
-    label: 'Conexión', color: '#C97B93', mirrorTitle: 'El cuerpo que busca al otro',
-    text: (tema) => `En ${tema}, tu cuerpo busca sintonía con quien tiene delante. Te inclinas, escuchas con los pies tanto como con los oídos, y esa disponibilidad es, en sí misma, una forma silenciosa de cuidado.`
-  }
-};
+<main>
 
-const MODULES = [
-  {
-    id: 'm1', Icon: Eye,
-    title: 'El teatro de las emociones',
-    subtitle: 'Emociones y microexpresiones',
-    theme: 'la forma en que tu rostro reacciona ante lo inesperado',
-    questions: [
-      { prompt: 'Alguien te da una noticia que no esperabas. ¿Qué hace tu rostro en el primer segundo?',
-        options: [
-          { text: 'Se abre: cejas arriba, ojos bien abiertos, sin filtro.', trait: 'apertura' },
-          { text: 'Se congela un instante, como evaluando el terreno.', trait: 'alerta' },
-          { text: 'Sonríe por reflejo, aunque por dentro sienta otra cosa.', trait: 'contencion' },
-          { text: 'Se mantiene neutro; tomo un segundo antes de reaccionar.', trait: 'presencia' },
-        ] },
-      { prompt: 'Cuando algo te hace gracia de verdad, ¿qué pasa con tus ojos?',
-        options: [
-          { text: 'Se arrugan, casi no puedo evitarlo.', trait: 'apertura' },
-          { text: 'Sigo riendo, pero contengo el volumen por si acaso.', trait: 'contencion' },
-          { text: 'Miro alrededor, para ver si los demás también se ríen.', trait: 'conexion' },
-          { text: 'Se me corta la risa rápido, vuelvo al control enseguida.', trait: 'alerta' },
-        ] },
-      { prompt: 'Disimulas una emoción incómoda en público (fastidio, tristeza, aburrimiento). ¿Qué es lo más probable?',
-        options: [
-          { text: 'Se me nota igual; mi cara no sabe mentir mucho tiempo.', trait: 'apertura' },
-          { text: 'Sostengo la máscara bastante bien, casi nadie lo nota.', trait: 'contencion' },
-          { text: 'Me tenso, y esa tensión se filtra en otra parte del cuerpo.', trait: 'alerta' },
-          { text: 'Busco la mirada de alguien de confianza, casi pidiendo apoyo.', trait: 'conexion' },
-        ] },
-    ]
-  },
-  {
-    id: 'm2', Icon: Anchor,
-    title: 'La postura, la base de todo',
-    subtitle: 'Postura y presencia física',
-    theme: 'cómo tu cuerpo se planta frente al mundo',
-    questions: [
-      { prompt: 'Antes de entrar a una reunión o situación importante, ¿cómo llegas?',
-        options: [
-          { text: 'Con el pecho abierto, hombros atrás, ocupando mi espacio.', trait: 'apertura' },
-          { text: 'Encorvado sobre el móvil hasta el último segundo.', trait: 'alerta' },
-          { text: 'Repasando mentalmente cómo debo comportarme, ya en modo actuación.', trait: 'contencion' },
-          { text: 'Con calma, sin prisa, llegando a mi propio ritmo.', trait: 'presencia' },
-        ] },
-      { prompt: 'Cuando alguien con más autoridad que tú entra en la sala, ¿qué hace tu columna?',
-        options: [
-          { text: 'Se mantiene igual; no cambio mi postura por jerarquía.', trait: 'presencia' },
-          { text: 'Se endereza de golpe, casi como un acto reflejo.', trait: 'alerta' },
-          { text: 'Se encoge un poco, ocupo menos espacio.', trait: 'contencion' },
-          { text: 'Me inclino levemente hacia esa persona, buscando conectar.', trait: 'conexion' },
-        ] },
-      { prompt: 'Si tuvieras que describir tu espalda en un día normal de trabajo, ¿cuál se parece más?',
-        options: [
-          { text: 'Recta, relajada, sin esfuerzo consciente.', trait: 'presencia' },
-          { text: 'Encorvada hacia la pantalla, sin darme cuenta.', trait: 'alerta' },
-          { text: 'Erguida casi con rigidez, como una armadura.', trait: 'contencion' },
-          { text: 'Cambia según con quién hablo; se adapta al otro.', trait: 'conexion' },
-        ] },
-    ]
-  },
-  {
-    id: 'm3', Icon: Hand,
-    title: 'Manos, brazos, pies y piernas',
-    subtitle: 'Gestos de manos y pies',
-    theme: 'lo que tus extremidades dicen cuando tú no estás mirando',
-    questions: [
-      { prompt: 'En una conversación que te incomoda un poco, ¿dónde terminan tus brazos?',
-        options: [
-          { text: 'Sueltos, gesticulando, sin darme cuenta de que hablo con las manos.', trait: 'apertura' },
-          { text: 'Cruzados sobre el pecho, como una barrera.', trait: 'alerta' },
-          { text: 'Cruzados, pero porque me siento cómodo así, es costumbre.', trait: 'contencion' },
-          { text: 'Buscando el brazo o el hombro del otro, algún punto de contacto.', trait: 'conexion' },
-        ] },
-      { prompt: 'Cuando alguien te tiende la mano para saludarte, ¿cómo respondes casi sin pensarlo?',
-        options: [
-          { text: 'Con la palma vertical, un apretón firme e igualitario.', trait: 'presencia' },
-          { text: 'Envuelvo su mano con las dos mías; quiero transmitir calidez.', trait: 'conexion' },
-          { text: 'Aprieto fuerte, casi de más, para marcar seguridad.', trait: 'alerta' },
-          { text: 'Dejo que el otro marque el tono, sigo su ritmo.', trait: 'contencion' },
-        ] },
-      { prompt: 'En una sala de espera, ¿hacia dónde apuntan tus pies la mayor parte del tiempo?',
-        options: [
-          { text: 'Hacia la puerta, aunque no tenga prisa por irme.', trait: 'alerta' },
-          { text: 'Hacia la persona con la que hablo, si hay alguien.', trait: 'conexion' },
-          { text: 'Quietos, apoyados con calma, sin urgencia.', trait: 'presencia' },
-          { text: 'Los cruzo por el tobillo y me olvido de ellos.', trait: 'contencion' },
-        ] },
-    ]
-  },
-  {
-    id: 'm4', Icon: Footprints,
-    title: 'El espacio y tu forma de caminar',
-    subtitle: 'Proxémica y forma de caminar',
-    theme: 'el ritmo con el que ocupas el mundo',
-    questions: [
-      { prompt: '¿Cómo describirías tu forma de caminar en un día cualquiera?',
-        options: [
-          { text: 'Rápida; casi siempre voy un paso por delante de mí mismo.', trait: 'alerta' },
-          { text: 'Firme y pausada, sin prisa por llegar.', trait: 'presencia' },
-          { text: 'Cambia mucho según mi estado de ánimo del día.', trait: 'contencion' },
-          { text: 'Atenta a quién va conmigo; ajusto el paso al otro.', trait: 'conexion' },
-        ] },
-      { prompt: 'Entras a un lugar donde no conoces a nadie. ¿Qué hace tu cuerpo primero?',
-        options: [
-          { text: 'Ocupa el espacio con naturalidad, camino como si perteneciera ahí.', trait: 'apertura' },
-          { text: 'Busca la salida o un punto de referencia, por si acaso.', trait: 'alerta' },
-          { text: 'Se hace un poco más pequeño, más discreto.', trait: 'contencion' },
-          { text: 'Busca una cara conocida o amistosa a la que acercarse.', trait: 'conexion' },
-        ] },
-      { prompt: '¿Qué distancia te resulta cómoda al hablar con alguien que acabas de conocer?',
-        options: [
-          { text: 'Bastante cerca; soy de contacto y cercanía.', trait: 'conexion' },
-          { text: 'Prefiero mi espacio, me tenso si alguien se acerca demasiado.', trait: 'alerta' },
-          { text: 'La distancia "de manual", ni muy cerca ni muy lejos.', trait: 'presencia' },
-          { text: 'Depende del contexto; la ajusto sin pensarlo.', trait: 'apertura' },
-        ] },
-    ]
-  },
-  {
-    id: 'm5', Icon: RefreshCcw,
-    title: 'El espejo roto',
-    subtitle: 'Estrés y autenticidad',
-    theme: 'lo que tu cuerpo hace cuando protege algo que no quieres mostrar',
-    questions: [
-      { prompt: 'Algo te duele pero estás en público. ¿Qué es lo más probable?',
-        options: [
-          { text: 'Sonrío igual; la sonrisa social se activa sola.', trait: 'contencion' },
-          { text: 'Se me tensan la mandíbula y los hombros sin que lo decida.', trait: 'alerta' },
-          { text: 'Me muevo más de la cuenta, hablo más, me distraigo.', trait: 'apertura' },
-          { text: 'Busco a alguien de confianza y se lo digo directamente.', trait: 'conexion' },
-        ] },
-      { prompt: '¿Con qué frecuencia sientes que tu cara dice "estoy bien" cuando no lo estás?',
-        options: [
-          { text: 'Casi nunca; mi cara me delata rápido.', trait: 'apertura' },
-          { text: 'Bastante seguido; se me da bien sostenerlo.', trait: 'contencion' },
-          { text: 'Depende de quién esté mirando.', trait: 'conexion' },
-          { text: 'Prefiero no sonreír si no lo siento, aunque incomode.', trait: 'presencia' },
-        ] },
-      { prompt: 'Cuando necesitas calmarte, ¿qué hace tu cuerpo sin que lo pienses?',
-        options: [
-          { text: 'Se mueve: tamborileo, piernas, algo necesita salir.', trait: 'alerta' },
-          { text: 'Se queda muy quieto, casi rígido, como aguantando.', trait: 'contencion' },
-          { text: 'Busca el abrazo o la voz de alguien cercano.', trait: 'conexion' },
-          { text: 'Respira hondo y baja el ritmo por sí solo; ya lo tengo entrenado.', trait: 'presencia' },
-        ] },
-    ]
-  },
-  {
-    id: 'm6', Icon: Briefcase,
-    title: 'Entrevistas y negociaciones',
-    subtitle: 'Negocios, entrevistas y primeras impresiones',
-    theme: 'cómo te comportas cuando el resultado importa',
-    questions: [
-      { prompt: 'Te hacen una pregunta difícil en una entrevista. ¿Qué hace tu cuerpo antes de responder?',
-        options: [
-          { text: 'Se adelanta; respondo casi de inmediato, sin pausa.', trait: 'alerta' },
-          { text: 'Se toma un segundo; respiro y ordeno la idea.', trait: 'presencia' },
-          { text: 'Se cierra un poco; cruzo brazos o piernas.', trait: 'contencion' },
-          { text: 'Busca conectar con quien pregunta antes de hablar.', trait: 'conexion' },
-        ] },
-      { prompt: 'En una negociación notas que el otro no está del todo convencido. ¿Qué haces?',
-        options: [
-          { text: 'Insisto con más argumentos, subo el ritmo.', trait: 'alerta' },
-          { text: 'Hago una pausa y pregunto qué necesita para sentirse seguro.', trait: 'conexion' },
-          { text: 'Mantengo mi postura; dejo que el silencio trabaje.', trait: 'presencia' },
-          { text: 'Sonrío y sigo adelante, aunque note la duda.', trait: 'contencion' },
-        ] },
-      { prompt: 'Al despedirte después de una reunión importante, ¿cómo sueles irte?',
-        options: [
-          { text: 'Con el mismo aplomo con el que entré, sin mirar atrás.', trait: 'presencia' },
-          { text: 'Aliviado; se me nota en el cuerpo que ya terminó.', trait: 'alerta' },
-          { text: 'Repasando mentalmente todo lo que dije, en modo revisión.', trait: 'contencion' },
-          { text: 'Con una última mirada o gesto amable hacia el otro.', trait: 'conexion' },
-        ] },
-      { prompt: 'Llegas a una reunión con un cliente potencial. En los primeros quince segundos, ¿qué hace tu cuerpo?',
-        options: [
-          { text: 'Se planta con calma: espalda recta, manos visibles, sin prisa por sentarme.', trait: 'presencia' },
-          { text: 'Entra ya revisando el móvil o el reloj, repasando datos de última hora.', trait: 'alerta' },
-          { text: 'Sonríe de inmediato y busca romper el hielo con humor.', trait: 'conexion' },
-          { text: 'Se mantiene formal y algo distante hasta "ganarme" su confianza.', trait: 'contencion' },
-        ] },
-      { prompt: 'Antes de proponer un negocio importante, ¿qué te preocupa más de tu presencia?',
-        options: [
-          { text: 'Que mi entusiasmo se note demasiado y parezca desesperación.', trait: 'contencion' },
-          { text: 'Que mi lenguaje corporal transmita la misma seguridad que mis palabras.', trait: 'presencia' },
-          { text: 'Que el otro no conecte conmigo como persona, más allá del trato.', trait: 'conexion' },
-          { text: 'Que se note si estoy nervioso; me cuesta disimularlo.', trait: 'alerta' },
-        ] },
-    ]
-  },
-  {
-    id: 'm7', Icon: Heart,
-    title: 'El lenguaje del corazón',
-    subtitle: 'Pareja, amistad y familia',
-    theme: 'cómo se mueve tu cuerpo cerca de quienes quieres',
-    questions: [
-      { prompt: 'Cuando alguien te gusta, ¿qué es lo primero que cambia en tu cuerpo?',
-        options: [
-          { text: 'Los pies; se orientan hacia esa persona sin que lo decida.', trait: 'conexion' },
-          { text: 'El pulso; me pongo alerta, como si algo estuviera en juego.', trait: 'alerta' },
-          { text: 'Me arreglo, me acomodo el pelo o la ropa sin darme cuenta.', trait: 'apertura' },
-          { text: 'Me pongo más serio de lo normal; controlo más mis gestos.', trait: 'contencion' },
-        ] },
-      { prompt: 'Tienes que decir algo difícil a alguien que quieres. ¿Cómo te sientas?',
-        options: [
-          { text: 'Enfrente, directo, aunque incomode.', trait: 'apertura' },
-          { text: 'Al lado, buscando que sea menos confrontación y más conversación.', trait: 'conexion' },
-          { text: 'Con los brazos ya cruzados antes de empezar a hablar.', trait: 'alerta' },
-          { text: 'Con la postura muy controlada, casi ensayada.', trait: 'contencion' },
-        ] },
-      { prompt: '¿Qué tipo de abrazo das con más frecuencia?',
-        options: [
-          { text: 'Completo, cuerpo contra cuerpo, sin prisa por soltar.', trait: 'conexion' },
-          { text: 'Con palmaditas en la espalda, como cerrando rápido.', trait: 'contencion' },
-          { text: 'Breve y algo rígido; no soy muy de contacto.', trait: 'alerta' },
-          { text: 'Depende del día; a veces me permito más que otras.', trait: 'presencia' },
-        ] },
-    ]
-  },
-  {
-    id: 'm8', Icon: Crown,
-    title: 'Imagen, voz y poder',
-    subtitle: 'Imagen, voz y presencia digital',
-    theme: 'lo que proyectas antes, durante y después de hablar',
-    questions: [
-      { prompt: 'Bajo presión, ¿qué le pasa a tu voz?',
-        options: [
-          { text: 'Se acelera y sube de tono sin que pueda evitarlo.', trait: 'alerta' },
-          { text: 'Se vuelve más pausada, casi más grave, para compensar.', trait: 'presencia' },
-          { text: 'La controlo mucho; cuido cada palabra.', trait: 'contencion' },
-          { text: 'Busco un tono cálido, casi conciliador.', trait: 'conexion' },
-        ] },
-      { prompt: 'En una videollamada importante, ¿qué es lo que más te cuesta?',
-        options: [
-          { text: 'Mantener la mirada en la cámara y no en mi propia imagen.', trait: 'alerta' },
-          { text: 'Nada especial; me siento igual que en persona.', trait: 'presencia' },
-          { text: 'Mostrarme natural; siento que actúo un poco.', trait: 'contencion' },
-          { text: 'No poder leer bien el lenguaje corporal del otro.', trait: 'conexion' },
-        ] },
-      { prompt: 'Alguien usa contigo un gesto de poder (invade tu espacio, sostiene la mirada de más, te interrumpe). ¿Qué haces?',
-        options: [
-          { text: 'Mantengo mi espacio y mi mirada, sin agrandarme ni encogerme.', trait: 'presencia' },
-          { text: 'Se me tensa el cuerpo; entro en alerta.', trait: 'alerta' },
-          { text: 'Me encojo un poco, cedo terreno casi sin darme cuenta.', trait: 'contencion' },
-          { text: 'Intento leer qué hay detrás de ese gesto, más que reaccionar.', trait: 'conexion' },
-        ] },
-      { prompt: 'Antes de una primera impresión importante (una reunión, una cita, una entrevista), ¿qué cuidas más de tu imagen?',
-        options: [
-          { text: 'La ropa y el aseo; quiero que se note que me importa esto.', trait: 'apertura' },
-          { text: 'Nada en particular; confío en que mi actitud hable por sí sola.', trait: 'presencia' },
-          { text: 'Reviso varias veces los detalles, hasta sentirme "protegido" con la imagen.', trait: 'contencion' },
-          { text: 'Pienso en qué le va a gustar o incomodar a la otra persona.', trait: 'conexion' },
-        ] },
-    ]
-  },
-  {
-    id: 'm9', type: 'quiz', Icon: Smile,
-    title: 'El diccionario de las emociones',
-    subtitle: 'Microexpresiones',
-    theme: 'tu entrenamiento para reconocer las siete emociones universales del rostro',
-    questions: [
-      {
-        prompt: 'El músculo orbicular de los ojos se contrae, las mejillas se elevan y aparecen las "patas de gallo". ¿Qué microexpresión es esta?',
-        options: [
-          { text: 'Alegría genuina (sonrisa de Duchenne).', correct: true },
-          { text: 'Sorpresa.', correct: false },
-          { text: 'Desprecio.', correct: false },
-          { text: 'Asco.', correct: false },
-        ],
-        explanation: 'Es la sonrisa de Duchenne: si los ojos no se arrugan, la boca puede estar mintiendo educadamente. Aquí sí lo hacen, así que la alegría es genuina.'
-      },
-      {
-        prompt: 'Los párpados superiores caen ligeramente, la mirada pierde enfoque y las comisuras de los labios se inclinan hacia abajo. ¿Qué microexpresión es esta?',
-        options: [
-          { text: 'Tristeza.', correct: true },
-          { text: 'Ira.', correct: false },
-          { text: 'Miedo.', correct: false },
-          { text: 'Alegría.', correct: false },
-        ],
-        explanation: 'La tristeza apaga el rostro: invade todo el semblante sin pedir permiso y es de las emociones más difíciles de ocultar.'
-      },
-      {
-        prompt: 'Los ojos se abren al máximo, las cejas se levantan y se juntan, y los labios se estiran horizontalmente. ¿Qué microexpresión es esta?',
-        options: [
-          { text: 'Miedo.', correct: true },
-          { text: 'Sorpresa.', correct: false },
-          { text: 'Asco.', correct: false },
-          { text: 'Desprecio.', correct: false },
-        ],
-        explanation: 'Es la respuesta de un organismo que se prepara para huir o luchar, escrita en el rostro en milisegundos.'
-      },
-      {
-        prompt: 'Las cejas bajan y se juntan, los párpados se tensan y los labios se aprietan con fuerza, como conteniendo un volcán. ¿Qué microexpresión es esta?',
-        options: [
-          { text: 'Ira.', correct: true },
-          { text: 'Tristeza.', correct: false },
-          { text: 'Sorpresa.', correct: false },
-          { text: 'Alegría.', correct: false },
-        ],
-        explanation: 'La ira consume energía: es tan potente que, al verla, se activa nuestro propio sistema de alerta.'
-      },
-      {
-        prompt: 'La nariz se arruga, el labio superior se eleva y las mejillas suben. ¿Qué microexpresión es esta?',
-        options: [
-          { text: 'Asco.', correct: true },
-          { text: 'Miedo.', correct: false },
-          { text: 'Ira.', correct: false },
-          { text: 'Desprecio.', correct: false },
-        ],
-        explanation: 'Es una emoción de rechazo, ya sea ante un alimento en mal estado o una situación moralmente inaceptable.'
-      },
-      {
-        prompt: 'Las cejas se arquean, los ojos se abren y la mandíbula cae ligeramente; dura apenas una fracción de segundo. ¿Qué microexpresión es esta?',
-        options: [
-          { text: 'Sorpresa.', correct: true },
-          { text: 'Miedo.', correct: false },
-          { text: 'Ira.', correct: false },
-          { text: 'Tristeza.', correct: false },
-        ],
-        explanation: 'Es la más breve de todas. Si ves una expresión de sorpresa que dura más de un segundo, con toda probabilidad es fingida.'
-      },
-      {
-        prompt: 'Una sola comisura de la boca se eleva y se tensa, de forma asimétrica. ¿Qué microexpresión es esta?',
-        options: [
-          { text: 'Desprecio.', correct: true },
-          { text: 'Alegría.', correct: false },
-          { text: 'Sorpresa.', correct: false },
-          { text: 'Tristeza.', correct: false },
-        ],
-        explanation: 'Es la emoción más sutil y venenosa: una media sonrisa que no tiene nada de alegre y que comunica superioridad y juicio.'
-      },
-    ]
-  },
-  {
-    id: 'm10', type: 'quiz', multi: true, Icon: Fingerprint,
-    title: 'Un gesto no es una sentencia',
-    subtitle: 'Indicios',
-    theme: 'la diferencia entre un indicio aislado y una certeza',
-    questions: [
-      {
-        prompt: 'Ves solo esto, sin ningún otro dato: alguien cruza los brazos sobre el pecho durante toda la reunión. Marca todas las causas que podrían explicarlo por sí solas.',
-        options: [
-          { text: 'Podría tener frío; es una respuesta física, no emocional.', correct: true },
-          { text: 'Podría sentirse a la defensiva o insegura en ese momento.', correct: true },
-          { text: 'Es una prueba segura de que está mintiendo.', correct: false },
-          { text: 'Significa, sin duda, que quiere terminar la reunión ya.', correct: false },
-        ],
-        explanation: 'Cruzar los brazos es de los gestos más malinterpretados: puede deberse a frío, comodidad, concentración o defensividad. Aislado, no permite descartar ninguna.'
-      },
-      {
-        prompt: 'Ves solo esto: alguien se toca la nariz varias veces mientras habla. Marca todas las causas plausibles.',
-        options: [
-          { text: 'Puede ser una alergia o un picor real.', correct: true },
-          { text: 'Puede reflejar nerviosismo ante una pregunta incómoda.', correct: true },
-          { text: 'Es un gesto exclusivo y garantizado de mentira.', correct: false },
-          { text: 'Significa desprecio hacia quien tiene delante.', correct: false },
-        ],
-        explanation: 'Atribuirle automáticamente el significado de "mentira" es un error de principiante. Un picor real y el nerviosismo son igual de plausibles sin más contexto.'
-      },
-      {
-        prompt: 'Ves solo esto: alguien evita el contacto visual mientras te responde. Marca todas las causas plausibles.',
-        options: [
-          { text: 'Puede ser timidez o inseguridad social.', correct: true },
-          { text: 'Puede ser respeto cultural hacia una figura de autoridad.', correct: true },
-          { text: 'Es prueba directa de que se siente culpable.', correct: false },
-          { text: 'Significa que no le importas en absoluto.', correct: false },
-        ],
-        explanation: 'En algunas culturas, evitar la mirada es señal de respeto, no de culpa. La timidez es igual de común. Ninguna certeza aislada.'
-      },
-      {
-        prompt: 'Ves solo esto: alguien mira el reloj varias veces durante la conversación. Marca todas las causas plausibles.',
-        options: [
-          { text: 'Puede tener prisa real o estar esperando a alguien.', correct: true },
-          { text: 'Puede sentirse aburrida o desconectada del momento.', correct: true },
-          { text: 'Es la prueba de que está mintiendo sobre algo.', correct: false },
-          { text: 'Demuestra un interés profundo en el tema.', correct: false },
-        ],
-        explanation: 'Un solo indicio es un rumor. Mirar el reloj admite varias lecturas —prisa, aburrimiento, ansiedad, costumbre— hasta que se combina con otras señales.'
-      },
-      {
-        prompt: 'Ves solo esto: alguien inclina la cabeza hacia un lado mientras escucha. Marca todas las causas plausibles.',
-        options: [
-          { text: 'Puede reflejar interés genuino y escucha activa.', correct: true },
-          { text: 'Puede ser solo un ajuste para oír mejor.', correct: true },
-          { text: 'Es prueba garantizada de atracción romántica.', correct: false },
-          { text: 'Indica que está a punto de irse.', correct: false },
-        ],
-        explanation: 'Inclinar la cabeza puede ser escucha activa, empatía o, simplemente, un ajuste auditivo momentáneo; ninguna lectura es segura por sí sola.'
-      },
-      {
-        prompt: 'Ves solo esto: alguien sonríe, pero sus ojos no se arrugan. Marca todas las causas plausibles.',
-        options: [
-          { text: 'Puede ser cortesía social, sin más carga emocional.', correct: true },
-          { text: 'Puede estar ocultando una emoción que prefiere no mostrar.', correct: true },
-          { text: 'Prueba, sin duda, que es una persona falsa.', correct: false },
-          { text: 'Prueba que no le agradas en absoluto.', correct: false },
-        ],
-        explanation: 'No toda sonrisa social es una mentira malintencionada; a menudo es solo el lubricante que permite que la maquinaria social funcione, u oculta una emoción distinta.'
-      },
-    ]
-  },
-  {
-    id: 'm11', type: 'quiz', Icon: Search,
-    title: 'Cuando todo encaja',
-    subtitle: 'Microexpresiones e indicios',
-    theme: 'tu entrenamiento para leer clústeres de señales, nunca un gesto suelto',
-    questions: [
-      {
-        prompt: 'Notas esta combinación en alguien: cejas que bajan y se juntan (microexpresión de ira), puños cerrados, cuerpo inclinado hacia adelante. ¿Qué es más probable?',
-        options: [
-          { text: 'Está a punto de estallar en enfado; conviene desescalar.', correct: true },
-          { text: 'Está profundamente aburrido de la conversación.', correct: false },
-          { text: 'Siente timidez y busca esconderse.', correct: false },
-          { text: 'Está sorprendido por algo que acaba de escuchar.', correct: false },
-        ],
-        explanation: 'Es una de las combinaciones más fiables del lenguaje no verbal: la microexpresión delata la emoción real, los puños indican tensión contenida y la inclinación hacia adelante prepara el cuerpo para una posible confrontación.'
-      },
-      {
-        prompt: 'Ojos muy abiertos, cejas levantadas y juntas (microexpresión de miedo) + manos frías y sudorosas + pies orientados hacia la puerta. ¿Qué indica este racimo de señales?',
-        options: [
-          { text: 'El sistema nervioso está en alerta; el cuerpo se prepara para huir.', correct: true },
-          { text: 'Está relajado y cómodo en la conversación.', correct: false },
-          { text: 'Siente curiosidad genuina por el tema.', correct: false },
-          { text: 'Está fingiendo interés por cortesía.', correct: false },
-        ],
-        explanation: 'El miedo activa el sistema nervioso simpático de inmediato: la microexpresión es la primera señal, las manos sudorosas confirman la activación fisiológica, y los pies hacia la salida delatan el deseo inconsciente de huir.'
-      },
-      {
-        prompt: 'Sonrisa sin que se arruguen los ojos + brazos cruzados + distancia física marcada. ¿Cómo se siente probablemente esta persona?',
-        options: [
-          { text: 'Incómoda; no quiere estar ahí, pero las normas sociales se lo impiden.', correct: true },
-          { text: 'Completamente feliz y a gusto.', correct: false },
-          { text: 'Concentrada en resolver un problema mental.', correct: false },
-          { text: 'Atraída románticamente por quien tiene delante.', correct: false },
-        ],
-        explanation: 'La sonrisa sin arrugas en los ojos es una máscara social. Combinada con brazos cruzados y distancia física, la probabilidad de que la persona esté incómoda u oculte una emoción negativa es muy alta.'
-      },
-      {
-        prompt: 'Mirar el reloj + tamborilear los dedos + suspiros profundos, todo junto. ¿Qué está comunicando este cuerpo?',
-        options: [
-          { text: 'Impaciencia o ansiedad que busca liberarse, aunque no lo diga en voz alta.', correct: true },
-          { text: 'Total desinterés por el resultado de la reunión.', correct: false },
-          { text: 'Una necesidad física de estirar las piernas.', correct: false },
-          { text: 'Un hábito sin ninguna carga emocional.', correct: false },
-        ],
-        explanation: 'Ningún indicio aislado basta, pero esta tríada junta —mirar el reloj, tamborilear, suspirar— eleva considerablemente la probabilidad de impaciencia o ansiedad contenida que busca que la situación termine.'
-      },
-      {
-        prompt: 'Elevación asimétrica de una sola comisura (microexpresión de desprecio) + brazos cruzados + cabeza ligeramente inclinada hacia atrás. ¿Qué sugiere este conjunto?',
-        options: [
-          { text: 'Una sensación de superioridad y un rechazo silencioso hacia lo que se dice.', correct: true },
-          { text: 'Un interés genuino y una escucha activa.', correct: false },
-          { text: 'Vergüenza o inseguridad social.', correct: false },
-          { text: 'Cansancio físico acumulado.', correct: false },
-        ],
-        explanation: 'El desprecio combina superioridad y rechazo. Los brazos cruzados refuerzan el cierre emocional y la cabeza inclinada hacia atrás crea distancia jerárquica: la persona se sitúa, sin palabras, por encima de la situación.'
-      },
-      {
-        prompt: 'Microexpresión de tristeza (párpados caídos, comisuras hacia abajo) + mirada perdida + suspiro profundo. ¿Qué está atravesando esta persona?',
-        options: [
-          { text: 'Un momento de agotamiento emocional o tristeza genuina.', correct: true },
-          { text: 'Está profundamente concentrada resolviendo un problema.', correct: false },
-          { text: 'Está a punto de reírse de algo.', correct: false },
-          { text: 'Siente atracción hacia alguien en la sala.', correct: false },
-        ],
-        explanation: 'La tristeza apaga el rostro y el cuerpo. Si además los hombros están caídos y la voz es monótona, la persona está atravesando un momento de agotamiento emocional.'
-      },
-    ]
-  },
-  {
-    id: 'm12', type: 'quiz', Icon: Magnet,
-    title: 'Señales de atracción',
-    subtitle: 'Coqueteo y atracción',
-    theme: 'las señales corporales del interés y el deseo que el libro describe en "El lenguaje del corazón"',
-    questions: [
-      {
-        prompt: 'Sus pupilas se dilatan ligeramente mientras te mira, aunque la luz del lugar no ha cambiado. ¿Qué sugiere esto?',
-        options: [
-          { text: 'Una respuesta involuntaria asociada al interés genuino; es difícil de fingir.', correct: true },
-          { text: 'Simple cansancio ocular.', correct: false },
-          { text: 'Un efecto de la iluminación, nada más.', correct: false },
-          { text: 'Molestia por la conversación.', correct: false },
-        ],
-        explanation: 'La dilatación pupilar es involuntaria: no se puede fingir, y por eso es una de las señales de interés más fiables en una primera cita.'
-      },
-      {
-        prompt: 'Sin darse cuenta, se acomoda el pelo, se ajusta la ropa y se toca el cuello varias veces mientras hablan. ¿Qué gesto es este y qué suele indicar?',
-        options: [
-          { text: '"Acicalamiento": el cuerpo quiere estar presentable ante quien le interesa.', correct: true },
-          { text: 'Un tic nervioso sin relación con la conversación.', correct: false },
-          { text: 'Señal de que quiere terminar la charla.', correct: false },
-          { text: 'Un hábito de higiene sin más.', correct: false },
-        ],
-        explanation: 'Cuando alguien nos gusta, el cuerpo quiere estar presentable, quiere brillar, y lo hace sin pedirnos permiso.'
-      },
-      {
-        prompt: 'Aunque su torso está ligeramente girado hacia otro lado, sus pies apuntan hacia ti durante toda la charla. ¿Qué indican los pies en este caso?',
-        options: [
-          { text: 'Interés real; los pies son de los indicadores más honestos y difíciles de controlar.', correct: true },
-          { text: 'Que quiere marcharse pronto.', correct: false },
-          { text: 'Incomodidad física, nada emocional.', correct: false },
-          { text: 'Que está distraída con otra persona.', correct: false },
-        ],
-        explanation: 'Los pies son extraordinariamente honestos: si apuntan hacia ti, hay interés y conexión, aunque el resto del cuerpo esté girado hacia otro lado.'
-      },
-      {
-        prompt: 'Al sentarse, orienta ligeramente la pelvis hacia ti, un detalle que casi nadie nota conscientemente. ¿Qué comunica este gesto?',
-        options: [
-          { text: 'Apertura y disponibilidad hacia la persona con la que habla.', correct: true },
-          { text: 'Simple comodidad postural sin más carga.', correct: false },
-          { text: 'Cansancio acumulado.', correct: false },
-          { text: 'Incomodidad con la silla.', correct: false },
-        ],
-        explanation: 'Es un gesto sutil pero inconfundible de apertura y disponibilidad; el inconsciente de quien lo recibe lo registra sin que nadie lo verbalice.'
-      },
-      {
-        prompt: 'Justo después de un cumplido tuyo, cruza los brazos y aprieta ligeramente los labios. ¿Qué es esto?',
-        options: [
-          { text: 'Un microrrechazo: su cuerpo dice "no" aunque sus palabras sean amables.', correct: true },
-          { text: 'Una señal clara de atracción intensa.', correct: false },
-          { text: 'Timidez que confirma interés romántico.', correct: false },
-          { text: 'Simplemente tiene frío.', correct: false },
-        ],
-        explanation: 'El cuerpo también dice "no" de formas muy claras. Aprender a leer y respetar estos microrrechazos es un acto de inteligencia emocional, tanto propia como ajena.'
-      },
-      {
-        prompt: 'Mientras conversan, notas que el ritmo de parpadeo de ambos empieza a coincidir, sin que nadie lo haga a propósito. ¿Qué sugiere esta sincronía?',
-        options: [
-          { text: 'Sintonía y conexión emocional entre ambos.', correct: true },
-          { text: 'Que los dos están cansados al mismo tiempo.', correct: false },
-          { text: 'Una coincidencia sin ningún significado.', correct: false },
-          { text: 'Que uno está imitando deliberadamente al otro.', correct: false },
-        ],
-        explanation: 'El parpadeo que se sincroniza es una forma de sincronización biológica que refleja la sintonía emocional entre dos personas, casi como si sus cuerpos bailaran al mismo ritmo.'
-      },
-    ]
-  },
-];
-
-const EMPTY_SCORES = { apertura: 0, alerta: 0, contencion: 0, presencia: 0, conexion: 0 };
-const TOTAL_QUESTIONS = MODULES.reduce((n, m) => n + m.questions.length, 0);
-const LEVEL_SIGNALS = {
-  m1: ['Cejas elevadas', 'Ojos muy abiertos', 'Sonrisa que llega a los ojos', 'Mandíbula tensa', 'Mirada perdida', 'Cambio rápido de expresión'],
-  m2: ['Hombros relajados', 'Pecho abierto', 'Espalda encorvada', 'Postura rígida', 'Cabeza gacha', 'Cambio de postura ante autoridad'],
-  m3: ['Palmas visibles', 'Brazos cruzados', 'Puños cerrados', 'Manos inquietas', 'Pies orientados hacia alguien', 'Contacto físico'],
-  m4: ['Caminar con prisa', 'Pasos firmes', 'Cuerpo que ocupa espacio', 'Buscar la salida', 'Distancia muy corta', 'Distancia que aumenta'],
-  m5: ['Mandíbula apretada', 'Tamborileo de dedos', 'Respiración superficial', 'Sonrisa social', 'Cuerpo rígido', 'Movimiento para distraerse'],
-  m6: ['Mirada serena', 'Manos visibles', 'Pausa antes de responder', 'Pies firmes en el suelo', 'Cuerpo que se echa atrás', 'Gestos de nerviosismo'],
-  m7: ['Contacto visual', 'Pies orientados hacia la persona', 'Sonrisa genuina', 'Distancia cómoda', 'Cuerpo que se acerca', 'Cuerpo que se retira'],
-  m8: ['Ropa cuidada', 'Voz pausada', 'Mirada a la cámara', 'Manos visibles', 'Postura estable', 'Gestos de autoridad'],
-  m9: ['Alegría', 'Tristeza', 'Miedo', 'Ira', 'Asco', 'Sorpresa o desprecio'],
-  m10: ['Frío o comodidad', 'Nerviosismo', 'Timidez', 'Picor físico', 'Aburrimiento', 'Respeto cultural'],
-  m11: ['Microexpresión facial', 'Postura coherente', 'Manos tensas', 'Respiración acelerada', 'Pies hacia la salida', 'Cambio de voz'],
-  m12: ['Pupilas dilatadas', 'Acicalamiento', 'Pies orientados hacia ti', 'Sincronía corporal', 'Brazos cruzados', 'Distancia física'],
-};
-const LEVEL_DYNAMICS = {
-  m1: [
-    { perceive: 'Alguien recibe una noticia inesperada. ¿Qué señales notas primero?', options: ['Cejas que suben', 'Ojos que se abren', 'Boca que se entreabre', 'Rostro que se congela', 'Sonrisa automática', 'Mirada que busca apoyo'], act: 'La próxima vez que recibas una noticia inesperada, ¿cómo responderías?', actions: ['Respirar antes de hablar', 'Pedir un momento', 'Nombrar lo que siento', 'Mantener una expresión neutral', 'Preguntar para comprender', 'Expresar mi reacción con honestidad'] },
-    { perceive: 'En una conversación divertida, ¿qué cambios del rostro identificas?', options: ['Arrugas junto a los ojos', 'Mejillas elevadas', 'Risa contenida', 'Mirada que se aparta', 'Labios tensos', 'Expresión que cambia rápido'], act: 'Si una emoción aparece mientras conversas, ¿qué harías?', actions: ['Permitir una sonrisa natural', 'No fingir entusiasmo', 'Observar mi reacción', 'Compartir lo que siento', 'Bajar el ritmo', 'Aceptar una emoción mezclada'] },
-    { perceive: 'Alguien intenta ocultar una emoción incómoda. ¿Qué observas?', options: ['Sonrisa que no llega a los ojos', 'Mandíbula apretada', 'Parpadeo acelerado', 'Mirada perdida', 'Cambio breve de expresión', 'Rostro que vuelve a la máscara'], act: 'Si tú intentaras ocultar una emoción, ¿cómo te prepararías?', actions: ['Reconocerla internamente', 'Relajar la mandíbula', 'Pedir privacidad', 'No obligarme a sonreír', 'Hablar cuando esté listo', 'Buscar apoyo'] },
-  ],
-  m2: [
-    { perceive: 'Una persona entra a una reunión importante. ¿Qué postura percibes?', options: ['Pecho abierto', 'Hombros elevados', 'Espalda encorvada', 'Pasos firmes', 'Cuerpo rígido', 'Pies bien apoyados'], act: 'Antes de entrar tú a una situación importante, ¿qué harías?', actions: ['Apoyar ambos pies', 'Soltar los hombros', 'Respirar profundo', 'Caminar sin prisa', 'Ocupar mi espacio', 'Evitar una postura forzada'] },
-    { perceive: 'Una figura de autoridad entra en la sala. ¿Qué cambios notas?', options: ['Columna que se endereza', 'Cuerpo que se encoge', 'Cabeza que baja', 'Pecho que se expande', 'Brazos que se cierran', 'Postura que permanece estable'], act: 'Si aparece una autoridad frente a ti, ¿cómo actuarías?', actions: ['Mantener mi postura', 'Escuchar sin encogerme', 'Pedir claridad', 'Relajar las manos', 'Sostener una mirada tranquila', 'Tomar una pausa'] },
-    { perceive: 'Durante el trabajo, ¿qué señales de postura sostenida identificas?', options: ['Cuello adelantado', 'Espalda redondeada', 'Hombros tensos', 'Postura relajada', 'Rigidez en la espalda', 'Cambios frecuentes de posición'], act: 'Si notas tensión mientras trabajas, ¿qué harías?', actions: ['Cambiar de posición', 'Estirar suavemente', 'Alejarme de la pantalla', 'Apoyar la espalda', 'Hacer una pausa', 'Consultar si el dolor continúa'] },
-  ],
-  m7: [
-    { perceive: 'En una conversación cercana, ¿qué señales observas?', options: ['Pies orientados hacia la persona', 'Mirada que se sostiene', 'Cuerpo que se acerca', 'Brazos que se cierran', 'Distancia que aumenta', 'Sonrisa genuina'], act: 'Si quisieras acercarte a alguien, ¿cómo actuarías?', actions: ['Preguntar si está cómodo', 'Mantener una distancia respetuosa', 'Escuchar sin invadir', 'Observar reciprocidad', 'Aceptar un no', 'Hablar directamente'] },
-    { perceive: 'En una primera cita o encuentro, ¿qué combinación notas?', options: ['Pupilas más abiertas', 'Acicalamiento', 'Risa nerviosa', 'Mirada hacia el teléfono', 'Cuerpo girado hacia la salida', 'Sincronía de movimientos'], act: 'Si te interesa alguien, ¿qué harías?', actions: ['Mostrar interés con palabras', 'No asumir que existe atracción', 'Respetar su espacio', 'Preguntar antes de tocar', 'Observar si hay reciprocidad', 'Aceptar la distancia'] },
-    { perceive: 'Durante un desacuerdo, ¿qué señales de límite identificas?', options: ['Cuerpo que retrocede', 'Labios apretados', 'Mirada que evita', 'Brazos cruzados', 'Tono que baja', 'Manos que buscan distancia'], act: 'Si la otra persona muestra incomodidad, ¿cómo responderías?', actions: ['Detener la presión', 'Preguntar qué necesita', 'Bajar el tono', 'Dar espacio', 'No interpretar el silencio', 'Retomar después'] },
-  ],
-  m10: [
-    { perceive: 'En una reunión, alguien cruza los brazos. ¿Qué explicaciones plausibles puedes considerar?', options: ['Puede tener frío', 'Puede estar cómodo', 'Puede estar concentrado', 'Puede sentirse inseguro', 'Puede estar en desacuerdo', 'El gesto no basta para saberlo'], act: 'Si vieras ese gesto, ¿cómo actuarías?', actions: ['No acusar ni etiquetar', 'Observar otros indicios', 'Revisar la temperatura y el contexto', 'Preguntar con naturalidad', 'Escuchar la respuesta', 'No sacar una conclusión todavía'] },
-    { perceive: 'Una persona se toca la nariz mientras responde. ¿Qué puedes identificar sin afirmar que miente?', options: ['Puede tener alergia', 'Puede sentir picor', 'Puede estar nerviosa', 'Puede estar pensando', 'Puede sentirse incómoda', 'No demuestra una mentira'], act: 'Si ocurre durante una conversación importante, ¿qué harías?', actions: ['No señalar el gesto como prueba', 'Observar si aparece un patrón', 'Comparar con su conducta habitual', 'Hacer una pregunta abierta', 'Escuchar el contenido', 'Evitar una acusación'] },
-    { perceive: 'Alguien evita el contacto visual. ¿Qué posibilidades caben?', options: ['Timidez', 'Inseguridad social', 'Respeto cultural', 'Vergüenza', 'Cansancio', 'Deseo de ocultar una emoción'], act: 'Si necesitas saber qué ocurre, ¿cómo actuarías?', actions: ['No asumir culpa', 'Considerar su cultura', 'Dar tiempo para responder', 'Preguntar si está cómodo', 'Escuchar sin presionar', 'Aceptar que puede no querer mirar'] },
-    { perceive: 'Una persona mira el reloj durante una conversación. ¿Qué indicios alternativos observas?', options: ['Tiene prisa real', 'Espera a alguien', 'Está aburrida', 'Está ansiosa', 'Tiene una costumbre', 'Quiere terminar la conversación'], act: 'Si notas ese gesto, ¿qué respuesta sería más adecuada?', actions: ['Preguntar si necesita terminar', 'Resumir lo importante', 'No tomarlo como rechazo', 'Observar otros cambios', 'Ofrecer continuar después', 'Respetar su tiempo'] },
-    { perceive: 'Alguien inclina la cabeza mientras te escucha. ¿Qué lecturas puedes mantener abiertas?', options: ['Interés genuino', 'Escucha activa', 'Empatía', 'Quiere oír mejor', 'Está procesando la información', 'No confirma atracción'], act: 'Si interpretas la señal, ¿cómo actuarías?', actions: ['Seguir explicando con claridad', 'Comprobar si entendió', 'No asumir interés romántico', 'Mantener una distancia respetuosa', 'Observar si también asiente', 'Preguntar directamente si hace falta'] },
-    { perceive: 'Una persona sonríe, pero sus ojos no se arrugan. ¿Qué puede estar ocurriendo?', options: ['Cortesía social', 'Sonrisa profesional', 'Incomodidad', 'Emoción oculta', 'Hábito personal', 'No demuestra falsedad'], act: 'Si recibes esa sonrisa, ¿cómo actuarías?', actions: ['No llamar a la persona falsa', 'Observar el tono y la postura', 'Mantener un trato respetuoso', 'Preguntar cómo se siente si hay confianza', 'No forzar una conversación', 'Esperar más contexto'] },
-  ],
-};
-const LEVEL_ACTION_OPTIONS = {
-  m3: [['Mostrar las manos sin exagerar', 'Saludar respetando el estilo del otro', 'Dejar los pies estables', 'Evitar señalar', 'No tocar sin permiso', 'Abrir la postura'], ['Pedir tiempo para pensar', 'Mantener las manos relajadas', 'Mostrar desacuerdo con palabras', 'Evitar gestos agresivos', 'Preguntar antes de aceptar', 'Cuidar la distancia'], ['Apoyar los pies', 'Relajar las manos', 'Soltar el cruce de tobillos', 'Respirar despacio', 'Reconocer la espera', 'Levantarte solo si lo necesitas']],
-  m4: [['Orientarme antes de avanzar', 'Caminar a mi ritmo', 'Dejar espacio a otros', 'Buscar un punto seguro', 'No invadir una distancia', 'Preguntar si necesito ayuda'], ['Preguntar si está bien', 'Ajustar el paso', 'No obligar a correr', 'Proponer una pausa', 'Respetar su espacio', 'Continuar con calma'], ['Retroceder un poco', 'Preguntar si está cómodo', 'No bloquear la salida', 'Mantener distancia social', 'Bajar la intensidad', 'Aceptar que necesita espacio']],
-  m5: [['Hacer una pausa breve', 'Nombrar la tensión', 'Bajar el ritmo', 'Pedir apoyo', 'No fingir que todo está bien', 'Elegir cuándo continuar'], ['Notar la señal sin juzgarla', 'Respirar lentamente', 'Apoyar las manos', 'Pedir que repitan', 'Ordenar la idea', 'Buscar una pausa segura'], ['Reconocer que algo cambió', 'No responder rápido', 'Explicar lo que necesito', 'Pedir privacidad', 'Escuchar mi cuerpo', 'Buscar ayuda si continúa']],
-  m6: [['Probar mi postura', 'Ensayar una pausa', 'Preparar ejemplos', 'Dejar las manos libres', 'Respirar antes de entrar', 'Escuchar antes de responder'], ['Preguntar qué necesita aclarar', 'No presionar', 'Resumir la propuesta', 'Ofrecer una alternativa', 'Escuchar la objeción', 'Confirmar por escrito'], ['Repetir la pregunta', 'Pedir unos segundos', 'Responder con honestidad', 'Mantener voz pausada', 'No inventar', 'Volver al punto principal']],
-  m8: [['Probar cámara y micrófono', 'Ajustar la luz', 'Mirar a la lente', 'Dejar espacio en el encuadre', 'Hablar con pausas', 'Ocultar mi vista previa'], ['Hablar sin acelerar', 'Mantener manos abiertas', 'No invadir espacio', 'Hacer pausas', 'Escuchar antes de ordenar', 'Ajustar mi imagen'], ['Escribir con claridad', 'Preguntar antes de asumir', 'Usar voz calmada', 'Explicar el tono', 'No discutir por mensajes', 'Proponer una conversación']],
-  m9: [['No etiquetar rápidamente', 'Dar espacio', 'Preguntar cómo se siente', 'Escuchar antes de aconsejar', 'No manipular', 'Responder con empatía'], ['No afirmar que vi la verdad', 'Esperar información', 'Observar el contexto', 'Preguntar con cuidado', 'Recordar que es una pista', 'Respetar la privacidad'], ['Aceptar la complejidad', 'No reducir a una emoción', 'Escuchar la historia', 'Evitar juicio rápido', 'Preguntar qué necesita', 'Acompañar sin invadir']],
-  m10: [['No acusar ni etiquetar', 'Observar otros indicios', 'Revisar el contexto físico', 'Preguntar con naturalidad', 'Escuchar la respuesta', 'No concluir todavía'], ['No señalarlo como prueba', 'Observar si hay un patrón', 'Comparar con su conducta habitual', 'Hacer una pregunta abierta', 'Escuchar el contenido', 'Evitar una acusación'], ['No asumir culpa', 'Considerar la cultura', 'Dar tiempo para responder', 'Preguntar si está cómodo', 'Escuchar sin presionar', 'Aceptar que puede no querer mirar']],
-  m11: [['Bajar la presión', 'Hacer una pausa', 'Preguntar qué ocurre', 'Dar una salida', 'No confrontar de inmediato', 'Confirmar antes de concluir'], ['Considerarlo una hipótesis', 'Comprobar el contexto', 'Hablar con calma', 'Dar espacio si hay miedo', 'Desescalar si hay ira', 'No tratarlo como certeza'], ['No decir “tu cuerpo te delata”', 'Preguntar de forma abierta', 'Escuchar ambas partes', 'Dar tiempo', 'No presionar', 'Aceptar la respuesta verbal']],
-  m12: [['Mostrar interés con palabras', 'Preguntar antes de acercarte', 'Observar reciprocidad', 'Respetar un retroceso', 'No interpretar como permiso', 'Aceptar un no'], ['Detener el avance', 'Dar espacio', 'Preguntar si está cómodo', 'Cambiar de tema', 'No insistir', 'Respetar la decisión'], ['Conversar con naturalidad', 'No convertirlo en promesa', 'Confirmar con palabras', 'Mantener límites', 'Avanzar con reciprocidad', 'Dejar que se desarrolle']],
-};
-
-function getLevelDynamic(module, index) {
-  const custom = LEVEL_DYNAMICS[module.id]?.[index];
-  if (custom) return custom;
-  const signals = LEVEL_SIGNALS[module.id] || [];
-  const actions = LEVEL_ACTION_OPTIONS[module.id]?.[index] || ['Observar antes de concluir', 'Respirar y hacer una pausa', 'Comparar con el contexto', 'Preguntar con respeto', 'Dar espacio', 'Respetar los límites'];
-  return {
-    perceive: `En la situación ${index + 1}, ¿qué señales de ${module.subtitle.toLowerCase()} identificas?`,
-    options: signals.slice(index * 2).concat(signals.slice(0, index * 2)).slice(0, 6),
-    act: `Si vivieras una situación parecida de ${module.subtitle.toLowerCase()}, ¿cómo actuarías?`,
-    actions,
-  };
-}
-const LEVEL_ACTIONS = {
-  m1: 'Nombra primero la emoción sin juzgarla. Antes de reaccionar, respira y comprueba si tu rostro coincide con lo que realmente sientes.',
-  m2: 'Ajusta tu postura sin forzarla: apoya los pies, relaja los hombros y deja espacio para responder con seguridad, especialmente ante una figura de autoridad.',
-  m3: 'Observa tus manos y pies antes de interpretar a otra persona. Mantén las palmas visibles, respeta el espacio ajeno y pregunta antes de iniciar contacto físico.',
-  m4: 'Baja el ritmo y observa la distancia. No invadas ni retrocedas automáticamente: adapta tu paso y tu espacio al contexto y a la comodidad de la otra persona.',
-  m5: 'Si detectas tensión, introduce una pausa. Reduce el ritmo, respira y pregunta qué ocurre en lugar de asumir que la persona está mintiendo o rechazándote.',
-  m6: 'Prepárate con una pausa, manos visibles y una postura estable. En una entrevista o negociación, escucha los cambios del otro y formula una pregunta antes de presionar.',
-  m7: 'No conviertas una señal en una conclusión sobre el interés de alguien. Observa el conjunto, pregunta con respeto y acepta cualquier límite o señal de distancia.',
-  m8: 'Alinea imagen, voz y postura con el contexto. Antes de una cámara, entrevista o presentación, prueba el encuadre, respira y habla con un ritmo que puedas sostener.',
-  m9: 'Usa la microexpresión como una pista emocional, no como una prueba. Dale espacio a la persona, escucha sus palabras y evita etiquetarla por una reacción fugaz.',
-  m10: 'Busca explicaciones alternativas antes de juzgar. Compara la señal con la línea base de la persona y el contexto; si necesitas saber algo, pregunta directamente.',
-  m11: 'Cuando varias señales coincidan, baja la intensidad de la interacción. Da espacio, escucha y confirma lo que ocurre antes de tomar una decisión o confrontar.',
-  m12: 'Trata las señales de atracción como posibilidades, nunca como consentimiento. Avanza solo con reciprocidad clara, comunicación directa y respeto por los límites.',
-};
-const BOOK_PARTS = {
-  m1: 'Parte I · Tu cuerpo nunca deja de hablar',
-  m2: 'Parte II · Aprende a escucharte',
-  m3: 'Parte II · Aprende a escucharte',
-  m4: 'Parte II · Aprende a escucharte',
-  m5: 'Parte III · Comprende a los demás',
-  m6: 'Parte III · Comprende a los demás',
-  m7: 'Parte III · Comprende a los demás',
-  m8: 'Parte IV · Transforma tu presencia',
-  m9: 'Bonus · Herramientas prácticas',
-  m10: 'Bonus · Herramientas prácticas',
-  m11: 'Bonus · Herramientas prácticas',
-  m12: 'Bonus · Herramientas prácticas',
-};
-
-function getDynamicAssessment(perceive = [], act = []) {
-  const perceptionText = perceive.length
-    ? `Percibiste ${perceive.length}: ${perceive.join(', ')}.`
-    : 'No registraste señales percibidas.';
-  const actionText = act.length
-    ? `Elegiste ${act.length} formas de actuar: ${act.join(', ')}.`
-    : 'No registraste una forma de actuar.';
-  const coherence = perceive.length && act.length
-    ? 'La dinámica está completa: primero observaste señales y después elegiste una respuesta para esa situación.'
-    : 'La dinámica está incompleta: necesitas relacionar lo que percibes con una forma concreta de actuar.';
-  return { perceptionText, actionText, coherence };
-}
-
-function getLevelSummary(module, tally, dynamic = { perceive: [], act: [] }) {
-  const dominant = module.type === 'quiz' ? null : getDominant(tally);
-  const trait = dominant ? TRAIT_INFO[dominant] : null;
-  const assessment = getDynamicAssessment(dynamic.perceive, dynamic.act);
-  if (module.type === 'quiz') {
-    return `Este nivel entrena tu capacidad para distinguir un gesto aislado de un conjunto de señales. ${assessment.perceptionText} ${assessment.actionText} ${assessment.coherence}`;
-  }
-  if (!trait) return `Tu selección se centró en observar señales concretas del nivel. ${assessment.perceptionText} ${assessment.actionText} ${assessment.coherence}`;
-  return `${trait.label} es la tendencia que más apareció en tus respuestas. ${trait.text(module.theme)} ${assessment.perceptionText} ${assessment.actionText} ${assessment.coherence}`;
-}
-
-function getSignalReading(signal) {
-  const readings = {
-    'Cejas elevadas': 'Puede indicar sorpresa, atención o incredulidad; observa cuánto dura y qué hacen los ojos y la boca.',
-    'Ojos muy abiertos': 'Puede aparecer ante sorpresa, miedo o alerta; el contexto decide cuál lectura tiene más sentido.',
-    'Sonrisa que llega a los ojos': 'Suele acompañar una alegría genuina o una conexión positiva, aunque siempre debe observarse el conjunto.',
-    'Mandíbula tensa': 'Puede revelar esfuerzo, estrés, contención o enojo; no demuestra por sí sola una emoción concreta.',
-    'Mirada perdida': 'Puede relacionarse con tristeza, cansancio, reflexión o desconexión del momento.',
-    'Cambio rápido de expresión': 'Puede mostrar el paso de una reacción espontánea a una expresión socialmente controlada.',
-  };
-  return readings[signal] || 'Es un indicio para observar junto con la postura, la voz, el contexto y las demás señales marcadas.';
-}
-
-function getDynamicReading(type, option) {
-  if (type === 'perceive') {
-    const readings = {
-      'Cejas que suben': 'Puede señalar sorpresa, atención o incredulidad. Mira cuánto dura y qué ocurre después.',
-      'Ojos que se abren': 'Puede aparecer ante sorpresa, miedo o alerta. Necesita el contexto de la situación.',
-      'Boca que se entreabre': 'Suele acompañar una reacción inesperada, pero también puede ser una pausa antes de responder.',
-      'Rostro que se congela': 'Puede mostrar bloqueo momentáneo, cautela o esfuerzo por controlar la reacción.',
-      'Sonrisa automática': 'Puede ser cortesía, nerviosismo o una forma de ocultar otra emoción. No confirma alegría.',
-      'Mirada que busca apoyo': 'Puede indicar necesidad de seguridad, conexión o confirmación de alguien cercano.',
-      'Arrugas junto a los ojos': 'Suelen acompañar una sonrisa genuina, aunque deben observarse junto con el resto del rostro.',
-      'Mejillas elevadas': 'Pueden acompañar alegría o entusiasmo; también pueden aparecer al forzar una sonrisa.',
-      'Risa contenida': 'Puede reflejar autocontrol, incomodidad o deseo de no llamar la atención.',
-      'Mirada que se aparta': 'Puede ser timidez, reflexión, incomodidad o una costumbre personal.',
-      'Labios tensos': 'Pueden señalar contención, concentración o desacuerdo. No prueban enojo por sí solos.',
-      'Expresión que cambia rápido': 'Puede mostrar una reacción espontánea seguida de una expresión social controlada.',
-      'Sonrisa que no llega a los ojos': 'Puede ser una sonrisa social o una máscara; conviene observar el tono y la postura.',
-      'Mandíbula apretada': 'Suele relacionarse con tensión, esfuerzo o contención emocional.',
-      'Parpadeo acelerado': 'Puede aparecer con nerviosismo, cansancio o cambios de atención.',
-      'Mirada perdida': 'Puede indicar tristeza, cansancio, reflexión o desconexión del momento.',
-      'Cambio breve de expresión': 'Puede ser una microexpresión, pero necesita otros indicios para interpretarse.',
-      'Rostro que vuelve a la máscara': 'Puede mostrar un intento de recuperar el control social después de una reacción emocional.',
-      'Puede tener frío': 'El frío puede explicar los brazos cruzados sin que exista una emoción defensiva.',
-      'Puede estar cómodo': 'Algunas personas cruzan los brazos por costumbre o comodidad; observa su línea base.',
-      'Puede estar concentrado': 'El gesto puede ayudar a recogerse mientras procesa información.',
-      'Puede sentirse inseguro': 'Puede ser una barrera corporal ante una situación que genera tensión, pero no lo confirma.',
-      'Puede estar en desacuerdo': 'Puede coincidir con desacuerdo si también aparecen distancia, tensión o cambios de voz.',
-      'El gesto no basta para saberlo': 'Esta es la lectura prudente: un gesto aislado necesita contexto y señales adicionales.',
-      'Puede tener alergia': 'Tocarse la nariz puede deberse a una reacción física y no a una intención de ocultar algo.',
-      'Puede sentir picor': 'Un picor real es una explicación simple que debe considerarse antes de sospechar.',
-      'Puede estar nerviosa': 'El nerviosismo puede aumentar los gestos de autoconfort, pero no equivale a mentira.',
-      'Puede estar pensando': 'La persona puede tocarse la nariz mientras organiza una respuesta difícil.',
-      'Puede sentirse incómoda': 'La incomodidad es posible si el gesto aparece junto con otros cambios, no por sí solo.',
-      'No demuestra una mentira': 'El libro insiste en que no existe un gesto único que pruebe engaño.',
-      'Timidez': 'Evitar la mirada puede relacionarse con timidez y no con culpa.',
-      'Inseguridad social': 'Puede ser una forma de reducir la exposición cuando la interacción resulta intensa.',
-      'Respeto cultural': 'En algunas culturas, bajar la mirada ante una autoridad comunica respeto.',
-      'Vergüenza': 'Puede aparecer al sentirse expuesto, aunque hace falta preguntar antes de interpretarlo.',
-      'Cansancio': 'El cansancio reduce el contacto visual y la energía sin que exista un mensaje oculto.',
-      'Deseo de ocultar una emoción': 'Es una posibilidad entre varias, no una conclusión automática.',
-      'Tiene prisa real': 'Mirar el reloj puede responder a una obligación concreta o a una cita pendiente.',
-      'Espera a alguien': 'Puede estar comprobando la hora por otra persona, no por desinterés hacia ti.',
-      'Está aburrida': 'El aburrimiento es una lectura posible si coincide con desconexión y respuestas breves.',
-      'Está ansiosa': 'La ansiedad puede aumentar la vigilancia del tiempo y la necesidad de terminar.',
-      'Tiene una costumbre': 'Algunas personas miran el reloj automáticamente sin intención comunicativa.',
-      'Quiere terminar la conversación': 'Puede serlo si aparece junto con cuerpo orientado hacia la salida y tono de cierre.',
-      'Interés genuino': 'Inclinar la cabeza puede acompañar una escucha atenta, aunque no lo demuestra por sí solo.',
-      'Escucha activa': 'Puede mostrar atención cuando coincide con asentir y una postura orientada hacia quien habla.',
-      'Empatía': 'Puede expresar sintonía emocional, pero debe confirmarse con la conversación.',
-      'Quiere oír mejor': 'También puede ser un ajuste físico para escuchar con claridad.',
-      'Está procesando la información': 'La inclinación puede acompañar un esfuerzo de comprensión.',
-      'No confirma atracción': 'Una inclinación de cabeza nunca debe interpretarse como consentimiento o interés romántico.',
-      'Cortesía social': 'Una sonrisa puede cumplir una norma de amabilidad sin expresar alegría profunda.',
-      'Sonrisa profesional': 'En atención al público puede ser un gesto aprendido y no una señal de falsedad.',
-      'Incomodidad': 'Puede acompañar incomodidad si coincide con rigidez, distancia o tono tenso.',
-      'Emoción oculta': 'Es posible, pero solo como hipótesis que necesita conversación y más contexto.',
-      'Hábito personal': 'Cada persona tiene una forma habitual de sonreír que debe conocerse antes de juzgar.',
-      'No demuestra falsedad': 'Una sonrisa sin arrugas en los ojos no convierte automáticamente a alguien en falso.',
-    };
-    return readings[option] || getSignalReading(option);
-  }
-  const actions = {
-    'Respirar antes de hablar': 'Te da tiempo para regular la emoción y responder sin hacerlo por impulso.',
-    'Pedir un momento': 'Permite reconocer lo que ocurre y evita responder bajo presión.',
-    'Nombrar lo que siento': 'Convierte una reacción interna en una comunicación clara y responsable.',
-    'Mantener una expresión neutral': 'Puede ayudarte a observar, aunque no conviene usarla para negar lo que sientes.',
-    'Preguntar para comprender': 'Reduce las suposiciones y abre espacio para conocer el contexto real.',
-    'Expresar mi reacción con honestidad': 'Favorece una respuesta congruente entre lo que sientes, dices y muestras.',
-    'No acusar ni etiquetar': 'Evita convertir un gesto ambiguo en una acusación que puede dañar la conversación.',
-    'Observar otros indicios': 'Permite formar una hipótesis más responsable a partir de un conjunto de señales.',
-    'Revisar la temperatura y el contexto': 'Comprueba primero una causa física o situacional antes de atribuir una emoción.',
-    'Preguntar con naturalidad': 'Abre la posibilidad de conocer la causa real sin presionar ni acusar.',
-    'Escuchar la respuesta': 'Las palabras y el contexto ayudan a contrastar lo que el cuerpo parece sugerir.',
-    'No sacar una conclusión todavía': 'Mantiene la interpretación abierta hasta tener información suficiente.',
-    'No señalar el gesto como prueba': 'Protege la conversación de un juicio basado en un mito del lenguaje corporal.',
-    'Observar si aparece un patrón': 'Un cambio repetido y contextualizado aporta más información que un gesto único.',
-    'Comparar con su conducta habitual': 'La línea base permite distinguir un hábito personal de un cambio relevante.',
-    'Hacer una pregunta abierta': 'Invita a explicar lo ocurrido sin imponer una respuesta o una sospecha.',
-    'Escuchar el contenido': 'Evita que la atención a un gesto haga olvidar lo que la persona está diciendo.',
-    'Evitar una acusación': 'Mantiene la relación segura mientras reúnes información y respetas la presunción de buena fe.',
-    'No asumir culpa': 'Evita interpretar una mirada apartada como prueba de responsabilidad.',
-    'Considerar su cultura': 'Reduce errores de interpretación producidos por diferencias culturales.',
-    'Dar tiempo para responder': 'Baja la presión y puede ayudar a que la persona se exprese con más claridad.',
-    'Preguntar si está cómodo': 'Convierte una observación en una conversación respetuosa.',
-    'Escuchar sin presionar': 'Permite cuidar el vínculo y respetar el ritmo de la otra persona.',
-    'Aceptar que puede no querer mirar': 'Respeta que el contacto visual no es una obligación ni una prueba de honestidad.',
-    'Preguntar si necesita terminar': 'Aclara la prisa sin convertirla en un rechazo personal.',
-    'Resumir lo importante': 'Cuida el tiempo de la otra persona y mantiene el objetivo de la conversación.',
-    'No tomarlo como rechazo': 'Evita personalizar una señal que puede tener muchas explicaciones.',
-    'Observar otros cambios': 'Ayuda a saber si el reloj es un hábito o parte de un patrón de desconexión.',
-    'Ofrecer continuar después': 'Da una salida respetuosa sin exigir que la persona permanezca.',
-    'Respetar su tiempo': 'Reconoce que una conversación clara también necesita límites temporales.',
-    'Seguir explicando con claridad': 'Aprovecha una posible señal de atención sin forzar una interpretación.',
-    'Comprobar si entendió': 'La pregunta directa confirma comprensión mejor que cualquier gesto.',
-    'No asumir interés romántico': 'Evita convertir una señal de escucha en una afirmación sobre atracción.',
-    'Mantener una distancia respetuosa': 'Permite que la otra persona conserve control sobre su espacio.',
-    'Esperar más contexto': 'La prudencia evita etiquetar una sonrisa por un único detalle facial.',
-    'Mantener un trato respetuoso': 'La cortesía no exige que conozcas o adivines la emoción de la otra persona.',
-    'No forzar una conversación': 'Respeta una posible incomodidad sin convertirla en un conflicto.',
-  };
-  if (actions[option]) return actions[option];
-  if (/preguntar|escuchar|hablar|decir|compartir|comunicar/i.test(option)) return 'Favorece una comunicación directa y reduce el riesgo de interpretar sin comprobar.';
-  if (/espacio|distancia|aceptar|detener|no invadir|límite/i.test(option)) return 'Ayuda a respetar la comodidad y los límites de la otra persona.';
-  if (/respirar|pausa|relajar|bajar|calma/i.test(option)) return 'Ayuda a regular la activación antes de elegir una respuesta.';
-  if (/observar|mirar|comparar/i.test(option)) return 'Permite reunir más información antes de sacar una conclusión.';
-  return 'Es una forma de prepararte para responder con más conciencia en una situación parecida.';
-}
-
-function getLevelSections(module, dynamic = { perceive: [], act: [] }) {
-  const signals = [...dynamic.perceive, ...dynamic.act];
-  return {
-    identified: dynamic.perceive.length
-      ? `Identificaste ${dynamic.perceive.length} señal${dynamic.perceive.length === 1 ? '' : 'es'}: ${dynamic.perceive.join(', ')}.`
-      : 'Todavía no identificaste señales en este nivel.',
-    meaning: signals.length
-      ? `Lo que marcaste puede orientar una hipótesis, no una certeza. Percibiste: ${dynamic.perceive.join(', ') || 'ninguna señal'}. Actuarías: ${dynamic.act.join(', ') || 'sin respuesta'}. El contexto, la línea base y la conversación deben confirmar o corregir esa lectura.`
-      : 'Marca las características que realmente observes para construir una lectura más útil y prudente.',
-    action: LEVEL_ACTIONS[module.id],
-  };
-}
-
-function getDominant(tally) {
-  if (!tally) return null;
-  let best = null, bestVal = -1;
-  for (const k of Object.keys(tally)) { if (tally[k] > bestVal) { bestVal = tally[k]; best = k; } }
-  return best;
-}
-
-/* ------------------------------------------------------------------ */
-/* UI ATOMS                                                            */
-/* ------------------------------------------------------------------ */
-
-function ReadingBar({ pct }) {
-  return (
-    <div className="fixed top-0 left-0 right-0 h-[3px] z-30" style={{ background: 'rgba(212,175,55,0.08)' }}>
-      <div
-        className="h-full transition-all duration-500 ease-out"
-        style={{ width: `${pct}%`, background: 'linear-gradient(90deg, #A9832A, #D4AF37, #F0D479)' }}
-      />
+  <!-- HISTORIAL -->
+  <section id="historial" class="active">
+    <h2>Historial de sorteos</h2>
+    <div class="filtro">
+      <select id="fLoteria">
+        <option value="">Todas las loterías</option>
+        <option>GEORGIA</option>
+        <option>FLORIDA</option>
+        <option>NEW YORK</option>
+      </select>
+      <input type="date" id="fFecha">
+      <button class="action" onclick="renderHistorial()">Filtrar</button>
+      <button class="action" onclick="limpiarFiltros()">Limpiar</button>
     </div>
-  );
-}
-
-function NavRow({ onBack, backLabel, onNext, nextLabel, nextDisabled, nextIcon: NextIcon = ChevronRight }) {
-  return (
-    <div className="flex items-center justify-between gap-3 pt-8">
-      <button
-        onClick={onBack}
-        className="inline-flex items-center gap-1.5 text-[13px] font-medium px-4 py-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
-        style={{ color: '#93A2C0' }}
-      >
-        <ChevronLeft size={16} /> {backLabel}
-      </button>
-      <button
-        onClick={onNext}
-        disabled={nextDisabled}
-        className="inline-flex items-center gap-2 font-semibold text-[13px] px-6 py-3 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
-        style={{
-          background: nextDisabled ? 'rgba(212,175,55,0.12)' : 'linear-gradient(135deg, #C9A227, #E8C860)',
-          color: nextDisabled ? '#5B6478' : '#0A1428',
-          cursor: nextDisabled ? 'default' : 'pointer',
-        }}
-      >
-        {nextLabel} <NextIcon size={16} />
-      </button>
+    <div class="hist-wrap">
+      <table id="tablaHistorial">
+        <thead>
+          <tr>
+            <th>Fecha</th><th>Día</th><th>Lotería</th><th>Hora</th>
+            <th>E</th><th>F</th><th>G</th><th>H</th><th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
-  );
-}
+    <div class="nota">La columna F es la que más paga en Pick 3. G y H son las que pagan en Pick 4.</div>
+  </section>
 
-/* ------------------------------------------------------------------ */
-/* APP                                                                 */
-/* ------------------------------------------------------------------ */
+  <!-- ACTUALIZAR -->
+  <section id="actualizar">
+    <h2>Actualizar base de datos</h2>
+    <div class="card">
+      <div class="form-grid">
+        <input type="date" id="nFecha">
+        <select id="nDia">
+          <option>Lunes</option><option>Martes</option><option>Miércoles</option>
+          <option>Jueves</option><option>Viernes</option><option>Sábado</option><option>Domingo</option>
+        </select>
+        <select id="nLoteria">
+          <option>GEORGIA</option><option>FLORIDA</option><option>NEW YORK</option>
+        </select>
+        <select id="nHora">
+          <option>12:30:00</option><option>13:30:00</option><option>14:30:00</option>
+          <option>19:00:00</option><option>21:50:00</option><option>22:30:00</option>
+          <option>23:30:00</option>
+        </select>
+        <input type="text" id="nE" placeholder="Centena (0-9)" maxlength="1">
+        <input type="text" id="nF" placeholder="Primera (00-99)" maxlength="2">
+        <input type="text" id="nG" placeholder="Segunda (00-99)" maxlength="2">
+        <input type="text" id="nH" placeholder="Tercera (00-99)" maxlength="2">
+      </div>
+      <button class="action" onclick="agregarSorteo()">Agregar sorteo</button>
+      <div id="msgActualizar"></div>
+    </div>
+    <div class="card">
+      <h3>Importar en bloque</h3>
+      <div class="nota">Pega filas con formato: fecha|día|lotería|hora|E|F|G|H (una por línea)</div>
+      <textarea id="bulk" rows="6" style="width:100%;background:#0a1a2f;color:var(--gold);border:1px solid var(--line);border-radius:5px;padding:8px;font-size:12px;"></textarea>
+      <button class="action" style="margin-top:8px;" onclick="importarBulk()">Importar</button>
+      <div id="msgBulk"></div>
+    </div>
+  </section>
 
-function isQuestionCorrect(mod, qi, ans) {
-  const opts = mod.questions[qi].options;
-  if (mod.multi) {
-    const correctSet = opts.map((o, i) => (o.correct ? i : null)).filter((x) => x !== null).sort();
-    const selSet = (Array.isArray(ans) ? [...ans] : []).sort();
-    return correctSet.length === selSet.length && correctSet.every((v, idx) => v === selSet[idx]);
-  }
-  return ans !== null && !!opts[ans]?.correct;
-}
+  <!-- MÉTODO 1 -->
+  <section id="m1">
+    <h2>Método 1 · Caos Heurístico</h2>
+    <div class="nota">Recurrencia, atractores estadísticos y predictibilidad local.</div>
+    <div id="resM1"></div>
+  </section>
 
-function emptyAnswers(mod) {
-  return Array(mod.questions.length).fill(mod.multi ? [] : null);
-}
+  <!-- MÉTODO 2 -->
+  <section id="m2">
+    <h2>Método 2 · Caos Formal</h2>
+    <div class="nota">Mapa de retorno, entropía de permutación, espacio de fases.</div>
+    <div id="resM2"></div>
+  </section>
 
-/* ------------------------------------------------------------------ */
-/* APP                                                                 */
-/* ------------------------------------------------------------------ */
+  <!-- MÉTODO 3 -->
+  <section id="m3">
+    <h2>Método 3 · Caos Estricto sobre F</h2>
+    <div class="nota">Embedding con retardo + vecinos cercanos sobre la serie de primera.</div>
+    <div id="resM3"></div>
+  </section>
 
-function App() {
-  const [screen, setScreen] = useState('intro'); // intro | ethics | map | question | moduleSummary | final | closing
-  const [moduleIndex, setModuleIndex] = useState(0);
-  const [questionIndex, setQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState([null, null, null]);
-  const [checked, setChecked] = useState(false);
-  const [moduleScores, setModuleScores] = useState({});
-  const [completedModules, setCompletedModules] = useState([]);
-  const [scores, setScores] = useState(EMPTY_SCORES);
-  const [direction, setDirection] = useState('forward');
-  const [moduleSignals, setModuleSignals] = useState({});
-  const [dynamicMarks, setDynamicMarks] = useState({});
+  <!-- MÉTODO 4 -->
+  <section id="m4">
+    <h2>Método 4 · Recurrencia G/H → F</h2>
+    <div class="nota">Números que salen en segunda o tercera y aún no han pasado a primera.</div>
+    <div id="resM4"></div>
+  </section>
 
-  const currentModule = MODULES[moduleIndex];
-  const currentQuestion = currentModule.questions[questionIndex];
-  const currentAnswer = answers[questionIndex];
-  const isMulti = !!currentModule.multi;
-  const isQuiz = currentModule.type === 'quiz';
-  const hasAnswer = isMulti ? Array.isArray(currentAnswer) && currentAnswer.length > 0 : currentAnswer !== null;
-  const hasSignals = (moduleSignals[currentModule.id] || []).length > 0;
-  const dynamicKey = `${currentModule.id}-${questionIndex}`;
-  const currentDynamicMarks = dynamicMarks[dynamicKey] || { perceive: [], act: [] };
-  const hasDynamicMarks = currentDynamicMarks.perceive.length > 0 || currentDynamicMarks.act.length > 0;
-  const canContinue = hasAnswer && currentDynamicMarks.perceive.length > 0 && currentDynamicMarks.act.length > 0;
-  const allDone = completedModules.length === MODULES.length;
+</main>
 
-  const solvedQuestions = completedModules.reduce(
-    (n, id) => n + MODULES.find((m) => m.id === id).questions.length, 0
-  );
-  const inProgress = screen === 'question' && !completedModules.includes(currentModule.id) ? questionIndex : 0;
-  const readingPct = screen === 'intro' ? 0 : Math.min(100, ((solvedQuestions + inProgress) / TOTAL_QUESTIONS) * 100);
+<script>
+/* =========================================================
+   DATOS INICIALES (historial completo)
+   Formato: fecha|día|lotería|hora|E|F|G|H
+   ========================================================= */
+const RAW = `2026-08-01|Sábado|GEORGIA|12:30:00|6|33|32|45
+2026-08-01|Sábado|FLORIDA|13:30:00|5|92|68|71
+2026-08-01|Sábado|NEW YORK|14:30:00|2|76|08|13
+2026-08-01|Sábado|GEORGIA|19:00:00|5|87|87|50
+2026-08-01|Sábado|FLORIDA|21:50:00|3|13|08|80
+2026-08-01|Sábado|NEW YORK|22:30:00|5|55|59|22
+2026-08-01|Sábado|GEORGIA|23:30:00|0|37|42|98
+2026-08-02|Domingo|GEORGIA|12:30:00|2|45|56|69
+2026-08-02|Domingo|FLORIDA|13:30:00|4|44|85|86
+2026-08-02|Domingo|NEW YORK|14:30:00|0|78|59|22
+2026-08-02|Domingo|GEORGIA|19:00:00|2|71|96|44
+2026-08-02|Domingo|FLORIDA|21:50:00|4|72|18|70
+2026-08-02|Domingo|NEW YORK|22:30:00|2|46|93|88
+2026-08-02|Domingo|GEORGIA|23:30:00|8|21|62|65
+2026-08-03|Lunes|GEORGIA|12:30:00|8|49|22|63
+2026-08-03|Lunes|FLORIDA|13:30:00|4|64|46|96
+2026-08-03|Lunes|NEW YORK|14:30:00|5|58|31|21
+2026-08-03|Lunes|GEORGIA|19:00:00|4|73|36|16
+2026-08-03|Lunes|FLORIDA|21:50:00|0|43|38|09
+2026-08-03|Lunes|NEW YORK|22:30:00|8|73|58|06
+2026-08-03|Lunes|GEORGIA|23:30:00|1|23|26|16
+2026-08-04|Martes|GEORGIA|12:30:00|4|77|57|65
+2026-08-04|Martes|FLORIDA|13:30:00|5|82|18|16
+2026-08-04|Martes|NEW YORK|14:30:00|0|70|87|98
+2026-08-04|Martes|GEORGIA|19:00:00|7|66|75|23
+2026-08-04|Martes|FLORIDA|21:50:00|6|50|62|28
+2026-08-04|Martes|NEW YORK|22:30:00|0|91|92|26
+2026-08-04|Martes|GEORGIA|23:30:00|6|07|47|95
+2026-08-05|Miércoles|GEORGIA|12:30:00|3|12|23|93
+2026-08-05|Miércoles|FLORIDA|13:30:00|7|76|39|07
+2026-08-05|Miércoles|NEW YORK|14:30:00|1|85|70|82
+2026-08-05|Miércoles|GEORGIA|19:00:00|0|89|20|83
+2026-08-05|Miércoles|FLORIDA|21:50:00|1|52|09|41
+2026-08-05|Miércoles|NEW YORK|22:30:00|4|91|85|49
+2026-08-05|Miércoles|GEORGIA|23:30:00|3|13|00|23
+2026-08-06|Jueves|GEORGIA|12:30:00|9|36|74|24
+2026-08-06|Jueves|FLORIDA|13:30:00|8|69|29|94
+2026-08-06|Jueves|NEW YORK|14:30:00|3|25|83|91
+2026-08-06|Jueves|GEORGIA|19:00:00|0|30|53|88
+2026-08-06|Jueves|FLORIDA|21:50:00|9|56|10|48
+2026-08-06|Jueves|NEW YORK|22:30:00|4|08|61|48
+2026-08-06|Jueves|GEORGIA|23:30:00|5|59|80|55
+2026-08-07|Viernes|GEORGIA|12:30:00|1|52|32|50
+2026-08-07|Viernes|FLORIDA|13:30:00|3|64|80|05
+2026-08-07|Viernes|NEW YORK|14:30:00|7|32|05|88
+2026-08-07|Viernes|GEORGIA|19:00:00|3|93|46|68
+2026-08-07|Viernes|FLORIDA|21:50:00|0|49|77|66
+2026-08-07|Viernes|NEW YORK|22:30:00|6|38|18|96
+2026-08-07|Viernes|GEORGIA|23:30:00|9|19|32|27
+2026-08-08|Sábado|GEORGIA|12:30:00|9|47|37|40
+2026-08-08|Sábado|FLORIDA|13:30:00|1|57|27|21
+2026-08-08|Sábado|NEW YORK|14:30:00|4|48|53|56
+2026-08-08|Sábado|GEORGIA|19:00:00|9|37|70|37
+2026-08-08|Sábado|FLORIDA|21:50:00|6|43|96|97
+2026-08-08|Sábado|NEW YORK|22:30:00|3|79|98|17
+2026-08-08|Sábado|GEORGIA|23:30:00|3|16|31|08
+2026-08-09|Domingo|GEORGIA|12:30:00|4|11|23|32
+2026-08-09|Domingo|FLORIDA|13:30:00|5|31|99|91
+2026-08-09|Domingo|NEW YORK|14:30:00|8|52|33|73
+2026-08-09|Domingo|GEORGIA|19:00:00|2|71|97|95
+2026-08-09|Domingo|FLORIDA|21:50:00|6|72|24|34
+2026-08-09|Domingo|NEW YORK|22:30:00|2|73|88|89
+2026-08-09|Domingo|GEORGIA|23:30:00|4|68|86|68
+2026-08-10|Lunes|GEORGIA|12:30:00|8|18|64|10
+2026-08-10|Lunes|FLORIDA|13:30:00|7|64|50|97
+2026-08-10|Lunes|NEW YORK|14:30:00|1|91|29|20
+2026-08-10|Lunes|GEORGIA|19:00:00|3|72|21|51
+2026-08-10|Lunes|FLORIDA|21:50:00|7|43|94|75
+2026-08-10|Lunes|NEW YORK|22:30:00|2|54|29|87
+2026-08-10|Lunes|GEORGIA|23:30:00|0|94|92|56
+2026-08-11|Martes|GEORGIA|12:30:00|9|88|27|65
+2026-08-11|Martes|FLORIDA|13:30:00|2|75|75|05
+2026-08-11|Martes|NEW YORK|14:30:00|1|17|99|90
+2026-08-11|Martes|GEORGIA|19:00:00|8|91|72|52
+2026-08-11|Martes|FLORIDA|21:50:00|5|39|55|91
+2026-08-11|Martes|NEW YORK|22:30:00|5|57|06|36
+2026-08-11|Martes|GEORGIA|23:30:00|7|18|06|05
+2026-08-12|Miércoles|GEORGIA|12:30:00|9|51|97|27
+2026-08-12|Miércoles|FLORIDA|13:30:00|4|64|85|58
+2026-08-12|Miércoles|NEW YORK|14:30:00|0|14|36|89
+2026-08-12|Miércoles|GEORGIA|19:00:00|6|15|06|18
+2026-08-12|Miércoles|FLORIDA|21:50:00|2|81|56|51
+2026-08-12|Miércoles|NEW YORK|22:30:00|0|57|24|58
+2026-08-12|Miércoles|GEORGIA|23:30:00|1|43|46|87
+2026-08-13|Jueves|GEORGIA|12:30:00|7|62|79|00
+2026-08-13|Jueves|FLORIDA|13:30:00|6|64|3|84
+2026-08-13|Jueves|NEW YORK|14:30:00|1|28|34|66
+2026-08-13|Jueves|GEORGIA|19:00:00|3|78|88|25
+2026-08-13|Jueves|FLORIDA|21:50:00|3|20|83|35
+2026-08-13|Jueves|NEW YORK|22:30:00|4|93|5|79
+2026-08-13|Jueves|GEORGIA|23:30:00|9|97|83|84
+2026-08-14|Viernes|GEORGIA|12:30:00|0|17|70|0
+2026-08-14|Viernes|FLORIDA|13:30:00|9|2|53|93
+2026-08-14|Viernes|NEW YORK|14:30:00|8|80|28|94
+2026-08-14|Viernes|GEORGIA|19:00:00|5|10|38|59
+2026-08-14|Viernes|FLORIDA|21:50:00|2|55|67|58
+2026-08-14|Viernes|NEW YORK|22:30:00|0|21|41|61
+2026-08-14|Viernes|GEORGIA|23:30:00|1|57|72|60
+2026-08-15|Sábado|GEORGIA|12:30:00|2|33|74|52
+2026-08-15|Sábado|FLORIDA|13:30:00|1|82|13|66
+2026-08-15|Sábado|NEW YORK|14:30:00|5|23|9|74
+2026-08-15|Sábado|GEORGIA|19:00:00|2|84|71|98
+2026-08-15|Sábado|FLORIDA|21:50:00|9|9|59|21
+2026-08-15|Sábado|NEW YORK|22:30:00|2|25|38|36
+2026-08-15|Sábado|GEORGIA|23:30:00|2|92|79|60
+2026-08-16|Domingo|GEORGIA|12:30:00|2|92|30|87
+2026-08-16|Domingo|FLORIDA|13:30:00|4|74|49|14
+2026-08-16|Domingo|NEW YORK|14:30:00|4|85|18|7
+2026-08-16|Domingo|GEORGIA|19:00:00|0|55|66|69
+2026-08-16|Domingo|FLORIDA|21:50:00|1|62|81|33
+2026-08-16|Domingo|NEW YORK|22:30:00|4|29|80|34
+2026-08-16|Domingo|GEORGIA|23:30:00|3|36|90|89
+2026-08-17|Lunes|GEORGIA|12:30:00|7|79|96|50
+2026-08-17|Lunes|FLORIDA|13:30:00|0|22|30|67
+2026-08-17|Lunes|NEW YORK|14:30:00|0|3|83|70
+2026-08-17|Lunes|GEORGIA|19:00:00|6|19|40|61
+2026-08-17|Lunes|FLORIDA|21:50:00|7|66|33|40
+2026-08-17|Lunes|NEW YORK|22:30:00|9|52|52|31
+2026-08-17|Lunes|GEORGIA|23:30:00|3|8|89|30
+2026-08-18|Martes|GEORGIA|12:30:00|9|51|22|47
+2026-08-18|Martes|FLORIDA|13:30:00|3|44|92|8
+2026-08-18|Martes|NEW YORK|14:30:00|5|82|15|13
+2026-08-18|Martes|GEORGIA|19:00:00|3|66|20|75
+2026-08-18|Martes|FLORIDA|21:50:00|8|96|43|32
+2026-08-18|Martes|NEW YORK|22:30:00|4|15|92|56
+2026-08-18|Martes|GEORGIA|23:30:00|0|3|32|6
+2026-08-19|Miércoles|GEORGIA|12:30:00|0|43|77|43
+2026-08-19|Miércoles|FLORIDA|13:30:00|6|70|85|24
+2026-08-19|Miércoles|NEW YORK|14:30:00|4|3|58|34
+2026-08-19|Miércoles|GEORGIA|19:00:00|8|15|29|9
+2026-08-19|Miércoles|FLORIDA|21:50:00|1|60|68|14
+2026-08-19|Miércoles|NEW YORK|22:30:00|2|90|0|72
+2026-08-19|Miércoles|GEORGIA|23:30:00|8|95|96|12
+2026-08-20|Jueves|GEORGIA|12:30:00|6|92|57|11
+2026-08-20|Jueves|FLORIDA|13:30:00|4|52|76|54
+2026-08-20|Jueves|NEW YORK|14:30:00|2|25|17|18
+2026-08-20|Jueves|GEORGIA|19:00:00|1|76|9|54
+2026-08-20|Jueves|FLORIDA|21:50:00|5|18|54|89
+2026-08-20|Jueves|NEW YORK|22:30:00|9|7|26|15
+2026-08-20|Jueves|GEORGIA|23:30:00|8|18|75|60
+2026-08-21|Viernes|GEORGIA|12:30:00|4|16|59|97
+2026-08-21|Viernes|FLORIDA|13:30:00|9|50|92|68
+2026-08-21|Viernes|NEW YORK|14:30:00|9|75|99|53
+2026-08-21|Viernes|GEORGIA|19:00:00|8|85|95|84
+2026-08-21|Viernes|FLORIDA|21:50:00|0|54|16|8
+2026-08-21|Viernes|NEW YORK|22:30:00|2|41|79|40
+2026-08-21|Viernes|GEORGIA|23:30:00|0|84|41|94
+2026-08-22|Sábado|GEORGIA|12:30:00|9|59|16|91
+2026-08-22|Sábado|FLORIDA|13:30:00|3|79|5|2
+2026-08-22|Sábado|NEW YORK|14:30:00|5|58|88|97
+2026-08-22|Sábado|GEORGIA|19:00:00|8|55|32|30
+2026-08-22|Sábado|FLORIDA|21:50:00|6|89|11|37
+2026-08-22|Sábado|NEW YORK|22:30:00|5|71|85|50
+2026-08-22|Sábado|GEORGIA|23:30:00|6|56|64|58
+2026-08-23|Domingo|GEORGIA|12:30:00|1|67|86|38
+2026-08-23|Domingo|FLORIDA|13:30:00|7|60|28|63
+2026-08-23|Domingo|NEW YORK|14:30:00|7|65|95|32
+2026-08-23|Domingo|GEORGIA|19:00:00|3|23|32|52
+2026-08-23|Domingo|FLORIDA|21:50:00|8|44|43|53
+2026-08-23|Domingo|NEW YORK|22:30:00|4|85|1|25
+2026-08-23|Domingo|GEORGIA|23:30:00|2|38|83|49
+2026-08-24|Lunes|GEORGIA|12:30:00|5|22|15|85
+2026-08-24|Lunes|FLORIDA|13:30:00|6|28|98|6
+2026-08-24|Lunes|NEW YORK|14:30:00|8|29|71|93
+2026-08-24|Lunes|GEORGIA|19:00:00|8|98|63|4
+2026-08-24|Lunes|FLORIDA|21:50:00|4|67|2|9
+2026-08-24|Lunes|NEW YORK|22:30:00|6|81|64|42
+2026-08-24|Lunes|GEORGIA|23:30:00|9|9|61|48
+2026-08-25|Martes|GEORGIA|12:30:00|9|35|65|70
+2026-08-25|Martes|FLORIDA|13:30:00|7|55|55|82
+2026-08-25|Martes|NEW YORK|14:30:00|6|82|47|11
+2026-08-25|Martes|GEORGIA|19:00:00|1|21|3|18
+2026-08-25|Martes|FLORIDA|21:50:00|2|99|30|95
+2026-08-25|Martes|NEW YORK|22:30:00|8|63|74|9
+2026-08-25|Martes|GEORGIA|23:30:00|0|2|1|86
+2026-08-26|Miércoles|GEORGIA|12:30:00|2|22|53|51
+2026-08-26|Miércoles|FLORIDA|13:30:00|5|39|83|75
+2026-08-26|Miércoles|NEW YORK|14:30:00|9|7|69|5
+2026-08-26|Miércoles|GEORGIA|19:00:00|0|66|6|35
+2026-08-26|Miércoles|FLORIDA|21:50:00|3|29|25|52
+2026-08-26|Miércoles|NEW YORK|22:30:00|0|68|37|60
+2026-08-26|Miércoles|GEORGIA|23:30:00|5|36|33|28
+2026-08-27|Jueves|GEORGIA|12:30:00|3|97|35|36
+2026-08-27|Jueves|FLORIDA|13:30:00|0|28|83|60
+2026-08-27|Jueves|NEW YORK|14:30:00|0|78|15|40
+2026-08-27|Jueves|GEORGIA|19:00:00|4|94|79|40
+2026-08-27|Jueves|FLORIDA|21:50:00|2|11|17|37
+2026-08-27|Jueves|NEW YORK|22:30:00|7|68|34|75
+2026-08-27|Jueves|GEORGIA|23:30:00|5|98|20|89
+2026-08-28|Viernes|GEORGIA|12:30:00|8|94|32|34
+2026-08-28|Viernes|FLORIDA|13:30:00|4|93|21|60
+2026-08-28|Viernes|NEW YORK|14:30:00|8|43|81|53
+2026-08-28|Viernes|GEORGIA|19:00:00|6|61|41|5
+2026-08-28|Viernes|FLORIDA|21:50:00|6|25|75|29
+2026-08-28|Viernes|NEW YORK|22:30:00|6|48|16|21
+2026-08-28|Viernes|GEORGIA|23:30:00|3|95|51|62
+2026-08-29|Sábado|GEORGIA|12:30:00|6|15|63|91
+2026-08-29|Sábado|FLORIDA|13:30:00|3|71|85|83
+2026-08-29|Sábado|NEW YORK|14:30:00|6|59|35|97
+2026-08-29|Sábado|GEORGIA|19:00:00|4|78|84|81
+2026-08-29|Sábado|FLORIDA|21:50:00|2|4|35|43
+2026-08-29|Sábado|NEW YORK|22:30:00|8|42|62|39
+2026-08-29|Sábado|GEORGIA|23:30:00|2|8|53|24
+2026-08-30|Domingo|GEORGIA|12:30:00|4|20|58|5
+2026-08-30|Domingo|FLORIDA|13:30:00|6|44|48|63
+2026-08-30|Domingo|NEW YORK|14:30:00|1|47|82|39
+2026-08-30|Domingo|GEORGIA|19:00:00|2|23|12|22
+2026-08-30|Domingo|FLORIDA|21:50:00|3|23|4|6
+2026-08-30|Domingo|NEW YORK|22:30:00|0|96|22|45
+2026-08-30|Domingo|GEORGIA|23:30:00|8|62|13|66
+2026-08-31|Lunes|GEORGIA|12:30:00|7|68|12|17
+2026-08-31|Lunes|FLORIDA|13:30:00|4|3|36|89
+2026-08-31|Lunes|NEW YORK|14:30:00|1|15|82|4
+2026-08-31|Lunes|GEORGIA|19:00:00|3|89|22|15
+2026-08-31|Lunes|FLORIDA|21:50:00|0|25|73|95
+2026-08-31|Lunes|NEW YORK|22:30:00|6|64|58|97
+2026-08-31|Lunes|GEORGIA|23:30:00|9|68|85|3
+2026-09-01|Martes|GEORGIA|12:30:00|9|79|45|98
+2026-09-01|Martes|FLORIDA|13:30:00|6|30|97|69
+2026-09-01|Martes|NEW YORK|14:30:00|6|9|26|18
+2026-09-01|Martes|GEORGIA|19:00:00|2|89|24|57
+2026-09-01|Martes|FLORIDA|21:50:00|4|9|25|11
+2026-09-01|Martes|NEW YORK|22:30:00|7|48|56|16
+2026-09-01|Martes|GEORGIA|23:30:00|4|37|84|43
+2026-09-02|Miércoles|GEORGIA|12:30:00|5|63|3|31
+2026-09-02|Miércoles|FLORIDA|13:30:00|3|40|10|95
+2026-09-02|Miércoles|NEW YORK|14:30:00|9|13|16|14
+2026-09-02|Miércoles|GEORGIA|19:00:00|0|87|16|77
+2026-09-02|Miércoles|FLORIDA|21:50:00|2|36|24|93
+2026-09-02|Miércoles|NEW YORK|22:30:00|4|68|12|93
+2026-09-02|Miércoles|GEORGIA|23:30:00|3|18|55|91
+2026-09-03|Jueves|GEORGIA|12:30:00|2|15|19|35
+2026-09-03|Jueves|FLORIDA|13:30:00|3|66|18|83
+2026-09-03|Jueves|NEW YORK|14:30:00|3|94|43|68
+2026-09-03|Jueves|GEORGIA|19:00:00|6|72|2|41
+2026-09-03|Jueves|FLORIDA|21:50:00|7|78|57|6
+2026-09-03|Jueves|NEW YORK|22:30:00|1|16|60|0
+2026-09-03|Jueves|GEORGIA|23:30:00|9|2|65|9
+2026-09-04|Viernes|GEORGIA|12:30:00|3|72|93|8
+2026-09-04|Viernes|FLORIDA|13:30:00|3|9|94|15
+2026-09-04|Viernes|NEW YORK|14:30:00|8|86|56|1
+2026-09-04|Viernes|GEORGIA|19:00:00|4|76|94|92
+2026-09-04|Viernes|FLORIDA|21:50:00|9|59|23|71
+2026-09-04|Viernes|NEW YORK|22:30:00|6|30|47|62
+2026-09-04|Viernes|GEORGIA|23:30:00|4|72|26|78
+2026-09-05|Sábado|GEORGIA|12:30:00|3|23|62|23
+2026-09-05|Sábado|FLORIDA|13:30:00|9|11|99|34
+2026-09-05|Sábado|NEW YORK|14:30:00|4|38|13|49
+2026-09-05|Sábado|GEORGIA|19:00:00|5|77|44|42
+2026-09-05|Sábado|FLORIDA|21:50:00|2|92|52|60
+2026-09-05|Sábado|NEW YORK|22:30:00|0|86|81|71
+2026-09-05|Sábado|GEORGIA|23:30:00|6|83|1|93
+2026-09-06|Domingo|GEORGIA|12:30:00|5|5|10|61
+2026-09-06|Domingo|FLORIDA|13:30:00|1|19|61|32
+2026-09-06|Domingo|NEW YORK|14:30:00|0|77|13|58
+2026-09-06|Domingo|GEORGIA|19:00:00|6|65|47|90
+2026-09-06|Domingo|FLORIDA|21:50:00|2|98|6|81
+2026-09-06|Domingo|NEW YORK|22:30:00|0|90|24|14
+2026-09-06|Domingo|GEORGIA|23:30:00|7|83|68|46
+2026-09-07|Lunes|GEORGIA|12:30:00|2|98|83|40
+2026-09-07|Lunes|FLORIDA|13:30:00|2|39|37|18
+2026-09-07|Lunes|NEW YORK|14:30:00|3|43|44|44
+2026-09-07|Lunes|GEORGIA|19:00:00|1|69|90|63
+2026-09-07|Lunes|FLORIDA|21:50:00|8|25|31|92
+2026-09-07|Lunes|NEW YORK|22:30:00|6|82|72|29
+2026-09-07|Lunes|GEORGIA|23:30:00|0|30|52|93
+2026-09-08|Martes|GEORGIA|12:30:00|7|18|76|63
+2026-09-08|Martes|FLORIDA|13:30:00|3|65|38|19
+2026-09-08|Martes|NEW YORK|14:30:00|6|55|98|72
+2026-09-08|Martes|GEORGIA|19:00:00|8|50|34|16
+2026-09-08|Martes|FLORIDA|21:50:00|9|95|31|76
+2026-09-08|Martes|NEW YORK|22:30:00|1|4|76|25
+2026-09-08|Martes|GEORGIA|23:30:00|5|3|48|65
+2026-09-09|Miércoles|GEORGIA|12:30:00|6|37|73|85
+2026-09-09|Miércoles|FLORIDA|13:30:00|7|40|91|82
+2026-09-09|Miércoles|NEW YORK|14:30:00|3|10|19|59
+2026-09-09|Miércoles|GEORGIA|19:00:00|4|81|40|86
+2026-09-09|Miércoles|FLORIDA|21:50:00|1|66|26|84
+2026-09-09|Miércoles|NEW YORK|22:30:00|0|15|98|49
+2026-09-09|Miércoles|GEORGIA|23:30:00|8|58|25|51
+2026-09-10|Jueves|GEORGIA|12:30:00|4|13|50|71
+2026-09-10|Jueves|FLORIDA|13:30:00|0|89|25|52
+2026-09-10|Jueves|NEW YORK|14:30:00|1|16|56|89
+2026-09-10|Jueves|GEORGIA|19:00:00|8|4|81|84
+2026-09-10|Jueves|FLORIDA|21:50:00|3|69|13|12
+2026-09-10|Jueves|NEW YORK|22:30:00|0|37|56|60
+2026-09-10|Jueves|GEORGIA|23:30:00|0|10|46|58
+2026-09-11|Viernes|GEORGIA|12:30:00|6|76|44|53
+2026-09-11|Viernes|FLORIDA|13:30:00|3|81|61|45
+2026-09-11|Viernes|NEW YORK|14:30:00|6|55|80|2
+2026-09-11|Viernes|GEORGIA|19:00:00|8|51|75|50
+2026-09-11|Viernes|FLORIDA|21:50:00|3|67|51|96
+2026-09-11|Viernes|NEW YORK|22:30:00|9|91|99|14
+2026-09-11|Viernes|GEORGIA|23:30:00|0|56|20|6
+2026-09-12|Sábado|GEORGIA|12:30:00|3|46|30|82
+2026-09-12|Sábado|FLORIDA|13:30:00|2|79|66|7
+2026-09-12|Sábado|NEW YORK|14:30:00|0|97|14|60
+2026-09-12|Sábado|GEORGIA|19:00:00|2|93|4|49
+2026-09-12|Sábado|FLORIDA|21:50:00|9|18|62|45
+2026-09-12|Sábado|NEW YORK|22:30:00|0|15|84|23
+2026-09-12|Sábado|GEORGIA|23:30:00|1|27|98|48
+2026-09-13|Domingo|GEORGIA|12:30:00|6|48|35|74
+2026-09-13|Domingo|FLORIDA|13:30:00|5|38|45|80
+2026-09-13|Domingo|NEW YORK|14:30:00|3|40|72|70
+2026-09-13|Domingo|GEORGIA|19:00:00|3|32|65|52
+2026-09-13|Domingo|FLORIDA|21:50:00|2|21|89|14
+2026-09-13|Domingo|NEW YORK|22:30:00|5|53|32|38
+2026-09-13|Domingo|GEORGIA|23:30:00|0|10|5|60
+2026-09-14|Lunes|GEORGIA|12:30:00|8|67|76|73
+2026-09-14|Lunes|FLORIDA|13:30:00|7|53|22|17
+2026-09-14|Lunes|NEW YORK|14:30:00|6|97|94|94
+2026-09-14|Lunes|GEORGIA|19:00:00|8|98|9|56
+2026-09-14|Lunes|FLORIDA|21:50:00|2|0|89|88
+2026-09-14|Lunes|NEW YORK|22:30:00|5|24|58|35
+2026-09-14|Lunes|GEORGIA|23:30:00|6|47|83|10
+2026-09-15|Martes|GEORGIA|12:30:00|9|8|47|13
+2026-09-15|Martes|FLORIDA|13:30:00|0|2|7|85
+2026-09-15|Martes|NEW YORK|14:30:00|9|65|42|84
+2026-09-15|Martes|GEORGIA|19:00:00|1|2|18|77
+2026-09-15|Martes|FLORIDA|21:50:00|4|5|68|68
+2026-09-15|Martes|NEW YORK|22:30:00|2|73|68|58
+2026-09-15|Martes|GEORGIA|23:30:00|1|11|9|64
+2026-09-16|Miércoles|GEORGIA|12:30:00|1|95|47|17
+2026-09-16|Miércoles|FLORIDA|13:30:00|7|19|99|95
+2026-09-16|Miércoles|NEW YORK|14:30:00|2|58|54|73
+2026-09-16|Miércoles|GEORGIA|19:00:00|1|44|97|0
+2026-09-16|Miércoles|FLORIDA|21:50:00|8|67|78|8
+2026-09-16|Miércoles|NEW YORK|22:30:00|7|30|17|75
+2026-09-16|Miércoles|GEORGIA|23:30:00|0|88|77|81
+2026-09-17|Jueves|GEORGIA|12:30:00|7|2|27|96
+2026-09-17|Jueves|FLORIDA|13:30:00|8|22|99|91
+2026-09-17|Jueves|NEW YORK|14:30:00|7|22|55|69
+2026-09-17|Jueves|GEORGIA|19:00:00|8|10|28|24
+2026-09-17|Jueves|FLORIDA|21:50:00|3|0|89|43
+2026-09-17|Jueves|NEW YORK|22:30:00|1|97|59|69
+2026-09-17|Jueves|GEORGIA|23:30:00|5|85|11|97
+2026-09-18|Viernes|GEORGIA|12:30:00|4|86|79|31
+2026-09-18|Viernes|FLORIDA|13:30:00|4|66|14|72
+2026-09-18|Viernes|NEW YORK|14:30:00|7|63|78|66
+2026-09-18|Viernes|GEORGIA|19:00:00|2|40|4|1
+2026-09-18|Viernes|FLORIDA|21:50:00|8|68|47|4
+2026-09-18|Viernes|NEW YORK|22:30:00|3|9|31|47
+2026-09-18|Viernes|GEORGIA|23:30:00|6|67|29|31
+2026-09-19|Sábado|GEORGIA|12:30:00|8|10|64|44
+2026-09-19|Sábado|FLORIDA|13:30:00|6|33|93|31
+2026-09-19|Sábado|NEW YORK|14:30:00|9|26|74|86
+2026-09-19|Sábado|GEORGIA|19:00:00|3|38|38|6
+2026-09-19|Sábado|FLORIDA|21:50:00|6|9|89|36
+2026-09-19|Sábado|NEW YORK|22:30:00|9|80|84|88
+2026-09-19|Sábado|GEORGIA|23:30:00|2|80|53|62
+2026-09-20|Domingo|GEORGIA|12:30:00|7|97|29|34
+2026-09-20|Domingo|FLORIDA|13:30:00|9|25|77|19
+2026-09-20|Domingo|NEW YORK|14:30:00|9|36|10|35
+2026-09-20|Domingo|GEORGIA|19:00:00|8|58|62|42
+2026-09-20|Domingo|FLORIDA|21:50:00|6|17|88|22
+2026-09-20|Domingo|NEW YORK|22:30:00|6|7|44|7
+2026-09-20|Domingo|GEORGIA|23:30:00|4|73|42|33
+2026-09-21|Lunes|GEORGIA|12:30:00|8|63|99|62
+2026-09-21|Lunes|FLORIDA|13:30:00|9|58|14|61
+2026-09-21|Lunes|NEW YORK|14:30:00|5|62|17|9
+2026-09-21|Lunes|GEORGIA|19:00:00|5|10|48|34
+2026-09-21|Lunes|FLORIDA|21:50:00|5|50|31|8
+2026-09-21|Lunes|NEW YORK|22:30:00|0|46|43|6
+2026-09-21|Lunes|GEORGIA|23:30:00|5|79|26|91
+2026-09-22|Martes|GEORGIA|12:30:00|7|1|21|38
+2026-09-22|Martes|FLORIDA|13:30:00|9|64|28|55
+2026-09-22|Martes|NEW YORK|14:30:00|7|64|84|1
+2026-09-22|Martes|GEORGIA|19:00:00|6|20|15|57
+2026-09-22|Martes|FLORIDA|21:50:00|7|2|26|82
+2026-09-22|Martes|NEW YORK|22:30:00|9|56|11|74
+2026-09-22|Martes|GEORGIA|23:30:00|1|89|35|11
+2026-09-23|Miércoles|GEORGIA|12:30:00|9|35|75|72
+2026-09-23|Miércoles|FLORIDA|13:30:00|5|70|2|58
+2026-09-23|Miércoles|NEW YORK|14:30:00|2|1|72|4
+2026-09-23|Miércoles|GEORGIA|19:00:00|0|2|64|97
+2026-09-23|Miércoles|FLORIDA|21:50:00|0|3|29|79
+2026-09-23|Miércoles|NEW YORK|22:30:00|3|51|3|54
+2026-09-23|Miércoles|GEORGIA|23.30|5|97|1|66
+2026-09-24|Jueves|GEORGIA|12:30:00|2|79|96|68
+2026-09-24|Jueves|FLORIDA|13:30:00|6|59|18|2
+2026-09-24|Jueves|NEW YORK|14:30:00|0|39|1|41
+2026-09-24|Jueves|GEORGIA|19:00:00|2|97|46|68
+2026-09-24|Jueves|FLORIDA|21:50:00|6|63|68|88
+2026-09-24|Jueves|NEW YORK|22:30:00|6|30|29|69
+2026-09-24|Jueves|GEORGIA|23.30|0|19|98|12
+2026-09-25|Viernes|GEORGIA|12:30:00|7|97|04|54
+2026-09-25|Viernes|FLORIDA|13:30:00|5|28|66|28
+2026-09-25|Viernes|NEW YORK|14:30:00|8|98|79|66
+2026-09-25|Viernes|GEORGIA|19:00:00|9|18|61|78
+2026-09-25|Viernes|FLORIDA|21:50:00|5|06|85|90
+2026-09-25|Viernes|NEW YORK|22:30:00|3|58|95|41
+2026-09-25|Viernes|GEORGIA|23.30|3|78|63|64
+2026-09-26|Sábado|GEORGIA|12:30:00|1|40|48|23
+2026-09-26|Sábado|FLORIDA|13:30:00|6|29|69|20
+2026-09-26|Sábado|NEW YORK|14:30:00|5|03|99|61
+2026-09-26|Sábado|GEORGIA|19:00:00|6|15|36|65
+2026-09-26|Sábado|FLORIDA|21:50:00|9|61|36|65
+2026-09-26|Sábado|NEW YORK|22:30:00|0|43|18|04
+2026-09-26|Sábado|GEORGIA|23.30|4|55|22|57
+2026-09-27|Domingo|GEORGIA|12:30:00|1|18|68|23
+2026-09-27|Domingo|FLORIDA|13:30:00|2|02|92|75
+2026-09-27|Domingo|NEW YORK|14:30:00|9|80|90|75
+2026-09-27|Domingo|GEORGIA|19:00:00|0|81|98|47
+2026-09-27|Domingo|FLORIDA|21:50:00|1|47|91|86
+2026-09-27|Domingo|NEW YORK|22:30:00|7|82|96|49
+2026-09-27|Domingo|GEORGIA|23.30|6|63|15|47
+2026-09-28|Lunes|GEORGIA|12:30:00|6|42|73|24
+2026-09-28|Lunes|FLORIDA|13:30:00|7|88|91|68
+2026-09-28|Lunes|NEW YORK|14:30:00|6|13|91|41
+2026-09-28|Lunes|GEORGIA|19:00:00|6|70|27|03
+2026-09-28|Lunes|FLORIDA|21:50:00|1|76|03|99
+2026-09-28|Lunes|NEW YORK|22:30:00|4|73|48|07
+2026-09-28|Lunes|GEORGIA|23.30|2|94|37|70
+2026-09-29|Martes|GEORGIA|12:30:00|0|88|43|75
+2026-09-29|Martes|FLORIDA|13:30:00|0|68|16|37
+2026-09-29|Martes|NEW YORK|14:30:00|9|12|38|36
+2026-09-29|Martes|GEORGIA|19:00:00|7|63|78|91
+2026-09-29|Martes|FLORIDA|21:50:00|4|19|37|56
+2026-09-29|Martes|NEW YORK|22:30:00|2|19|67|17
+2026-09-29|Martes|GEORGIA|23.30|3|27|49|03
+2026-09-30|Miércoles|GEORGIA|12:30:00|8|97|60|26
+2026-09-30|Miércoles|FLORIDA|13:30:00|6|74|95|27
+2026-09-30|Miércoles|NEW YORK|14:30:00|7|29|28|78
+2026-09-30|Miércoles|GEORGIA|19:00:00|6|56|37|33
+2026-09-30|Miércoles|FLORIDA|21:50:00|4|24|14|43
+2026-09-30|Miércoles|NEW YORK|22:30:00|2|25|97|06
+2026-09-30|Miércoles|GEORGIA|23.30|6|39|84|55
+2026-10-01|Jueves|GEORGIA|12:30:00|1|64|40|69
+2026-10-01|Jueves|FLORIDA|13:30:00|3|88|53|62
+2026-10-01|Jueves|NEW YORK|14:30:00|7|00|34|65
+2026-10-01|Jueves|GEORGIA|19:00:00|3|62|01|82
+2026-10-01|Jueves|FLORIDA|21:50:00|3|28|15|57
+2026-10-01|Jueves|NEW YORK|22:30:00|6|46|78|15
+2026-10-01|Jueves|GEORGIA|23.30|2|74|77|75
+2026-10-02|Viernes|GEORGIA|12:30:00|6|71|24|30
+2026-10-02|Viernes|FLORIDA|13:30:00|6|06|92|52
+2026-10-02|Viernes|NEW YORK|14:30:00|0|21|05|53
+2026-10-02|Viernes|GEORGIA|19:00:00|9|36|59|84
+2026-10-02|Viernes|FLORIDA|21:50:00|6|53|56|91
+2026-10-02|Viernes|NEW YORK|22:30:00|8|56|80|50
+2026-10-02|Viernes|GEORGIA|23.30|7|00|65|08
+2026-10-03|Sábado|GEORGIA|12:30:00|5|13|13|74
+2026-10-03|Sábado|FLORIDA|13:30:00|2|85|83|23
+2026-10-03|Sábado|NEW YORK|14:30:00|4|77|21|02
+2026-10-03|Sábado|GEORGIA|19:00:00|5|79|03|67
+2026-10-03|Sábado|FLORIDA|21:50:00|2|90|50|00
+2026-10-03|Sábado|NEW YORK|22:30:00|8|57|06|16
+2026-10-03|Sábado|GEORGIA|23.30|8|98|65|79
+2026-10-04|Domingo|GEORGIA|12:30:00|4|63|89|05
+2026-10-04|Domingo|FLORIDA|13:30:00|1|24|78|11
+2026-10-04|Domingo|NEW YORK|14:30:00|0|94|20|99
+2026-10-04|Domingo|GEORGIA|19:00:00|8|65|95|87
+2026-10-04|Domingo|FLORIDA|21:50:00|9|02|72|83
+2026-10-04|Domingo|NEW YORK|22:30:00|9|91|53|45
+2026-10-04|Domingo|GEORGIA|23.30|6|08|68|38
+2026-10-05|Lunes|GEORGIA|12:30:00|6|33|14|43
+2026-10-05|Lunes|FLORIDA|13:30:00|6|54|14|65
+2026-10-05|Lunes|NEW YORK|14:30:00|1|82|34|34
+2026-10-05|Lunes|GEORGIA|19:00:00|9|44|25|89
+2026-10-05|Lunes|FLORIDA|21:50:00|8|98|95|17
+2026-10-05|Lunes|NEW YORK|22:30:00|5|46|95|94
+2026-10-05|Lunes|GEORGIA|23.30|7|98|18|71
+2026-10-06|Martes|GEORGIA|12:30:00|2|40|53|60
+2026-10-06|Martes|FLORIDA|13:30:00|2|38|87|22
+2026-10-06|Martes|NEW YORK|14:30:00|0|28|74|22
+2026-10-06|Martes|GEORGIA|19:00:00|2|55|13|46
+2026-10-06|Martes|FLORIDA|21:50:00|5|95|71|17
+2026-10-06|Martes|NEW YORK|22:30:00|8|86|68|14
+2026-10-06|Martes|GEORGIA|23.30|2|67|44|14
+2026-10-07|Miércoles|GEORGIA|12:30:00|8|47|12|51
+2026-10-07|Miércoles|FLORIDA|13:30:00|0|46|05|60
+2026-10-07|Miércoles|NEW YORK|14:30:00|2|41|17|82
+2026-10-07|Miércoles|GEORGIA|19:00:00|5|72|93|71
+2026-10-07|Miércoles|FLORIDA|21:50:00|3|30|93|97
+2026-10-07|Miércoles|NEW YORK|22:30:00|3|61|19|15
+2026-10-07|Miércoles|GEORGIA|23.30|8|64|60|29
+2026-10-08|Jueves|GEORGIA|12:30:00|5|02|27|04
+2026-10-08|Jueves|FLORIDA|13:30:00|4|89|19|63
+2026-10-08|Jueves|NEW YORK|14:30:00|5|49|98|74
+2026-10-08|Jueves|GEORGIA|19:00:00|5|17|04|42
+2026-10-08|Jueves|FLORIDA|21:50:00|5|15|28|84
+2026-10-08|Jueves|NEW YORK|22:30:00|7|94|48|59
+2026-10-08|Jueves|GEORGIA|23.30|4|57|71|91
+2026-10-09|Viernes|GEORGIA|12:30:00|0|92|06|93
+2026-10-09|Viernes|FLORIDA|13:30:00|1|74|20|33
+2026-10-09|Viernes|NEW YORK|14:30:00|1|33|62|79
+2026-10-09|Viernes|GEORGIA|19:00:00|6|18|22|71
+2026-10-09|Viernes|FLORIDA|21:50:00|0|97|11|97
+2026-10-09|Viernes|NEW YORK|22:30:00|7|50|86|00
+2026-10-09|Viernes|GEORGIA|23.30|5|53|86|00
+2026-10-10|Sábado|GEORGIA|12:30:00|5|32|53|93
+2026-10-10|Sábado|FLORIDA|13:30:00|7|44|35|47
+2026-10-10|Sábado|NEW YORK|14:30:00|5|06|62|64
+2026-10-10|Sábado|GEORGIA|19:00:00|7|86|17|36
+2026-10-10|Sábado|FLORIDA|21:50:00|1|52|37|53
+2026-10-10|Sábado|NEW YORK|22:30:00|9|23|83|44
+2026-10-10|Sábado|GEORGIA|23.30|9|38|40|66
+2026-10-11|Domingo|GEORGIA|12:30:00|1|23|29|28
+2026-10-11|Domingo|FLORIDA|13:30:00|5|16|53|29
+2026-10-11|Domingo|NEW YORK|14:30:00|1|45|73|78
+2026-10-11|Domingo|GEORGIA|19:00:00|6|47|82|46
+2026-10-11|Domingo|FLORIDA|21:50:00|6|48|77|97
+2026-10-11|Domingo|NEW YORK|22:30:00|3|21|73|19
+2026-10-11|Domingo|GEORGIA|23.30|7|62|55|48
+2026-10-12|Lunes|GEORGIA|12:30:00|6|43|37|16
+2026-10-12|Lunes|FLORIDA|13:30:00|5|08|11|84
+2026-10-12|Lunes|NEW YORK|14:30:00|0|57|40|58
+2026-10-12|Lunes|GEORGIA|19:00:00|5|67|59|27
+2026-10-12|Lunes|FLORIDA|21:50:00|5|98|24|41
+2026-10-12|Lunes|NEW YORK|22:30:00|8|38|33|61
+2026-10-12|Lunes|GEORGIA|23.30|7|42|23|52`;
 
-  function startModule(idx) {
-    setDirection('forward');
-    setModuleIndex(idx);
-    setQuestionIndex(0);
-    setAnswers(emptyAnswers(MODULES[idx]));
-    setChecked(false);
-    setScreen('question');
-  }
+/* =========================================================
+   PERSISTENCIA
+   ========================================================= */
+const LS_KEY = 'visionLota2026_data';
 
-  function selectOption(i) {
-    if (isQuiz && checked) return; // locked once verified
-    setAnswers((prev) => prev.map((a, idx) => {
-      if (idx !== questionIndex) return a;
-      if (isMulti) {
-        const arr = Array.isArray(a) ? a : [];
-        return arr.includes(i) ? arr.filter((x) => x !== i) : [...arr, i];
-      }
-      return i;
-    }));
-  }
-
-  function handleVerify() {
-    if (!hasAnswer) return;
-    setChecked(true);
-  }
-
-  function goBackQuestion() {
-    setDirection('backward');
-    setChecked(false);
-    if (questionIndex > 0) setQuestionIndex((q) => q - 1);
-    else setScreen('map');
-  }
-
-  function goForwardQuestion() {
-    if (!canContinue) return;
-    if (isQuiz && !checked) { handleVerify(); return; }
-    setDirection('forward');
-    if (questionIndex < currentModule.questions.length - 1) {
-      setQuestionIndex((q) => q + 1);
-      setChecked(false);
-    } else if (isQuiz) {
-      let correct = 0;
-      answers.forEach((ans, qi) => { if (isQuestionCorrect(currentModule, qi, ans)) correct += 1; });
-      setModuleScores((prev) => ({ ...prev, [currentModule.id]: { correct, total: currentModule.questions.length } }));
-      setCompletedModules((prev) => (prev.includes(currentModule.id) ? prev : [...prev, currentModule.id]));
-      setScreen('moduleSummary');
-    } else {
-      const tally = {};
-      answers.forEach((ansIdx, qi) => {
-        const option = currentModule.questions[qi].options[ansIdx];
-        if (option?.trait) tally[option.trait] = (tally[option.trait] || 0) + 1;
-      });
-      setScores((prev) => {
-        const next = { ...prev };
-        const old = moduleScores[currentModule.id];
-        if (old && !old.total) { for (const k in old) next[k] = (next[k] || 0) - old[k]; }
-        for (const k in tally) next[k] = (next[k] || 0) + tally[k];
-        return next;
-      });
-      setModuleScores((prev) => ({ ...prev, [currentModule.id]: tally }));
-      setCompletedModules((prev) => (prev.includes(currentModule.id) ? prev : [...prev, currentModule.id]));
-      setScreen('moduleSummary');
-    }
-  }
-
-  function backToLastQuestion() {
-    setDirection('backward');
-    setChecked(isQuiz); // answers already committed; show them checked again
-    setQuestionIndex(currentModule.questions.length - 1);
-    setScreen('question');
-  }
-
-  function goNextModuleOrFinal() {
-    setDirection('forward');
-    if (allDone) { setScreen('final'); return; }
-    if (moduleIndex < MODULES.length - 1) { startModule(moduleIndex + 1); return; }
-    const firstPending = MODULES.findIndex((m) => !completedModules.includes(m.id));
-    if (firstPending !== -1) startModule(firstPending); else setScreen('final');
-  }
-
-  function resetAll() {
-    setScreen('intro');
-    setModuleIndex(0);
-    setQuestionIndex(0);
-    setAnswers([null, null, null]);
-    setChecked(false);
-    setModuleScores({});
-    setCompletedModules([]);
-    setScores(EMPTY_SCORES);
-    setDirection('forward');
-    setModuleSignals({});
-    setDynamicMarks({});
-  }
-
-  function toggleModuleSignal(signal) {
-    setModuleSignals((prev) => {
-      const current = prev[currentModule.id] || [];
-      const next = current.includes(signal) ? current.filter((item) => item !== signal) : [...current, signal];
-      return { ...prev, [currentModule.id]: next };
-    });
-  }
-
-  function toggleDynamicMark(type, value) {
-    setDynamicMarks((prev) => {
-      const current = prev[dynamicKey] || { perceive: [], act: [] };
-      const values = current[type].includes(value)
-        ? current[type].filter((item) => item !== value)
-        : [...current[type], value];
-      return { ...prev, [dynamicKey]: { ...current, [type]: values } };
-    });
-  }
-
-  function getAllDynamicMarks(moduleId) {
-    const marks = Object.entries(dynamicMarks)
-      .filter(([key]) => key.startsWith(`${moduleId}-`))
-      .map(([, value]) => value);
+function parseRaw(raw){
+  return raw.split('\n').filter(l=>l.trim()).map(line=>{
+    const p = line.split('|');
     return {
-      perceive: marks.flatMap((value) => value.perceive),
-      act: marks.flatMap((value) => value.act),
+      fecha: p[0], dia: p[1], loteria: p[2], hora: p[3],
+      e: p[4], f: p[5], g: p[6], h: p[7]
     };
-  }
-
-  const pageKey = `${screen}-${moduleIndex}-${questionIndex}`;
-  const pageClass = direction === 'forward' ? 'page-forward' : 'page-back';
-
-  return (
-    <div
-      className="min-h-screen w-full flex flex-col relative"
-      style={{
-        background: 'radial-gradient(ellipse 90% 55% at 50% -8%, #10203C 0%, #081326 55%, #050B18 100%)',
-        color: '#EDE3C8',
-        fontFamily: "ui-sans-serif, system-ui, -apple-system, sans-serif",
-      }}
-    >
-      <style>{`
-        .font-display { font-family: ui-serif, Georgia, 'Times New Roman', serif; }
-        @keyframes slideInRight { from { opacity:0; transform: translateX(18px);} to { opacity:1; transform: translateX(0);} }
-        @keyframes slideInLeft { from { opacity:0; transform: translateX(-18px);} to { opacity:1; transform: translateX(0);} }
-        .page-forward { animation: slideInRight .38s cubic-bezier(.2,.7,.3,1) both; }
-        .page-back { animation: slideInLeft .38s cubic-bezier(.2,.7,.3,1) both; }
-        @keyframes glow { 0%,100% { opacity:.4; } 50% { opacity:.7; } }
-        .glow-pulse { animation: glow 7s ease-in-out infinite; }
-        @media (prefers-reduced-motion: reduce) {
-          .page-forward, .page-back, .glow-pulse { animation: none !important; }
-        }
-        ::selection { background: rgba(212,175,55,0.35); }
-        .cover-grid { background: linear-gradient(110deg, rgba(16,32,60,0.42), rgba(5,11,24,0.08)); }
-        .cover-line { background: linear-gradient(90deg, #D4AF37, rgba(212,175,55,0)); }
-        .signal-card { background: rgba(147,162,192,0.055); border: 1px solid rgba(147,162,192,0.16); }
-        .signal-card:hover { border-color: rgba(212,175,55,0.5); transform: translateY(-2px); }
-        @media (max-width: 640px) {
-          .cover-grid { grid-template-columns: 1fr; }
-          .cover-signals { border-left: 0 !important; border-top: 1px solid rgba(212,175,55,0.22); padding-left: 0 !important; padding-top: 2rem; }
-        }
-      `}</style>
-
-      {screen !== 'intro' && <ReadingBar pct={readingPct} />}
-
-      {/* ---------------- INTRO ---------------- */}
-      {screen === 'intro' && (
-        <div className="flex-1 flex items-center justify-center px-5 sm:px-8 py-10 sm:py-16 relative overflow-hidden">
-          <div className="cover-grid relative grid grid-cols-2 gap-12 max-w-6xl w-full p-2 sm:p-8 lg:p-14 page-forward" style={{ borderLeft: '3px solid #D4AF37' }}>
-            <div className="flex flex-col justify-between min-h-[480px]">
-              <div>
-                <div className="flex items-center gap-3 mb-10" style={{ color: '#D4AF37' }}>
-                  <span className="w-9 h-px" style={{ background: '#D4AF37' }} />
-                  <span className="text-[10px] tracking-[0.28em] uppercase font-semibold">Experiencia interactiva · 2026</span>
-                </div>
-                <p className="text-[13px] tracking-[0.28em] uppercase mb-4" style={{ color: '#93A2C0' }}>Conócete · 2026</p>
-                <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl leading-[0.92] mb-7" style={{ color: '#F0D479' }}>
-                  El lenguaje<br /><em>secreto</em><br />de tu cuerpo
-                </h1>
-                <div className="h-px w-44 mb-6 cover-line" />
-                <p className="text-base sm:text-lg leading-relaxed max-w-lg" style={{ color: '#D7DCE8' }}>
-                  Descubre lo que revelan tus gestos, indicios y microexpresiones, incluso aquello que no ves de ti mismo.
-                </p>
-              </div>
-              <div className="mt-10">
-                <button
-                  onClick={() => setScreen('ethics')}
-                  className="group inline-flex items-center gap-3 font-semibold text-sm px-7 py-4 rounded-full transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
-                  style={{ background: 'linear-gradient(135deg, #C9A227, #E8C860)', color: '#0A1428' }}
-                >
-                  Entrar a la experiencia
-                  <ChevronRight size={17} className="group-hover:translate-x-0.5 transition-transform" />
-                </button>
-                <p className="text-[11px] mt-5 tracking-wide" style={{ color: '#5B6478' }}>
-                  Una guía de observación y autoconocimiento basada en el libro de Yoeldis Castillo Quiala y Junior Coronel Durán.
-                </p>
-              </div>
-            </div>
-
-            <div className="cover-signals border-l pl-8 sm:pl-10 flex flex-col justify-center" style={{ borderColor: 'rgba(212,175,55,0.22)' }}>
-              <div className="flex items-center justify-between mb-8">
-                <span className="text-[11px] tracking-[0.25em] uppercase font-semibold" style={{ color: '#D4AF37' }}>Tu mapa de observación</span>
-                <span className="font-display italic text-3xl" style={{ color: '#5B6478' }}>01—12</span>
-              </div>
-              <p className="text-sm leading-relaxed mb-6" style={{ color: '#D7DCE8' }}>
-                <strong style={{ color: '#F0D479' }}>Microexpresiones e indicios</strong><br />
-                Observa lo que aparece en el rostro y las señales del cuerpo que solo adquieren sentido cuando las relacionas con el contexto.
-              </p>
-              <div className="space-y-3">
-                {[
-                  [Smile, 'Microexpresiones', 'emociones que aparecen en el rostro'],
-                  [Search, 'Indicios', 'señales que necesitan contexto'],
-                  [Eye, 'Indicios + microexpresiones', 'cuando ambas señales coinciden'],
-                  [Heart, 'Relaciones', 'interés, distancia y límites'],
-                  [Sparkles, 'Reflejo final', 'tu patrón personal']
-                ].map(([Icon, label, detail], index) => (
-                  <div key={label} className="signal-card flex items-center gap-4 rounded-2xl p-4 transition-all duration-200">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: 'rgba(212,175,55,0.13)', color: '#D4AF37' }}>
-                      <Icon size={18} />
-                    </div>
-                    <div>
-                      <p className="font-display text-lg" style={{ color: '#EDE3C8' }}>{label}</p>
-                      <p className="text-[12px]" style={{ color: '#93A2C0' }}>{detail}</p>
-                    </div>
-                    <span className="ml-auto text-[10px]" style={{ color: '#5B6478' }}>0{index + 1}</span>
-                  </div>
-                ))}
-              </div>
-              <p className="text-[12px] leading-relaxed mt-8" style={{ color: '#93A2C0' }}>
-                En cada nivel puedes observar microexpresiones, identificar indicios y analizar qué ocurre cuando ambos aparecen juntos.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ---------------- ETHICS / PROPÓSITO ---------------- */}
-      {screen === 'ethics' && (
-        <div className="flex-1 flex items-center justify-center px-6 py-16 max-w-lg mx-auto w-full page-forward">
-          <div className="w-full text-center">
-            <div
-              className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6"
-              style={{ background: 'rgba(212,175,55,0.14)', color: '#D4AF37' }}
-            >
-              <Compass size={22} />
-            </div>
-            <h2 className="font-display italic text-3xl mb-6" style={{ color: '#F0D479' }}>
-              Antes de empezar, una aclaración
-            </h2>
-            <div className="text-left space-y-4 text-[14px] leading-relaxed mb-10" style={{ color: '#D7DCE8' }}>
-              <p>
-                Esta es una app de <span style={{ color: '#D4AF37', fontWeight: 600 }}>autoconocimiento</span>,
-                no un detector de mentiras. Ningún gesto, aislado, prueba nada sobre ti ni sobre nadie.
-              </p>
-              <p>
-                Tus respuestas no te clasifican ni te diagnostican: solo te muestran una tendencia,
-                un punto de partida para observarte con más honestidad, tal como propone el libro
-                desde su primera página.
-              </p>
-              <p>
-                Los módulos bonus ponen a prueba lo que sabes sobre microexpresiones e indicios,
-                pero incluso ahí la lección más importante es la misma: un solo gesto es un rumor,
-                nunca una sentencia. Usa lo que aprendas aquí para comprender, nunca para juzgar
-                ni manipular a otra persona.
-              </p>
-            </div>
-            <NavRow
-              onBack={() => setScreen('intro')}
-              backLabel="Portada"
-              onNext={() => setScreen('map')}
-              nextLabel="Entiendo, comenzar"
-              nextDisabled={false}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* ---------------- MAP ---------------- */}
-      {screen === 'map' && (
-        <div className="flex-1 px-5 sm:px-8 pb-16 pt-8 max-w-3xl mx-auto w-full page-forward">
-          <button
-            onClick={() => setScreen('ethics')}
-            className="inline-flex items-center gap-1.5 text-[12px] mb-6 focus:outline-none"
-            style={{ color: '#5B6478' }}
-          >
-            <ChevronLeft size={14} /> Portada
-          </button>
-
-          <div className="text-center mb-8">
-            <h2 className="font-display italic text-3xl mb-2" style={{ color: '#F0D479' }}>Tu mapa de observación</h2>
-            <p className="text-sm max-w-md mx-auto" style={{ color: '#93A2C0' }}>
-              Elige un nivel. En cada uno respondes una pregunta y marcas señales concretas para recibir un resumen personal.
-            </p>
-            <p className="text-[11px] mt-3" style={{ color: '#5B6478' }}>
-              {completedModules.length} de {MODULES.length} completados
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-3.5">
-            {MODULES.filter((m) => m.type !== 'quiz').map((m) => {
-              const idx = MODULES.indexOf(m);
-              const done = completedModules.includes(m.id);
-              const dominant = done ? getDominant(moduleScores[m.id]) : null;
-              const Icon = m.Icon;
-              return (
-                <button
-                  key={m.id}
-                  onClick={() => startModule(idx)}
-                  className="text-left rounded-2xl p-4 sm:p-5 transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
-                  style={{
-                    background: done ? 'rgba(212,175,55,0.06)' : 'rgba(147,162,192,0.045)',
-                    border: `1px solid ${done ? 'rgba(212,175,55,0.35)' : 'rgba(147,162,192,0.14)'}`,
-                  }}
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center"
-                      style={{ background: 'rgba(212,175,55,0.14)', color: '#D4AF37' }}
-                    >
-                      <Icon size={18} />
-                    </div>
-                    {done && (
-                      <span
-                        className="flex items-center gap-1 text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded-full"
-                        style={{ background: `${TRAIT_INFO[dominant].color}22`, color: TRAIT_INFO[dominant].color }}
-                      >
-                        <Check size={11} /> {TRAIT_INFO[dominant].label}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="font-display text-lg leading-snug mb-1" style={{ color: '#EDE3C8' }}>{m.title}</h3>
-                  <p className="text-[13px]" style={{ color: '#93A2C0' }}>{m.subtitle}</p>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="flex items-center gap-3 mt-10 mb-4">
-            <div className="h-px flex-1" style={{ background: 'rgba(212,175,55,0.25)' }} />
-            <span className="text-[11px] tracking-[0.25em] uppercase font-semibold" style={{ color: '#D4AF37' }}>
-              Módulos bonus
-            </span>
-            <div className="h-px flex-1" style={{ background: 'rgba(212,175,55,0.25)' }} />
-          </div>
-          <p className="text-[12px] text-center max-w-md mx-auto mb-5" style={{ color: '#93A2C0' }}>
-            Microexpresiones, indicios, su combinación, y las señales de coqueteo — con corrección
-            inmediata y explicación tomadas del libro.
-          </p>
-
-          <div className="grid sm:grid-cols-2 gap-3.5">
-            {MODULES.filter((m) => m.type === 'quiz').map((m) => {
-              const idx = MODULES.indexOf(m);
-              const done = completedModules.includes(m.id);
-              const Icon = m.Icon;
-              return (
-                <button
-                  key={m.id}
-                  onClick={() => startModule(idx)}
-                  className="text-left rounded-2xl p-4 sm:p-5 transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
-                  style={{
-                    background: done ? 'rgba(212,175,55,0.09)' : 'rgba(212,175,55,0.035)',
-                    border: `1px solid ${done ? 'rgba(212,175,55,0.4)' : 'rgba(212,175,55,0.22)'}`,
-                  }}
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center"
-                      style={{ background: 'rgba(212,175,55,0.16)', color: '#D4AF37' }}
-                    >
-                      <Icon size={18} />
-                    </div>
-                    {done && (
-                      <span
-                        className="flex items-center gap-1 text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded-full"
-                        style={{ background: 'rgba(212,175,55,0.18)', color: '#D4AF37' }}
-                      >
-                        <Check size={11} /> {moduleScores[m.id]?.correct}/{moduleScores[m.id]?.total}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="font-display text-lg leading-snug mb-1 flex items-center gap-2" style={{ color: '#EDE3C8' }}>
-                    {m.title}
-                    <span
-                      className="text-[9px] uppercase tracking-wider font-semibold px-1.5 py-0.5 rounded"
-                      style={{ background: 'rgba(212,175,55,0.22)', color: '#D4AF37' }}
-                    >
-                      Bonus
-                    </span>
-                  </h3>
-                  <p className="text-[13px] font-semibold" style={{ color: '#D4AF37' }}>{m.subtitle}</p>
-                </button>
-              );
-            })}
-          </div>
-
-          <button
-            onClick={() => allDone && setScreen('final')}
-            disabled={!allDone}
-            className="w-full mt-6 rounded-2xl p-5 text-center transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
-            style={{
-              background: allDone ? 'linear-gradient(135deg, rgba(212,175,55,0.16), rgba(167,139,196,0.10))' : 'rgba(147,162,192,0.03)',
-              border: `1px solid ${allDone ? 'rgba(212,175,55,0.4)' : 'rgba(147,162,192,0.08)'}`,
-              cursor: allDone ? 'pointer' : 'default',
-              opacity: allDone ? 1 : 0.55,
-            }}
-          >
-            <p className="font-display italic text-xl mb-1" style={{ color: '#F0D479' }}>
-              {allDone ? 'Ver tu reflejo final' : 'Tu reflejo final se revela al completar los 12 módulos'}
-            </p>
-            <p className="text-[12px]" style={{ color: '#93A2C0' }}>
-              {allDone ? 'Un retrato de cómo habitas tu cuerpo, escrito a partir de tus respuestas.' : `Faltan ${MODULES.length - completedModules.length} módulo(s).`}
-            </p>
-          </button>
-        </div>
-      )}
-
-      {/* ---------------- QUESTION ---------------- */}
-      {screen === 'question' && (
-        <div className="flex-1 flex flex-col px-5 sm:px-8 pb-10 pt-10 max-w-2xl mx-auto w-full">
-          <div key={pageKey} className={`${pageClass} flex-1 flex flex-col`}>
-            <div className="flex items-center gap-2 mb-1" style={{ color: '#D4AF37' }}>
-              <currentModule.Icon size={15} />
-              <span className="text-[11px] tracking-[0.2em] uppercase font-medium">
-                Nivel {moduleIndex + 1} de {MODULES.length} · {currentModule.title}
-              </span>
-            </div>
-            <p className="text-[11px] mb-6" style={{ color: '#5B6478' }}>
-              Página {questionIndex + 1} de {currentModule.questions.length}
-            </p>
-
-            {currentModule.id === 'm7' && (
-              <div
-                className="rounded-2xl px-4 py-3 mb-5 text-left"
-                style={{ background: 'rgba(201,123,147,0.09)', border: '1px solid rgba(201,123,147,0.28)' }}
-              >
-                <p className="text-[10px] uppercase tracking-[0.18em] font-semibold mb-1" style={{ color: '#C97B93' }}>
-                  Nivel de relaciones
-                </p>
-                <p className="text-[13px] leading-relaxed" style={{ color: '#D7DCE8' }}>
-                  Observa mirada, pies, postura, distancia, voz y contacto. Una señal sola no decide si existe interés, distancia o incomodidad: busca la combinación, compárala con el contexto y respeta siempre los límites de la otra persona.
-                </p>
-              </div>
-            )}
-
-            <h2 className="font-display text-2xl sm:text-3xl leading-snug mb-2" style={{ color: '#EDE3C8' }}>
-              {currentQuestion.prompt}
-            </h2>
-            {isMulti && (
-              <p className="text-[12px] mb-6 italic" style={{ color: '#93A2C0' }}>
-                Marca todas las opciones que apliquen.
-              </p>
-            )}
-            {!isMulti && <div className="mb-6" />}
-
-            <div className="space-y-2.5">
-              {currentQuestion.options.map((opt, i) => {
-                const isSelected = isMulti
-                  ? Array.isArray(currentAnswer) && currentAnswer.includes(i)
-                  : currentAnswer === i;
-                let bg = 'rgba(147,162,192,0.045)', border = 'rgba(147,162,192,0.14)', color = '#D7DCE8';
-                if (isQuiz && checked) {
-                  if (opt.correct) { bg = 'rgba(122,196,140,0.14)'; border = '#7AC48C'; color = '#B7E8C4'; }
-                  else if (isSelected) { bg = 'rgba(201,116,74,0.14)'; border = '#C9744A'; color = '#E8B7A0'; }
-                  else { bg = 'rgba(147,162,192,0.03)'; border = 'rgba(147,162,192,0.08)'; color = '#5B6478'; }
-                } else if (isSelected) {
-                  bg = 'rgba(212,175,55,0.14)'; border = '#D4AF37'; color = '#F0D479';
-                }
-                return (
-                  <button
-                    key={i}
-                    onClick={() => selectOption(i)}
-                    disabled={isQuiz && checked}
-                    className="w-full text-left rounded-xl px-4 py-3.5 text-[14px] leading-snug transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] flex items-center justify-between gap-3"
-                    style={{ background: bg, border: `1px solid ${border}`, color, cursor: isQuiz && checked ? 'default' : 'pointer' }}
-                  >
-                    <span>{opt.text}</span>
-                    {isQuiz && checked && opt.correct && <Check size={16} className="shrink-0" style={{ color: '#7AC48C' }} />}
-                    {isQuiz && checked && isSelected && !opt.correct && <XIcon size={16} className="shrink-0" style={{ color: '#C9744A' }} />}
-                    {isMulti && !checked && (
-                      <span
-                        className="w-4 h-4 rounded shrink-0 flex items-center justify-center"
-                        style={{ border: `1.5px solid ${isSelected ? '#D4AF37' : 'rgba(147,162,192,0.35)'}`, background: isSelected ? '#D4AF37' : 'transparent' }}
-                      >
-                        {isSelected && <Check size={11} style={{ color: '#0A1428' }} />}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-
-            {(() => {
-              const dynamic = getLevelDynamic(currentModule, questionIndex);
-              const renderMarks = (type, options) => options.map((option) => {
-                const selected = currentDynamicMarks[type].includes(option);
-                return (
-                  <div key={option}>
-                    <button onClick={() => toggleDynamicMark(type, option)} className="w-full flex items-center gap-2 text-left rounded-xl px-3 py-3 text-[12px] transition-all focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" style={{ background: selected ? 'rgba(212,175,55,0.16)' : 'rgba(147,162,192,0.045)', border: `1px solid ${selected ? '#D4AF37' : 'rgba(147,162,192,0.16)'}`, color: selected ? '#F0D479' : '#D7DCE8' }}>
-                      <span className="w-4 h-4 rounded flex items-center justify-center shrink-0" style={{ border: `1px solid ${selected ? '#D4AF37' : '#5B6478'}`, background: selected ? '#D4AF37' : 'transparent' }}>{selected && <Check size={11} style={{ color: '#0A1428' }} />}</span>
-                      {option}
-                    </button>
-                    {selected && <p className="px-3 py-2 text-[11px] leading-relaxed" style={{ color: type === 'perceive' ? '#B9CFE8' : '#B7E8C4' }}>{getDynamicReading(type, option)}</p>}
-                  </div>
-                );
-              });
-              return (
-                <div className="mt-6 grid gap-4 text-left">
-                  <div className="rounded-2xl p-4" style={{ background: 'rgba(110,155,199,0.08)', border: '1px solid rgba(110,155,199,0.3)' }}>
-                    <p className="text-[10px] uppercase tracking-[0.18em] font-semibold mb-2" style={{ color: '#6E9BC7' }}>A · Lo que percibes</p>
-                    <p className="text-[13px] leading-relaxed mb-3" style={{ color: '#D7DCE8' }}>{dynamic.perceive}</p>
-                    <div className="grid sm:grid-cols-2 gap-2">{renderMarks('perceive', dynamic.options)}</div>
-                    <p className="text-[11px] mt-3" style={{ color: '#93A2C0' }}>{currentDynamicMarks.perceive.length} señales percibidas</p>
-                  </div>
-                  <div className="rounded-2xl p-4" style={{ background: 'rgba(122,196,140,0.08)', border: '1px solid rgba(122,196,140,0.3)' }}>
-                    <p className="text-[10px] uppercase tracking-[0.18em] font-semibold mb-2" style={{ color: '#7AC48C' }}>B · Cómo actuarías tú</p>
-                    <p className="text-[13px] leading-relaxed mb-3" style={{ color: '#D7DCE8' }}>{dynamic.act}</p>
-                    <div className="grid sm:grid-cols-2 gap-2">{renderMarks('act', dynamic.actions)}</div>
-                    <p className="text-[11px] mt-3" style={{ color: '#93A2C0' }}>{currentDynamicMarks.act.length} respuestas personales</p>
-                  </div>
-                  {hasDynamicMarks && <div className="rounded-xl px-4 py-3" style={{ background: 'rgba(212,175,55,0.06)', border: '1px solid rgba(212,175,55,0.2)' }}><p className="text-[10px] uppercase tracking-wider font-semibold mb-2" style={{ color: '#D4AF37' }}>Lectura de esta hoja</p><p className="text-[12px] leading-relaxed" style={{ color: '#D7DCE8' }}>Percibes: {currentDynamicMarks.perceive.join(', ') || 'ninguna señal todavía'}. Tu respuesta: {currentDynamicMarks.act.join(', ') || 'ninguna marcada todavía'}. Úsalo como preparación para observar y actuar con más claridad.</p></div>}
-                </div>
-              );
-            })()}
-
-            {isQuiz && checked && (
-              <div
-                className="mt-4 rounded-xl px-4 py-3.5 text-[13px] leading-relaxed"
-                style={{ background: 'rgba(212,175,55,0.06)', border: '1px solid rgba(212,175,55,0.2)', color: '#D7DCE8' }}
-              >
-                <span className="text-[10px] uppercase tracking-wider font-semibold block mb-1.5" style={{ color: '#D4AF37' }}>
-                  Por qué
-                </span>
-                {currentQuestion.explanation}
-              </div>
-            )}
-
-            <NavRow
-              onBack={goBackQuestion}
-              backLabel={questionIndex === 0 ? 'Al mapa' : 'Atrás'}
-              onNext={goForwardQuestion}
-              nextDisabled={!canContinue}
-              nextLabel={
-                isQuiz && !checked
-                  ? 'Verificar respuesta'
-                  : questionIndex === currentModule.questions.length - 1
-                  ? 'Terminar nivel'
-                  : 'Siguiente'
-              }
-            />
-          </div>
-        </div>
-      )}
-
-      {/* ---------------- MODULE SUMMARY ---------------- */}
-      {screen === 'moduleSummary' && (
-        <div className="flex-1 flex items-center justify-center px-5 sm:px-8 pb-10 pt-10 max-w-xl mx-auto w-full">
-          <div key={pageKey} className={`${pageClass} w-full text-center`}>
-            <span className="text-[11px] tracking-[0.25em] uppercase font-medium" style={{ color: '#D4AF37' }}>
-              Cae el telón · {currentModule.title}
-            </span>
-            {currentModule.type === 'quiz' ? (() => {
-              const { correct, total } = moduleScores[currentModule.id] || { correct: 0, total: 5 };
-              const msg = correct === total
-                ? 'Ojo clínico. Lees los racimos de señales, no gestos sueltos, que es justo la diferencia entre un observador casual y uno entrenado.'
-                : correct >= total - 2
-                ? 'Buen observador. Sigue practicando: la clave siempre está en combinar tres indicios, nunca en juzgar uno solo.'
-                : 'Ir despacio también es parte del entrenamiento. Vuelve al nivel de emociones y repasa cómo se combinan microexpresión, gesto y contexto.';
-              const missed = currentModule.questions
-                .map((_, qi) => qi)
-                .filter((qi) => !isQuestionCorrect(currentModule, qi, answers[qi]));
-              return (
-                <>
-                  <h2 className="font-display italic text-3xl my-5" style={{ color: '#D4AF37' }}>{correct} de {total} aciertos</h2>
-                  <p className="text-[15px] leading-relaxed mb-6" style={{ color: '#D7DCE8' }}>{msg}</p>
-                  {missed.length > 0 && (
-                    <div className="text-left rounded-xl px-5 py-4 mb-8" style={{ background: 'rgba(212,175,55,0.06)', border: '1px solid rgba(212,175,55,0.2)' }}>
-                      <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-semibold mb-3" style={{ color: '#D4AF37' }}>
-                        <Lightbulb size={12} /> En qué seguir trabajando
-                      </span>
-                      <div className="space-y-3">
-                        {missed.map((qi) => (
-                          <p key={qi} className="text-[13px] leading-relaxed" style={{ color: '#B9C2D6' }}>
-                            {currentModule.questions[qi].explanation}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </>
-              );
-            })() : (() => {
-              const dominant = getDominant(moduleScores[currentModule.id]);
-              const info = dominant
-                ? TRAIT_INFO[dominant]
-                : {
-                    color: '#D4AF37',
-                    mirrorTitle: 'Tu patrón de observación',
-                    text: () => 'Has construido este nivel a partir de las señales que reconociste. Observa cómo se combinan y confirma siempre su significado con el contexto, la conversación y los límites de la otra persona.'
-                  };
-              return (
-                <>
-                  <h2 className="font-display italic text-3xl my-5" style={{ color: info.color }}>{info.mirrorTitle}</h2>
-                  <p className="text-[15px] leading-relaxed mb-8" style={{ color: '#D7DCE8' }}>
-                    {info.text(currentModule.theme)}
-                  </p>
-                </>
-              );
-            })()}
-
-            <div
-              className="text-left rounded-2xl px-5 py-4 mb-6"
-              style={{ background: 'rgba(147,162,192,0.045)', border: '1px solid rgba(147,162,192,0.14)' }}
-            >
-              <span className="text-[10px] uppercase tracking-wider font-semibold" style={{ color: '#D4AF37' }}>
-                Resumen de este nivel
-              </span>
-              <p className="text-[13px] leading-relaxed mt-2" style={{ color: '#D7DCE8' }}>
-                {getLevelSummary(currentModule, moduleScores[currentModule.id], getAllDynamicMarks(currentModule.id))}
-              </p>
-              {(() => {
-                const assessment = getDynamicAssessment(
-                  getAllDynamicMarks(currentModule.id).perceive,
-                  getAllDynamicMarks(currentModule.id).act
-                );
-                return (
-                  <div className="mt-3 space-y-2 text-[12px] leading-relaxed" style={{ color: '#B9C2D6' }}>
-                    <p><strong style={{ color: '#6E9BC7' }}>Lo que percibiste:</strong> {assessment.perceptionText}</p>
-                    <p><strong style={{ color: '#7AC48C' }}>Cómo actuarías:</strong> {assessment.actionText}</p>
-                    <p><strong style={{ color: '#D4AF37' }}>Evaluación:</strong> {assessment.coherence}</p>
-                  </div>
-                );
-              })()}
-              <p className="text-[11px] mt-3" style={{ color: '#93A2C0' }}>
-                {BOOK_PARTS[currentModule.id]} · Las señales orientan una conversación contigo; no son un diagnóstico.
-              </p>
-            </div>
-
-            {(() => {
-              const sections = getLevelSections(currentModule, getAllDynamicMarks(currentModule.id));
-              return (
-                <div className="grid gap-3 text-left mb-6">
-                  <div className="rounded-2xl px-5 py-4" style={{ background: 'rgba(110,155,199,0.08)', borderLeft: '3px solid #6E9BC7' }}>
-                    <p className="text-[10px] uppercase tracking-wider font-semibold mb-2" style={{ color: '#6E9BC7' }}>1 · Lo que identificaste</p>
-                    <p className="text-[13px] leading-relaxed" style={{ color: '#D7DCE8' }}>{sections.identified}</p>
-                  </div>
-                  <div className="rounded-2xl px-5 py-4" style={{ background: 'rgba(212,175,55,0.07)', borderLeft: '3px solid #D4AF37' }}>
-                    <p className="text-[10px] uppercase tracking-wider font-semibold mb-2" style={{ color: '#D4AF37' }}>2 · Qué puede significar</p>
-                    <p className="text-[13px] leading-relaxed" style={{ color: '#D7DCE8' }}>{sections.meaning}</p>
-                  </div>
-                  <div className="rounded-2xl px-5 py-4" style={{ background: 'rgba(122,196,140,0.08)', borderLeft: '3px solid #7AC48C' }}>
-                    <p className="text-[10px] uppercase tracking-wider font-semibold mb-2" style={{ color: '#7AC48C' }}>3 · Cómo actuar o prepararte</p>
-                    <p className="text-[13px] leading-relaxed" style={{ color: '#D7DCE8' }}>{sections.action}</p>
-                  </div>
-                </div>
-              );
-            })()}
-
-            {currentModule.type !== 'quiz' && (
-              <div className="flex justify-center flex-wrap gap-1.5 mb-4">
-                {Object.entries(moduleScores[currentModule.id] || {}).map(([k, v]) => (
-                  <span
-                    key={k}
-                    className="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 rounded-full"
-                    style={{ background: `${TRAIT_INFO[k].color}22`, color: TRAIT_INFO[k].color }}
-                  >
-                    {TRAIT_INFO[k].label} · {v}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            <NavRow
-              onBack={backToLastQuestion}
-              backLabel="Revisar respuestas"
-              onNext={goNextModuleOrFinal}
-              nextLabel={allDone ? 'Ver mi reflejo final' : 'Siguiente módulo'}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* ---------------- FINAL ---------------- */}
-      {screen === 'final' && (() => {
-        const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-        const [top1] = sorted[0];
-        const [top2] = sorted[1];
-        const maxVal = Math.max(...Object.values(scores), 4);
-        const radarData = Object.entries(scores).map(([k, v]) => ({ trait: TRAIT_INFO[k].label, value: v, full: maxVal }));
-        const top1Info = TRAIT_INFO[top1];
-        const top2Info = TRAIT_INFO[top2];
-        const top2Text = top2Info.text('varios momentos de este recorrido');
-
-        return (
-          <div className="flex-1 px-5 sm:px-8 pb-16 pt-8 max-w-2xl mx-auto w-full page-forward">
-            <button
-              onClick={() => setScreen('map')}
-              className="inline-flex items-center gap-1.5 text-[12px] mb-4 focus:outline-none"
-              style={{ color: '#5B6478' }}
-            >
-              <ChevronLeft size={14} /> Volver al mapa
-            </button>
-
-            <div className="text-center mb-2">
-              <span className="text-[11px] tracking-[0.25em] uppercase font-medium" style={{ color: '#5B6478' }}>Tu reflejo</span>
-            </div>
-
-            <div className="flex justify-center my-8">
-              <div
-                className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-full flex items-center justify-center text-center px-8"
-                style={{
-                  background: `radial-gradient(circle at 35% 30%, rgba(255,255,255,0.08), rgba(255,255,255,0) 45%), radial-gradient(circle, ${top1Info.color}22 0%, #0C1730 70%)`,
-                  border: `1px solid ${top1Info.color}55`,
-                  boxShadow: `0 0 60px ${top1Info.color}1f, inset 0 0 40px rgba(0,0,0,0.4)`,
-                }}
-              >
-                <p className="font-display italic text-2xl sm:text-[28px] leading-tight" style={{ color: top1Info.color }}>
-                  {top1Info.mirrorTitle}
-                </p>
-              </div>
-            </div>
-
-            <p className="text-[15px] leading-relaxed text-center max-w-md mx-auto mb-3" style={{ color: '#D7DCE8' }}>
-              {top1Info.text('tu forma general de habitar el cuerpo')}
-            </p>
-            <p className="text-[13px] leading-relaxed text-center max-w-md mx-auto mb-10" style={{ color: '#93A2C0' }}>
-              Muy cerca aparece también <span style={{ color: top2Info.color }}>{top2Info.label.toLowerCase()}</span>: {top2Text.charAt(0).toLowerCase() + top2Text.slice(1)}
-            </p>
-
-            <div className="h-64 sm:h-72 mb-10">
-              <ResponsiveContainer width="100%" height="100%">
-                <RadarChart data={radarData} outerRadius="70%">
-                  <PolarGrid stroke="rgba(147,162,192,0.16)" />
-                  <PolarAngleAxis dataKey="trait" tick={{ fill: '#93A2C0', fontSize: 12 }} />
-                  <Radar dataKey="value" stroke="#D4AF37" fill="#D4AF37" fillOpacity={0.28} strokeWidth={2} />
-                </RadarChart>
-              </ResponsiveContainer>
-            </div>
-
-            <h3 className="font-display italic text-xl mb-4 text-center" style={{ color: '#F0D479' }}>Módulo a módulo</h3>
-            <div className="space-y-2 mb-10">
-              {MODULES.map((m) => {
-                const isQuiz = m.type === 'quiz';
-                const dom = isQuiz ? null : getDominant(moduleScores[m.id]);
-                const info = dom ? TRAIT_INFO[dom] : null;
-                const levelSummary = moduleScores[m.id]
-                  ? getLevelSummary(m, moduleScores[m.id], getAllDynamicMarks(m.id))
-                  : 'Nivel pendiente.';
-                const levelSections = getLevelSections(m, getAllDynamicMarks(m.id));
-                return (
-                  <div
-                    key={m.id}
-                    className="rounded-xl px-4 py-3"
-                    style={{ background: 'rgba(147,162,192,0.035)', border: '1px solid rgba(147,162,192,0.1)' }}
-                  >
-                    <div className="flex items-center justify-between gap-2.5">
-                      <div className="flex items-center gap-2.5">
-                        <m.Icon size={15} style={{ color: '#5B6478' }} />
-                        <span className="text-[13px]" style={{ color: '#D7DCE8' }}>{m.title}</span>
-                      </div>
-                      {info && (
-                        <span
-                          className="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 rounded-full shrink-0"
-                          style={{ background: `${info.color}22`, color: info.color }}
-                        >
-                          {info.label}
-                        </span>
-                      )}
-                      {isQuiz && moduleScores[m.id] && (
-                        <span
-                          className="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 rounded-full shrink-0"
-                          style={{ background: 'rgba(212,175,55,0.18)', color: '#D4AF37' }}
-                        >
-                          {moduleScores[m.id].correct}/{moduleScores[m.id].total} aciertos
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-[12px] leading-relaxed mt-2" style={{ color: '#B9C2D6' }}>{levelSummary}</p>
-                    {moduleScores[m.id] && <p className="text-[12px] leading-relaxed mt-2" style={{ color: '#9ED9AC' }}><strong>Cómo actuar:</strong> {levelSections.action}</p>}
-                  </div>
-                );
-              })}
-            </div>
-
-            <NavRow
-              onBack={() => setScreen('map')}
-              backLabel="Volver al mapa"
-              onNext={() => setScreen('closing')}
-              nextDisabled={false}
-              nextLabel="Continuar"
-            />
-          </div>
-        );
-      })()}
-
-      {/* ---------------- CLOSING / MARKETING ---------------- */}
-      {screen === 'closing' && (
-        <div className="flex-1 flex items-center justify-center px-6 py-16 max-w-lg mx-auto w-full page-forward">
-          <div className="w-full text-center">
-            <div
-              className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6"
-              style={{ background: 'rgba(212,175,55,0.14)', color: '#D4AF37' }}
-            >
-              <Sparkles size={20} />
-            </div>
-            <h2 className="font-display italic text-3xl mb-5" style={{ color: '#F0D479' }}>
-              Gracias por mirarte con honestidad
-            </h2>
-            <p className="text-[14.5px] leading-relaxed mb-6" style={{ color: '#D7DCE8' }}>
-              Has recorrido decenas de escenas de tu propia vida y has elegido, cada vez,
-              responder desde lo que realmente hace tu cuerpo y no desde lo que crees que
-              "debería" hacer. Ese gesto —el de observarte sin juzgarte— es exactamente el que
-              proponíamos al abrir este libro. El viaje no termina aquí: sigue cada vez que te
-              sorprendas a ti mismo cruzando los brazos, aguantando una sonrisa o buscando la
-              salida con los pies.
-            </p>
-
-            <div
-              className="rounded-2xl p-6 text-center mb-8"
-              style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.14), rgba(167,139,196,0.08))', border: '1px solid rgba(212,175,55,0.3)' }}
-            >
-              <BookHeart size={20} className="mx-auto mb-3" style={{ color: '#D4AF37' }} />
-              <p className="font-display italic text-lg mb-2" style={{ color: '#F0D479' }}>
-                Esta app es solo el eco de un libro más grande
-              </p>
-              <p className="text-[13.5px] leading-relaxed mb-4" style={{ color: '#D7DCE8' }}>
-                Todo lo que respondiste aquí viene de <em>Conócete: el lenguaje secreto de tu cuerpo</em>,
-                donde cada capítulo profundiza mucho más: entrevistas, negociaciones, pareja, poder,
-                pérdida y despedida. Si esta experiencia te dijo algo sobre ti, el libro completo
-                te dirá mucho más.
-              </p>
-              <a
-                href="https://www.conocete.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-semibold text-sm px-6 py-3 rounded-full transition-transform hover:scale-[1.02]"
-                style={{ background: 'linear-gradient(135deg, #C9A227, #E8C860)', color: '#0A1428' }}
-              >
-                Consigue el libro en conocete.com <ChevronRight size={16} />
-              </a>
-            </div>
-
-            <p className="text-[11px] tracking-wide mb-10" style={{ color: '#5B6478' }}>
-              Yoeldis Castillo Quiala, Psicólogo · Junior Coronel Durán<br />
-              Autores de «Conócete: el lenguaje secreto de tu cuerpo» · @conocete.app
-            </p>
-
-            <div className="flex justify-center gap-3">
-              <button
-                onClick={() => setScreen('final')}
-                className="inline-flex items-center gap-1.5 text-sm px-6 py-3 rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
-                style={{ borderColor: 'rgba(147,162,192,0.25)', color: '#D7DCE8' }}
-              >
-                <ChevronLeft size={15} /> Volver a tu reflejo
-              </button>
-              <button
-                onClick={resetAll}
-                className="inline-flex items-center gap-2 font-semibold text-sm px-6 py-3 rounded-full transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
-                style={{ background: 'linear-gradient(135deg, #C9A227, #E8C860)', color: '#0A1428' }}
-              >
-                <RotateCcw size={15} /> Empezar de nuevo
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+  });
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+function getData(){
+  const stored = localStorage.getItem(LS_KEY);
+  if(!stored){
+    const d = parseRaw(RAW);
+    localStorage.setItem(LS_KEY, JSON.stringify(d));
+    return d;
+  }
+  try { return JSON.parse(stored); } catch(e){ return parseRaw(RAW); }
+}
+
+function saveData(d){
+  localStorage.setItem(LS_KEY, JSON.stringify(d));
+}
+
+/* =========================================================
+   FECHA ACTUAL
+   ========================================================= */
+function mostrarFechaActual(){
+  const d = new Date();
+  const dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  document.getElementById('fechaActual').textContent =
+    `${dias[d.getDay()]}, ${d.getDate()} de ${meses[d.getMonth()]} de ${d.getFullYear()}`;
+}
+
+/* =========================================================
+   NAVEGACIÓN
+   ========================================================= */
+document.querySelectorAll('nav button').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+    const sec = b.dataset.sec;
+    document.getElementById(sec).classList.add('active');
+    if(sec === 'm1') renderMetodo1();
+    if(sec === 'm2') renderMetodo2();
+    if(sec === 'm3') renderMetodo3();
+    if(sec === 'm4') renderMetodo4();
+  });
+});
+
+/* =========================================================
+   HISTORIAL
+   ========================================================= */
+function renderHistorial(){
+  const data = getData();
+  const fLot = document.getElementById('fLoteria').value;
+  const fFec = document.getElementById('fFecha').value;
+  const tbody = document.querySelector('#tablaHistorial tbody');
+  tbody.innerHTML = '';
+  data
+    .filter(r => (!fLot || r.loteria === fLot) && (!fFec || r.fecha === fFec))
+    .slice()
+    .sort((a,b)=> a.fecha === b.fecha ? a.hora.localeCompare(b.hora) : a.fecha.localeCompare(b.fecha))
+    .forEach((r, idx)=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${r.fecha}</td><td>${r.dia}</td><td>${r.loteria}</td><td>${r.hora}</td>
+        <td>${r.e}</td><td>${r.f}</td><td>${r.g}</td><td>${r.h}</td>
+        <td><button class="del" onclick="borrarFila('${r.fecha}','${r.loteria}','${r.hora}')">X</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+}
+
+function borrarFila(fecha, loteria, hora){
+  if(!confirm('¿Borrar este sorteo?')) return;
+  let data = getData();
+  data = data.filter(r => !(r.fecha===fecha && r.loteria===loteria && r.hora===hora));
+  saveData(data);
+  renderHistorial();
+}
+
+function limpiarFiltros(){
+  document.getElementById('fLoteria').value = '';
+  document.getElementById('fFecha').value = '';
+  renderHistorial();
+}
+
+/* =========================================================
+   ACTUALIZAR
+   ========================================================= */
+function agregarSorteo(){
+  const fecha = document.getElementById('nFecha').value;
+  const dia = document.getElementById('nDia').value;
+  const loteria = document.getElementById('nLoteria').value;
+  const hora = document.getElementById('nHora').value;
+  const e = document.getElementById('nE').value.trim();
+  const f = document.getElementById('nF').value.trim().padStart(2,'0');
+  const g = document.getElementById('nG').value.trim().padStart(2,'0');
+  const h = document.getElementById('nH').value.trim().padStart(2,'0');
+  const msg = document.getElementById('msgActualizar');
+  if(!fecha || e==='' || f==='' || g==='' || h===''){
+    msg.className='msg err'; msg.textContent='Faltan datos.'; return;
+  }
+  const data = getData();
+  data.push({fecha, dia, loteria, hora, e, f, g, h});
+  saveData(data);
+  msg.className='msg ok'; msg.textContent='Sorteo agregado.';
+  ['nE','nF','nG','nH'].forEach(id=>document.getElementById(id).value='');
+}
+
+function importarBulk(){
+  const txt = document.getElementById('bulk').value.trim();
+  const msg = document.getElementById('msgBulk');
+  if(!txt){ msg.className='msg err'; msg.textContent='Nada que importar.'; return; }
+  const data = getData();
+  let count = 0;
+  txt.split('\n').forEach(line=>{
+    const p = line.split('|');
+    if(p.length >= 8){
+      data.push({
+        fecha:p[0], dia:p[1], loteria:p[2], hora:p[3],
+        e:p[4], f:p[5].padStart(2,'0'), g:p[6].padStart(2,'0'), h:p[7].padStart(2,'0')
+      });
+      count++;
+    }
+  });
+  saveData(data);
+  msg.className='msg ok'; msg.textContent=`${count} filas importadas.`;
+  document.getElementById('bulk').value='';
+}
+
+/* =========================================================
+   UTILIDADES DE CÁLCULO
+   ========================================================= */
+function agruparPorSlot(data){
+  const slots = {};
+  data.forEach(r=>{
+    const key = r.loteria + '|' + r.hora;
+    if(!slots[key]) slots[key] = [];
+    slots[key].push(r);
+  });
+  // ordenar cada slot por fecha
+  Object.keys(slots).forEach(k=>{
+    slots[k].sort((a,b)=> a.fecha.localeCompare(b.fecha));
+  });
+  return slots;
+}
+
+function topFrecuente(arr, n){
+  const c = {};
+  arr.forEach(v=> c[v]=(c[v]||0)+1);
+  return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,n);
+}
+
+/* =========================================================
+   MÉTODO 1 · CAOS HEURÍSTICO
+   ========================================================= */
+function calcularMetodo1(){
+  const data = getData();
+  const slots = agruparPorSlot(data);
+  const resultado = {};
+  Object.keys(slots).forEach(k=>{
+    const rows = slots[k].slice(-30);
+    const fVals = rows.map(r=>r.f);
+    const gVals = rows.map(r=>r.g);
+    const hVals = rows.map(r=>r.h);
+    const fCount = {};
+    fVals.forEach(v=> fCount[v]=(fCount[v]||0)+1);
+    const candidatos = {};
+    [...gVals, ...hVals].forEach(v=>{
+      if(!fCount[v]) candidatos[v]=(candidatos[v]||0)+1;
+    });
+    const topF = topFrecuente(fVals, 3).map(x=>x[0]);
+    const topGH = Object.entries(candidatos).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
+    const fFinal = [...new Set([...topGH, ...topF])].slice(0,3);
+    // Pick 4: G y H separados
+    const topG = topFrecuente(gVals, 2).map(x=>x[0]);
+    const topH = topFrecuente(hVals, 2).map(x=>x[0]);
+    resultado[k] = { f: fFinal, g: topG, h: topH };
+  });
+  return resultado;
+}
+
+function renderMetodo1(){
+  const r = calcularMetodo1();
+  pintarResultado('resM1', r, 'Caos Heurístico');
+}
+
+/* =========================================================
+   MÉTODO 2 · CAOS FORMAL
+   ========================================================= */
+function calcularMetodo2(){
+  const data = getData();
+  const slots = agruparPorSlot(data);
+  const resultado = {};
+  Object.keys(slots).forEach(k=>{
+    const rows = slots[k].slice(-40);
+    // mapa de retorno de E
+    const eSeq = rows.map(r=>parseInt(r.e));
+    const trans = {};
+    for(let i=0;i<eSeq.length-1;i++){
+      const a = eSeq[i], b = eSeq[i+1];
+      if(!trans[a]) trans[a]={};
+      trans[a][b]=(trans[a][b]||0)+1;
+    }
+    const lastE = eSeq[eSeq.length-1];
+    let nextE = null;
+    if(trans[lastE]){
+      nextE = Object.entries(trans[lastE]).sort((a,b)=>b[1]-a[1])[0][0];
+    }
+    // frecuencia de F
+    const fVals = rows.map(r=>r.f);
+    const fCount = {};
+    fVals.forEach(v=> fCount[v]=(fCount[v]||0)+1);
+    // ranking: F que aparecen más y no son el último
+    const ultimoF = fVals[fVals.length-1];
+    const topF = Object.entries(fCount)
+      .filter(([v])=> v!==ultimoF)
+      .sort((a,b)=>b[1]-a[1])
+      .slice(0,3).map(x=>x[0]);
+    // G y H
+    const gVals = rows.map(r=>r.g);
+    const hVals = rows.map(r=>r.h);
+    const topG = topFrecuente(gVals, 2).map(x=>x[0]);
+    const topH = topFrecuente(hVals, 2).map(x=>x[0]);
+    resultado[k] = { f: topF, g: topG, h: topH, nextE };
+  });
+  return resultado;
+}
+
+function renderMetodo2(){
+  const r = calcularMetodo2();
+  pintarResultado('resM2', r, 'Caos Formal');
+}
+
+/* =========================================================
+   MÉTODO 3 · CAOS ESTRICTO SOBRE F
+   ========================================================= */
+function calcularMetodo3(){
+  const data = getData();
+  const slots = agruparPorSlot(data);
+  const resultado = {};
+  Object.keys(slots).forEach(k=>{
+    const rows = slots[k].slice(-40);
+    const fSeq = rows.map(r=>parseInt(r.f));
+    if(fSeq.length < 4){
+      resultado[k] = { f: ['--'], g:['--'], h:['--'] };
+      return;
+    }
+    // embedding (F(t-1), F(t)) -> F(t+1)
+    const vectores = [];
+    for(let i=0;i<fSeq.length-2;i++){
+      vectores.push({ v:[fSeq[i], fSeq[i+1]], next:fSeq[i+2] });
+    }
+    const last = [fSeq[fSeq.length-2], fSeq[fSeq.length-1]];
+    // distancia euclídea
+    const dist = vectores.map(o=>{
+      const d = Math.sqrt(Math.pow(o.v[0]-last[0],2) + Math.pow(o.v[1]-last[1],2));
+      return { d, next:o.next };
+    });
+    dist.sort((a,b)=>a.d-b.d);
+    const k = dist.slice(0,3);
+    const votos = {};
+    k.forEach(o=> votos[o.next]=(votos[o.next]||0)+1);
+    const predF = Object.entries(votos).sort((a,b)=>b[1]-a[1]).map(x=>String(x[0]).padStart(2,'0'));
+    if(predF.length===0) predF.push('--');
+    // G y H por frecuencia reciente
+    const gVals = rows.map(r=>r.g);
+    const hVals = rows.map(r=>r.h);
+    const topG = topFrecuente(gVals, 2).map(x=>x[0]);
+    const topH = topFrecuente(hVals, 2).map(x=>x[0]);
+    resultado[k] = { f: predF, g: topG, h: topH };
+  });
+  return resultado;
+}
+
+function renderMetodo3(){
+  const r = calcularMetodo3();
+  pintarResultado('resM3', r, 'Caos Estricto sobre F');
+}
+
+/* =========================================================
+   MÉTODO 4 · RECURRENCIA G/H → F
+   ========================================================= */
+function calcularMetodo4(){
+  const data = getData();
+  const slots = agruparPorSlot(data);
+  const resultado = {};
+  Object.keys(slots).forEach(k=>{
+    const rows = slots[k];
+    const fSet = new Set(rows.map(r=>r.f));
+    // contar cuántas veces sale cada G y cada H en TODA la historia del slot
+    const gCount = {}, hCount = {};
+    rows.forEach(r=>{
+      gCount[r.g] = (gCount[r.g]||0)+1;
+      hCount[r.h] = (hCount[r.h]||0)+1;
+    });
+    // candidatos: los que están en G o H y NUNCA han salido en F
+    const cand = {};
+    Object.entries(gCount).forEach(([v,c])=>{ if(!fSet.has(v)) cand[v]=(cand[v]||0)+c; });
+    Object.entries(hCount).forEach(([v,c])=>{ if(!fSet.has(v)) cand[v]=(cand[v]||0)+c; });
+    const top = Object.entries(cand).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
+    // si no hay suficientes, completar con los G/H más frecuentes
+    const relleno = [...Object.entries(gCount), ...Object.entries(hCount)]
+      .sort((a,b)=>b[1]-a[1])
+      .map(x=>x[0])
+      .filter(v=>!top.includes(v));
+    const fFinal = [...top, ...relleno].slice(0,3);
+    // G y H
+    const topG = Object.entries(gCount).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]);
+    const topH = Object.entries(hCount).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]);
+    resultado[k] = { f: fFinal, g: topG, h: topH };
+  });
+  return resultado;
+}
+
+function renderMetodo4(){
+  const r = calcularMetodo4();
+  pintarResultado('resM4', r, 'Recurrencia G/H → F');
+}
+
+/* =========================================================
+   PINTAR RESULTADOS
+   ========================================================= */
+function pintarResultado(contenedorId, resultado, nombreMetodo){
+  const cont = document.getElementById(contenedorId);
+  const loterias = ['GEORGIA','FLORIDA','NEW YORK'];
+  const horas = ['12:30:00','13:30:00','14:30:00','19:00:00','21:50:00','22:30:00','23:30:00'];
+
+  // mejores del día (global)
+  const globalF = {};
+  Object.values(resultado).forEach(slot=>{
+    slot.f.forEach((v,i)=>{ globalF[v] = (globalF[v]||0) + (3-i); });
+  });
+  const topGlobalF = Object.entries(globalF).sort((a,b)=>b[1]-a[1]).slice(0,2);
+
+  let html = '';
+  html += `<div class="card"><h3>Top 2 más fuertes del día · ${nombreMetodo}</h3>`;
+  if(topGlobalF.length){
+    html += `<div class="num-grande">${topGlobalF[0][0]}</div>`;
+    if(topGlobalF[1]) html += `<div class="num-alt">Alternativa: <b>${topGlobalF[1][0]}</b></div>`;
+  } else {
+    html += `<div class="nota">Sin datos suficientes.</div>`;
+  }
+  html += `</div>`;
+
+  // por lotería
+  loterias.forEach(lot=>{
+    html += `<div class="card"><h3>${lot} · mejores pronósticos</h3>`;
+    html += `<div class="pred-grid">`;
+    horas.forEach(h=>{
+      const key = lot + '|' + h;
+      if(!resultado[key]) return;
+      const r = resultado[key];
+      html += `<div class="pred-box">
+        <div class="titulo">${h}</div>
+        <div style="font-size:12px;">F (primera) · paga más</div>
+        <div class="num-grande">${r.f[0] || '--'}</div>
+        <div class="num-alt">Alt: ${(r.f.slice(1)||[]).map(x=>`<span class="tag">${x}</span>`).join('') || '—'}</div>
+        <div style="margin-top:8px;font-size:12px;">G (Pick 4)</div>
+        <div class="num-alt">${(r.g||[]).map(x=>`<span class="tag">${x}</span>`).join('') || '—'}</div>
+        <div style="margin-top:6px;font-size:12px;">H (Pick 4)</div>
+        <div class="num-alt">${(r.h||[]).map(x=>`<span class="tag">${x}</span>`).join('') || '—'}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+
+  html += `<div class="nota">Este método se recalcula automáticamente al abrir la ventana, con la última actualización del historial.</div>`;
+  cont.innerHTML = html;
+}
+
+/* =========================================================
+   INICIALIZACIÓN
+   ========================================================= */
+mostrarFechaActual();
+renderHistorial();
 </script>
 </body>
 </html>
-
-
+         
+   
+.',
+    
+  
