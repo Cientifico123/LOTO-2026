@@ -91,7 +91,7 @@
         <tbody></tbody>
       </table>
     </div>
-    <div class="nota">F (primera) es el par de 2 dígitos que más paga en Pick 3. G y H forman el Pick 4.</div>
+    <div class="nota">El último sorteo aparece arriba. F (primera) es el par de 2 dígitos que más paga en Pick 3. G y H forman el Pick 4.</div>
   </section>
 
   <section id="actualizar">
@@ -688,7 +688,7 @@ function parseRaw(raw){
   });
 }
 
-const LS_KEY='visionLote2026_v3';
+const LS_KEY='visionLote2026_v4';
 
 function getData(){
   const s=localStorage.getItem(LS_KEY);
@@ -743,7 +743,7 @@ function renderHistorial(){
   tb.innerHTML='';
   const filtradas=data
     .filter(r=>(!fL||r.loteria===fL)&&(!fF||r.fecha===fF))
-    .sort((a,b)=> a.fecha===b.fecha ? a.hora.localeCompare(b.hora) : b.fecha.localeCompare(a.fecha));
+    .sort((a,b)=> a.fecha===b.fecha ? b.hora.localeCompare(a.hora) : b.fecha.localeCompare(a.fecha));
   if(!filtradas.length){
     tb.innerHTML='<tr><td colspan="9" style="padding:20px;opacity:.6;">Sin datos.</td></tr>'; return;
   }
