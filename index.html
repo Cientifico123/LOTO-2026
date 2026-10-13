@@ -5,11 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Vision Lote 2026</title>
 <style>
-  :root{
-    --bg:#08172b;--bg2:#0e2544;--bg3:#132f55;
-    --gold:#d4af37;--gold2:#ffd700;--line:#1e3a5f;
-    --red:#e74c3c;--green:#2ecc71;
-  }
+  :root{--bg:#08172b;--bg2:#0e2544;--bg3:#132f55;--gold:#d4af37;--gold2:#ffd700;--line:#1e3a5f;--red:#e74c3c;--green:#2ecc71;}
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--gold);font-family:'Segoe UI',Roboto,Arial,sans-serif;min-height:100vh;}
   header{text-align:center;padding:22px 12px 16px;background:linear-gradient(180deg,#08172b 0%,#0e2544 100%);border-bottom:2px solid var(--gold);}
@@ -41,8 +37,8 @@
   th{color:var(--gold2);background:var(--bg);font-size:11px;letter-spacing:1px;position:sticky;top:0;}
   tr:hover td{background:rgba(212,175,55,.05);}
   .hist-wrap{max-height:540px;overflow:auto;border:1px solid var(--line);border-radius:10px;background:var(--bg2);}
-  input,select,textarea{background:var(--bg);color:var(--gold);border:1px solid var(--line);padding:9px 10px;border-radius:7px;font-size:13px;width:100%;font-family:inherit;}
-  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);}
+  input,select{background:var(--bg);color:var(--gold);border:1px solid var(--line);padding:9px 10px;border-radius:7px;font-size:13px;width:100%;font-family:inherit;}
+  input:focus,select:focus{outline:none;border-color:var(--gold);}
   .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px;}
   label{display:block;font-size:11px;color:var(--gold);opacity:.75;margin-bottom:4px;letter-spacing:.5px;}
   .btn{background:var(--gold);color:var(--bg);border:none;padding:11px 22px;border-radius:8px;cursor:pointer;font-weight:700;font-size:13px;letter-spacing:1px;transition:all .2s;}
@@ -156,7 +152,6 @@
 </main>
 
 <script>
-/* ============ DATOS ============ */
 const RAW = `
 0801|S|G|1230|6|33|32|45
 0801|S|F|1330|5|92|68|71
@@ -670,6 +665,7 @@ const RAW = `
 1012|L|N|2230|8|38|33|61
 1012|L|G|2330|7|42|23|52
 1013|M|G|1230|1|14|68|30
+1013|M|F|1330|2|68|95|04
 `.trim();
 
 const DIA={L:'Lunes',M:'Martes',X:'Miércoles',J:'Jueves',V:'Viernes',S:'Sábado',D:'Domingo'};
@@ -692,8 +688,7 @@ function parseRaw(raw){
   });
 }
 
-/* LS_KEY v2 para forzar recarga con el nuevo sorteo */
-const LS_KEY='visionLote2026_v2';
+const LS_KEY='visionLote2026_v3';
 
 function getData(){
   const s=localStorage.getItem(LS_KEY);
@@ -706,26 +701,20 @@ function getData(){
 }
 function saveData(d){ localStorage.setItem(LS_KEY,JSON.stringify(d)); }
 
-/* ============ FECHA Y RELOJ ============ */
 (function(){
   const d=new Date();
   const dias=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
   const meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-  document.getElementById('fechaActual').textContent =
+  document.getElementById('fechaActual').textContent=
     dias[d.getDay()]+', '+d.getDate()+' de '+meses[d.getMonth()]+' de '+d.getFullYear();
 })();
-
 function actualizarReloj(){
   const d=new Date();
-  const hh=String(d.getHours()).padStart(2,'0');
-  const mm=String(d.getMinutes()).padStart(2,'0');
-  const ss=String(d.getSeconds()).padStart(2,'0');
-  document.getElementById('reloj').textContent=hh+':'+mm+':'+ss;
+  document.getElementById('reloj').textContent=
+    String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+':'+String(d.getSeconds()).padStart(2,'0');
 }
-actualizarReloj();
-setInterval(actualizarReloj,1000);
+actualizarReloj(); setInterval(actualizarReloj,1000);
 
-/* ============ NAVEGACIÓN ============ */
 function ir(id,btn){
   document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
@@ -737,20 +726,15 @@ function ir(id,btn){
   if(id==='m3') renderMetodo3();
   if(id==='m4') renderMetodo4();
 }
-
-/* Refresca la vista actual sin cambiar de pestaña */
 function refrescarVistaActual(){
-  const activa=document.querySelector('section.active');
-  if(!activa) return;
-  const id=activa.id;
-  if(id==='historial') renderHistorial();
-  if(id==='m1') renderMetodo1();
-  if(id==='m2') renderMetodo2();
-  if(id==='m3') renderMetodo3();
-  if(id==='m4') renderMetodo4();
+  const a=document.querySelector('section.active'); if(!a) return;
+  if(a.id==='historial') renderHistorial();
+  if(a.id==='m1') renderMetodo1();
+  if(a.id==='m2') renderMetodo2();
+  if(a.id==='m3') renderMetodo3();
+  if(a.id==='m4') renderMetodo4();
 }
 
-/* ============ HISTORIAL ============ */
 function renderHistorial(){
   const data=getData();
   const fL=document.getElementById('fLoteria').value;
@@ -761,22 +745,17 @@ function renderHistorial(){
     .filter(r=>(!fL||r.loteria===fL)&&(!fF||r.fecha===fF))
     .sort((a,b)=> a.fecha===b.fecha ? a.hora.localeCompare(b.hora) : b.fecha.localeCompare(a.fecha));
   if(!filtradas.length){
-    tb.innerHTML='<tr><td colspan="9" style="padding:20px;opacity:.6;">Sin datos.</td></tr>';
-    return;
+    tb.innerHTML='<tr><td colspan="9" style="padding:20px;opacity:.6;">Sin datos.</td></tr>'; return;
   }
   filtradas.forEach(r=>{
     const tr=document.createElement('tr');
-    tr.innerHTML=
-      '<td>'+r.fecha+'</td><td>'+r.dia+'</td><td>'+r.loteria+'</td><td>'+r.hora+'</td>'+
-      '<td>'+r.e+'</td><td>'+r.f+'</td><td>'+r.g+'</td><td>'+r.h+'</td>'+
-      '<td><button class="btn-del" onclick="borrar(\''+r.fecha+'\',\''+r.loteria+'\',\''+r.hora+'\')">X</button></td>';
+    tr.innerHTML='<td>'+r.fecha+'</td><td>'+r.dia+'</td><td>'+r.loteria+'</td><td>'+r.hora+'</td><td>'+r.e+'</td><td>'+r.f+'</td><td>'+r.g+'</td><td>'+r.h+'</td><td><button class="btn-del" onclick="borrar(\''+r.fecha+'\',\''+r.loteria+'\',\''+r.hora+'\')">X</button></td>';
     tb.appendChild(tr);
   });
 }
 function borrar(f,l,h){
   if(!confirm('¿Borrar este sorteo?')) return;
-  const d=getData().filter(r=>!(r.fecha===f&&r.loteria===l&&r.hora===h));
-  saveData(d);
+  saveData(getData().filter(r=>!(r.fecha===f&&r.loteria===l&&r.hora===h)));
   refrescarVistaActual();
 }
 function limpiarFiltros(){
@@ -785,7 +764,6 @@ function limpiarFiltros(){
   renderHistorial();
 }
 
-/* ============ ACTUALIZAR ============ */
 function agregarSorteo(){
   const fecha=document.getElementById('nFecha').value;
   const dia=document.getElementById('nDia').value;
@@ -796,59 +774,39 @@ function agregarSorteo(){
   const gRaw=document.getElementById('nG').value.trim();
   const hRaw=document.getElementById('nH').value.trim();
   const msg=document.getElementById('msgActualizar');
-
   if(!fecha||e===''||fRaw===''||gRaw===''||hRaw===''){
     msg.className='msg err'; msg.textContent='Faltan datos.'; return;
   }
-
   const f=fRaw.padStart(2,'0');
   const g=gRaw.padStart(2,'0');
   const h=hRaw.padStart(2,'0');
-
   const d=getData();
-  /* Reemplaza si existe el mismo slot/fecha/hora */
   const idx=d.findIndex(r=>r.fecha===fecha&&r.loteria===loteria&&r.hora===hora);
   const nuevo={fecha,dia,loteria,hora,e,f,g,h};
   if(idx>=0) d[idx]=nuevo; else d.push(nuevo);
   saveData(d);
-
   msg.className='msg ok';
   msg.textContent='Sorteo guardado. Historial y pronósticos actualizados.';
-
   ['nE','nF','nG','nH'].forEach(id=>document.getElementById(id).value='');
-
-  /* Refresca historial y métodos al instante */
-  renderHistorial();
-  renderMetodo1(); renderMetodo2(); renderMetodo3(); renderMetodo4();
+  renderHistorial(); renderMetodo1(); renderMetodo2(); renderMetodo3(); renderMetodo4();
 }
-
 function exportar(){
-  const d=getData();
-  const blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});
+  const blob=new Blob([JSON.stringify(getData(),null,2)],{type:'application/json'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
   a.download='vision_lote_2026_respaldo.json';
   a.click();
 }
 function importarJSON(e){
-  const file=e.target.files[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    try{
-      const d=JSON.parse(ev.target.result);
-      if(Array.isArray(d)){ saveData(d); alert('Respaldo importado.'); refrescarVistaActual(); }
-    }catch(err){ alert('Archivo inválido.'); }
-  };
-  reader.readAsText(file);
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=ev=>{ try{ const d=JSON.parse(ev.target.result); if(Array.isArray(d)){ saveData(d); alert('Respaldo importado.'); refrescarVistaActual(); } }catch(err){ alert('Archivo inválido.'); } };
+  r.readAsText(f);
 }
 
-/* ============ UTILIDADES ============ */
 function agruparSlots(data){
   const s={};
-  data.forEach(r=>{
-    const k=r.loteria+'|'+r.hora;
-    (s[k]=s[k]||[]).push(r);
-  });
+  data.forEach(r=>{ const k=r.loteria+'|'+r.hora; (s[k]=s[k]||[]).push(r); });
   Object.keys(s).forEach(k=>s[k].sort((a,b)=>a.fecha.localeCompare(b.fecha)));
   return s;
 }
@@ -858,7 +816,6 @@ function topN(arr,n){
   return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,n).map(x=>x[0]);
 }
 
-/* ============ MÉTODOS ============ */
 function metodo1(){
   const s=agruparSlots(getData()); const out={};
   Object.keys(s).forEach(k=>{
@@ -879,7 +836,6 @@ function metodo2(){
   const s=agruparSlots(getData()); const out={};
   Object.keys(s).forEach(k=>{
     const r=s[k].slice(-40);
-    const eSeq=r.map(x=>parseInt(x.e));
     const fV=r.map(x=>x.f), gV=r.map(x=>x.g), hV=r.map(x=>x.h);
     const fC={}; fV.forEach(v=>fC[v]=(fC[v]||0)+1);
     const lastF=fV[fV.length-1];
@@ -925,14 +881,12 @@ function metodo4(){
     Object.entries(hC).forEach(([v,c])=>{ if(!fSet.has(v)) cand[v]=(cand[v]||0)+c; });
     let top=Object.entries(cand).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]);
     const relleno=[...Object.entries(gC),...Object.entries(hC)].sort((a,b)=>b[1]-a[1]).map(x=>x[0]).filter(v=>!top.includes(v));
-    const fFinal=[...top,...relleno].slice(0,3);
-    out[k]={f:fFinal, g:Object.entries(gC).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]), h:Object.entries(hC).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0])};
+    out[k]={f:[...top,...relleno].slice(0,3), g:Object.entries(gC).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]), h:Object.entries(hC).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0])};
   });
   return out;
 }
 function renderMetodo4(){ pintar('resM4', metodo4()); }
 
-/* ============ PINTAR ============ */
 function pintar(contId,res){
   const cont=document.getElementById(contId);
   const loterias=['GEORGIA','FLORIDA','NEW YORK'];
@@ -978,8 +932,7 @@ function pintar(contId,res){
     });
     if(slotFuerte){
       const r=res[slotFuerte];
-      html+='<div class="lot-box"><h4>Pick 4 del slot más fuerte ('+slotFuerte.split('|')[1]+')</h4>';
-      html+='<div class="lot-top2">';
+      html+='<div class="lot-box"><h4>Pick 4 del slot más fuerte ('+slotFuerte.split('|')[1]+')</h4><div class="lot-top2">';
       html+='<div class="n"><small>G</small>'+(r.g[0]||'--')+'</div>';
       html+='<div class="n"><small>H</small>'+(r.h[0]||'--')+'</div>';
       html+='</div></div>';
@@ -991,7 +944,6 @@ function pintar(contId,res){
   cont.innerHTML=html;
 }
 
-/* ============ INICIO ============ */
 renderHistorial();
 </script>
 </body>
